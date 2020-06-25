@@ -8,13 +8,13 @@ Publication date: 2020-06-18T00:00:00.000Z
 
 # How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)
 
+[![How to sign, encrypt and decrypt messages using PGP on macOS (adding privacy to email) - YouTube](how-to-sign-encrypt-and-decrypt-messages-using-pgp-on-macos-adding-privacy-to-email.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to sign, encrypt and decrypt messages using PGP on macOS (adding privacy to email) - YouTube")
+
 > WARNING: this is a getting started guide. For a hardened guide, see https://github.com/drduh/YubiKey-Guide.
 
 ## Installation guide
 
-**Step 1: install Homebrew**
-
-See https://brew.sh/
+**Step 1: install [Homebrew](https://brew.sh/)**
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -26,7 +26,7 @@ See https://brew.sh/
 brew analytics off
 ```
 
-**Step 3: install GnuPG**
+**Step 3: install [GnuPG](https://gnupg.org/)**
 
 ```shell
 brew install gnupg
