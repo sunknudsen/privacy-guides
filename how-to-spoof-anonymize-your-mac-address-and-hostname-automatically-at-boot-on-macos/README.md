@@ -8,7 +8,7 @@ Publication date: 2020-05-19T00:00:00.000Z
 
 # How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS
 
-[![How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube](how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube")
+[![How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube](how-to-how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube")
 
 > Heads up: unfortunately this guide does not work on Macs equipped with the new T2 chip running macOS Mojave. If that’s your case, please consider upgrading to Catalina.
 
@@ -136,7 +136,7 @@ chmod +x /usr/local/sbin/spoof.sh
 This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
 
 ```shell
-curl -o /usr/local/sbin/first_names.txt https://sunknudsen.com/static/media/privacy-guides/spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/first_names.txt
+curl -o /usr/local/sbin/first_names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/first_names.txt
 ```
 
 **Step 5: download [mac_address_prefixes.txt](mac_address_prefixes.txt)**
@@ -144,7 +144,7 @@ curl -o /usr/local/sbin/first_names.txt https://sunknudsen.com/static/media/priv
 This list includes 768 Apple MAC address prefixes.
 
 ```shell
-curl -o /usr/local/sbin/mac_address_prefixes.txt https://sunknudsen.com/static/media/privacy-guides/spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/mac_address_prefixes.txt
+curl -o /usr/local/sbin/mac_address_prefixes.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/mac_address_prefixes.txt
 ```
 
 **Step 6: create `local.spoof.plist` launch daemon**
