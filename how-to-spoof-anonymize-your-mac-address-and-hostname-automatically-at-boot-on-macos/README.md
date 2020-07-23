@@ -120,7 +120,7 @@ Set variable `mac_address` using values from variables `mac_address_prefix` and 
 
 ```shell
 sudo ifconfig en0 ether "$mac_address"
-echo "Spoofed MAC address of en0 interface to $mac_address"x
+echo "Spoofed MAC address of en0 interface to $mac_address"
 ```
 
 Set spoofed MAC address using [ifconfig](https://en.wikipedia.org/wiki/Ifconfig) and echo spoofed MAC address
