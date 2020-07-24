@@ -26,7 +26,7 @@ Publication date: 2020-07-18T10:28:23.605Z
 
 Open "Settings", then "Cellular", then "Cellular Data Network".
 
-![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=192)
+![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=240)
 
 **Step 5 (macOS): configure "Cellular" settings**
 
@@ -48,7 +48,7 @@ Open "Settings", then "Cellular", then "Cellular Data Network".
 
 Open "Settings", then "Profile Downloaded" and tap "Install"
 
-![ios-install-profile](./ios-install-profile.png?shadow=1&width=192)
+![ios-install-profile](./ios-install-profile.png?shadow=1&width=240)
 
 ## macOS guide
 
