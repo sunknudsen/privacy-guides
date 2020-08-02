@@ -14,25 +14,25 @@ Publication date: 2020-06-18T00:00:00.000Z
 
 ## Installation guide
 
-**Step 1: install [Homebrew](https://brew.sh/)**
+#### Step 1: install [Homebrew](https://brew.sh/)
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-**Step 2: disable analytics**
+#### Step 2: disable analytics
 
 ```shell
 brew analytics off
 ```
 
-**Step 3: install [GnuPG](https://gnupg.org/)**
+#### Step 3: install [GnuPG](https://gnupg.org/)
 
 ```shell
 brew install gnupg
 ```
 
-**Step 4: generate PGP key pair**
+#### Step 4: generate PGP key pair
 
 ```shell
 $ gpg --full-generate-key
@@ -91,7 +91,7 @@ uid                      John Doe <john@example.net>
 sub   rsa4096 2020-06-16 [E]
 ```
 
-**Step 5: set default PGP key server to `hkps://keys.openpgp.org`**
+#### Step 5: set default PGP key server to `hkps://keys.openpgp.org`
 
 ```shell
 echo "keyserver hkps://keys.openpgp.org" >> ~/.gnupg/dirmngr.conf
@@ -101,13 +101,13 @@ echo "keyserver hkps://keys.openpgp.org" >> ~/.gnupg/dirmngr.conf
 
 ## Usage guide
 
-**Export John’s PGP public key**
+#### Export John’s PGP public key
 
 ```shell
 gpg --armor --export john@example.net > ~/Desktop/john.asc
 ```
 
-**Import Sun’s PGP public key**
+#### Import Sun’s PGP public key
 
 ```shell
 gpg --keyserver hkps://keys.openpgp.org --recv-keys 0xC1323A377DE14C8B
@@ -119,7 +119,7 @@ or
 curl https://sunknudsen.com/sunknudsen.asc | gpg --import
 ```
 
-**Confirm Sun’s PGP public key is legit using its fingerprint**
+#### Confirm Sun’s PGP public key is legit using its fingerprint
 
 ```shell
 $ gpg --fingerprint hello@sunknudsen.com
@@ -138,7 +138,7 @@ See https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and ht
 
 👍
 
-**Paste, encrypt and sign message (enter line break and use command `ctrl+d` to quit edit mode)**
+#### Paste, encrypt and sign message (enter line break and use command `ctrl+d` to quit edit mode)
 
 ```shell
 $ gpg --encrypt --sign --armor --output ~/Desktop/encrypted.asc -r john@example.net -r hello@sunknudsen.com
@@ -156,7 +156,7 @@ Use this key anyway? (y/N) y
 This is a test!
 ```
 
-**Decrypt message to stdout and decode quoted-printable characters**
+#### Decrypt message to stdout and decode quoted-printable characters
 
 ```‌shell
 $ gpg --decrypt /Users/johndoe/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
@@ -170,7 +170,7 @@ gpg: Good signature from "John Doe <john@example.net>" [ultimate]
 This is a test!
 ```
 
-**Clear passphrase from GnuPG cache**
+#### Clear passphrase from GnuPG cache
 
 ```shell
 gpg-connect-agent reloadagent /bye

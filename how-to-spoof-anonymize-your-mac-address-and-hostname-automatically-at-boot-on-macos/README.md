@@ -8,18 +8,18 @@ Publication date: 2020-05-19T00:00:00.000Z
 
 # How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS
 
-[![How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube](how-to-how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube")
+[![How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube](how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube")
 
 > Heads up: unfortunately this guide does not work on Macs equipped with the new T2 chip running macOS Mojave. If that’s your case, please consider upgrading to Catalina.
 
-**Step 1: create `/usr/local/sbin` folder**
+#### Step 1: create `/usr/local/sbin` folder
 
 ```shell
 sudo mkdir /usr/local/sbin
 sudo chown $(whoami):admin /usr/local/sbin/
 ```
 
-**Step 2: create `spoof.sh` script**
+#### Step 2: create `spoof.sh` script
 
 **Pro tip 1: when copy/pasting commands that start with `cat << "EOF"`, select all lines (from `cat << "EOF"` to `EOF`) at once as they are part of the same (single) command**
 
@@ -125,13 +125,13 @@ echo "Spoofed MAC address of en0 interface to $mac_address"
 
 Set spoofed MAC address using [ifconfig](https://en.wikipedia.org/wiki/Ifconfig) and echo spoofed MAC address
 
-**Step 3: make `spoof.sh` executable**
+#### Step 3: make `spoof.sh` executable
 
 ```shell
 chmod +x /usr/local/sbin/spoof.sh
 ```
 
-**Step 4: download [first_names.txt](first_names.txt)**
+#### Step 4: download [first_names.txt](first_names.txt)
 
 This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
 
@@ -139,7 +139,7 @@ This list includes the top 2048 most popular baby names from the [USA Social Sec
 curl -o /usr/local/sbin/first_names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/first_names.txt
 ```
 
-**Step 5: download [mac_address_prefixes.txt](mac_address_prefixes.txt)**
+#### Step 5: download [mac_address_prefixes.txt](mac_address_prefixes.txt)
 
 This list includes 768 Apple MAC address prefixes.
 
@@ -147,7 +147,7 @@ This list includes 768 Apple MAC address prefixes.
 curl -o /usr/local/sbin/mac_address_prefixes.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos/mac_address_prefixes.txt
 ```
 
-**Step 6: create `local.spoof.plist` launch daemon**
+#### Step 6: create `local.spoof.plist` launch daemon
 
 This step is responsible for running `spoof.sh` every time your Mac boots.
 
@@ -172,7 +172,7 @@ cat << "EOF" | sudo tee /Library/LaunchDaemons/local.spoof.plist > /dev/null
 EOF
 ```
 
-**Step 7: reboot and confirm hostname and MAC address have been spoofed**
+#### Step 7: reboot and confirm hostname and MAC address have been spoofed
 
 ```shell
 # Spoofed hostname
@@ -193,7 +193,7 @@ networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}'
 
 ## Want things back the way they were before following this guide? No problem!
 
-**Step 1: set computer name, local hostname and hostname**
+#### Step 1: set computer name, local hostname and hostname
 
 Replace `John Doe` with a value to your liking. Don’t forget to replace empty spaces by `-` for `LocalHostName` and `HostName`.
 
@@ -203,7 +203,7 @@ sudo scutil --set LocalHostName "John-Doe"
 sudo scutil --set HostName "John-Doe"
 ```
 
-**Step 2: set MAC address to factory value**
+#### Step 2: set MAC address to factory value
 
 Given MAC address spoofing is ephemeral, deleting the `/Library/LaunchDaemons/local.spoof.plist` launch daemon and rebooting will reset your MAC address to its factory value.
 
@@ -211,7 +211,7 @@ Given MAC address spoofing is ephemeral, deleting the `/Library/LaunchDaemons/lo
 sudo rm /Library/LaunchDaemons/local.spoof.plist
 ```
 
-**Step 3 (optional): delete script and datasets**
+#### Step 3 (optional): delete script and datasets
 
 ```shell
 rm /usr/local/sbin/spoof.sh

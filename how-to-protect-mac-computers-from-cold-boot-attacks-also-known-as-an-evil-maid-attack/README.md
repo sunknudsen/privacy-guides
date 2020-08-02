@@ -10,7 +10,7 @@ Publication date: 2020-06-05T00:00:00.000Z
 
 [![How to protect Mac computers from cold boot attacks (also known as an evil maid attack) - YouTube](<how-to-protect-mac-computers-from-cold-boot-attacks-(also-known-as-an-evil-maid-attack).png>)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks (also known as an evil maid attack) - YouTube")
 
-**Run the following `pmset` command using the Terminal.**
+#### Run the following `pmset` command using the Terminal.
 
 ```shell
 sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 standbydelaylow 0 standbydelayhigh 0
@@ -30,7 +30,7 @@ See `man pmset` for more information.
 
 ## Want things back the way they were before following this guide? No problem!
 
-**Run the following `pmset` command using the Terminal.**
+#### Run the following `pmset` command using the Terminal.
 
 ```shell
 sudo pmset -a destroyfvkeyonstandby 0 hibernatemode 3 standbydelaylow 10800 standbydelayhigh 86400
