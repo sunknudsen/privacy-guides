@@ -49,7 +49,7 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-#### Step 2: log in to the server as root
+#### Step 2: log in to server as root
 
 Replace `185.193.126.203` with IP of server.
 
@@ -79,7 +79,7 @@ $(cat ~/.ssh/vpn-server.pub)
 EOF"
 ```
 
-On server, paste output from macOS command and press <kbd>enter</kbd>.
+On server, paste output from Mac command and press <kbd>enter</kbd>.
 
 ```shell
 cat << "EOF" > ~/.ssh/authorized_keys
@@ -87,7 +87,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWL
 EOF
 ```
 
-On server, confirm the output from `cat ~/.ssh/authorized_keys` matches the output from `cat ~/.ssh/vpn-server.pub` on macOS.
+On server, confirm the output from `cat ~/.ssh/authorized_keys` matches the output from `cat ~/.ssh/vpn-server.pub` on Mac.
 
 #### Step 4: create `vpn-server-admin` user
 
@@ -216,6 +216,7 @@ iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
 iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
 iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -t nat -A POSTROUTING -s 10.0.2.0/24 -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
@@ -250,6 +251,7 @@ ip6tables -A OUTPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 ip6tables -t nat -A POSTROUTING -s fdc7:da04:1ee6::/64 -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
@@ -260,8 +262,6 @@ ip6tables -P FORWARD DROP
 ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
-
-ip6tables -A FORWARD -p tcp -m policy --pol ipsec --dir in -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1280
 
 #### Step 17: log out and log in to confirm iptables didn’t block SSH
 
@@ -310,7 +310,7 @@ nameserver 2606:4700:4700::1001
 EOF
 ```
 
-#### Step 20: add dummy network interface
+#### Step 20: add and enable dummy network interface
 
 ```shell
 cp /etc/network/interfaces /etc/network/interfaces.backup
@@ -321,6 +321,7 @@ iface strongswan0 inet static
   address 10.0.2.1/24
   pre-up ip link add strongswan0 type dummy
 EOF
+ifup strongswan0
 ```
 
 #### Step 21: install dnsmasq
@@ -387,7 +388,7 @@ conn ikev2
   leftid=vpn-server.com
   leftcert=vpn-server.crt
   leftsendcert=always
-  leftsubnet=0.0.0.0/0
+  leftsubnet=0.0.0.0/0,::/0
   right=%any
   rightid=%any
   rightauth=eap-tls
@@ -470,7 +471,7 @@ cat << "EOF" > /etc/strongswan.d/charon/dhcp.conf
 dhcp {
     force_server_address = yes
     identity_lease = yes
-    interface = lo
+    interface = strongswan0
     load = yes
     server = 10.0.2.1
 }
@@ -485,7 +486,7 @@ sed -i 's/load = yes/load = no/g' ./*.conf
 sed -i 's/load = no/load = yes/g' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.conf ./gcm.conf ./hmac.conf ./kernel-netlink.conf ./nonce.conf ./openssl.conf ./pem.conf ./pgp.conf ./pkcs12.conf ./pkcs7.conf ./pkcs8.conf ./pubkey.conf ./random.conf ./revocation.conf ./sha2.conf ./socket-default.conf ./stroke.conf ./x509.conf
 ```
 
-#### Step 26: create certificate authority (for security reasons, this is done on macOS rather than on server)
+#### Step 26: create certificate authority (for security reasons, this is done on Mac rather than on server)
 
 **Create `certificate-authority` folder on desktop**
 
@@ -661,13 +662,14 @@ systemctl restart strongswan
 
 ```shell
 cp /etc/sysctl.conf /etc/sysctl.conf.backup
+sed -i -E 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+sed -i -E 's/#net.ipv4.conf.all.accept_redirects = 0/net.ipv4.conf.all.accept_redirects = 0/' /etc/sysctl.conf
+sed -i -E 's/#net.ipv4.conf.all.send_redirects = 0/net.ipv4.conf.all.send_redirects = 0/' /etc/sysctl.conf
 ```
 
 If the server is IPv4-only, run:
 
 ```shell
-sed -i -E 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
-sed -i -E 's/#net.ipv4.conf.all.send_redirects = 0/net.ipv4.conf.all.send_redirects = 0/' /etc/sysctl.conf
 cat << "EOF" >> /etc/sysctl.conf
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
@@ -678,9 +680,6 @@ EOF
 If the server is dual stack (IPv4 + IPv6) run:
 
 ```shell
-sed -i -E 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
-sed -i -E 's/#net.ipv4.conf.all.accept_redirects = 0/net.ipv4.conf.all.accept_redirects = 0/' /etc/sysctl.conf
-sed -i -E 's/#net.ipv4.conf.all.send_redirects = 0/net.ipv4.conf.all.send_redirects = 0/' /etc/sysctl.conf
 sed -i -E 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/' /etc/sysctl.conf
 ```
 
@@ -694,34 +693,34 @@ sysctl -p
 
 Open "Apple Configurator 2", then click "File", then "New Profile".
 
-In "General", fill out "Name" and "Identifier".
+In "General", enter "Self-hosted strongSwan VPN" in "Name".
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In "Certificates", click "Configure" and select "ca.crt". Then click "+" and select "vpn-client.p12".
-
-The password is the one from [step 25](#step-25-create-certificate-authority-for-security-reasons-this-is-done-on-macos-rather-than-on-server).
+In "Certificates", click "Configure" and select "ca.crt". Then click "+" and select "vpn-client.p12". The password is the one from [step 26](#step-26-create-certificate-authority-for-security-reasons-this-is-done-on-macos-rather-than-on-server).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
-In "VPN", click "Configure" and enter the settings from the following screenshot. The "Child SA Params" are the same as "IKE SA Params".
+In "VPN", click "Configure" and enter the settings from the following screenshot (replace `185.193.126.203` with IP of server).
+
+The "Child SA Params" are the same as "IKE SA Params".
 
 ![apple-configurator-vpn](apple-configurator-vpn.png?shadow=1)
 
 Finally, click "File", then "Save", and save file as "Self-hosted strongSwan VPN.mobileconfig".
 
-#### Step 31: add VPN profile to macOS
+#### Step 31: add VPN profile to Mac
 
 This step is super simple, simply double-click "Self-hosted strongSwan VPN.mobileconfig" and follow instructions.
 
-#### Step 32: add VPN profile to iOS using Apple Configurator 2
+#### Step 32: add VPN profile to iPhone using Apple Configurator 2
 
 Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
 In "All Devices", double-click on iPhone, then "Add", and finally "Profiles".
 
-Select "Self-hosted strongSwan VPN.mobileconfig" and follow instructions on iPhone.
+Select "Self-hosted strongSwan VPN.mobileconfig" and follow instructions.
 
-On iOS, open "Settings", then "Profile Downloaded" and tap "Install"
+On iPhone, open "Settings", then "Profile Downloaded" and tap "Install"
 
-#### Step 33: connect to VPN on iOS and macOS
+#### Step 33: connect to VPN on iPhone or Mac
