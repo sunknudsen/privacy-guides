@@ -716,11 +716,11 @@ This step is super simple, simply double-click "Self-hosted strongSwan VPN.mobil
 
 #### Step 32: add VPN profile to iOS using Apple Configurator 2
 
-Unlock your iPhone and connect it to your Mac and open Apple Configurator 2.
+Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
-In "All Devices", double-click on your iPhone, then "Add", and finally "Profiles".
+In "All Devices", double-click on iPhone, then "Add", and finally "Profiles".
 
-Select "Self-hosted strongSwan VPN.mobileconfig" and follow instructions on your iPhone.
+Select "Self-hosted strongSwan VPN.mobileconfig" and follow instructions on iPhone.
 
 On iOS, open "Settings", then "Profile Downloaded" and tap "Install"
 
