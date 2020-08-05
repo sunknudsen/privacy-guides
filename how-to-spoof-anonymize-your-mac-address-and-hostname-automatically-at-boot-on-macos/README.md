@@ -21,7 +21,7 @@ sudo chown $(whoami):admin /usr/local/sbin/
 
 #### Step 2: create `spoof.sh` script
 
-**Pro tip 1: when copy/pasting commands that start with `cat << "EOF"`, select all lines (from `cat << "EOF"` to `EOF`) at once as they are part of the same (single) command**
+> When copy/pasting commands that start with `cat << "EOF"`, select all lines (from `cat << "EOF"` to `EOF`) at once as they are part of the same (single) command
 
 ```shell
 cat << "EOF" > /usr/local/sbin/spoof.sh
@@ -64,7 +64,7 @@ Exit on error
 export LC_CTYPE=C
 ```
 
-Fix `sed: RE error: illegal byte sequence` [sed](https://en.wikipedia.org/wiki/Sed) error
+Fix `sed: RE error: illegal byte sequence` error
 
 ```shell
 dirname=`dirname "${BASH_SOURCE}"`
@@ -98,7 +98,7 @@ sudo scutil --set HostName "$host_name"
 echo "Spoofed hostname to $host_name"
 ```
 
-Set `ComputerName`, `LocalHostName` and `HostName` using [scutil](https://ss64.com/osx/scutil.html) and echo spoofed computer name
+Set `ComputerName`, `LocalHostName` and `HostName` using `scutil` and echo spoofed computer name
 
 ```shell
 mac_address_prefix=`sed "$(jot -r 1 1 768)q;d" $dirname/mac_address_prefixes.txt | sed -e 's/[^A-F0-9:]//g'`
@@ -110,7 +110,7 @@ Set variable `mac_address_prefix` to random Apple MAC address prefix found in `m
 mac_address_suffix=`openssl rand -hex 3 | sed 's/\(..\)/\1:/g; s/.$//'`
 ```
 
-Set variable `mac_address_suffix` to random value genereated by [OpenSSL](https://en.wikipedia.org/wiki/OpenSSL)
+Set variable `mac_address_suffix` to random value genereated by OpenSSL
 
 ```shell
 mac_address=`echo "$mac_address_prefix:$mac_address_suffix" | awk '{print toupper($0)}'`
@@ -123,7 +123,7 @@ sudo ifconfig en0 ether "$mac_address"
 echo "Spoofed MAC address of en0 interface to $mac_address"
 ```
 
-Set spoofed MAC address using [ifconfig](https://en.wikipedia.org/wiki/Ifconfig) and echo spoofed MAC address
+Set spoofed MAC address using `ifconfig` and echo spoofed MAC address
 
 #### Step 3: make `spoof.sh` executable
 

@@ -34,7 +34,7 @@ brew install gnupg
 
 #### Step 4: generate PGP key pair
 
-```shell
+```console
 $ gpg --full-generate-key
 gpg (GnuPG) 2.2.20; Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -121,7 +121,7 @@ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
 
 #### Confirm Sun’s PGP public key is legit using its fingerprint
 
-```shell
+```console
 $ gpg --fingerprint hello@sunknudsen.com
 gpg: checking the trustdb
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
@@ -140,7 +140,7 @@ See https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and ht
 
 #### Paste, encrypt and sign message (enter line break and use command `ctrl+d` to quit edit mode)
 
-```shell
+```console
 $ gpg --encrypt --sign --armor --output ~/Desktop/encrypted.asc -r john@example.net -r hello@sunknudsen.com
 gpg: 5574F4B0B0F67D7F: There is no assurance this key belongs to the named user
 
@@ -158,7 +158,7 @@ This is a test!
 
 #### Decrypt message to stdout and decode quoted-printable characters
 
-```‌shell
+```console
 $ gpg --decrypt /Users/johndoe/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
 gpg: encrypted with 4096-bit RSA key, ID 5574F4B0B0F67D7F, created 2019-10-17
       "Sun Knudsen <hello@sunknudsen.com>"
