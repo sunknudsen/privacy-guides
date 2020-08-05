@@ -388,7 +388,7 @@ conn ikev2
   leftid=vpn-server.com
   leftcert=vpn-server.crt
   leftsendcert=always
-  leftsubnet=0.0.0.0/0,::/0
+  leftsubnet=0.0.0.0/0
   right=%any
   rightid=%any
   rightauth=eap-tls
@@ -423,7 +423,7 @@ conn ikev2
   leftid=vpn-server.com
   leftcert=vpn-server.crt
   leftsendcert=always
-  leftsubnet=0.0.0.0/0
+  leftsubnet=0.0.0.0/0,::/0
   right=%any
   rightid=%any
   rightauth=eap-tls
