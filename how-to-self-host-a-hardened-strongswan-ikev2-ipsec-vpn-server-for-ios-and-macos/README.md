@@ -202,7 +202,7 @@ apt install -y iptables-persistent
 
 #### Step 16: configure iptables
 
-Replace `eth0` (if needed) and `fdc7:da04:1ee6::/64` with first subnet of [step 14](#step-14-generate-random-ipv6-ula) (to display available interfaces, run `ip a`).
+Replace `eth0` (if needed) and `fdc7:da04:1ee6::/64` with first subnet of [step 14](#step-14-install-curl-and-python-and-generate-random-ipv6-ula) (to display available interfaces, run `ip a`).
 
 ```shell
 iptables -A INPUT -i lo -j ACCEPT
@@ -375,7 +375,7 @@ apt install -y strongswan libcharon-extra-plugins
 
 #### Step 25: configure strongSwan
 
-Replace `fdc7:da04:1ee6::/64` with first subnet of [step 14](#step-14-generate-random-ipv6-ula)
+Replace `fdc7:da04:1ee6::/64` with first subnet of [step 14](#step-14-install-curl-and-python-and-generate-random-ipv6-ula)
 
 **Backup and override `/etc/ipsec.conf`**
 
