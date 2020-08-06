@@ -16,13 +16,13 @@ Publication date: 2020-06-05T00:00:00.000Z
 sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 standbydelaylow 0 standbydelayhigh 0
 ```
 
-`destroyfvkeyonstandby 1` tells macOS to destroy your password (override it with random data) when your computer goes to standby mode.
+`destroyfvkeyonstandby 1` tells macOS to destroy password (override it with random data) when computer goes to standby mode.
 
 `hibernatemode 25` tells macOS to store the content of the RAM to the hard drive (which is encrypted using FileVault) and power off the RAM (which clears its data).
 
-`standbydelaylow 0` tells macOS to enable standby mode immediately when your battery is low and you put your computer to sleep.
+`standbydelaylow 0` tells macOS to enable standby mode immediately when battery is low and computer is put to sleep.
 
-`standbydelayhigh 0` tells macOS to enable standby mode immediately when your battery is high and you put your computer to sleep.
+`standbydelayhigh 0` tells macOS to enable standby mode immediately when battery is high and computer is put to sleep.
 
 See `man pmset` for more information.
 

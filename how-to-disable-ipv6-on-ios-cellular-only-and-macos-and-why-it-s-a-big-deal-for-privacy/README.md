@@ -14,37 +14,37 @@ Publication date: 2020-07-18T10:28:23.605Z
 
 ## iOS guide
 
-#### Step 1 (macOS): download and open [Apple Configurator 2](https://support.apple.com/apple-configurator)
+#### Step 1 (on Mac): download and open [Apple Configurator 2](https://support.apple.com/apple-configurator)
 
-#### Step 2 (macOS): create new profile using <kbd>cmd + n</kbd>
+#### Step 2 (on Mac): create new profile using <kbd>cmd + n</kbd>
 
-#### Step 3 (macOS): configure "General" settings
+#### Step 3 (on Mac): configure "General" settings
 
 ![apple-configurator-general](./apple-configurator-general.png?shadow=1)
 
-#### Step 4 (iOS): find your APN settings
+#### Step 4 (on iPhone): find APN settings
 
 Open "Settings", then "Cellular", then "Cellular Data Network".
 
 ![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=240)
 
-#### Step 5 (macOS): configure "Cellular" settings
+#### Step 5 (on Mac): configure "Cellular" settings
 
 ![apple-configurator-cellular](./apple-configurator-cellular.png?shadow=1)
 
-#### Step 6 (macOS): save provisioning profile
+#### Step 6 (on Mac): save provisioning profile
 
-#### Step 7 (macOS): connect iPhone to Mac
+#### Step 7 (on Mac): connect iPhone to Mac
 
-#### Step 8 (macOS): double-click on iPhone
+#### Step 8 (on Mac): double-click on iPhone
 
 ![apple-configurator-iphone](./apple-configurator-iphone.png?shadow=1)
 
-#### Step 9 (macOS): click on "Profile" tab, then "Add Profiles...", select saved provisioning profile and click "Add"
+#### Step 9 (on Mac): click on "Profile" tab, then "Add Profiles...", select saved provisioning profile and click "Add"
 
 ![apple-configurator-add-profile](./apple-configurator-add-profile.png?shadow=1)
 
-#### Step 10 (iOS): review profile
+#### Step 10 (on iPhone): review profile
 
 Open "Settings", then "Profile Downloaded" and tap "Install"
 
@@ -69,13 +69,13 @@ networksetup -setv6off "Thunderbolt Ethernet"
 
 ## Want things back the way they were before following this guide? No problem!
 
-#### Step 1 (iOS): remove provisioning profile from iPhone
+#### Step 1 (on iPhone): remove provisioning profile
 
-Open "Settings", then "General", then "Profile", tap on your provisioning profile and tap "Remove Profile".
+Open "Settings", then "General", then "Profile", and tap provisioning profile, then "Remove Profile".
 
 ![ios-remove-profile](./ios-remove-profile.png?shadow=1&width=240)
 
-#### Step 2 (macOS): set network interfaces to automatic
+#### Step 2 (on Mac): set network interfaces to automatic
 
 ```shell
 networksetup -setv6automatic "Wi-Fi"
