@@ -312,6 +312,8 @@ EOF
 
 #### Step 20: add and enable dummy network interface
 
+If server is configured to use `/etc/network/interfaces`, run:
+
 ```shell
 cp /etc/network/interfaces /etc/network/interfaces.backup
 cat << "EOF" >> /etc/network/interfaces
@@ -322,6 +324,23 @@ iface strongswan0 inet static
   pre-up ip link add strongswan0 type dummy
 EOF
 ifup strongswan0
+```
+
+If server is configured to use systemd-networkd, run:
+
+```shell
+cat << "EOF" >> /etc/systemd/network/10-strongswan0.netdev
+[NetDev]
+Name=strongswan0
+Kind=dummy
+EOF
+cat << "EOF" >> /etc/systemd/network/20-strongswan0.network
+[Match]
+Name=strongswan0
+
+[Network]
+Address=10.0.2.1/24
+EOF
 ```
 
 #### Step 21: install dnsmasq
@@ -482,8 +501,15 @@ EOF
 
 ```shell
 cd /etc/strongswan.d/charon
-sed -i 's/load = yes/load = no/g' ./*.conf
-sed -i 's/load = no/load = yes/g' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.conf ./gcm.conf ./hmac.conf ./kernel-netlink.conf ./nonce.conf ./openssl.conf ./pem.conf ./pgp.conf ./pkcs12.conf ./pkcs7.conf ./pkcs8.conf ./pubkey.conf ./random.conf ./revocation.conf ./sha2.conf ./socket-default.conf ./stroke.conf ./x509.conf
+sed -i 's/load = yes/load = no/' ./*.conf
+sed -i 's/load = no/load = yes/' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.conf ./gcm.conf ./hmac.conf ./kernel-netlink.conf ./nonce.conf ./openssl.conf ./pem.conf ./pgp.conf ./pkcs12.conf ./pkcs7.conf ./pkcs8.conf ./pubkey.conf ./random.conf ./revocation.conf ./sha2.conf ./socket-default.conf ./stroke.conf ./x509.conf
+```
+
+**Backup and edit `/lib/systemd/system/strongswan.service`**
+
+```shell
+cp /lib/systemd/system/strongswan.service /lib/systemd/system/strongswan.service.backup
+sed -i 's/After=network-online.target/After=dnsmasq.service/' /lib/systemd/system/strongswan.service
 ```
 
 #### Step 26: create certificate authority (for security reasons, this is done on Mac rather than on server)
