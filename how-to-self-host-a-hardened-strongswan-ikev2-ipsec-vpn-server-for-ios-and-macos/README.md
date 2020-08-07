@@ -317,7 +317,6 @@ If server is configured to use `/etc/network/interfaces`, run:
 ```shell
 cp /etc/network/interfaces /etc/network/interfaces.backup
 cat << "EOF" >> /etc/network/interfaces
-
 auto strongswan0
 iface strongswan0 inet static
   address 10.0.2.1/24
@@ -423,7 +422,6 @@ If the server is dual stack (IPv4 + IPv6) run:
 cat << "EOF" > /etc/ipsec.conf
 config setup
   charondebug="ike 1, knl 1, cfg 1"
-  uniqueids=never
 
 conn ikev2
   auto=add
@@ -675,9 +673,10 @@ On server: run `vi /etc/ipsec.d/certs/vpn-server.crt`, press <kbd>i</kbd>, paste
 
 On server: run `chmod -R 600 /etc/ipsec.d/private`
 
-#### Step 28: start strongSwan
+#### Step 28: restart strongSwan
 
 ```shell
+systemctl daemon-reload
 systemctl restart strongswan
 ```
 
