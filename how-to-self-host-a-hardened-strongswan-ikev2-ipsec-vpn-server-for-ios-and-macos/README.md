@@ -389,7 +389,6 @@ If the server is IPv4-only, run:
 cat << "EOF" > /etc/ipsec.conf
 config setup
   charondebug="ike 1, knl 1, cfg 1"
-  uniqueids=never
 
 conn ikev2
   auto=add
