@@ -12,19 +12,19 @@ Publication date: 2020-06-25T00:00:00.000Z
 
 ## Installation guide
 
-#### Step 1: install [Homebrew](https://brew.sh/)
+### Step 1: install [Homebrew](https://brew.sh/)
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-#### Step 2: disable analytics
+### Step 2: disable analytics
 
 ```shell
 brew analytics off
 ```
 
-#### Step 3: install [ExifTool](https://exiftool.org/)
+### Step 3: install [ExifTool](https://exiftool.org/)
 
 ```shell
 brew install exiftool
@@ -34,13 +34,13 @@ brew install exiftool
 
 ## Usage guide
 
-#### View EXIF metadata
+### View EXIF metadata
 
 ```shell
 exiftool -n /path/to/image.jpg
 ```
 
-#### Remove EXIF metadata
+### Remove EXIF metadata
 
 ```shell
 exiftool -all= /path/to/image.jpg

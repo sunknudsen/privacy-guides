@@ -10,13 +10,13 @@ Publication date: 2020-05-15T00:00:00.000Z
 
 [![How to mitigate fingerprinting and IP leaks using Firefox advanced preferences - YouTube](how-to-mitigate-fingerprinting-and-ip-leaks-using-firefox-advanced-preferences.png)](https://www.youtube.com/watch?v=uYoJ7U0OMCY "How to mitigate fingerprinting and IP leaks using Firefox advanced preferences - YouTube")
 
-#### Step 1: make sure you are running the latest version of Firefox
+### Step 1: make sure you are running the latest version of Firefox
 
-#### Step 2: make sure you configured Firefox for privacy using [https://www.youtube.com/watch?v=NH4DdXC0RFw](https://www.youtube.com/watch?v=NH4DdXC0RFw)
+### Step 2: make sure you configured Firefox for privacy using [https://www.youtube.com/watch?v=NH4DdXC0RFw](https://www.youtube.com/watch?v=NH4DdXC0RFw)
 
-#### Step 3: in `Privacy & Security`, disable `Deceptive Content and Dangerous Software Protection`
+### Step 3: in `Privacy & Security`, disable `Deceptive Content and Dangerous Software Protection`
 
-#### Step 4: open `about:config` and set the following
+### Step 4: open `about:config` and set the following
 
 ```
 dom.event.clipboardevents.enabled = false
