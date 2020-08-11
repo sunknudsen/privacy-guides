@@ -85,6 +85,7 @@ EOF"
 On server, paste output from Mac command and press <kbd>enter</kbd>.
 
 ```shell
+mkdir -p ~/.ssh
 cat << "EOF" > ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWLI8y5aYkLzyEgyp7EibB0rcmwiZfwx/RDb5zAvlr9KGsOWOYJ/gRIf4AwK1PdBPDo8jaa02J/H585NHV7T7XJ7Ycl/LeJh+oDXGs4OOspiFM/7NuleqCA0sSuJEnnuuTZsIDAlJwtWIJTM8lg4nWCQx2xAGkRyx4eNHE2vmlg+xHu3PbHg9kpSIaBWpx0WsysypyaB77+pkid6kYzxPXexoxFm4FnkoY7PZGb97wl4FwW1EK/yo9rnwbtEq5ny96JEHqeJdxeBGHYrsAoRro4jPWYXvdXZV2s27NYC6S3yHsJdaLfyfJXyTaygOyyaf39GcwqfJZpmVYwVyfZ2Go6ec9R/dFbKEA4Ue7aeCkDskSTiMuUZjYjfhezpa4Y0Jiy+lDZFVSv3tsBYu7Nxq0erZ2ygRJAXUMvvyFICJQGUhblRGXAOwYUt72CSUM0ZMsr84aOWsyzRwVQXzxETuDgnXk= vpn-server
 EOF
@@ -164,15 +165,29 @@ systemctl restart ssh
 
 ### Step 11: update apt index files and upgrade packages
 
+#### Update apt index files
+
 ```shell
 apt update
+```
+
+#### Upgrade packages
+
+```shell
 apt upgrade -y
 ```
 
-### Step 12: install and configure vim
+### Step 12: install and configure Vim
+
+#### Install Vim
 
 ```shell
 apt install -y vim
+```
+
+#### Configure Vim
+
+```shell
 cat << "EOF" > ~/.vimrc
 set encoding=UTF-8
 set termencoding=UTF-8
@@ -208,13 +223,19 @@ $ source ~/.bashrc
 
 ### Step 15: install cURL and Python, generate random IPv6 ULA and save to environment variables
 
+#### Install cURL and Python
+
+```shell
+apt install -y curl python
+```
+
+#### Generate random IPv6 ULA and save to environment variables
+
 Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977aab368e6280a8) for `ulagen.py`.
 
 The following code block downloads and runs [ulagen.py](./ulagen.py) (advanced users may wish to download [ulagen.py.sig](./ulagen.py.sig) and verify signature using my [PGP public key](https://sunknudsen.com/sunknudsen.asc) before running script).
 
 ```console
-$ apt install -y curl python
-
 $ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-a-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python | grep "First subnet:" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
 STRONGSWAN_IPV6_ULA=fdcb:f7a1:38ec::/64
 
@@ -235,7 +256,7 @@ apt install -y iptables-persistent
 iptables -N SSH_BRUTE_FORCE_MITIGATION
 iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --set
 iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[ssh-brute-force-mitigation]: "
--A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -j DROP
+iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -j DROP
 iptables -A SSH_BRUTE_FORCE_MITIGATION -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 --syn -m conntrack --ctstate NEW -j SSH_BRUTE_FORCE_MITIGATION
@@ -409,12 +430,40 @@ apt install -y strongswan libcharon-extra-plugins
 
 ### Step 23: configure strongSwan
 
-#### Set DNS servers (comma-separated if more than one)
+#### Find server’s DNS nameserver(s)
 
-Replace `95.215.19.53` with DNS server(s) of server.
+Depending on the server’s configuration, DNS nameserver(s) can be found using one of the following commands (ignore nameservers starting with `127`).
+
+Fist, run:
+
+```console
+$ cat /etc/resolv.conf | grep "nameserver" | awk '{print $2}'
+93.95.224.28
+93.95.224.29
+```
+
+If that doesn’t output valid nameserver(s), run:
+
+```console
+$ cat /etc/network/interfaces | grep "dns-nameservers" | awk '{$1="";$0=$0;} NF=NF'
+93.95.224.28 93.95.224.29
+```
+
+If that doesn’t output valid nameserver(s), run:
+
+```console
+$ systemd-resolve --status | grep "DNS Servers" | awk '{print $3}'
+95.215.19.53
+```
+
+#### Set DNS nameserver(s)
+
+Replace `95.215.19.53` with server’s DNS nameserver(s).
+
+Separate nameservers using commas with no leading spaces (example: `93.95.224.28,93.95.224.29`).
 
 ```shell
-STRONGSWAN_DNS_SERVERS=95.215.19.53
+STRONGSWAN_DNS_NAMESERVERS=95.215.19.53
 ```
 
 #### Backup and override `/etc/ipsec.conf`
@@ -450,7 +499,7 @@ conn ikev2
   right=%any
   rightid=%any
   rightauth=eap-tls
-  rightdns=$STRONGSWAN_DNS_SERVERS
+  rightdns=$STRONGSWAN_DNS_NAMESERVERS
   rightsourceip=%dhcp
   rightsendcert=never
   eap_identity=%identity
@@ -484,7 +533,7 @@ conn ikev2
   right=%any
   rightid=%any
   rightauth=eap-tls
-  rightdns=$STRONGSWAN_DNS_SERVERS
+  rightdns=$STRONGSWAN_DNS_NAMESERVERS
   rightsourceip=%dhcp,$STRONGSWAN_IPV6_ULA
   rightsendcert=never
   eap_identity=%identity
@@ -755,6 +804,12 @@ On iPhone, open "Settings", then enable "VPN".
 
 On Mac, open "System Preferences", click "Network", then "Self-hosted strongSwan VPN" and finally "Connect" and enable "Show VPN status in menu bar".
 
-### Step 36: create additionnal provisioning profiles
+### Step 36: test for leaks
+
+Open Firefox and go to https://ipleak.net/.
+
+Make sure listed IPv4, IPv6 (if server is dual stack) and DNS servers do not match the ones supplied by client ISP.
+
+### Step 37: create additionnal provisioning profiles
 
 Repeat steps [25](#step-25-create-openssl-config-file), [28](#step-28-generate-client-cert) and [32](#step-32-create-vpn-profile-for-ios-and-macos-using).
