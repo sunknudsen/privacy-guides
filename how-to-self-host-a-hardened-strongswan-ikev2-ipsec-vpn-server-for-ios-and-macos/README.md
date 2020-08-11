@@ -233,7 +233,7 @@ apt install -y curl python
 
 Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977aab368e6280a8) for `ulagen.py`.
 
-The following code block downloads and runs [ulagen.py](./ulagen.py) (advanced users may wish to download [ulagen.py.sig](./ulagen.py.sig) and verify signature using my [PGP public key](https://sunknudsen.com/sunknudsen.asc) before running script).
+The following commands downloads and runs [ulagen.py](./ulagen.py) (advanced users may wish to download [ulagen.py.sig](./ulagen.py.sig) and verify signature using my [PGP public key](https://sunknudsen.com/sunknudsen.asc) before running script).
 
 ```console
 $ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-a-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python | grep "First subnet:" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
