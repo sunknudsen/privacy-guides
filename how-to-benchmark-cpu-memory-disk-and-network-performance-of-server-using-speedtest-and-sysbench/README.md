@@ -8,7 +8,7 @@ Publication date: 2020-07-31T12:39:56.670Z
 
 # How to benchmark CPU, memory, disk and network performance of server using Speedtest and SysBench
 
-> Ideally, run benchmark tests on development servers to avoid installing and running Speedtest and SysBench on production servers.
+> Heads up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on disposable servers.
 
 ## Requirements
 
