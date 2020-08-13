@@ -45,7 +45,13 @@ apt update
 apt install -y gnupg2
 ```
 
-### Step 5: import [Speedtest](https://www.speedtest.net/)’s PGP public key and enable Speedtest’s repository
+### Step 5: install Common CA certificates
+
+```shell
+apt install -y ca-certificates
+```
+
+### Step 6: import [Speedtest](https://www.speedtest.net/)’s PGP public key and enable Speedtest’s repository
 
 ```console
 $ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
@@ -60,7 +66,7 @@ deb https://ookla.bintray.com/debian buster main
 $ apt update
 ```
 
-### Step 6: install Speedtest and SysBench
+### Step 7: install Speedtest and SysBench
 
 ```shell
 apt install -y speedtest sysbench
