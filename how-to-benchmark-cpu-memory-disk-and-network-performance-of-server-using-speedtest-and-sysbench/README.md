@@ -41,6 +41,7 @@ $ gpg --version
 ### Step 4: install GnuPG (only run command if previous step returned `-bash: gpg: command not found`)
 
 ```shell
+apt update
 apt install -y gnupg2
 ```
 
