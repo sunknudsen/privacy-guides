@@ -30,7 +30,10 @@ For increased security, protect private key using strong passphrase.
 When asked for file in which to save key, enter `vpn-server`.
 
 ```console
+$ mkdir -p ~/.ssh
+
 $ cd ~/.ssh
+
 $ ssh-keygen -t rsa -C "vpn-server"
 Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/sunknudsen/.ssh/id_rsa): vpn-server
