@@ -23,11 +23,13 @@ Publication date: 2020-07-31T12:39:56.680Z
 
 ## Guide
 
-### Step 1: create SSH key pair (used to connect to server)
+### Step 1: create SSH key pair
 
 For increased security, protect private key using strong passphrase.
 
 When asked for file in which to save key, enter `vpn-server`.
+
+Use `vpn-server.pub` public key when setting up server.
 
 ```console
 $ mkdir -p ~/.ssh
@@ -55,6 +57,9 @@ The key's randomart image is:
 |  + + .+ o       |
 | . o oo.o.       |
 +----[SHA256]-----+
+
+$ cat vpn-server.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWLI8y5aYkLzyEgyp7EibB0rcmwiZfwx/RDb5zAvlr9KGsOWOYJ/gRIf4AwK1PdBPDo8jaa02J/H585NHV7T7XJ7Ycl/LeJh+oDXGs4OOspiFM/7NuleqCA0sSuJEnnuuTZsIDAlJwtWIJTM8lg4nWCQx2xAGkRyx4eNHE2vmlg+xHu3PbHg9kpSIaBWpx0WsysypyaB77+pkid6kYzxPXexoxFm4FnkoY7PZGb97wl4FwW1EK/yo9rnwbtEq5ny96JEHqeJdxeBGHYrsAoRro4jPWYXvdXZV2s27NYC6S3yHsJdaLfyfJXyTaygOyyaf39GcwqfJZpmVYwVyfZ2Go6ec9R/dFbKEA4Ue7aeCkDskSTiMuUZjYjfhezpa4Y0Jiy+lDZFVSv3tsBYu7Nxq0erZ2ygRJAXUMvvyFICJQGUhblRGXAOwYUt72CSUM0ZMsr84aOWsyzRwVQXzxETuDgnXk= vpn-server
 ```
 
 ### Step 2: log in to server as root
@@ -67,7 +72,7 @@ If server uses password authentication, run the following and type in password.
 ssh root@185.193.126.203
 ```
 
-If server uses public key authentication (using the key pair from [step 1](#step-1-create-ssh-key-pair-used-to-connect-to-server)), run the following and type in passphrase.
+If server uses public key authentication, run the following and type in passphrase.
 
 ```shell
 ssh root@185.193.126.203 -i ~/.ssh/vpn-server
@@ -75,7 +80,7 @@ ssh root@185.193.126.203 -i ~/.ssh/vpn-server
 
 ### Step 3: add SSH public key to `authorized_keys`
 
-> This step is only required if server was configured without public key authentication.
+> This step is only required if server was configured without SSH public key.
 
 On Mac, run:
 
