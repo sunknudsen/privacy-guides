@@ -580,7 +580,9 @@ systemctl daemon-reload
 
 ### Step 23: create `strongswan-certs` folder
 
-> For security reasons, steps 24 to 28 are done on Mac vs server.
+> For security reasons, steps 23 to 27 are done on Mac vs server.
+
+> Store `strongswan-certs` folder in a safe place if you wish to issue additional certificates in the future.
 
 ```shell
 mkdir ~/Desktop/strongswan-certs
