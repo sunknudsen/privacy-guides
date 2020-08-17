@@ -66,14 +66,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWL
 
 Replace `185.193.126.203` with IP of server.
 
-If server uses password authentication, run the following and type in password.
-
-```shell
-ssh root@185.193.126.203
-```
-
-If server uses public key authentication, run the following and type in passphrase.
-
 ```shell
 ssh root@185.193.126.203 -i ~/.ssh/vpn-server
 ```
@@ -129,7 +121,7 @@ exit
 Replace `185.193.126.203` with IP of server.
 
 ```shell
-ssh vpn-server-admin@185.193.126.203 -i .ssh/vpn-server
+ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
 ```
 
 ### Step 8: switch to root
@@ -328,7 +320,7 @@ exit
 Replace `185.193.126.203` with IP of server.
 
 ```shell
-ssh vpn-server-admin@185.193.126.203 -i .ssh/vpn-server
+ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
 ```
 
 #### Switch to root
