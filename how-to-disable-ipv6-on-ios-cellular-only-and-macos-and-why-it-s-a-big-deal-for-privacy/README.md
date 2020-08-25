@@ -54,14 +54,21 @@ Open "Settings", then "Profile Downloaded" and tap "Install"
 
 ### Step 1: list network interfaces
 
-```shell
-networksetup -listallnetworkservices
+```console
+$ networksetup -listallnetworkservices
+An asterisk (*) denotes that a network service is disabled.
+Wi-Fi
+iPhone USB
+Thunderbolt Ethernet
 ```
 
 ### Step 2: disable IPv6
 
+> Heads up: use network interfaces found in [step 1](#step-1-list-network-interfaces) (most computers only have `Wi-Fi` interface)
+
 ```shell
 networksetup -setv6off "Wi-Fi"
+networksetup -setv6off "iPhone USB"
 networksetup -setv6off "Thunderbolt Ethernet"
 ```
 
@@ -79,5 +86,6 @@ Open "Settings", then "General", then "Profile", and tap provisioning profile, t
 
 ```shell
 networksetup -setv6automatic "Wi-Fi"
+networksetup -setv6automatic "iPhone USB"
 networksetup -setv6automatic "Thunderbolt Ethernet"
 ```

@@ -16,6 +16,11 @@ Publication date: 2020-07-31T12:39:56.670Z
 
 - Virtual private server (VPS) or dedicated server running Debian 10 (buster)
 
+## Caveats
+
+- When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
+- When copy/pasting commands that start with `cat << "EOF"`, select all lines at once (from `cat << "EOF"` to `EOF` inclusively) as they are part of the same (single) command
+
 ## Installation guide
 
 ### Step 1: check if Backports repository is enabled
