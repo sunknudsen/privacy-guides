@@ -47,6 +47,8 @@ Status: Enabled
 
 ### Step 3: backup and override `/etc/pf.conf`
 
+> Heads up: software updates will likely restore `/etc/pf.conf` to default. Remember to check `/etc/pf.conf` using `cat /etc/pf.conf` after updates and test kill switch.
+
 ```shell
 sudo cp /etc/pf.conf /etc/pf.conf.backup
 cat << "EOF" | sudo tee /etc/pf.conf
