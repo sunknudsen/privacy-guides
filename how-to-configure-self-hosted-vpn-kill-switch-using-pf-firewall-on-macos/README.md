@@ -287,6 +287,8 @@ Use `socketfilterfw` to block specific apps.
 cat << "EOF" > /usr/local/sbin/strict.sh
 #! /bin/sh
 
+set -e
+
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
   exit 1
@@ -308,6 +310,8 @@ printf "\n"
 pfctl -F all -f /etc/pf.conf
 
 printf "\n%s" "${green}Strict mode enabled${end}"
+
+exit 0
 EOF
 chmod +x /usr/local/sbin/strict.sh
 ```
@@ -319,6 +323,8 @@ Use `socketfilterfw` to unblock specific apps (useful to allow 1Password’s [lo
 ```shell
 cat << "EOF" > /usr/local/sbin/trusted.sh
 #! /bin/sh
+
+set -e
 
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
@@ -363,6 +369,8 @@ chmod +x /usr/local/sbin/trusted.sh
 ```shell
 cat << "EOF" > /usr/local/sbin/disabled.sh
 #! /bin/sh
+
+set -e
 
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
