@@ -8,6 +8,8 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 # How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS
 
+[![How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube](how-to-backup-and-encrypt-data-privately-and-securely-using-rsync-and-veracrypt-on-macos.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube")
+
 ## Requirements
 
 - Computer running macOS Mojave or Catalina
@@ -216,7 +218,7 @@ chmod +x /usr/local/sbin/backup.sh
 vi /usr/local/sbin/backup.sh
 ```
 
-Press <kbd>i</kbd> to enter edit mode, edit backup script, press <kbd>esc</kbd> to exit edit mode and press <kbd>shift+z+z</kbd> to save and exit.
+Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd> to exit insert mode and press <kbd>shift+z+z</kbd> to save and exit.
 
 ## Usage guide
 
