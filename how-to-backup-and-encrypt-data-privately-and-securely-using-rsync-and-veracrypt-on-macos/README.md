@@ -176,15 +176,10 @@ veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 ### Step 11: create backup script
 
 ```shell
-cat << EOF > /usr/local/sbin/backup.sh
+cat << EOF > /usr/local/bin/backup.sh
 #! /bin/sh
 
 set -e
-
-if [ "\$(id -u)" != "0" ]; then
-  echo "This script must run as root"
-  exit 1
-fi
 
 red=$'\e[1;31m'
 end=$'\e[0m'
@@ -201,6 +196,8 @@ for file in "\${files[@]}"; do
   rsync -axRS --delete "\$file" /Volumes/Backup
 done
 
+open /Volumes/Backup
+
 printf "\${red}Inspect backup and press enter\${end}"
 
 read -r answer
@@ -209,13 +206,13 @@ veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 
 echo "Done"
 EOF
-chmod +x /usr/local/sbin/backup.sh
+chmod +x /usr/local/bin/backup.sh
 ```
 
 ### Step 12: edit backup script
 
 ```shell
-vi /usr/local/sbin/backup.sh
+vi /usr/local/bin/backup.sh
 ```
 
 Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd> to exit insert mode and press <kbd>shift+z+z</kbd> to save and exit.
@@ -223,8 +220,7 @@ Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd
 ## Usage guide
 
 ```console
-$ sudo backup.sh
-Password:
+$ backup.sh
 Enter password for /Volumes/Samsung BAR/.b:
 Inspect backup and press enter
 Done
