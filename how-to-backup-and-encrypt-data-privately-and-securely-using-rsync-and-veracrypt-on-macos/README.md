@@ -21,7 +21,7 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 ## Setup guide
 
-### Step 1: download and install [FUSE](https://osxfuse.github.io/)
+### Step 1: download and install [FUSE for macOS](https://osxfuse.github.io/)
 
 Go to https://osxfuse.github.io/, download and install latest release.
 
