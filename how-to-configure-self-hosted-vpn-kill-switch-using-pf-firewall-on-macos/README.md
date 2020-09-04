@@ -287,8 +287,6 @@ Use `socketfilterfw` to block specific apps.
 cat << "EOF" > /usr/local/sbin/strict.sh
 #! /bin/sh
 
-set -e
-
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
   exit 1
@@ -310,8 +308,6 @@ printf "\n"
 pfctl -F all -f /etc/pf.conf
 
 printf "\n%s" "${green}Strict mode enabled${end}"
-
-exit 0
 EOF
 chmod +x /usr/local/sbin/strict.sh
 ```
@@ -324,8 +320,6 @@ Use `socketfilterfw` to unblock specific apps (useful to allow 1Password’s [lo
 cat << "EOF" > /usr/local/sbin/trusted.sh
 #! /bin/sh
 
-set -e
-
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
   exit 1
@@ -333,14 +327,6 @@ fi
 
 red=$'\e[1;31m'
 end=$'\e[0m'
-
-function disable()
-{
-  /usr/local/sbin/strict.sh
-  exit 0
-}
-
-trap disable EXIT
 
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /Applications/1Password\ 7.app
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /usr/local/Cellar/squid/4.8/sbin/squid
@@ -356,6 +342,13 @@ pfctl -F all -f /etc/pf.conf
 
 printf "\n%s\n\n" "${red}Trusted mode enabled (press ctrl+c to disable)${end}"
 
+function disable()
+{
+  /usr/local/sbin/strict.sh
+}
+
+trap disable EXIT
+
 while :
 do
   sleep 60
@@ -370,8 +363,6 @@ chmod +x /usr/local/sbin/trusted.sh
 cat << "EOF" > /usr/local/sbin/disabled.sh
 #! /bin/sh
 
-set -e
-
 if [ "$(id -u)" != "0" ]; then
   echo "This script must run as root"
   exit 1
@@ -380,17 +371,16 @@ fi
 red=$'\e[1;31m'
 end=$'\e[0m'
 
-function disable()
-{
-  /usr/local/sbin/strict.sh
-  exit 0
-}
-
-trap disable EXIT
-
 pfctl -d
 
 printf "\n%s\n\n" "${red}Firewall disabled (press ctrl+c to enable)${end}"
+
+function disable()
+{
+  /usr/local/sbin/strict.sh
+}
+
+trap disable EXIT
 
 while :
 do
