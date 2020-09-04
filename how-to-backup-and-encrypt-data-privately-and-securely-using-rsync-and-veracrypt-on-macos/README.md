@@ -27,7 +27,7 @@ Go to https://osxfuse.github.io/, download and install latest release.
 
 ### Step 2: install [GnuPG](https://gnupg.org/)
 
-Follow steps from [How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)](../how-to-encrypt-sign-and-decrypt-messages-using-pgp-on-macos-adding-privacy-to-email) guide.
+Follow steps 1 to 3 from [How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)](../how-to-encrypt-sign-and-decrypt-messages-using-pgp-on-macos-adding-privacy-to-email) guide.
 
 ### Step 3: import VeraCrypt’s public key
 
@@ -151,7 +151,7 @@ The VeraCrypt volume has been successfully created.
 
 ### Step 10 (optional): mount, rename and dismount encrypted volume
 
-By default, VeraCrypt encrypted volumes are named "untitled".
+By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are named "untitled".
 
 #### Mount encrypted volume
 
@@ -178,8 +178,6 @@ veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 ```shell
 cat << EOF > /usr/local/bin/backup.sh
 #! /bin/sh
-
-set -e
 
 red=$'\e[1;31m'
 end=$'\e[0m'
