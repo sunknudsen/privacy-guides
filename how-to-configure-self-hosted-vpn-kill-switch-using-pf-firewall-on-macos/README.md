@@ -325,6 +325,14 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
+function disable()
+{
+  /usr/local/sbin/strict.sh
+  exit 0
+}
+
+trap disable HUP INT QUIT TERM
+
 red=$'\e[1;31m'
 end=$'\e[0m'
 
@@ -341,13 +349,6 @@ printf "\n"
 pfctl -F all -f /etc/pf.conf
 
 printf "\n%s\n\n" "${red}Trusted mode enabled (press ctrl+c to disable)${end}"
-
-function disable()
-{
-  /usr/local/sbin/strict.sh
-}
-
-trap disable EXIT
 
 while :
 do
@@ -368,19 +369,20 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
+function disable()
+{
+  /usr/local/sbin/strict.sh
+  exit 0
+}
+
+trap disable HUP INT QUIT TERM
+
 red=$'\e[1;31m'
 end=$'\e[0m'
 
 pfctl -d
 
 printf "\n%s\n\n" "${red}Firewall disabled (press ctrl+c to enable)${end}"
-
-function disable()
-{
-  /usr/local/sbin/strict.sh
-}
-
-trap disable EXIT
 
 while :
 do
