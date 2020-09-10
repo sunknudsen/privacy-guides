@@ -11,9 +11,12 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 [![How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube](how-to-backup-and-encrypt-data-privately-and-securely-using-rsync-and-veracrypt-on-macos.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube")
 
+> Heads up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
+
 ## Requirements
 
 - Computer running macOS Mojave or Catalina
+- USB flash drive or SD card formatted using FAT (4GiB file size limit) or exFAT filesystem (see [Journaling File Systems](https://www.veracrypt.fr/en/Journaling%20File%20Systems.html))
 
 ## Caveats
 
@@ -26,11 +29,25 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 Go to https://osxfuse.github.io/, download and install latest release.
 
-### Step 2: install [GnuPG](https://gnupg.org/)
+### Step 2: install [Homebrew](https://brew.sh/)
 
-Follow steps 1 to 3 from [How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)](../how-to-encrypt-sign-and-decrypt-messages-using-pgp-on-macos-adding-privacy-to-email) guide.
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
 
-### Step 3: import VeraCrypt’s public key
+### Step 3: disable Homebrew analytics
+
+```shell
+brew analytics off
+```
+
+### Step 4: install [GnuPG](https://gnupg.org/)
+
+```shell
+brew install gnupg
+```
+
+### Step 5: import VeraCrypt’s public key
 
 ```console
 $ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x821ACD02680D16DE
@@ -39,11 +56,11 @@ gpg: Total number processed: 1
 gpg:               imported: 1
 ```
 
-### Step 4: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
+### Step 6: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 
 Go to https://www.veracrypt.fr/en/Downloads.html and download latest release and its associated PGP signature to `~/Downloads` folder.
 
-### Step 5: verify VeraCrypt release signature using GnuPG
+### Step 7: verify VeraCrypt release signature using GnuPG
 
 Replace `VeraCrypt_1.24-Update7` with current release.
 
@@ -62,9 +79,9 @@ Good signature
 
 👍
 
-### Step 6: install VeraCrypt
+### Step 8: install VeraCrypt
 
-### Step 7: create and test VeraCrypt symlink
+### Step 9: create and test VeraCrypt symlink
 
 ```console
 $ ln -s /Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt /usr/local/bin/veracrypt
@@ -77,17 +94,17 @@ VeraCrypt 1.24-Update7
 
 👍
 
-### Step 8: set temporary environment variable
+### Step 10: set temporary environment variable
 
-> Heads up: using `.b` as encrypted volume path to make things inconspicuous (files that start with `.` are hidden on macOS, use <kbd>cmd+shift+.</kbd> to display them).
+> Heads up: using `b` as encrypted volume file name to make things inconspicuous.
 
 `BACKUP_VOLUME_PATH` path to VeraCrypt volume
 
 ```shell
-BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/.b"
+BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/b"
 ```
 
-### Step 9: create encrypted volume
+### Step 11: create encrypted volume
 
 > Heads up: volume size cannot be increased later.
 
@@ -118,7 +135,7 @@ Encryption Algorithm:
  13) Serpent(AES)
  14) Serpent(Twofish(AES))
  15) Twofish(Serpent)
-Select [1]:
+Select [7]:
 
 Hash algorithm:
  1) SHA-512
@@ -145,12 +162,12 @@ Enter keyfile path [none]:
 Please type at least 320 randomly chosen characters and then press Enter:
 
 
-Done: 100.000%  Speed: 245 MiB/s  Left: 0 s
+Done: 100.000%  Speed:  24 MiB/s  Left: 0 s
 
 The VeraCrypt volume has been successfully created.
 ```
 
-### Step 10 (optional): mount, rename and dismount encrypted volume
+### Step 12 (optional): mount, rename and dismount encrypted volume
 
 By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are named "untitled".
 
@@ -158,7 +175,7 @@ By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are name
 
 ```console
 $ veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
-Enter password for /Volumes/SAMSUNG BAR/.b:
+Enter password for /Volumes/Samsung BAR/b:
 ```
 
 #### Rename encrypted volume
@@ -174,16 +191,26 @@ Volume on disk3 renamed to Backup
 veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 ```
 
-### Step 11: create backup script
+### Step 13: create `/usr/local/bin/backup.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/backup.sh
 #! /bin/sh
 
-red=$'\e[1;31m'
-end=$'\e[0m'
+set -e
+
+function cleanup()
+{
+  if [ -d "/Volumes/Backup" ]; then
+    veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+  fi
+}
+
+trap cleanup ERR INT
 
 veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
+
+mkdir -p /Volumes/Backup/Versioning
 
 declare -a files=(
   "/Users/$(whoami)/.gnupg"
@@ -192,23 +219,38 @@ declare -a files=(
 )
 
 for file in "\${files[@]}"; do
-  rsync -axRS --delete "\$file" /Volumes/Backup
+  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix=\$(date +'.%F_%H-%M') "\$file" /Volumes/Backup
 done
+
+if [ "\$(find /Volumes/Backup/Versioning -type f -ctime +90)" != "" ]; then
+  printf "Do you wish to prune versions older than 90 days (y or n)? "
+  read -r answer
+  if [ "\$answer" = "y" ]; then
+    find /Volumes/Backup/Versioning -type f -ctime +90 -delete
+    find /Volumes/Backup/Versioning -type d -empty -delete
+  fi
+fi
 
 open /Volumes/Backup
 
-printf "\${red}Inspect backup and press enter\${end}"
+printf "Inspect backup and press enter"
 
 read -r answer
 
 veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 
-echo "Done"
+printf "Generate hash (y or n)? "
+read -r answer
+if [ "\$answer" = "y" ]; then
+  openssl dgst -sha512 "$BACKUP_VOLUME_PATH"
+fi
+
+printf "%s\n" "Done"
 EOF
 chmod +x /usr/local/bin/backup.sh
 ```
 
-### Step 12: edit backup script
+### Step 14: edit backup script
 
 ```shell
 vi /usr/local/bin/backup.sh
@@ -216,15 +258,58 @@ vi /usr/local/bin/backup.sh
 
 Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd> to exit insert mode and press <kbd>shift+z+z</kbd> to save and exit.
 
+### Step 15: create `/usr/local/bin/check.sh` script
+
+```shell
+cat << EOF > /usr/local/bin/check.sh
+#! /bin/sh
+
+set -e
+
+red=$'\e[1;31m'
+nc=$'\e[0m'
+
+printf "Backup hash: "
+
+read -r previous
+
+current=\$(openssl dgst -sha512 "$BACKUP_VOLUME_PATH")
+
+if [ "\$current" != "\$previous" ]; then
+  printf "\${red}%s\${nc}\n" "Integrity check failed"
+  exit 1
+fi
+
+printf "%s\n" "OK"
+EOF
+chmod +x /usr/local/bin/check.sh
+```
+
 ## Usage guide
+
+### Backup
 
 ```console
 $ backup.sh
-Enter password for /Volumes/Samsung BAR/.b:
+Enter password for /Volumes/Samsung BAR/b:
 Inspect backup and press enter
+Generate hash (y or n)? y
+SHA512(/Volumes/Samsung BAR/b)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
 Done
 ```
 
 Done
+
+👍
+
+### Check integrity of backup
+
+```console
+$ check.sh
+Backup hash: SHA512(/Volumes/Samsung BAR/b)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
+OK
+```
+
+OK
 
 👍
