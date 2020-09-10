@@ -289,12 +289,12 @@ cat << "EOF" > /usr/local/sbin/strict.sh
 #! /bin/sh
 
 if [ "$(id -u)" != "0" ]; then
-  echo "This script must run as root"
+  printf "%s\n" "This script must run as root"
   exit 1
 fi
 
 green=$'\e[1;32m'
-end=$'\e[0m'
+nc=$'\e[0m'
 
 # /usr/libexec/ApplicationFirewall/socketfilterfw --blockapp /Applications/1Password\ 7.app
 # /usr/libexec/ApplicationFirewall/socketfilterfw --blockapp /usr/local/Cellar/squid/4.8/sbin/squid
@@ -308,7 +308,7 @@ printf "\n"
 
 pfctl -F all -f /etc/pf.conf
 
-printf "\n%s" "${green}Strict mode enabled${end}"
+printf "\n${green}%s${nc}\n" "Strict mode enabled"
 EOF
 chmod +x /usr/local/sbin/strict.sh
 ```
@@ -322,7 +322,7 @@ cat << "EOF" > /usr/local/sbin/trusted.sh
 #! /bin/sh
 
 if [ "$(id -u)" != "0" ]; then
-  echo "This script must run as root"
+  printf "%s\n" "This script must run as root"
   exit 1
 fi
 
@@ -332,10 +332,10 @@ function disable()
   exit 0
 }
 
-trap disable HUP INT QUIT TERM
+trap disable INT
 
 red=$'\e[1;31m'
-end=$'\e[0m'
+nc=$'\e[0m'
 
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /Applications/1Password\ 7.app
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /usr/local/Cellar/squid/4.8/sbin/squid
@@ -349,7 +349,7 @@ printf "\n"
 
 pfctl -F all -f /etc/pf.conf
 
-printf "\n%s\n\n" "${red}Trusted mode enabled (press ctrl+c to disable)${end}"
+printf "\n${red}%s${nc}\n\n" "Trusted mode enabled (press ctrl+c to disable)"
 
 while :
 do
@@ -366,7 +366,7 @@ cat << "EOF" > /usr/local/sbin/disabled.sh
 #! /bin/sh
 
 if [ "$(id -u)" != "0" ]; then
-  echo "This script must run as root"
+  printf "%s\n" "This script must run as root"
   exit 1
 fi
 
@@ -376,14 +376,14 @@ function disable()
   exit 0
 }
 
-trap disable HUP INT QUIT TERM
+trap disable INT
 
 red=$'\e[1;31m'
-end=$'\e[0m'
+nc=$'\e[0m'
 
 pfctl -d
 
-printf "\n%s\n\n" "${red}Firewall disabled (press ctrl+c to enable)${end}"
+printf "\n${red}%s${nc}\n\n" "Firewall disabled (press ctrl+c to enable)"
 
 while :
 do
