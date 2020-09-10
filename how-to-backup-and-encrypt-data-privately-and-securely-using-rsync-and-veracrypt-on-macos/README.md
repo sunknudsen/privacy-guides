@@ -3,7 +3,7 @@ Title: How to backup and encrypt data privately and securely using rsync and Ver
 Description: Learn how to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
-Reviewers:
+Reviewers: Alex Anderson <https://github.com/Serpent27>
 Publication date: 2020-08-26T14:07:36.767Z
 -->
 
@@ -313,3 +313,7 @@ OK
 OK
 
 👍
+
+You should be careful to ensure the hash is not modified by an attacker, since this would allow [tampering with the backup](https://crypto.stackexchange.com/questions/83776/should-i-be-worried-about-xts-tampering-when-encrypting-backups-using-veracrypt/83782#83782). One good way to do this is to use an [HMAC](https://en.wikipedia.org/wiki/HMAC) hash instead of just hashing the backup, or to simply store a copy of the hash securely.
+
+Putting the hash in another VeraCrypt container would be enough, assuming you use the standard XTS mode.
