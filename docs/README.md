@@ -11,15 +11,13 @@ Publication date: 1970-01-01T00:00:00.000Z
 
 First, thanks for considering contributing. 🙌
 
-**Found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues).
+**Value the project?** Please star the [repo](https://github.com/sunknudsen/privacy-guides).
+
+**Have a recommendation?** Please submit an [issue](https://github.com/sunknudsen/privacy-guides/issues).
 
 **Found a security vulnerability?** Please report vulnerability using the PGP public key and email found on [sunknudsen.com](https://sunknudsen.com/).
 
-**Have a fix or improvement?** Please submit [pull request](https://github.com/sunknudsen/privacy-guides/pulls) ([signed](#how-to-sign-pull-requests) pull requests are favored).
-
 **Fellow privacy and security researcher?** Please [peer review and sign](#how-to-peer-review-and-sign-a-guide) a guide.
-
-**Value the project?** Consider starring the [repo](https://github.com/sunknudsen/privacy-guides).
 
 ## How to get help
 
@@ -29,14 +27,17 @@ Please use comments on [YouTube](https://www.youtube.com/sunknudsen) or [PeerTub
 
 ## How to peer review and sign a guide
 
-> Heads up: in order to establish a web of trust, peer reviewers must have public-facing track records and will be background checked.
 > Heads-up: in order to establish a web of trust, peer reviewers must have public-facing track records and will be background checked.
 
 ### Step 1: clone [repo](https://github.com/sunknudsen/privacy-guides)
 
-### Step 2: review guide and suggest fixes or improvements (if need be)
+### Step 2: checkout [draft](https://github.com/sunknudsen/privacy-guides/tree/draft)
 
-### Step 3: append yourself to `Reviewers` (comma-separated).
+### Step 3: review guide and submit recommendations using [issues](https://github.com/sunknudsen/privacy-guides/issues)
+
+Once consensus has been reached (issues are closed) and updated guide has been published to [draft.sunknudsen.com](https://draft.sunknudsen.com/), time for [step 4](#step-4-append-yourself-to).
+
+### Step 4: append yourself to `Reviewers` (comma-separated)
 
 Example:
 
@@ -51,7 +52,7 @@ Publication date: 2020-09-09T17:25:25.799Z
 -->
 ```
 
-### Step 4: submit [signed](#how-to-sign-pull-requests) pull request
+### Step 5: submit [signed](#how-to-sign-pull-requests) pull request
 
 👍
 
