@@ -289,6 +289,8 @@ chmod +x /usr/local/bin/check.sh
 
 ### Backup
 
+> Heads-up: store hash in safe place such as password manager (not on same device as backup).
+
 ```console
 $ backup.sh
 Enter password for /Volumes/Samsung BAR/b:
@@ -313,7 +315,3 @@ OK
 OK
 
 👍
-
-You should be careful to ensure the hash is not modified by an attacker, since this would allow [tampering with the backup](https://crypto.stackexchange.com/questions/83776/should-i-be-worried-about-xts-tampering-when-encrypting-backups-using-veracrypt/83782#83782). One good way to do this is to use an [HMAC](https://en.wikipedia.org/wiki/HMAC) hash instead of just hashing the backup, or to simply store a copy of the hash securely.
-
-Putting the hash in another VeraCrypt container would be enough, assuming you use the standard XTS mode.
