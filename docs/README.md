@@ -30,6 +30,7 @@ Please use comments on [YouTube](https://www.youtube.com/sunknudsen) or [PeerTub
 ## How to peer review and sign a guide
 
 > Heads up: in order to establish a web of trust, peer reviewers must have public-facing track records and will be background checked.
+> Heads-up: in order to establish a web of trust, peer reviewers must have public-facing track records and will be background checked.
 
 ### Step 1: clone [repo](https://github.com/sunknudsen/privacy-guides)
 

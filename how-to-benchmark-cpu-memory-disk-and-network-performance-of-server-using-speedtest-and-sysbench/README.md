@@ -11,7 +11,7 @@ Publication date: 2020-07-31T12:39:56.670Z
 
 [![How to benchmark CPU, memory, disk and network performance of server using Speedtest and SysBench - YouTube](how-to-benchmark-cpu-memory-disk-and-network-performance-of-server-using-speedtest-and-sysbench.png)](https://www.youtube.com/watch?v=zcq2iZUcQQY "How to benchmark CPU, memory, disk and network performance of server using Speedtest and SysBench - YouTube")
 
-> Heads up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on disposable servers.
+> Heads-up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on disposable servers.
 
 ## Requirements
 

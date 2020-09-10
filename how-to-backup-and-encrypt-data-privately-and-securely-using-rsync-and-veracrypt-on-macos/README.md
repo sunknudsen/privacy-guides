@@ -11,7 +11,7 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 [![How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube](how-to-backup-and-encrypt-data-privately-and-securely-using-rsync-and-veracrypt-on-macos.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube")
 
-> Heads up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
+> Heads-up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
 
 ## Requirements
 
@@ -96,7 +96,7 @@ VeraCrypt 1.24-Update7
 
 ### Step 10: set temporary environment variable
 
-> Heads up: using `b` as encrypted volume file name to make things inconspicuous.
+> Heads-up: using `b` as encrypted volume file name to make things inconspicuous.
 
 `BACKUP_VOLUME_PATH` path to VeraCrypt volume
 
@@ -106,9 +106,9 @@ BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/b"
 
 ### Step 11: create encrypted volume
 
-> Heads up: volume size cannot be increased later.
+> Heads-up: volume size cannot be increased later.
 
-> Heads up: Mac OS Extended filesystem required on macOS.
+> Heads-up: Mac OS Extended filesystem required on macOS.
 
 ```console
 $ veracrypt --text --create "$BACKUP_VOLUME_PATH"

@@ -11,7 +11,7 @@ Publication date: 2020-05-19T00:00:00.000Z
 
 [![How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube](how-to-spoof-anonymize-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof (anonymize) your MAC address and hostname automatically at boot on macOS - YouTube")
 
-> Heads up: unfortunately this guide does not work on Macs equipped with the new T2 chip running macOS Mojave. If that’s your case, please consider upgrading to Catalina.
+> Heads-up: unfortunately this guide does not work on Macs equipped with the new T2 chip running macOS Mojave. If that’s your case, please consider upgrading to Catalina.
 
 ## Caveats
 

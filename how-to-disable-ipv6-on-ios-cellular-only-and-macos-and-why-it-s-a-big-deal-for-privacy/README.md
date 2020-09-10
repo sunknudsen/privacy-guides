@@ -11,7 +11,7 @@ Publication date: 2020-07-18T10:28:23.605Z
 
 [![How to disable IPv6 on iOS (cellular only) and macOS and why it’s a big deal for privacy - YouTube](how-to-disable-ipv6-on-ios-cellular-only-and-macos-and-why-it-s-a-big-deal-for-privacy.png)](https://www.youtube.com/watch?v=Nzx9T7GtmT4 "How to disable IPv6 on iOS (cellular only) and macOS and why it’s a big deal for privacy - YouTube")
 
-> Heads up: unfortunately this guide will not work on carriers or ISPs that have migrated their networks to IPv6-only.
+> Heads-up: unfortunately this guide will not work on carriers or ISPs that have migrated their networks to IPv6-only.
 
 ## iOS guide
 
@@ -65,7 +65,7 @@ Thunderbolt Ethernet
 
 ### Step 2: disable IPv6
 
-> Heads up: use network interfaces found in [step 1](#step-1-list-network-interfaces) (most computers only have `Wi-Fi` interface)
+> Heads-up: use network interfaces found in [step 1](#step-1-list-network-interfaces) (most computers only have `Wi-Fi` interface)
 
 ```shell
 networksetup -setv6off "Wi-Fi"
