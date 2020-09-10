@@ -2,7 +2,7 @@
 Title: How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS
 Description: Learn how to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>
 Reviewers: Alex Anderson <https://github.com/Serpent27>
 Publication date: 2020-08-26T14:07:36.767Z
 -->
