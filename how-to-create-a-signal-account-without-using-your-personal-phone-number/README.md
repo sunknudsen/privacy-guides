@@ -3,6 +3,7 @@ Title: How to create a Signal account without using your personal phone number
 Description: Learn how to create a Signal account without using your personal phone number.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
 Publication date: 2020-06-04T00:00:00.000Z
 -->
 

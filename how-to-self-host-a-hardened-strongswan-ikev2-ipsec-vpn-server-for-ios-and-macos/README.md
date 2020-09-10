@@ -3,6 +3,7 @@ Title: How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and
 Description: Learn how to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
 Publication date: 2020-07-31T12:39:56.680Z
 -->
 

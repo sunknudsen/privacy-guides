@@ -3,6 +3,7 @@ Title: How to spoof (anonymize) your MAC address and hostname automatically at b
 Description: Learn how to spoof (anonymize) your MAC address and hostname automatically at boot on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
 Publication date: 2020-05-19T00:00:00.000Z
 -->
 

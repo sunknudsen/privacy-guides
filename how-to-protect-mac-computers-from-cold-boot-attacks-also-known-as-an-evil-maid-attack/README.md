@@ -3,6 +3,7 @@ Title: How to protect Mac computers from cold boot attacks (also known as an evi
 Description: Learn how to protect Mac computers from cold boot attacks (also known as an evil maid attack).
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
 Publication date: 2020-06-05T00:00:00.000Z
 -->
 

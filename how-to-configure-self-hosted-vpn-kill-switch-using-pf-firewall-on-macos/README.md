@@ -3,6 +3,7 @@ Title: How to configure self-hosted VPN kill switch using PF firewall on macOS
 Description: Learn how to configure self-hosted VPN kill switch using PF firewall on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
 Publication date: 2020-08-21T15:42:23.029Z
 -->
 
