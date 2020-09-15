@@ -208,7 +208,7 @@ function cleanup()
 
 trap cleanup ERR INT
 
-veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
+veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "${BACKUP_VOLUME_PATH}" /Volumes/Backup
 
 mkdir -p /Volumes/Backup/Versioning
 
@@ -218,14 +218,16 @@ declare -a files=(
   "/Users/$(whoami)/Library/Keychains"
 )
 
-for file in "\${files[@]}"; do
-  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix=\$(date +'.%F_%H-%M') "\$file" /Volumes/Backup
+timestamp=$(date +'.%F_%H-%M')
+
+for file in "${files[@]}"; do
+  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix="${timestamp}" "${file}" /Volumes/Backup
 done
 
-if [ "\$(find /Volumes/Backup/Versioning -type f -ctime +90)" != "" ]; then
+if [ "$(find /Volumes/Backup/Versioning -type f -ctime +90)" != "" ]; then
   printf "Do you wish to prune versions older than 90 days (y or n)? "
   read -r answer
-  if [ "\$answer" = "y" ]; then
+  if [ "${answer}" = "y" ]; then
     find /Volumes/Backup/Versioning -type f -ctime +90 -delete
     find /Volumes/Backup/Versioning -type d -empty -delete
   fi
@@ -241,7 +243,7 @@ veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 
 printf "Generate hash (y or n)? "
 read -r answer
-if [ "\$answer" = "y" ]; then
+if [ "${answer}" = "y" ]; then
   openssl dgst -sha512 "$BACKUP_VOLUME_PATH"
 fi
 
