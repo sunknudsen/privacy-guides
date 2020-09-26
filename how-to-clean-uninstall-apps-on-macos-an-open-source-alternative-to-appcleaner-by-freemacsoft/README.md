@@ -21,7 +21,7 @@ sudo chown $(whoami):admin /usr/local/bin
 ### Step 2: download [app-cleaner.sh](app-cleaner.sh) ([PGP signature](./app-cleaner.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
-curl -o /usr/local/bin/app-cleaner.sh https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-apps-on-macos/app-cleaner.sh
+curl -o /usr/local/bin/app-cleaner.sh https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-apps-on-macos-an-open-source-alternative-to-appcleaner-by-freemacsoft/app-cleaner.sh
 chmod +x /usr/local/bin/app-cleaner.sh
 ```
 
