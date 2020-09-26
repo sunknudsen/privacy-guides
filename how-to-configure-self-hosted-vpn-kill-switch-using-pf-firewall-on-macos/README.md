@@ -255,7 +255,7 @@ sudo pfctl -F all -f /etc/pf.conf
 
 ```shell
 sudo mkdir -p /usr/local/sbin
-sudo chown $(whoami):admin /usr/local/sbin/
+sudo chown $(whoami):admin /usr/local/sbin
 ```
 
 ### Step 11: source `/usr/local/sbin` folder

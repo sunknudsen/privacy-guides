@@ -212,14 +212,14 @@ veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLU
 
 mkdir -p /Volumes/Backup/Versioning
 
-declare -a files=(
+files=(
   "/Users/$(whoami)/.gnupg"
   "/Users/$(whoami)/.ssh"
   "/Users/$(whoami)/Library/Keychains"
 )
 
 for file in "\${files[@]}"; do
-  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix=\$(date +'.%F_%H-%M') "\$file" /Volumes/Backup
+  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix=\$(date +".%F-%H%M%S") "\$file" /Volumes/Backup
 done
 
 if [ "\$(find /Volumes/Backup/Versioning -type f -ctime +90)" != "" ]; then
@@ -250,7 +250,7 @@ EOF
 chmod +x /usr/local/bin/backup.sh
 ```
 
-### Step 14: edit backup script
+### Step 14: edit `/usr/local/bin/backup.sh` script
 
 ```shell
 vi /usr/local/bin/backup.sh
@@ -285,6 +285,38 @@ EOF
 chmod +x /usr/local/bin/check.sh
 ```
 
+### Step 16: create `/usr/local/bin/restore.sh` script
+
+```shell
+cat << EOF > /usr/local/bin/restore.sh
+#! /bin/sh
+
+set -e
+
+function cleanup()
+{
+  if [ -d "/Volumes/Backup" ]; then
+    veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+  fi
+}
+
+trap cleanup ERR INT
+
+veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
+
+open /Volumes/Backup
+
+printf "Restore data and press enter"
+
+read -r answer
+
+veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+
+printf "%s\n" "Done"
+EOF
+chmod +x /usr/local/bin/restore.sh
+```
+
 ## Usage guide
 
 ### Backup
@@ -304,7 +336,7 @@ Done
 
 👍
 
-### Check integrity of backup
+### Check
 
 ```console
 $ check.sh
@@ -313,5 +345,18 @@ OK
 ```
 
 OK
+
+👍
+
+### Restore
+
+```console
+$ restore.sh
+Enter password for /Volumes/Samsung BAR/b:
+Restore data and press enter
+Done
+```
+
+Done
 
 👍
