@@ -9,6 +9,8 @@ Publication date: 2020-09-21T15:50:15.415Z
 
 # How to clean uninstall apps on macOS (an open source alternative to AppCleaner by FreeMacSoft)
 
+[![How to clean uninstall apps on macOS (an open source alternative to AppCleaner by FreeMacSoft) - YouTube](how-to-clean-uninstall-apps-on-macos-an-open-source-alternative-to-appcleaner-by-freemacsoft.png)](https://www.youtube.com/watch?v=0nVOB0EE5ps "How to clean uninstall apps on macOS (an open source alternative to AppCleaner by FreeMacSoft) - YouTube")
+
 ## Guide
 
 ### Step 1: create `/usr/local/bin` folder
