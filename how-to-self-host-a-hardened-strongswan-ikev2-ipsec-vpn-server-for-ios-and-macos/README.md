@@ -583,9 +583,9 @@ systemctl daemon-reload
 
 ### Step 23: create `strongswan-certs` folder
 
-> For security reasons, steps 23 to 27 are done on Mac vs server.
+> Heads-up: for security reasons, steps 23 to 27 are done on Mac vs server.
 
-> Store `strongswan-certs` folder in a safe place if you wish to issue additional certificates in the future.
+> Heads-up: store `strongswan-certs` folder in a safe place if you wish to issue additional certificates in the future.
 
 ```shell
 mkdir ~/Desktop/strongswan-certs
@@ -746,7 +746,7 @@ sysctl -p
 
 ### Step 31: create VPN profile for iOS and macOS using [Apple Configurator 2](https://support.apple.com/apple-configurator)
 
-> When configuring strongSwan using certs and dnsmasq, two devices cannot use the same provisioning profile simultaneously.
+> Heads-up: when configuring strongSwan using certs and dnsmasq, two devices cannot use the same provisioning profile simultaneously.
 
 Open "Apple Configurator 2", then click "File", then "New Profile".
 
@@ -774,11 +774,23 @@ In "All Devices", double-click on iPhone, then "Add", and finally "Profiles".
 
 Select "john.mobileconfig" and follow instructions.
 
-On iPhone, open "Settings", then "Profile Downloaded" and tap "Install"
+On iPhone, open "Settings", then "Profile Downloaded" and tap "Install".
+
+**If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
+
+```shell
+sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
+```
 
 ### Step 33: add VPN profile to Mac
 
 This step is super simple, simply double-click "john.mobileconfig" and follow instructions.
+
+**If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
+
+```shell
+sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
+```
 
 ### Step 34: connect to VPN on iPhone or Mac
 
