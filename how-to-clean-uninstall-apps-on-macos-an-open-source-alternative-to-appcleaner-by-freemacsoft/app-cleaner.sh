@@ -37,7 +37,7 @@ if [ ${#processes[@]} -gt 0 ]; then
     printf "%s\n" "Killing running processes..."
     sleep 1
     for process in "${processes[@]}"; do
-      echo $process | awk '{print $1}' | xargs kill
+      echo $process | awk '{print $1}' | xargs kill 2>&1 | grep -v "No such process"
     done
   fi
 fi
@@ -46,8 +46,8 @@ home_dir=~
 
 paths=()
 
-paths+=($(find /private/var/db/receipts -iname "*$app_name*.bom" -maxdepth 1 -prune 2>&1 | grep -av "Permission denied"))
-paths+=($(find /private/var/db/receipts -iname "*$bundle_identifier*.bom" -maxdepth 1 -prune 2>&1 | grep -av "Permission denied"))
+paths+=($(find /private/var/db/receipts -iname "*$app_name*.bom" -maxdepth 1 -prune 2>&1 | grep -v "Permission denied"))
+paths+=($(find /private/var/db/receipts -iname "*$bundle_identifier*.bom" -maxdepth 1 -prune 2>&1 | grep -v "Permission denied"))
 
 if [ ${#paths[@]} -gt 0 ]; then
   printf "%s\n" "Saving bill of material logs to desktop..."
@@ -91,16 +91,18 @@ locations=(
   "/usr/local/sbin"
   "/usr/local/share"
   "/usr/local/var"
+  $(getconf DARWIN_USER_CACHE_DIR | sed "s/\/$//")
+  $(getconf DARWIN_USER_TEMP_DIR | sed "s/\/$//")
 )
 
 paths=($1)
 
 for location in "${locations[@]}"; do
-  paths+=($(find "$location" -iname "*$app_name*" -maxdepth 1 -prune 2>&1 | grep -av "No such file or directory" | grep -av "Permission denied"))
+  paths+=($(find "$location" -iname "*$app_name*" -maxdepth 1 -prune 2>&1 | grep -v "No such file or directory" | grep -v "Operation not permitted" | grep -v "Permission denied"))
 done
 
 for location in "${locations[@]}"; do
-  paths+=($(find "$location" -iname "*$bundle_identifier*" -maxdepth 1 -prune 2>&1 | grep -av "No such file or directory" | grep -av "Permission denied"))
+  paths+=($(find "$location" -iname "*$bundle_identifier*" -maxdepth 1 -prune 2>&1 | grep -v "No such file or directory" | grep -v "Operation not permitted" | grep -v "Permission denied"))
 done
 
 paths=($(printf "%s\n" "${paths[@]}" | sort -u));
