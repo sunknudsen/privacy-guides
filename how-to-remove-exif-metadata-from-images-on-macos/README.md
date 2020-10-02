@@ -1,15 +1,15 @@
 <!--
-Title: How to remove EXIF metadata from images on macOS to prevent geolocation and hardware leaks
-Description: Learn how to remove EXIF metadata from images on macOS to prevent geolocation and hardware leaks.
+Title: How to remove EXIF metadata from images on macOS
+Description: Learn how to remove EXIF metadata from images on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-06-25T00:00:00.000Z
 -->
 
-# How to remove EXIF metadata from images on macOS to prevent geolocation and hardware leaks
+# How to remove EXIF metadata from images on macOS
 
-[![How to remove EXIF metadata from images on macOS to prevent geolocation and hardware leaks - YouTube](how-to-remove-exif-metadata-from-images-on-macos-to-prevent-geolocation-and-hardware-leaks.png)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS to prevent geolocation and hardware leaks - YouTube")
+[![How to remove EXIF metadata from images on macOS - YouTube](how-to-remove-exif-metadata-from-images-on-macos.png)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS - YouTube")
 
 ## Installation guide
 

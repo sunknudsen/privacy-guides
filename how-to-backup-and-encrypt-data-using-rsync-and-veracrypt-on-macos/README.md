@@ -1,15 +1,15 @@
 <!--
-Title: How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS
-Description: Learn how to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS.
+Title: How to backup and encrypt data using rsync and VeraCrypt on macOS
+Description: Learn how to backup and encrypt data using rsync and VeraCrypt on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>
 Reviewers: Alex Anderson <https://github.com/Serpent27>
 Publication date: 2020-08-26T14:07:36.767Z
 -->
 
-# How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS
+# How to backup and encrypt data using rsync and VeraCrypt on macOS
 
-[![How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube](how-to-backup-and-encrypt-data-privately-and-securely-using-rsync-and-veracrypt-on-macos.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data privately and securely using rsync and VeraCrypt on macOS - YouTube")
+[![How to backup and encrypt data using rsync and VeraCrypt on macOS - YouTube](how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data using rsync and VeraCrypt on macOS - YouTube")
 
 > Heads-up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
 

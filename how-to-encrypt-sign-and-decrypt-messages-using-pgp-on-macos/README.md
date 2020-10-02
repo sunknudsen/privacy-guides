@@ -1,15 +1,15 @@
 <!--
-Title: How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)
-Description: Learn how to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email).
+Title: How to encrypt, sign and decrypt messages using PGP on macOS
+Description: Learn how to encrypt, sign and decrypt messages using PGP on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-06-18T00:00:00.000Z
 -->
 
-# How to encrypt, sign and decrypt messages using PGP on macOS (adding privacy to email)
+# How to encrypt, sign and decrypt messages using PGP on macOS
 
-[![How to sign, encrypt and decrypt messages using PGP on macOS (adding privacy to email) - YouTube](how-to-sign-encrypt-and-decrypt-messages-using-pgp-on-macos-adding-privacy-to-email.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to sign, encrypt and decrypt messages using PGP on macOS (adding privacy to email) - YouTube")
+[![How to encrypt, sign and decrypt messages using PGP on macOS - YouTube](how-to-encrypt-sign-and-decrypt-messages-using-pgp-on-macos.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using PGP on macOS - YouTube")
 
 > WARNING: this is a getting started guide. For a hardened guide, see https://github.com/drduh/YubiKey-Guide.
 

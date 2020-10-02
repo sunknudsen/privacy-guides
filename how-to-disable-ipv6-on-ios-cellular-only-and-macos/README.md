@@ -1,15 +1,15 @@
 <!--
-Title: How to disable IPv6 on iOS (cellular-only) and macOS and why it’s a big deal for privacy
-Description: Learn how to disable IPv6 on iOS (cellular-only) and macOS and why it’s a big deal for privacy.
+Title: How to disable IPv6 on iOS (cellular-only) and macOS
+Description: Learn how to disable IPv6 on iOS (cellular-only) and macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-07-18T10:28:23.605Z
 -->
 
-# How to disable IPv6 on iOS (cellular-only) and macOS and why it’s a big deal for privacy
+# How to disable IPv6 on iOS (cellular-only) and macOS
 
-[![How to disable IPv6 on iOS (cellular only) and macOS and why it’s a big deal for privacy - YouTube](how-to-disable-ipv6-on-ios-cellular-only-and-macos-and-why-it-s-a-big-deal-for-privacy.png)](https://www.youtube.com/watch?v=Nzx9T7GtmT4 "How to disable IPv6 on iOS (cellular only) and macOS and why it’s a big deal for privacy - YouTube")
+[![How to disable IPv6 on iOS (cellular-only) and macOS - YouTube](how-to-disable-ipv6-on-ios-cellular-only-and-macos.png)](https://www.youtube.com/watch?v=Nzx9T7GtmT4 "How to disable IPv6 on iOS (cellular-only) and macOS - YouTube")
 
 > Heads-up: unfortunately this guide will not work on carriers or ISPs that have migrated their networks to IPv6-only.
 

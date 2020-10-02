@@ -1,15 +1,15 @@
 <!--
-Title: How to protect Mac computers from cold boot attacks (also known as an evil maid attack)
-Description: Learn how to protect Mac computers from cold boot attacks (also known as an evil maid attack).
+Title: How to protect Mac computers from cold boot attacks
+Description: Learn how to protect Mac computers from cold boot attacks.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-06-05T00:00:00.000Z
 -->
 
-# How to protect Mac computers from cold boot attacks (also known as an evil maid attack)
+# How to protect Mac computers from cold boot attacks
 
-[![How to protect Mac computers from cold boot attacks (also known as an evil maid attack) - YouTube](<how-to-protect-mac-computers-from-cold-boot-attacks-(also-known-as-an-evil-maid-attack).png>)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks (also known as an evil maid attack) - YouTube")
+[![How to protect Mac computers from cold boot attacks - YouTube](how-to-protect-mac-computers-from-cold-boot-attacks.png)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks - YouTube")
 
 ### Run the following `pmset` command using the Terminal.
 
