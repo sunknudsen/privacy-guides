@@ -402,7 +402,7 @@ systemctl restart dnsmasq
 
 ### Step 21: install strongSwan
 
-If you are shown an "Old runlevel management superseded" warning, answer `Ok`.
+If you are shown an “Old runlevel management superseded” warning, answer `Ok`.
 
 ```shell
 apt install -y strongswan libcharon-extra-plugins
@@ -748,33 +748,33 @@ sysctl -p
 
 > Heads-up: when configuring strongSwan using certs and dnsmasq, two devices cannot use the same provisioning profile simultaneously.
 
-Open "Apple Configurator 2", then click "File", then "New Profile".
+Open “Apple Configurator 2”, then click “File”, then “New Profile”.
 
-In "General", enter "Self-hosted strongSwan VPN" in "Name".
+In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In "Certificates", click "Configure" and select "ca.crt". Then click "+" and select "john.p12". The password is the one from [step 28](#step-28-generate-client-cert).
+In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 28](#step-28-generate-client-cert).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
-In "VPN", click "Configure" and enter the settings from the following screenshot (replace `185.193.126.203` with IP of server).
+In “VPN”, click “Configure” and enter the settings from the following screenshot (replace `185.193.126.203` with IP of server).
 
-The "Child SA Params" are the same as "IKE SA Params".
+The “Child SA Params” are the same as “IKE SA Params”.
 
 ![apple-configurator-vpn](apple-configurator-vpn.png?shadow=1)
 
-Finally, click "File", then "Save", and save file as "john.mobileconfig".
+Finally, click “File”, then “Save”, and save file as “john.mobileconfig”.
 
 ### Step 32: add VPN profile to iPhone using Apple Configurator 2
 
 Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
-In "All Devices", double-click on iPhone, then "Add", and finally "Profiles".
+In “All Devices”, double-click on iPhone, then “Add”, and finally “Profiles”.
 
-Select "john.mobileconfig" and follow instructions.
+Select “john.mobileconfig” and follow instructions.
 
-On iPhone, open "Settings", then "Profile Downloaded" and tap "Install".
+On iPhone, open “Settings”, then “Profile Downloaded” and tap “Install”.
 
 **If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
 
@@ -784,7 +784,7 @@ sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobile
 
 ### Step 33: add VPN profile to Mac
 
-This step is super simple, simply double-click "john.mobileconfig" and follow instructions.
+This step is super simple, simply double-click “john.mobileconfig” and follow instructions.
 
 **If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
 
@@ -794,9 +794,9 @@ sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobile
 
 ### Step 34: connect to VPN on iPhone or Mac
 
-On iPhone, open "Settings", then enable "VPN".
+On iPhone, open “Settings”, then enable “VPN”.
 
-On Mac, open "System Preferences", click "Network", then "Self-hosted strongSwan VPN" and finally "Connect" and enable "Show VPN status in menu bar".
+On Mac, open “System Preferences”, click “Network”, then “Self-hosted strongSwan VPN” and finally “Connect” and enable “Show VPN status in menu bar”.
 
 ### Step 35: test for leaks
 

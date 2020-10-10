@@ -169,7 +169,7 @@ The VeraCrypt volume has been successfully created.
 
 ### Step 12 (optional): mount, rename and dismount encrypted volume
 
-By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are named "untitled".
+By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are named “untitled”.
 
 #### Mount encrypted volume
 

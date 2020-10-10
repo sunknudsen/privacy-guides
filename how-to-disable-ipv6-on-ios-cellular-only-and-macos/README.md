@@ -19,17 +19,17 @@ Publication date: 2020-07-18T10:28:23.605Z
 
 ### Step 2 (on Mac): create new profile using <kbd>cmd + n</kbd>
 
-### Step 3 (on Mac): configure "General" settings
+### Step 3 (on Mac): configure “General” settings
 
 ![apple-configurator-general](./apple-configurator-general.png?shadow=1)
 
 ### Step 4 (on iPhone): find APN settings
 
-Open "Settings", then "Cellular", then "Cellular Data Network".
+Open “Settings“, then “Cellular“, then “Cellular Data Network“.
 
 ![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=240)
 
-### Step 5 (on Mac): configure "Cellular" settings
+### Step 5 (on Mac): configure “Cellular” settings
 
 ![apple-configurator-cellular](./apple-configurator-cellular.png?shadow=1)
 
@@ -41,13 +41,13 @@ Open "Settings", then "Cellular", then "Cellular Data Network".
 
 ![apple-configurator-iphone](./apple-configurator-iphone.png?shadow=1)
 
-### Step 9 (on Mac): click on "Profile" tab, then "Add Profiles...", select saved provisioning profile and click "Add"
+### Step 9 (on Mac): click on “Profile” tab, then “Add Profiles…”, select saved provisioning profile and click “Add”
 
 ![apple-configurator-add-profile](./apple-configurator-add-profile.png?shadow=1)
 
 ### Step 10 (on iPhone): review profile
 
-Open "Settings", then "Profile Downloaded" and tap "Install"
+Open “Settings”, then “Profile Downloaded” and tap “Install”
 
 ![ios-install-profile](./ios-install-profile.png?shadow=1&width=240)
 
@@ -79,7 +79,7 @@ networksetup -setv6off "Thunderbolt Ethernet"
 
 ### Step 1 (on iPhone): remove provisioning profile
 
-Open "Settings", then "General", then "Profile", and tap provisioning profile, then "Remove Profile".
+Open “Settings”, then “General”, then “Profile”, and tap provisioning profile, then “Remove Profile”.
 
 ![ios-remove-profile](./ios-remove-profile.png?shadow=1&width=240)
 

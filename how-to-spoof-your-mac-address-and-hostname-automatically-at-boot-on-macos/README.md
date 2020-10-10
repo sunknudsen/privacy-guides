@@ -143,7 +143,7 @@ $ networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}'
 9c:f4:8e:d6:2b:7d
 ```
 
-"Spoofed hostname" is random and "Spoofed MAC address" doesn’t match "Hardware MAC address"?
+“Spoofed hostname” is random and “Spoofed MAC address” doesn’t match “Hardware MAC address”?
 
 👍
 

@@ -27,11 +27,11 @@ Publication date: 2020-08-21T15:42:23.029Z
 
 ### Step 1: enable PF
 
-Open "System Preferences", click "Security & Privacy", then "Firewall" and enable "Turn On Firewall".
+Open “System Preferences”, click “Security & Privacy”, then “Firewall” and enable “Turn On Firewall”.
 
 ![firewall](firewall.png?shadow=1)
 
-Then, click "Firewall Options...", disable all options except "Enable stealth mode".
+Then, click “Firewall Options…”, disable all options except “Enable stealth mode”.
 
 ![firewall-options](firewall-options.png?shadow=1)
 
