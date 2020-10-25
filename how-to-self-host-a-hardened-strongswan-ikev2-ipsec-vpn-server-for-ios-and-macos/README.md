@@ -235,7 +235,7 @@ apt install -y iptables-persistent
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
 iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --set
-iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[ssh-brute-force-mitigation]: "
+iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[ssh-brute-force]: "
 iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -j DROP
 iptables -A SSH_BRUTE_FORCE_MITIGATION -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
