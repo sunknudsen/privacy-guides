@@ -199,18 +199,21 @@ cat << EOF > /usr/local/bin/backup.sh
 
 set -e
 
-function cleanup()
+function dismount()
 {
-  if [ -d "/Volumes/Backup" ]; then
-    veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+  if [ -d "\$mount_point" ]; then
+    veracrypt --text --dismount "\$mount_point"
   fi
 }
 
-trap cleanup ERR INT
+trap dismount ERR INT
 
-veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
+volume_path="$BACKUP_VOLUME_PATH"
+mount_point="/Volumes/Backup"
 
-mkdir -p /Volumes/Backup/Versioning
+veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "\$volume_path" "\$mount_point"
+
+mkdir -p "\$mount_point/Versioning"
 
 files=(
   "/Users/$(whoami)/.gnupg"
@@ -219,15 +222,15 @@ files=(
 )
 
 for file in "\${files[@]}"; do
-  rsync -axRS --delete --backup --backup-dir /Volumes/Backup/Versioning --suffix=\$(date +".%F-%H%M%S") "\$file" /Volumes/Backup
+  rsync -axRS --delete --backup --backup-dir "\$mount_point/Versioning" --suffix="\$(date +".%F-%H%M%S")" "\$file" "\$mount_point"
 done
 
-if [ "\$(find /Volumes/Backup/Versioning -type f -ctime +90)" != "" ]; then
+if [ "\$(find "\$mount_point/Versioning" -type f -ctime +90)" != "" ]; then
   printf "Do you wish to prune versions older than 90 days (y or n)? "
   read -r answer
   if [ "\$answer" = "y" ]; then
-    find /Volumes/Backup/Versioning -type f -ctime +90 -delete
-    find /Volumes/Backup/Versioning -type d -empty -delete
+    find "\$mount_point/Versioning" -type f -ctime +90 -delete
+    find "\$mount_point/Versioning" -type d -empty -delete
   fi
 fi
 
@@ -237,12 +240,12 @@ printf "Inspect backup and press enter"
 
 read -r answer
 
-veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+dismount
 
 printf "Generate hash (y or n)? "
 read -r answer
 if [ "\$answer" = "y" ]; then
-  openssl dgst -sha512 "$BACKUP_VOLUME_PATH"
+  openssl dgst -sha512 "\$volume_path"
 fi
 
 printf "%s\n" "Done"
@@ -293,24 +296,27 @@ cat << EOF > /usr/local/bin/restore.sh
 
 set -e
 
-function cleanup()
+function dismount()
 {
-  if [ -d "/Volumes/Backup" ]; then
-    veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+  if [ -d "\$mount_point" ]; then
+    veracrypt --text --dismount "\$mount_point"
   fi
 }
 
-trap cleanup ERR INT
+trap dismount ERR INT
 
-veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
+volume_path="$BACKUP_VOLUME_PATH"
+mount_point="/Volumes/Backup"
 
-open /Volumes/Backup
+veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "\$volume_path" "\$mount_point"
+
+open "\$mount_point"
 
 printf "Restore data and press enter"
 
 read -r answer
 
-veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
+dismount
 
 printf "%s\n" "Done"
 EOF
