@@ -5,6 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>
 Reviewers: Alex Anderson <https://github.com/Serpent27>
 Publication date: 2020-08-26T14:07:36.767Z
+Listed: true
 -->
 
 # How to backup and encrypt data using rsync and VeraCrypt on macOS
@@ -27,7 +28,7 @@ Publication date: 2020-08-26T14:07:36.767Z
 
 ### Step 1: download and install [FUSE for macOS](https://osxfuse.github.io/)
 
-Go to https://osxfuse.github.io/, download and install latest release.
+Go to [https://osxfuse.github.io/](https://osxfuse.github.io/), download and install latest release.
 
 ### Step 2: install [Homebrew](https://brew.sh/)
 
@@ -58,7 +59,7 @@ gpg:               imported: 1
 
 ### Step 6: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 
-Go to https://www.veracrypt.fr/en/Downloads.html and download latest release and its associated PGP signature to `~/Downloads` folder.
+Go to [https://www.veracrypt.fr/en/Downloads.html](https://www.veracrypt.fr/en/Downloads.html) and download latest release and its associated PGP signature to `~/Downloads` folder.
 
 ### Step 7: verify VeraCrypt release signature using GnuPG
 

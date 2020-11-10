@@ -5,6 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-05-13T00:00:00.000Z
+Listed: true
 -->
 
 # How to use multiple compartmentalized Firefox instances simultaneously using profiles

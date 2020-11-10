@@ -5,6 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-09-21T15:50:15.415Z
+Listed: true
 -->
 
 # How to clean uninstall apps on macOS using AppCleaner open source alternative

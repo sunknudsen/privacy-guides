@@ -5,6 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-07-18T10:28:23.605Z
+Listed: true
 -->
 
 # How to disable IPv6 on iOS (cellular-only) and macOS

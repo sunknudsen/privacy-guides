@@ -5,6 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-07-31T12:39:56.680Z
+Listed: true
 -->
 
 # How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
@@ -186,7 +187,7 @@ EOF
 
 ### Step 12: set timezone (the following is for Montreal time)
 
-See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for available timezones.
+See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for available timezones.
 
 ```shell
 timedatectl set-timezone America/Montreal
@@ -800,7 +801,7 @@ On Mac, open “System Preferences”, click “Network”, then “Self-hosted 
 
 ### Step 35: test for leaks
 
-Open Firefox and go to https://ipleak.net/.
+Open Firefox and go to [https://ipleak.net/](https://ipleak.net/).
 
 Make sure listed IPv4, IPv6 (if server is dual stack) and DNS servers do not match the ones supplied by client ISP.
 
