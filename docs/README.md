@@ -35,7 +35,7 @@ Please use comments on [YouTube](https://www.youtube.com/sunknudsen) or [PeerTub
 
 ### Step 3: review guide and submit recommendations using [issues](https://github.com/sunknudsen/privacy-guides/issues)
 
-Once consensus has been reached (issues are closed) and updated guide has been published to [draft.sunknudsen.com](https://draft.sunknudsen.com/), time for [step 4](#step-4-append-yourself-to).
+Once consensus has been reached (issues are closed) and updated guide has been published to [draft.sunknudsen.com](https://draft.sunknudsen.com/), time for [step 4](#step-4-append-yourself-to-reviewers-comma-separated).
 
 ### Step 4: append yourself to `Reviewers` (comma-separated)
 

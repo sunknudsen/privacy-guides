@@ -29,9 +29,9 @@ Listed: true
 
 ### Step 1: create SSH key pair
 
-For increased security, protect private key using strong passphrase.
-
 When asked for file in which to save key, enter `vpn-server`.
+
+When asked for passphrase, use output from `openssl rand -base64 24` (and store passphrase in password manager).
 
 Use `vpn-server.pub` public key when setting up server.
 
@@ -76,7 +76,9 @@ ssh root@185.193.126.203 -i ~/.ssh/vpn-server
 
 ### Step 3: create `vpn-server-admin` user
 
-When asked for password, use output from `openssl rand -base64 24` (and store password in password manager). All other fields are optional, press <kbd>enter</kbd> to skip them and then press <kbd>Y</kbd>.
+When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
+
+All other fields are optional, press <kbd>enter</kbd> to skip them and then press <kbd>Y</kbd>.
 
 ```console
 $ adduser vpn-server-admin
@@ -144,7 +146,7 @@ sed -i -E 's/(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh
 systemctl restart ssh
 ```
 
-### Step 10: update apt index files and upgrade packages
+### Step 10: update APT index files and upgrade packages
 
 #### Update apt index files
 
@@ -755,7 +757,7 @@ In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 28](#step-28-generate-client-cert).
+In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 27](#step-27-generate-client-cert).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
@@ -807,4 +809,4 @@ Make sure listed IPv4, IPv6 (if server is dual stack) and DNS servers do not mat
 
 ### Step 36: create additional provisioning profiles
 
-Repeat steps [24](#step-24-create-openssl-config-file), [27](#step-27-generate-client-cert) and [31](#step-31-create-vpn-profile-for-ios-and-macos-using).
+Repeat steps [24](#step-24-create-openssl-config-file), [27](#step-27-generate-client-cert) and [31](#step-31-create-vpn-profile-for-ios-and-macos-using-apple-configurator-2).
