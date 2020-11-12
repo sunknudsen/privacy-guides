@@ -27,7 +27,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create SSH key pair
+### Step 1: create SSH key pair (on Mac)
 
 When asked for file in which to save key, enter `vpn-server`.
 
@@ -146,9 +146,9 @@ sed -i -E 's/(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh
 systemctl restart ssh
 ```
 
-### Step 10: update APT index files and upgrade packages
+### Step 10: update APT index and upgrade packages
 
-#### Update apt index files
+#### Update APT index
 
 ```shell
 apt update

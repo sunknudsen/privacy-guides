@@ -217,9 +217,9 @@ veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "\$volume_pat
 mkdir -p "\$mount_point/Versioning"
 
 files=(
-  "/Users/$(whoami)/.gnupg"
-  "/Users/$(whoami)/.ssh"
-  "/Users/$(whoami)/Library/Keychains"
+  "/Users/$USER/.gnupg"
+  "/Users/$USER/.ssh"
+  "/Users/$USER/Library/Keychains"
 )
 
 for file in "\${files[@]}"; do

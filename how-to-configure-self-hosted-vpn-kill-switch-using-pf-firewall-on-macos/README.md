@@ -30,11 +30,11 @@ Listed: true
 
 Open “System Preferences”, click “Security & Privacy”, then “Firewall” and enable “Turn On Firewall”.
 
-![firewall](firewall.png?shadow=1)
+![firewall](firewall.png?shadow=1&width=668)
 
 Then, click “Firewall Options…”, disable all options except “Enable stealth mode”.
 
-![firewall-options](firewall-options.png?shadow=1)
+![firewall-options](firewall-options.png?shadow=1&width=668)
 
 ### Step 2: confirm PF is enabled
 
@@ -256,7 +256,7 @@ sudo pfctl -F all -f /etc/pf.conf
 
 ```shell
 sudo mkdir -p /usr/local/sbin
-sudo chown $(whoami):admin /usr/local/sbin
+sudo chown $USER:admin /usr/local/sbin
 ```
 
 ### Step 11: source `/usr/local/sbin` folder

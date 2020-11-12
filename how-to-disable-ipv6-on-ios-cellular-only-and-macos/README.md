@@ -28,7 +28,7 @@ Listed: true
 
 Open “Settings“, then “Cellular“, then “Cellular Data Network“.
 
-![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=240)
+![ios-cellular-data-network](./ios-cellular-data-network.png?shadow=1&width=375)
 
 ### Step 5 (on Mac): configure “Cellular” settings
 
@@ -50,7 +50,7 @@ Open “Settings“, then “Cellular“, then “Cellular Data Network“.
 
 Open “Settings”, then “Profile Downloaded” and tap “Install”
 
-![ios-install-profile](./ios-install-profile.png?shadow=1&width=240)
+![ios-install-profile](./ios-install-profile.png?shadow=1&width=375)
 
 ## macOS guide
 
@@ -82,7 +82,7 @@ networksetup -setv6off "Thunderbolt Ethernet"
 
 Open “Settings”, then “General”, then “Profile”, and tap provisioning profile, then “Remove Profile”.
 
-![ios-remove-profile](./ios-remove-profile.png?shadow=1&width=240)
+![ios-remove-profile](./ios-remove-profile.png?shadow=1&width=375)
 
 ### Step 2 (on Mac): set network interfaces to automatic
 
