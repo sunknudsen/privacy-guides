@@ -410,34 +410,42 @@ EOF
 
 Go to [https://osxfuse.github.io/](https://osxfuse.github.io/), download and install latest release.
 
-### Step 23: install [Borg](https://github.com/borgbackup/borg)
-
-#### Install [Homebrew](https://brew.sh/)
+### Step 23: install [Homebrew](https://brew.sh/)
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-#### Disable Homebrew analytics
+### Step 24: Disable Homebrew analytics
 
 ```shell
 brew analytics off
 ```
 
-#### Install Borg
+### Step 25: install [Borg](https://github.com/borgbackup/borg)
 
 ```shell
 brew install borgbackup
+```
+
+### Step 26: configure Borg
+
+#### Generate Borg passphrase using `openssl` and add passphrase to “Keychain Access”
+
+```shell
+security add-generic-password -D secret -U -a $USER -s borg-passphrase -w $(openssl rand -base64 24)
 ```
 
 #### Initialize Borg repo
 
 Replace `185.112.144.30` with IP of server.
 
-```shell
-export BORG_PASSCOMMAND="security find-generic-password -a $USER -s borg-passphrase -w"
-export BORG_RSH="ssh -i ~/.ssh/borg"
-borg init --encryption=keyfile-blake2 "borg@185.112.144.30:backup"
+```console
+$ export BORG_PASSCOMMAND="security find-generic-password -a $USER -s borg-passphrase -w"
+
+$ export BORG_RSH="ssh -i ~/.ssh/borg"
+
+$ borg init --encryption=keyfile-blake2 "borg@185.112.144.30:backup"
 
 By default repositories initialized with this version will produce security
 errors if written to with an older version (up to and including Borg 1.0.8).
@@ -453,17 +461,11 @@ Write down the passphrase. Store both at safe place(s).
 
 ```
 
-#### Backup `~/.config/borg` folder (IMPORTANT!)
+#### Backup `~/.config/borg` and `~/Library/Keychains` folders
 
-> Heads-up: `~/.config/borg` includes a key which is used alongside passphrase to encrypt data.
+> Heads-up: both key (stored in `~/.config/borg`) and passphrase (stored in `~/Library/Keychains`) are required to decrypt backup.
 
-### Step 24: generate "Keychain Access" backup password
-
-```shell
-security add-generic-password -D secret -U -a $USER -s borg-passphrase -w $(openssl rand -base64 24)
-```
-
-### Step 25: set temporary environment variables
+### Step 27: set temporary environment variables
 
 Replace `185.112.144.30` with IP of server and set backup name.
 
@@ -472,7 +474,7 @@ SERVER_IP="185.112.144.30"
 BACKUP_NAME="$USER-macbook-pro"
 ```
 
-### Step 26: create `/usr/local/bin/borg-backup.sh` script
+### Step 28: create `/usr/local/bin/borg-backup.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/borg-backup.sh
@@ -501,13 +503,13 @@ EOF
 chmod +x /usr/local/bin/borg-backup.sh
 ```
 
-### Step 27: edit `/usr/local/bin/borg-backup.sh` script
+### Step 29: edit `/usr/local/bin/borg-backup.sh` script
 
 ```shell
 vi /usr/local/bin/borg-backup.sh
 ```
 
-### Step 28: create `/usr/local/bin/borg-list.sh` script
+### Step 30: create `/usr/local/bin/borg-list.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/borg-list.sh
@@ -528,7 +530,7 @@ EOF
 chmod +x /usr/local/bin/borg-list.sh
 ```
 
-### Step 29: create `/usr/local/bin/borg-prune.sh` script
+### Step 31: create `/usr/local/bin/borg-prune.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/borg-prune.sh
@@ -549,7 +551,7 @@ EOF
 chmod +x /usr/local/bin/borg-prune.sh
 ```
 
-### Step 30: create `/usr/local/bin/borg-restore.sh` script
+### Step 32: create `/usr/local/bin/borg-restore.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/borg-restore.sh
@@ -590,11 +592,11 @@ EOF
 chmod +x /usr/local/bin/borg-restore.sh
 ```
 
-### Step 31: download and install [Borg Backup](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg) ([PGP signature](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 33: download and install [Borg Backup](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg) ([PGP signature](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 > Heads-up: source code available on [GitHub](https://github.com/sunknudsen/borg-backup).
 
-### Step 32: initialize Borg Backup
+### Step 34: initialize Borg Backup
 
 ```shell
 open /Applications/Borg\ Backup.app
@@ -608,7 +610,7 @@ open /Applications/Borg\ Backup.app
 
 ![Allow app step 3](./allow-app-step-3.png?shadow=1&width=475)
 
-### Step 33: schedule backup every hour using launchd
+### Step 35: schedule backup every hour using launchd
 
 ```shell
 mkdir -p ~/Library/LaunchAgents
