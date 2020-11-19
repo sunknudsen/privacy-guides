@@ -602,7 +602,7 @@ chmod +x /usr/local/bin/borg-restore.sh
 open /Applications/Borg\ Backup.app
 ```
 
-> Heads-up: given Borg Backup is developed outside the [Apple Developer Program](https://developer.apple.com/programs/), macOS will prevent opening the app without explicit consent (“Open Anyway”) in “System Preferences” / “Privacy & Security”.
+> Heads-up: given Borg Backup is developed outside the [Apple Developer Program](https://developer.apple.com/programs/), macOS will prevent opening the app without explicit user consent (“Open Anyway”) in “System Preferences” / “Privacy & Security”.
 
 ![Allow app step 1](./allow-app-step-1.png?shadow=1&width=420)
 
@@ -692,7 +692,6 @@ Done
 
 ```console
 $ borg-prune.sh
-borg-prune.sh
 Enter passphrase for key '/Users/sunknudsen/.ssh/server':
 Keeping archive: sunknudsen-macbook-pro-2020-11-12-095711 Thu, 2020-11-12 09:57:14 [943420e2bfd0154a953c7dc84a6c42f1ab49888e17453df0c63518b65512d718]
 Pruning archive: sunknudsen-macbook-pro-2020-11-12-095625 Thu, 2020-11-12 09:56:28 [a8f8ef592501cc240da7f000b23626a4371719565d8c9e5ce55855b1fe465742] (1/1)
