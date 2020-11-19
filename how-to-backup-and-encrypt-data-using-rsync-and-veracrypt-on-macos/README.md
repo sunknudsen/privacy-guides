@@ -212,7 +212,7 @@ trap dismount ERR INT
 volume_path="$BACKUP_VOLUME_PATH"
 mount_point="/Volumes/Backup"
 
-veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "\$volume_path" "\$mount_point"
+veracrypt --text --mount --pim "0" --keyfiles "" --protect-hidden "no" "\$volume_path" "\$mount_point"
 
 mkdir -p "\$mount_point/Versioning"
 
@@ -309,7 +309,7 @@ trap dismount ERR INT
 volume_path="$BACKUP_VOLUME_PATH"
 mount_point="/Volumes/Backup"
 
-veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "\$volume_path" "\$mount_point"
+veracrypt --text --mount --mount-options "readonly" --pim "0" --keyfiles "" --protect-hidden "no" "$volume_path" "$mount_point"
 
 open "\$mount_point"
 
