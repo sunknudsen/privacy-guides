@@ -387,15 +387,13 @@ apt install -y borgbackup
 su - borg
 ```
 
-#### Create `.ssh` folder if it doesn’t exist
+#### Create `.ssh` folder
 
 ```shell
 mkdir -p /home/borg/.ssh
 ```
 
-#### Create `/home/borg/.ssh/authorized_keys`
-
-> Heads-up: use heredoc generated at [step 3](#step-3-generate-ssh-authorized-keys-heredoc-on-mac).
+#### Create `/home/borg/.ssh/authorized_keys` using heredoc generated at [step 3](#step-3-generate-ssh-authorized-keys-heredoc-on-mac)
 
 ```shell
 cat << EOF > /home/borg/.ssh/authorized_keys
@@ -416,7 +414,7 @@ Go to [https://osxfuse.github.io/](https://osxfuse.github.io/), download and ins
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-### Step 24: Disable Homebrew analytics
+### Step 24: disable Homebrew analytics
 
 ```shell
 brew analytics off
@@ -592,17 +590,25 @@ EOF
 chmod +x /usr/local/bin/borg-restore.sh
 ```
 
-### Step 33: download and install [Borg Backup](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg) ([PGP signature](https://github.com/sunknudsen/borg-backup/releases/download/v1.0/borg-backup-1.0.dmg.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 33: install [Borg Backup](https://github.com/sunknudsen/borg-backup)
 
-> Heads-up: source code available on [GitHub](https://github.com/sunknudsen/borg-backup).
+#### Go to [https://github.com/sunknudsen/borg-backup/releases](https://github.com/sunknudsen/borg-backup/releases) and download latest `.dmg` release ([PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
-### Step 34: initialize Borg Backup
+#### Double-click `.dmg` release and drag and drop “Borg Backup” to the “Applications” folder
+
+### Step 34: create `/usr/local/var/log` folder
+
+```shell
+mkdir -p /usr/local/var/log
+```
+
+### Step 35: run “Borg Backup”
 
 ```shell
 open /Applications/Borg\ Backup.app
 ```
 
-> Heads-up: given Borg Backup is developed outside the [Apple Developer Program](https://developer.apple.com/programs/), macOS will prevent opening the app without explicit user consent (“Open Anyway”) in “System Preferences” / “Privacy & Security”.
+> Heads-up: given “Borg Backup” is developed outside the [Apple Developer Program](https://developer.apple.com/programs/), macOS prevents opening the app without explicit user consent (clicking “Open Anyway” in “System Preferences” / “Privacy & Security”).
 
 ![Allow app step 1](./allow-app-step-1.png?shadow=1&width=420)
 
@@ -610,7 +616,7 @@ open /Applications/Borg\ Backup.app
 
 ![Allow app step 3](./allow-app-step-3.png?shadow=1&width=475)
 
-### Step 35: schedule backup every hour using launchd
+### Step 36: schedule backup every hour using launchd
 
 ```shell
 mkdir -p ~/Library/LaunchAgents
