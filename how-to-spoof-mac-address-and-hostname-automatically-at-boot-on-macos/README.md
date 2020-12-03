@@ -1,6 +1,6 @@
 <!--
-Title: How to spoof your MAC address and hostname automatically at boot on macOS
-Description: Learn how to spoof your MAC address and hostname automatically at boot on macOS.
+Title: How to spoof MAC address and hostname automatically at boot on macOS
+Description: Learn how to spoof MAC address and hostname automatically at boot on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,9 +8,9 @@ Publication date: 2020-05-19T00:00:00.000Z
 Listed: true
 -->
 
-# How to spoof your MAC address and hostname automatically at boot on macOS
+# How to spoof MAC address and hostname automatically at boot on macOS
 
-[![How to spoof your MAC address and hostname automatically at boot on macOS - YouTube](how-to-spoof-your-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof your MAC address and hostname automatically at boot on macOS - YouTube")
+[![How to spoof MAC address and hostname automatically at boot on macOS - YouTube](how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof MAC address and hostname automatically at boot on macOS - YouTube")
 
 > Heads-up: unfortunately this guide does not work on Macs equipped with the new T2 chip running macOS Mojave. If that’s your case, please consider upgrading to Catalina.
 
@@ -92,7 +92,7 @@ chmod +x /usr/local/sbin/spoof.sh
 This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
 
 ```shell
-curl -o /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-your-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
+curl -o /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
 ```
 
 ### Step 6: download [mac-address-prefixes.txt](mac-address-prefixes.txt)
@@ -100,7 +100,7 @@ curl -o /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/priv
 This list includes 768 Apple MAC address prefixes.
 
 ```shell
-curl -o /usr/local/sbin/mac-address-prefixes.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-your-mac-address-and-hostname-automatically-at-boot-on-macos/mac-address-prefixes.txt
+curl -o /usr/local/sbin/mac-address-prefixes.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/mac-address-prefixes.txt
 ```
 
 ### Step 7: create `local.spoof.plist` launch daemon
@@ -177,3 +177,5 @@ rm /usr/local/sbin/spoof.sh
 rm /usr/local/sbin/first-names.txt
 rm /usr/local/sbin/mac-address-prefixes.txt
 ```
+
+👍

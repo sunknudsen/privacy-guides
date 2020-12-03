@@ -52,6 +52,8 @@ Open “Settings”, then “Profile Downloaded” and tap “Install”
 
 ![ios-install-profile](./ios-install-profile.png?shadow=1&width=375)
 
+👍
+
 ## macOS guide
 
 ### Step 1: list network interfaces
@@ -91,3 +93,5 @@ networksetup -setv6automatic "Wi-Fi"
 networksetup -setv6automatic "iPhone USB"
 networksetup -setv6automatic "Thunderbolt Ethernet"
 ```
+
+👍

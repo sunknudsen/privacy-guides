@@ -26,29 +26,28 @@ Listed: true
 
 ## Setup guide
 
-### Step 1: download and install [FUSE for macOS](https://osxfuse.github.io/)
-
-Go to [https://osxfuse.github.io/](https://osxfuse.github.io/), download and install latest release.
-
-### Step 2: install [Homebrew](https://brew.sh/)
+### Step 1: install [Homebrew](https://brew.sh/)
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-### Step 3: disable Homebrew analytics
+### Step 2: disable Homebrew analytics
 
 ```shell
 brew analytics off
 ```
 
-### Step 4: install [GnuPG](https://gnupg.org/)
+### Step 3: install [FUSE for macOS](https://osxfuse.github.io/) and [GnuPG](https://gnupg.org/)
+
+> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [#9382](https://github.com/Homebrew/brew/issues/9382)).
 
 ```shell
+brew install --cask osxfuse
 brew install gnupg
 ```
 
-### Step 5: import VeraCrypt’s public key
+### Step 4: import VeraCrypt’s public key
 
 ```console
 $ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x821ACD02680D16DE
@@ -57,11 +56,11 @@ gpg: Total number processed: 1
 gpg:               imported: 1
 ```
 
-### Step 6: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
+### Step 5: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 
 Go to [https://www.veracrypt.fr/en/Downloads.html](https://www.veracrypt.fr/en/Downloads.html) and download latest release and its associated PGP signature to `~/Downloads` folder.
 
-### Step 7: verify VeraCrypt release signature using GnuPG
+### Step 6: verify VeraCrypt release signature using GnuPG
 
 Replace `VeraCrypt_1.24-Update7` with current release.
 
@@ -80,9 +79,9 @@ Good signature
 
 👍
 
-### Step 8: install VeraCrypt
+### Step 7: install VeraCrypt
 
-### Step 9: create and test VeraCrypt symlink
+### Step 8: create and test VeraCrypt symlink
 
 ```console
 $ ln -s /Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt /usr/local/bin/veracrypt
@@ -95,17 +94,13 @@ VeraCrypt 1.24-Update7
 
 👍
 
-### Step 10: set temporary environment variable
-
-> Heads-up: using `b` as encrypted volume file name to make things inconspicuous.
-
-`BACKUP_VOLUME_PATH` path to VeraCrypt volume
+### Step 9: set temporary environment variable
 
 ```shell
-BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/b"
+BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/backupackup"
 ```
 
-### Step 11: create encrypted volume
+### Step 10: create encrypted volume
 
 > Heads-up: volume size cannot be increased later.
 
@@ -168,7 +163,7 @@ Done: 100.000%  Speed:  24 MiB/s  Left: 0 s
 The VeraCrypt volume has been successfully created.
 ```
 
-### Step 12 (optional): mount, rename and dismount encrypted volume
+### Step 11 (optional): mount, rename and dismount encrypted volume
 
 By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are named “untitled”.
 
@@ -176,7 +171,7 @@ By default, VeraCrypt encrypted volumes with Mac OS Extended filesystem are name
 
 ```console
 $ veracrypt --text --mount --pim 0 --keyfiles "" --protect-hidden no "$BACKUP_VOLUME_PATH" /Volumes/Backup
-Enter password for /Volumes/Samsung BAR/b:
+Enter password for /Volumes/Samsung BAR/backup:
 ```
 
 #### Rename encrypted volume
@@ -192,7 +187,7 @@ Volume on disk3 renamed to Backup
 veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 ```
 
-### Step 13: create `/usr/local/bin/backup.sh` script
+### Step 12: create `/usr/local/bin/backup.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/backup.sh
@@ -254,7 +249,7 @@ EOF
 chmod +x /usr/local/bin/backup.sh
 ```
 
-### Step 14: edit `/usr/local/bin/backup.sh` script
+### Step 13: edit `/usr/local/bin/backup.sh` script
 
 ```shell
 vi /usr/local/bin/backup.sh
@@ -262,7 +257,7 @@ vi /usr/local/bin/backup.sh
 
 Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd> to exit insert mode and press <kbd>shift+z+z</kbd> to save and exit.
 
-### Step 15: create `/usr/local/bin/check.sh` script
+### Step 14: create `/usr/local/bin/check.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/check.sh
@@ -289,7 +284,7 @@ EOF
 chmod +x /usr/local/bin/check.sh
 ```
 
-### Step 16: create `/usr/local/bin/restore.sh` script
+### Step 15: create `/usr/local/bin/restore.sh` script
 
 ```shell
 cat << EOF > /usr/local/bin/restore.sh
@@ -324,6 +319,10 @@ EOF
 chmod +x /usr/local/bin/restore.sh
 ```
 
+👍
+
+---
+
 ## Usage guide
 
 ### Backup
@@ -332,10 +331,10 @@ chmod +x /usr/local/bin/restore.sh
 
 ```console
 $ backup.sh
-Enter password for /Volumes/Samsung BAR/b:
+Enter password for /Volumes/Samsung BAR/backup:
 Inspect backup and press enter
 Generate hash (y or n)? y
-SHA512(/Volumes/Samsung BAR/b)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
+SHA512(/Volumes/Samsung BAR/backup)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
 Done
 ```
 
@@ -347,7 +346,7 @@ Done
 
 ```console
 $ check.sh
-Backup hash: SHA512(/Volumes/Samsung BAR/b)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
+Backup hash: SHA512(/Volumes/Samsung BAR/backup)= 281a3b0afec6708eff9566effdfa67de357933527688dfa2dfabae5dda5b7681f0fb84f6cfec6c3f7ac20246517f18f40babbd4f337b254a55de30ff67d6dd2e
 OK
 ```
 
@@ -359,7 +358,7 @@ OK
 
 ```console
 $ restore.sh
-Enter password for /Volumes/Samsung BAR/b:
+Enter password for /Volumes/Samsung BAR/backup:
 Restore data and press enter
 Done
 ```

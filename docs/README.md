@@ -3,6 +3,7 @@ Title: Privacy guides docs
 Description: Learn how to contribute, get help, peer review and sign the reference material.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Publication date: 1970-01-01T00:00:00.000Z
+Listed: false
 -->
 
 # Privacy guides docs

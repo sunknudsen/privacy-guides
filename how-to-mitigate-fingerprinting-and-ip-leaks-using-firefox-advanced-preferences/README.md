@@ -34,3 +34,5 @@ privacy.resistFingerprinting = true
 privacy.trackingprotection.enabled = true
 webgl.disabled =  true
 ```
+
+👍

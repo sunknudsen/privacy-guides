@@ -25,3 +25,5 @@ Listed: true
 ```shell
 nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p work --no-remote > /dev/null 2>&1 &
 ```
+
+👍

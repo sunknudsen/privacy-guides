@@ -99,6 +99,8 @@ sub   rsa4096 2020-06-16 [E]
 echo "keyserver hkps://keys.openpgp.org" >> ~/.gnupg/dirmngr.conf
 ```
 
+👍
+
 ---
 
 ## Usage guide

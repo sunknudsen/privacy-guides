@@ -473,6 +473,8 @@ cat << EOF | sudo tee /Library/LaunchDaemons/local.pf.plist
 EOF
 ```
 
+👍
+
 ---
 
 ## Want things back the way they were before following this guide? No problem!
@@ -512,3 +514,5 @@ sudo rm /Library/LaunchDaemons/local.pf.plist
 ```shell
 sudo pfctl -F all -f /etc/pf.conf
 ```
+
+👍

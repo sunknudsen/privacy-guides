@@ -1,6 +1,6 @@
 <!--
-Title: How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
-Description: Learn how to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS.
+Title: How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
+Description: Learn how to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,9 +8,9 @@ Publication date: 2020-07-31T12:39:56.680Z
 Listed: true
 -->
 
-# How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
+# How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
 
-[![How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube](how-to-self-host-a-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos.png)](https://www.youtube.com/watch?v=HY3F_vHuTFQ "How to self-host a hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube")
+[![How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube](how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos.png)](https://www.youtube.com/watch?v=HY3F_vHuTFQ "How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube")
 
 > Heads-up: when following this guide on IPv4-only servers (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) infrastructure. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos-and-why-it-s-a-big-deal-for-privacy).
 
@@ -27,7 +27,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create SSH key pair (on Mac)
+### Step 1: create `vpn-server` SSH key pair (on Mac)
 
 When asked for file in which to save key, enter `vpn-server`.
 
@@ -74,7 +74,22 @@ Replace `185.193.126.203` with IP of server.
 ssh root@185.193.126.203 -i ~/.ssh/vpn-server
 ```
 
-### Step 3: create `vpn-server-admin` user
+### Step 3: disable root bash history
+
+```shell
+echo "HISTFILESIZE=0" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Step 4: set root password
+
+When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
+
+```shell
+passwd
+```
+
+### Step 5: create vpn-server-admin user
 
 When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
 
@@ -100,7 +115,7 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n] Y
 ```
 
-### Step 4: copy root’s `authorized_keys` file to vpn-server-admin’s home folder
+### Step 6: copy root `authorized_keys` file to vpn-server-admin home folder
 
 ```shell
 mkdir /home/vpn-server-admin/.ssh
@@ -108,21 +123,13 @@ cp /root/.ssh/authorized_keys /home/vpn-server-admin/.ssh/authorized_keys
 chown -R vpn-server-admin:vpn-server-admin /home/vpn-server-admin/.ssh
 ```
 
-### Step 5: set root password
-
-When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
-
-```shell
-passwd
-```
-
-### Step 6: log out
+### Step 7: log out
 
 ```shell
 exit
 ```
 
-### Step 7: log in as `vpn-server-admin`
+### Step 8: log in as vpn-server-admin
 
 Replace `185.193.126.203` with IP of server.
 
@@ -130,7 +137,16 @@ Replace `185.193.126.203` with IP of server.
 ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
 ```
 
-### Step 8: switch to root
+### Step 9: disable vpn-server-admin bash history
+
+```shell
+sed -i -E 's/^HISTSIZE=/#HISTSIZE=/' ~/.bashrc
+sed -i -E 's/^HISTFILESIZE=/#HISTFILESIZE=/' ~/.bashrc
+echo "HISTFILESIZE=0" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Step 10: switch to root
 
 When asked, enter root password.
 
@@ -138,7 +154,7 @@ When asked, enter root password.
 su -
 ```
 
-### Step 9: update SSH config to disable root login and password authentication and restart SSH
+### Step 11: disable root login and password authentication
 
 ```shell
 sed -i -E 's/(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -146,7 +162,7 @@ sed -i -E 's/(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh
 systemctl restart ssh
 ```
 
-### Step 10: update APT index and upgrade packages
+### Step 12: update APT index and upgrade packages
 
 #### Update APT index
 
@@ -160,7 +176,7 @@ apt update
 apt upgrade -y
 ```
 
-### Step 11: install and configure Vim
+### Step 13: install and configure Vim
 
 #### Install Vim
 
@@ -187,7 +203,7 @@ syntax on
 EOF
 ```
 
-### Step 12: set timezone (the following is for Montreal time)
+### Step 14: set timezone (the following is for Montreal time)
 
 See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for available timezones.
 
@@ -195,7 +211,7 @@ See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wi
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 13: detect network interface and save to environment variables
+### Step 15: detect network interface and save to environment variables
 
 ```console
 $ ip -4 route | grep "default" | awk '{print "STRONGSWAN_INTERFACE="$5}' | tee -a ~/.bashrc
@@ -204,7 +220,7 @@ STRONGSWAN_INTERFACE=eth0
 $ source ~/.bashrc
 ```
 
-### Step 14: install cURL and Python, generate random IPv6 ULA and save to environment variables
+### Step 16: install cURL and Python, generate random IPv6 ULA and save to environment variables
 
 #### Install cURL and Python
 
@@ -219,13 +235,13 @@ Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977a
 The following command downloads and runs [ulagen.py](./ulagen.py) ([PGP signature](./ulagen.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc)).
 
 ```console
-$ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-a-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
+$ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
 STRONGSWAN_IPV6_ULA=fdcb:f7a1:38ec::/64
 
 $ source ~/.bashrc
 ```
 
-### Step 15: install iptables-persistent
+### Step 17: install iptables-persistent
 
 When asked to save current IPv4 or IPv6 rules, answer `Yes`.
 
@@ -233,7 +249,7 @@ When asked to save current IPv4 or IPv6 rules, answer `Yes`.
 apt install -y iptables-persistent
 ```
 
-### Step 16: configure iptables
+### Step 18: configure iptables
 
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
@@ -264,7 +280,7 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 ```
 
-If the server is IPv4-only, run:
+If server is IPv4-only, run:
 
 ```shell
 ip6tables -P FORWARD DROP
@@ -272,7 +288,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-If the server is dual stack (IPv4 + IPv6) run:
+If server is dual stack (IPv4 + IPv6) run:
 
 ```shell
 ip6tables -A INPUT -i lo -j ACCEPT
@@ -312,7 +328,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-### Step 17: log out and log in to confirm iptables didn’t block SSH
+### Step 19: log out and log in to confirm iptables didn’t block SSH
 
 #### Log out
 
@@ -337,14 +353,14 @@ When asked, enter root password.
 su -
 ```
 
-### Step 18: make iptables rules persistent
+### Step 20: make iptables rules persistent
 
 ```shell
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 ```
 
-### Step 19: add and enable dummy network interface
+### Step 21: add and enable dummy network interface
 
 If server is configured to use `/etc/network/interfaces`, run:
 
@@ -377,7 +393,7 @@ EOF
 systemctl restart systemd-networkd
 ```
 
-### Step 20: install, configure and restart dnsmasq
+### Step 22: install, configure and restart dnsmasq
 
 #### Install dnsmasq
 
@@ -403,7 +419,7 @@ EOF
 systemctl restart dnsmasq
 ```
 
-### Step 21: install strongSwan
+### Step 23: install strongSwan
 
 If you are shown an “Old runlevel management superseded” warning, answer `Ok`.
 
@@ -411,11 +427,11 @@ If you are shown an “Old runlevel management superseded” warning, answer `Ok
 apt install -y strongswan libcharon-extra-plugins
 ```
 
-### Step 22: configure strongSwan
+### Step 24: configure strongSwan
 
-#### Find server’s DNS nameserver(s)
+#### Find server DNS nameserver(s)
 
-Depending on the server’s configuration, DNS nameserver(s) can be found using one of the following commands (ignore nameservers starting with `127`).
+Depending on server configuration, DNS nameserver(s) can be found using one of the following commands (ignore nameservers starting with `127`).
 
 Fist, run:
 
@@ -441,7 +457,7 @@ $ systemd-resolve --status | grep "DNS Servers" | awk '{print $3}'
 
 #### Set DNS nameserver(s)
 
-Replace `95.215.19.53` with server’s DNS nameserver(s).
+Replace `95.215.19.53` with server DNS nameserver(s).
 
 Separate nameservers using commas with no leading spaces (example: `93.95.224.28,93.95.224.29`).
 
@@ -455,7 +471,7 @@ STRONGSWAN_DNS_NAMESERVERS=95.215.19.53
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
 ```
 
-If the server is IPv4-only, run:
+If server is IPv4-only, run:
 
 ```shell
 cat << EOF > /etc/ipsec.conf
@@ -489,7 +505,7 @@ conn ikev2
 EOF
 ```
 
-If the server is dual stack (IPv4 + IPv6) run:
+If server is dual stack (IPv4 + IPv6) run:
 
 ```shell
 cat << EOF > /etc/ipsec.conf
@@ -584,7 +600,7 @@ sed -i 's/After=network-online.target/After=dnsmasq.service/' /lib/systemd/syste
 systemctl daemon-reload
 ```
 
-### Step 23: create `strongswan-certs` folder
+### Step 25: create `strongswan-certs` folder
 
 > Heads-up: for security reasons, steps 23 to 27 are done on Mac vs server.
 
@@ -595,7 +611,7 @@ mkdir ~/Desktop/strongswan-certs
 cd ~/Desktop/strongswan-certs
 ```
 
-### Step 24: create OpenSSL config file
+### Step 26: create OpenSSL config file
 
 #### Set client common name
 
@@ -640,7 +656,7 @@ extendedKeyUsage = serverAuth, 1.3.6.1.5.5.8.2.2
 EOF
 ```
 
-### Step 25: generate certificate authority cert
+### Step 27: generate certificate authority cert
 
 ```console
 $ openssl genrsa -out ca.key 4096
@@ -652,7 +668,7 @@ e is 65537 (0x10001)
 $ openssl req -x509 -new -nodes -config openssl.cnf -extensions ca -key ca.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=vpn-server.com" -days 3650 -out ca.crt
 ```
 
-### Step 26: generate server cert
+### Step 28: generate server cert
 
 ```console
 $ openssl genrsa -out server.key 4096
@@ -669,7 +685,7 @@ subject=/C=US/O=Self-hosted strongSwan VPN/CN=vpn-server.com
 Getting CA Private Key
 ```
 
-### Step 27: generate client cert
+### Step 29: generate client cert
 
 When asked for export password, use output from `openssl rand -base64 24` (and store password in password manager).
 
@@ -692,7 +708,7 @@ Enter Export Password:
 Verifying - Enter Export Password:
 ```
 
-### Step 28: copy/paste the content of `ca.crt`, `server.key` and `server.crt` to server and make private key root-only.
+### Step 30: copy/paste the content of `ca.crt`, `server.key` and `server.crt` to server and make private key root-only.
 
 On Mac: run `cat ca.crt`
 
@@ -708,15 +724,15 @@ On server: run `vi /etc/ipsec.d/certs/server.crt`, press <kbd>i</kbd>, paste out
 
 On server: run `chmod -R 600 /etc/ipsec.d/private`
 
-### Step 29: restart strongSwan
+### Step 31: restart strongSwan
 
 ```shell
 systemctl restart strongswan
 ```
 
-### Step 30: configure sysctl
+### Step 32: configure sysctl
 
-#### Backup and override `/etc/sysctl.conf`
+#### Backup and edit `/etc/sysctl.conf`
 
 ```shell
 cp /etc/sysctl.conf /etc/sysctl.conf.backup
@@ -725,7 +741,7 @@ sed -i -E 's/#net.ipv4.conf.all.accept_redirects = 0/net.ipv4.conf.all.accept_re
 sed -i -E 's/#net.ipv4.conf.all.send_redirects = 0/net.ipv4.conf.all.send_redirects = 0/' /etc/sysctl.conf
 ```
 
-If the server is IPv4-only, run:
+If server is IPv4-only, run:
 
 ```shell
 cat << "EOF" >> /etc/sysctl.conf
@@ -735,7 +751,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 EOF
 ```
 
-If the server is dual stack (IPv4 + IPv6) rune:
+If server is dual stack (IPv4 + IPv6) run:
 
 ```shell
 sed -i -E 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/' /etc/sysctl.conf
@@ -747,7 +763,7 @@ sed -i -E 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/' /e
 sysctl -p
 ```
 
-### Step 31: create VPN profile for iOS and macOS using [Apple Configurator 2](https://support.apple.com/apple-configurator)
+### Step 33: create VPN profile for iOS and macOS using [Apple Configurator 2](https://support.apple.com/apple-configurator)
 
 > Heads-up: when configuring strongSwan using certs and dnsmasq, two devices cannot use the same provisioning profile simultaneously.
 
@@ -757,7 +773,7 @@ In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 27](#step-27-generate-client-cert).
+In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 29](#step-29-generate-client-cert).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
@@ -769,7 +785,7 @@ The “Child SA Params” are the same as “IKE SA Params”.
 
 Finally, click “File”, then “Save”, and save file as “john.mobileconfig”.
 
-### Step 32: add VPN profile to iPhone using Apple Configurator 2
+### Step 34: add VPN profile to iPhone using Apple Configurator 2
 
 Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
@@ -785,7 +801,7 @@ On iPhone, open “Settings”, then “Profile Downloaded” and tap “Install
 sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
 ```
 
-### Step 33: add VPN profile to Mac
+### Step 35: add VPN profile to Mac
 
 This step is super simple, simply double-click “john.mobileconfig” and follow instructions.
 
@@ -795,18 +811,20 @@ This step is super simple, simply double-click “john.mobileconfig” and follo
 sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
 ```
 
-### Step 34: connect to VPN on iPhone or Mac
+### Step 36: connect to VPN on iPhone or Mac
 
 On iPhone, open “Settings”, then enable “VPN”.
 
 On Mac, open “System Preferences”, click “Network”, then “Self-hosted strongSwan VPN” and finally “Connect” and enable “Show VPN status in menu bar”.
 
-### Step 35: test for leaks
+### Step 37: test for leaks
 
 Open Firefox and go to [https://ipleak.net/](https://ipleak.net/).
 
 Make sure listed IPv4, IPv6 (if server is dual stack) and DNS servers do not match the ones supplied by client ISP.
 
-### Step 36: create additional provisioning profiles
+### Step 38: create additional provisioning profiles
 
-Repeat steps [24](#step-24-create-openssl-config-file), [27](#step-27-generate-client-cert) and [31](#step-31-create-vpn-profile-for-ios-and-macos-using-apple-configurator-2).
+Repeat steps [26](#step-26-create-openssl-config-file), [29](#step-29-generate-client-cert) and [33](#step-33-create-vpn-profile-for-ios-and-macos-using-apple-configurator-2).
+
+👍

@@ -32,6 +32,8 @@ brew analytics off
 brew install exiftool
 ```
 
+👍
+
 ---
 
 ## Usage guide
