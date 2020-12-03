@@ -40,7 +40,7 @@ brew analytics off
 
 ### Step 3: install [FUSE for macOS](https://osxfuse.github.io/) and [GnuPG](https://gnupg.org/)
 
-> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [#9382](https://github.com/Homebrew/brew/issues/9382)).
+> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [issue](https://github.com/Homebrew/brew/issues/9382)).
 
 ```shell
 brew install --cask osxfuse

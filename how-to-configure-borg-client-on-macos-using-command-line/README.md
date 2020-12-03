@@ -155,9 +155,9 @@ brew analytics off
 
 ### Step 7: install [FUSE for macOS](https://osxfuse.github.io/), [Borg](https://www.borgbackup.org/) and [Borg Wrapper](https://github.com/sunknudsen/borg-wrapper)
 
-> Heads-up: when installing Borg using `brew install borgbackup`, one can no longer run `brew mount` (see issue [#5522](https://github.com/borgbackup/borg/issues/5522)) so I created a [tap](https://github.com/borgbackup/homebrew-tap) that includes a patched version of [borgbackup](https://formulae.brew.sh/formula/borgbackup) called [borgbackup-fuse](https://github.com/borgbackup/homebrew-tap/blob/master/Formula/borgbackup-fuse.rb).
+> Heads-up: when installing Borg using `brew install borgbackup`, one can no longer run `brew mount` (see [issue](https://github.com/borgbackup/borg/issues/5522)) so I created a [tap](https://github.com/borgbackup/homebrew-tap) that includes a patched version of [borgbackup](https://formulae.brew.sh/formula/borgbackup) called [borgbackup-fuse](https://github.com/borgbackup/homebrew-tap/blob/master/Formula/borgbackup-fuse.rb).
 
-> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [#9382](https://github.com/Homebrew/brew/issues/9382)).
+> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [issue](https://github.com/Homebrew/brew/issues/9382)).
 
 ```shell
 brew install --cask osxfuse
