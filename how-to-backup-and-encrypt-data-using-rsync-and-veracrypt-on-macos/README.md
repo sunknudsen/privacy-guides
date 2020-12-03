@@ -97,7 +97,7 @@ VeraCrypt 1.24-Update7
 ### Step 9: set temporary environment variable
 
 ```shell
-BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/backupackup"
+BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/backup"
 ```
 
 ### Step 10: create encrypted volume
