@@ -118,27 +118,27 @@ Go to [Repositories](https://www.borgbase.com/account) and add repository.
 
 ### Step 4: generate and upload `authorized_keys` file (if using rsync.net)
 
-#### Set temporary environment variable
+#### Set temporary environment variables
 
 ```shell
+BORG_USERNAME="18434"
 BORG_STORAGE_QUOTA="500G"
+BORG_HOSTNAME="ch-s011.rsync.net"
 ```
 
 #### Generate `authorized_keys` file
 
-Replace `18434` with rsync.net username.
-
 ```shell
 cat << EOF > ~/Desktop/authorized_keys
-command="borg1 serve --restrict-to-repository /data1/home/18434/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg.pub)
-command="borg1 serve --append-only --restrict-to-repository /data1/home/18434/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg-append-only.pub)
+command="borg1 serve --restrict-to-repository /data1/home/$BORG_USERNAME/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg.pub)
+command="borg1 serve --append-only --restrict-to-repository /data1/home/$BORG_USERNAME/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg-append-only.pub)
 EOF
 ```
 
 #### Upload `authorized_keys` file
 
 ```shell
-scp ~/Desktop/authorized_keys 18434@ch-s011.rsync.net:.ssh/authorized_keys
+scp ~/Desktop/authorized_keys $BORG_USERNAME@$BORG_HOSTNAME:.ssh/authorized_keys
 ```
 
 ### Step 5: install [Homebrew](https://brew.sh/)
