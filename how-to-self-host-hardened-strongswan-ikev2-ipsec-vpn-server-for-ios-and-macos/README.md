@@ -27,7 +27,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create `vpn-server` SSH key pair (on Mac)
+### Step 1: create SSH key pair (on Mac)
 
 When asked for file in which to save key, enter `vpn-server`.
 
@@ -69,6 +69,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWL
 ### Step 2: log in to server as root
 
 Replace `185.193.126.203` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh root@185.193.126.203 -i ~/.ssh/vpn-server
@@ -132,6 +134,8 @@ exit
 ### Step 8: log in as vpn-server-admin
 
 Replace `185.193.126.203` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
@@ -340,6 +344,8 @@ exit
 #### Log in
 
 Replace `185.193.126.203` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server

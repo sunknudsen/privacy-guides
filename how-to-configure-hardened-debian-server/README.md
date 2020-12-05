@@ -22,7 +22,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create `server` SSH key pair (on computer)
+### Step 1: create SSH key pair (on computer)
 
 When asked for file in which to save key, enter `server`.
 
@@ -64,6 +64,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP58i1vuFEe3zoHT+hZRh0YaXQY+ADa8OgBIoTji+A
 ### Step 2: log in to server as root
 
 Replace `185.112.147.115` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh root@185.112.147.115 -i ~/.ssh/server
@@ -127,6 +129,8 @@ exit
 ### Step 8: log in as server-admin
 
 Replace `185.112.147.115` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh server-admin@185.112.147.115 -i ~/.ssh/server
@@ -303,6 +307,8 @@ exit
 #### Log in
 
 Replace `185.112.147.115` with IP of server.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh server-admin@185.112.147.115 -i ~/.ssh/server
