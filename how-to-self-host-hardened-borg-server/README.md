@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../how-to-configure-hardened-debian-server) 📦
+- [Hardened Debian server](../how-to-configure-hardened-debian-server) 📦 or [hardened Raspberry Pi OS server](../how-to-configure-hardened-raspberry-pi-os-server) 📦
 - Linux or macOS computer
 
 ## Caveats
@@ -113,7 +113,7 @@ EOF
 
 ### Step 4: log in to server
 
-Replace `185.112.147.115` with IP of server.
+Replace `server-admin@185.112.147.115` with SSH destination of server and `~/.ssh/server` with path to associated private key.
 
 ```shell
 ssh server-admin@185.112.147.115 -i ~/.ssh/server

@@ -427,7 +427,7 @@ systemctl restart dnsmasq
 
 ### Step 23: install strongSwan
 
-If you are shown an “Old runlevel management superseded” warning, answer `Ok`.
+If you are shown an “Old runlevel management superseded” warning, answer “Ok”.
 
 ```shell
 apt install -y strongswan libcharon-extra-plugins
@@ -595,7 +595,7 @@ EOF
 cd /etc/strongswan.d/charon
 sed -i 's/load = yes/load = no/' ./*.conf
 sed -i 's/load = no/load = yes/' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.conf ./gcm.conf ./hmac.conf ./kernel-netlink.conf ./nonce.conf ./openssl.conf ./pem.conf ./pgp.conf ./pkcs12.conf ./pkcs7.conf ./pkcs8.conf ./pubkey.conf ./random.conf ./revocation.conf ./sha2.conf ./socket-default.conf ./stroke.conf ./x509.conf
-cd
+cd -
 ```
 
 #### Backup and edit `/lib/systemd/system/strongswan.service`
@@ -624,7 +624,7 @@ cd ~/Desktop/strongswan-certs
 Each client is configured using a unique common name ending with `@vpn-server.com`.
 
 ```shell
-STRONGSWAN_CLIENT_COMMON_NAME=john@vpn-server.com
+STRONGSWAN_CLIENT_COMMON_NAME=alice@vpn-server.com
 ```
 
 #### Create OpenSSL config file
@@ -696,25 +696,25 @@ Getting CA Private Key
 When asked for export password, use output from `openssl rand -base64 24` (and store password in password manager).
 
 ```console
-$ openssl genrsa -out john.key 4096
+$ openssl genrsa -out alice.key 4096
 Generating RSA private key, 4096 bit long modulus
 .........++
 ............................................................................++
 e is 65537 (0x10001)
 
-$ openssl req -new -config openssl.cnf -extensions client -key john.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=$STRONGSWAN_CLIENT_COMMON_NAME" -out john.csr
+$ openssl req -new -config openssl.cnf -extensions client -key alice.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=$STRONGSWAN_CLIENT_COMMON_NAME" -out alice.csr
 
-$ openssl x509 -req -extfile openssl.cnf -extensions client -in john.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650 -out john.crt
+$ openssl x509 -req -extfile openssl.cnf -extensions client -in alice.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650 -out alice.crt
 Signature ok
-subject=/C=US/O=Self-hosted strongSwan VPN/CN=john@vpn-server.com
+subject=/C=US/O=Self-hosted strongSwan VPN/CN=alice@vpn-server.com
 Getting CA Private Key
 
-$ openssl pkcs12 -in john.crt -inkey john.key -certfile ca.crt -export -out john.p12
+$ openssl pkcs12 -in alice.crt -inkey alice.key -certfile ca.crt -export -out alice.p12
 Enter Export Password:
 Verifying - Enter Export Password:
 ```
 
-### Step 30: copy/paste the content of `ca.crt`, `server.key` and `server.crt` to server and make private key root-only.
+### Step 30: copy/paste content of `ca.crt`, `server.key` and `server.crt` to server and make private key root-only.
 
 On Mac: run `cat ca.crt`
 
@@ -779,7 +779,7 @@ In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “john.p12”. The password is the one from [step 29](#step-29-generate-client-cert).
+In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “alice.p12”. The password is the one from [step 29](#step-29-generate-client-cert).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
@@ -789,7 +789,7 @@ The “Child SA Params” are the same as “IKE SA Params”.
 
 ![apple-configurator-vpn](apple-configurator-vpn.png?shadow=1)
 
-Finally, click “File”, then “Save”, and save file as “john.mobileconfig”.
+Finally, click “File”, then “Save”, and save file as “alice.mobileconfig”.
 
 ### Step 34: add VPN profile to iPhone using Apple Configurator 2
 
@@ -797,24 +797,24 @@ Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
 In “All Devices”, double-click on iPhone, then “Add”, and finally “Profiles”.
 
-Select “john.mobileconfig” and follow instructions.
+Select “alice.mobileconfig” and follow instructions.
 
 On iPhone, open “Settings”, then “Profile Downloaded” and tap “Install”.
 
 **If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
 
 ```shell
-sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
+sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/alice.mobileconfig
 ```
 
 ### Step 35: add VPN profile to Mac
 
-This step is super simple, simply double-click “john.mobileconfig” and follow instructions.
+This step is super simple, simply double-click “alice.mobileconfig” and follow instructions.
 
 **If this steps fails (a recent update to Apple Configurator 2 has introduced a bug), please run the following and try again.**
 
 ```shell
-sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/john.mobileconfig
+sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/alice.mobileconfig
 ```
 
 ### Step 36: connect to VPN on iPhone or Mac

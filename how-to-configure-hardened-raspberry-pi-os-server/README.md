@@ -1,0 +1,421 @@
+<!--
+Title: How to configure hardened Raspberry Pi OS server
+Description: Learn how to configure hardened Raspberry Pi OS server.
+Author: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Reviewers:
+Publication date: 2020-11-27T10:00:26.807Z
+Listed: true
+-->
+
+# How to configure hardened Raspberry Pi OS server
+
+## Requirements
+
+- [Raspberry Pi](https://www.raspberrypi.org/)
+- Power adapter, keyboard and HDMI cable (and SD card reader if computer doesn’t have one built-in)
+- Linux or macOS computer
+
+## Caveats
+
+- When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
+- When copy/pasting commands that start with `cat << "EOF"`, select all lines at once (from `cat << "EOF"` to `EOF` inclusively) as they are part of the same (single) command
+
+## Guide
+
+### Step 1: create SSH key pair (on computer)
+
+When asked for file in which to save key, enter `pi`.
+
+When asked for passphrase, use output from `openssl rand -base64 24` (and store passphrase in password manager).
+
+```shell
+$ mkdir -p ~/.ssh
+
+$ cd ~/.ssh
+
+$ ssh-keygen -t rsa -C "pi"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/sunknudsen/.ssh/id_rsa): pi
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in pi.
+Your public key has been saved in pi.pub.
+The key fingerprint is:
+SHA256:NZkr0Bmu6tpQfDp2GHTIPyBz253uZk/gOmoqzEszGM0 pi
+The key's randomart image is:
++---[RSA 3072]----+
+|        .        |
+|   . . o o o     |
+|  o * o + =      |
+| o * * + o o     |
+|. E = * S .      |
+|.. . * + o       |
+|++. * . o .      |
+|ooo=.o.oo.       |
+| o+++..+...      |
++----[SHA256]-----+
+
+$ cat pi.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqEWjWQZY8HoLQEF7SmU/7f8dJuy/4r7/X6PbwrDzASym+5vCLz3QJIlLuJuQL557FsTzsz/sLFoTJnDkiQ3lZtFOofynyYQQiRDkZPy9nGz/j+rTHm6vfp17o8k1LeADKRq2mHpAljlf6/ywkKbzmGhXwnVsvxA0RvvNoujnpiLoSZFrq0wsfzIOi67ZzySlzxKmL0/Uxs9LJ+XFyKlVOILD+TMCayB6UNJ38PkghDZ/8spSSH44jkhmElPdqsqaJ/hqYYXT8q4sSB7Yp5RSYWDYIQiIs2cailho/gOCq/0AskREuGEuwPGL3ivOa2uBN544zrJHbegeliRwTwxSvFat9MoXjpWpEtTVpR5Skr2nGxwXZWYEGZ1u+iJc+Y67k7vabZYADAk1Q8VePAh2BOfhkhZfdAnBZJn9s/XISi/T8WxsLoG3twu1OMWtoiNMlwCUzeIzVRg5BMiFJjEtsANiETdrCuH/Ms9G/EMRo9gKh7moVbfwI+Urf0StIx3k= pi
+```
+
+### Step 2: generate heredoc (the output of following command will be used at [step 10](#step-10-configure-pi-ssh-authorized-keys))
+
+```shell
+cat << EOF
+cat << _EOF > /home/pi/.ssh/authorized_keys
+$(cat ~/.ssh/pi.pub)
+_EOF
+EOF
+```
+
+### Step 3: download latest version of [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
+
+### Step 4: clone "Raspberry Pi OS Lite" to SD card
+
+> WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
+
+Run `diskutil list` to find disk ID of SD card to override with "Raspberry Pi OS Lite" (`disk2` in the following example).
+
+Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example) and `2020-12-02-raspios-buster-armhf-lite.img` with current image.
+
+```console
+$ diskutil list
+/dev/disk0 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *500.3 GB   disk0
+   1:                        EFI EFI                     209.7 MB   disk0s1
+   2:                 Apple_APFS Container disk1         500.1 GB   disk0s2
+
+/dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +500.1 GB   disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD - Data     340.9 GB   disk1s1
+   2:                APFS Volume Preboot                 85.9 MB    disk1s2
+   3:                APFS Volume Recovery                529.0 MB   disk1s3
+   4:                APFS Volume VM                      3.2 GB     disk1s4
+   5:                APFS Volume Macintosh HD            11.3 GB    disk1s5
+
+/dev/disk2 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *15.9 GB    disk2
+   1:             Windows_FAT_32 boot                    268.4 MB   disk2s1
+   2:                      Linux                         15.7 GB    disk2s2
+
+$ sudo diskutil unmount /dev/diskn
+disk2 was already unmounted or it has a partitioning scheme so use "diskutil unmountDisk" instead
+
+$ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
+Unmount of all volumes on disk2 was successful
+
+$ sudo dd bs=1m if=/Users/sunknudsen/Downloads/2020-12-02-raspios-buster-armhf-lite.img of=/dev/rdiskn
+1772+0 records in
+1772+0 records out
+1858076672 bytes transferred in 40.449002 secs (45936280 bytes/sec)
+
+$ sudo diskutil unmountDisk /dev/diskn
+Unmount of all volumes on disk2 was successful
+```
+
+### Step 5: log in as pi (using keyboard) and change password using `passwd`
+
+> Heads-up: default password is `raspberry`.
+
+### Step 6: configure Wi-Fi (if not using ethernet)
+
+```shell
+sudo raspi-config
+```
+
+Select “System Options”, then “Wireless LAN”, choose country, then select “OK”, enter “SSID”, enter passphrase.
+
+### Step 7: enable SSH
+
+```shell
+sudo raspi-config
+```
+
+Select “Interface Options”, then “SSH”, then “Yes”, then “OK” and finally “Finish”.
+
+When asked if you wish to reboot, select “No”.
+
+### Step 8: find IP of Raspberry Pi (see `eth0` if using ethernet or `wlan0` if using Wi-Fi)
+
+```shell
+ip a
+```
+
+### Step 9: log in to Raspberry Pi over SSH
+
+Replace `10.0.1.69` with IP of Raspberry Pi.
+
+When asked for password, enter password from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
+
+```shell
+ssh pi@10.0.1.69
+```
+
+### Step 10: configure pi SSH authorized keys
+
+#### Create `.ssh` folder
+
+```shell
+mkdir -p /home/pi/.ssh
+```
+
+#### Create `/home/pi/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-10)
+
+```shell
+cat << _EOF > /home/pi/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqEWjWQZY8HoLQEF7SmU/7f8dJuy/4r7/X6PbwrDzASym+5vCLz3QJIlLuJuQL557FsTzsz/sLFoTJnDkiQ3lZtFOofynyYQQiRDkZPy9nGz/j+rTHm6vfp17o8k1LeADKRq2mHpAljlf6/ywkKbzmGhXwnVsvxA0RvvNoujnpiLoSZFrq0wsfzIOi67ZzySlzxKmL0/Uxs9LJ+XFyKlVOILD+TMCayB6UNJ38PkghDZ/8spSSH44jkhmElPdqsqaJ/hqYYXT8q4sSB7Yp5RSYWDYIQiIs2cailho/gOCq/0AskREuGEuwPGL3ivOa2uBN544zrJHbegeliRwTwxSvFat9MoXjpWpEtTVpR5Skr2nGxwXZWYEGZ1u+iJc+Y67k7vabZYADAk1Q8VePAh2BOfhkhZfdAnBZJn9s/XISi/T8WxsLoG3twu1OMWtoiNMlwCUzeIzVRg5BMiFJjEtsANiETdrCuH/Ms9G/EMRo9gKh7moVbfwI+Urf0StIx3k= pi
+_EOF
+```
+
+### Step 11: log out
+
+```shell
+exit
+```
+
+### Step 12: log in to Raspberry Pi over SSH (using `pi` private key)
+
+Replace `10.0.1.69` with IP of Raspberry Pi.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+
+```shell
+ssh pi@10.0.1.69 -i ~/.ssh/pi
+```
+
+### Step 13: disable pi Bash history
+
+```shell
+sed -i -E 's/^HISTSIZE=/#HISTSIZE=/' ~/.bashrc
+sed -i -E 's/^HISTFILESIZE=/#HISTFILESIZE=/' ~/.bashrc
+echo "HISTFILESIZE=0" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Step 14: switch to root
+
+```shell
+sudo su -
+```
+
+### Step 15: disable root Bash history
+
+```shell
+echo "HISTFILESIZE=0" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Step 16: set root password
+
+When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
+
+```shell
+passwd
+```
+
+### Step 17: uninstall sudo
+
+```shell
+apt remove -y sudo
+```
+
+### Step 18: disable root login and password authentication
+
+```shell
+sed -i -E 's/^(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+systemctl restart ssh
+```
+
+### Step 19: disable Bluetooth and Wi-Fi
+
+> Heads-up: will take effect after reboot.
+
+#### Disable Bluetooth
+
+```shell
+echo "dtoverlay=disable-bt" | tee -a /boot/config.txt
+systemctl disable hciuart
+```
+
+#### Disable Wi-Fi (if using ethernet)
+
+```shell
+echo "dtoverlay=disable-wifi" | tee -a /boot/config.txt
+```
+
+### Step 20: update APT index and upgrade packages
+
+#### Update APT index
+
+```shell
+apt update
+```
+
+#### Upgrade packages
+
+```shell
+apt upgrade -y
+```
+
+### Step 21: install and configure Vim
+
+#### Install Vim
+
+```shell
+apt install -y vim
+```
+
+#### Configure Vim
+
+```shell
+cat << "EOF" > ~/.vimrc
+set encoding=UTF-8
+set termencoding=UTF-8
+set nocompatible
+set backspace=indent,eol,start
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set ruler
+set paste
+syntax on
+EOF
+```
+
+### Step 22: set timezone (the following is for Montreal time)
+
+See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for available timezones.
+
+```shell
+timedatectl set-timezone America/Montreal
+```
+
+### Step 23: configure sysctl (if server is IPv4-only)
+
+> Heads-up: only run the following if server is IPv4-only.
+
+```shell
+cp /etc/sysctl.conf /etc/sysctl.conf.backup
+cat << "EOF" >> /etc/sysctl.conf
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+EOF
+sysctl -p
+```
+
+### Step 24: install iptables-persistent
+
+When asked to save current IPv4 or IPv6 rules, answer `Yes`.
+
+```shell
+apt install -y iptables-persistent
+```
+
+### Step 25: configure iptables
+
+```shell
+iptables -N SSH_BRUTE_FORCE_MITIGATION
+iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --set
+iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[ssh-brute-force]: "
+iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -j DROP
+iptables -A SSH_BRUTE_FORCE_MITIGATION -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 --syn -m conntrack --ctstate NEW -j SSH_BRUTE_FORCE_MITIGATION
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+```
+
+If server is IPv4-only, run:
+
+```shell
+ip6tables -P FORWARD DROP
+ip6tables -P INPUT DROP
+ip6tables -P OUTPUT DROP
+```
+
+If server is dual stack (IPv4 + IPv6) run:
+
+```shell
+ip6tables -A INPUT -i lo -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type destination-unreachable -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type packet-too-big -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type time-exceeded -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type parameter-problem -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type router-advertisement -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type neighbor-solicitation -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type neighbor-advertisement -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A INPUT -p ipv6-icmp --icmpv6-type redirect -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+ip6tables -A OUTPUT -o lo -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type destination-unreachable -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type packet-too-big -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type time-exceeded -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type parameter-problem -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type router-solicitation -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-solicitation -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-advertisement -m hl --hl-eq 255 -j ACCEPT
+ip6tables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
+ip6tables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+ip6tables -P FORWARD DROP
+ip6tables -P INPUT DROP
+ip6tables -P OUTPUT DROP
+```
+
+### Step 26: log out and log in to confirm iptables didn’t block SSH
+
+#### Log out
+
+```shell
+exit
+exit
+```
+
+#### Log in
+
+Replace `10.0.1.69` with IP of Raspberry Pi.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+
+```shell
+ssh pi@10.0.1.69 -i ~/.ssh/pi
+```
+
+#### Switch to root
+
+When asked, enter root password.
+
+```shell
+su -
+```
+
+### Step 27: make iptables rules persistent
+
+```shell
+iptables-save > /etc/iptables/rules.v4
+ip6tables-save > /etc/iptables/rules.v6
+```
+
+👍
