@@ -10,6 +10,8 @@ Listed: true
 
 # How to self-host hardened Borg server
 
+[![How to self-host hardened Borg server - YouTube](how-to-self-host-hardened-borg-server.png)](https://www.youtube.com/watch?v=rzEaxL6F2Eg "How to self-host hardened Borg server - YouTube")
+
 ## Requirements
 
 - [Hardened Debian server](../how-to-configure-hardened-debian-server) 📦 or [hardened Raspberry Pi OS server](../how-to-configure-hardened-raspberry-pi-os-server) 📦
