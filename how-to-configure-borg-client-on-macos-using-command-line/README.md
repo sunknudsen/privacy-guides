@@ -10,6 +10,8 @@ Listed: true
 
 # How to configure Borg client on macOS using command-line
 
+[![How to configure Borg client on macOS using command-line - YouTube](how-to-configure-borg-client-on-macos-using-command-line.png)](https://www.youtube.com/watch?v=g73XmszOwYs "How to configure Borg client on macOS using command-line - YouTube")
+
 ## Requirements
 
 - Borg server ([self-hosted](../how-to-self-host-hardened-borg-server) or cloud-based such as [BorgBase](https://www.borgbase.com/) or [rsync.net](https://rsync.net/products/attic.html))

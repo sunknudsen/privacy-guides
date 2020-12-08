@@ -10,6 +10,8 @@ Listed: true
 
 # How to configure hardened Debian server
 
+[![How to configure hardened Debian server - YouTube](how-to-configure-hardened-debian-server.png)](https://www.youtube.com/watch?v=z8hizZRX5-4 "How to configure hardened Debian server - YouTube")
+
 ## Requirements
 
 - Virtual private server (VPS) or dedicated server running Debian 10 (buster)
