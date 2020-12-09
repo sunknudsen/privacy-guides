@@ -12,7 +12,7 @@ Listed: true
 
 [![How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube](how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos.png)](https://www.youtube.com/watch?v=HY3F_vHuTFQ "How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube")
 
-> Heads-up: when following this guide on IPv4-only servers (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) infrastructure. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos-and-why-it-s-a-big-deal-for-privacy).
+> Heads-up: when following this guide on IPv4-only servers (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) infrastructure. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos).
 
 ## Requirements
 
@@ -224,7 +224,9 @@ STRONGSWAN_INTERFACE=eth0
 $ source ~/.bashrc
 ```
 
-### Step 16: install cURL and Python, generate random IPv6 ULA and save to environment variables
+### Step 16: install cURL and Python, generate random IPv6 ULA and save to environment variables (if server is dual stack)
+
+> Heads-up: only run the following if server is dual stack (IPv4 + IPv6).
 
 #### Install cURL and Python
 
