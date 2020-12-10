@@ -453,7 +453,7 @@ Firewall disabled (press ctrl+c to enable)
 ### Step 16: make sure PF is set to strict at boot
 
 ```shell
-cat << EOF | sudo tee /Library/LaunchDaemons/local.pf.plist
+cat << "EOF" | sudo tee /Library/LaunchDaemons/local.pf.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">

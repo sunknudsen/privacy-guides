@@ -47,22 +47,22 @@ Enter same passphrase again:
 Your identification has been saved in borg.
 Your public key has been saved in borg.pub.
 The key fingerprint is:
-SHA256:b4YxePgBjP9hB/wPFz7MkzM5fDYEBtbtOBd7kxRTicY borg
+SHA256:9DzU/jDPyR/vGe8k2Yn1p31wF8UxLzCmYEj//D6+oYk borg
 The key's randomart image is:
 +---[RSA 3072]----+
-|          oo+..o=|
-|     o . . ..Eoo.|
-|    . o o   oooo.|
-|     . + o =o=+o.|
-|      + S + #o+..|
-|       = O + O . |
-|        + + .    |
-|         o       |
-|                 |
+|     ...o   +  +.|
+|      .o . + o  =|
+|        o o . . o|
+|       . * .   o |
+|        S * +  ..|
+|           o B++=|
+|            o.O**|
+|         . +.. *O|
+|        E o.+o.+O|
 +----[SHA256]-----+
 
 $ cat borg.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClMqEv1xTTWrz9cRGFsjtQ5ieK7sMs2eUMyROg1emhblUmGd6cMMfQDFDlwXUXk7ZPDHIkN3k9recff1oa3tvW+9D2oqGSyG0WOXqbZNHXZUSEhb9giOlVij0kOjfVbMR37zMZn+e6cVzq75Kn5B/ZSm9pfpWI5p4sHEn9S8TvoSgvCCu67bWc3UHHedd9dK5kJUPHNHvZUf+ebNo69iZuKE9HSP7eifGx5DszkU5cs6DPivAvRGgGer7Um2piQ+T7q+XcKo0JcaXVaObDZSGTZwiF8xAFDF1bfCl9jna26ZqqPKHdJJTEl8gaj9MQH6vlsAZ40xeFyCxiG0AhVpQ6SeeIN2qkf6k7EDyUQNcCmwY23THhFhEjfjuq6mbsuCK52tUx7bDMF8wed0lQ5k7OLuQuwyxDUinz3aBwboUQxxHfzImgKXzIrZ0hPge3fIgtFUBiUwFUv5xnTzBIStP5BFf5Ca5oxRq4rJDORnD0wMuMTWSyGZFVU5iEVml0Jhk= borg
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwCdu7RCOmISZQ5cr43lDRPrFoxCXcVfCREYsdTIBEoQrIwyg1jZyzQMf9kORIGcNe5+olIj1aK9qVg0hCEeDSJosSsMP5o8tQJzNu5aYCtnADlZ+AuCgp5CpL1vECMaQsfQV9nju3ScE/+0C/MSYVvDx5sbRvi1XuutBbCAZtlUa7Rn7S8/X08XLFasM7KhFz7AH2Hvvi1i3Cg1WqkRKzpXE/uxntZ/qZxBdpa2WEN/phD4LgmmCbzKJYflhJNKJnYQZxGveGsdexdrDpEbajVECBw/0ntS5/YYaLxzqCrNGyCRdAajIccuOLQjRGzr9U5mdzVpHhkCLjbIDQ1JHxtb9nHxNgvGep7z0UCqawdcJN2nEr1D7Khu7Mh8mryR7iBxqEdPfdARuQn3kMFH+YA5NASTus9p/MR1cavJmBq3u88oNje8q+szkBsQDb1h0n0eAzjjDXRSxgm8bdtpi07TjTNCc+AmhYiym+MYXmbxqMO6pnjjE1I+ht3a8zUU0= borg
 ```
 
 ### Step 2: create `borg-append-only` SSH key pair (if using BorgBase or rsync.net)
@@ -82,22 +82,22 @@ Enter same passphrase again:
 Your identification has been saved in borg-append-only.
 Your public key has been saved in borg-append-only.pub.
 The key fingerprint is:
-SHA256:xR8BvPMujEM955VubA/TWVlqt/Nt2INNX4UIw3wtssw borg-append-only
+SHA256:Se6MQbWpFg0lWI2+fJ1IVPtUCs/ZRYrgtpz4F3hi2ow borg-append-only
 The key's randomart image is:
 +---[RSA 3072]----+
-|         +....   |
-|         .B o..  |
-|         ooB.o ..|
-|         .E.....+|
-|        S. o. oo+|
-|        . o o.o+=|
-|       . o = +**+|
-|        o o o.*=B|
-|         . . o o=|
+|     o++o.+   ..o|
+|    . .=o+ * * o |
+|     .o.= + B o  |
+|     ..=.= *     |
+|     .+oSoB.+    |
+|     .o=oBoo .   |
+|      ..E + .    |
+|           .     |
+|                 |
 +----[SHA256]-----+
 
 $ cat borg-append-only.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsEfUNEZToWjefcGr8Dy/d+6ILuklWjC18E3ziaCZPNzKZAMfZTXm0CqKYgwRH5UXgYz//3gLPLNLtlHNeluVXSzLO1pxc+2Au19JOfzgcy86A3y4Gx8lFh80VyHhm33LjHsKsgacF2C0tKDBaJ/WqwDpX0m+E1WHCF0xZ7QdgGEoqj31yJ34WCeOXOro1yJfrV98iVWKuokCMHboaQoXTNu4+AMzGw/1MPUgmkT1nGnBpN5lP1v+kwAXAemC+A+Aw8gLf3pq84uAOhiTficH57PiyasJtwll5loDinkhnBtYhPHO9qN+M+n0by3rmIhsEIukdpwiI5Qm4LNTm6i53NiX1rfN2ln4SvqwVG7mmkqP9PbJXsgtD6mNjXOhncHvHeTbEb8IAHg28hGpq1rn8284+2jvviw9FMAzIgkeLRmAHz+XVAOmZDkn0128H4bYXAOeLISxTbgY1WAWzGnW+kCYbmQV3e8wAyOrp8mfZ1LgMvfc2/o0D9828Zy5UP4c= borg-append-only
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2cmGUEKwopEN0vpHl2yNoV/wvm21D1hOP/8V886iCawgYpP5SUNpuVTDEgZEFJSvTMtfPaBicln0ULx8bp5NAiOQ8uPIvJD3xaacwISwvCVSYXY8jnQG3eRuhbKCU0aVFLONjnAvo288+NWbVcLw8Y166MPyk+tVz76plmv0LGefrZ0yPG99MngR3E5BLQk1EWQoH1kWGGHNFecFtMLq3usX23Ee4e605gfkWWoj7xSgpujfCHi/re6u7B25cn5t2eR7Ee0qRe/O2Sid2yIma7zK2l9NA0+k7pGngyXUTnGx9bI4+xM5qY0ZJcOQk03UJh52Gx8zXFASOxdGO71FiHvYKz60yyd5dUetPcBOYUygdejdBeBS36bh6SisXE/iI6aOfB/ViZd2ZNne1Fb7ijakyNsDCVEAWkMGJxnN8ZCapGsfG9YhKk/fU92Yxjos+AB1IC3M9Qjq5p8fZGsKdRtzJ3zxtTyk5dQEziAbmBVIJYyFohx/aCUB+MVF9xaM= borg-append-only
 ```
 
 ### Step 3: configure SSH keys and create repo (if using BorgBase)
@@ -380,7 +380,7 @@ Backup completed
 
 ```shell
 mkdir -p ~/Library/LaunchAgents
-cat << EOF > ~/Library/LaunchAgents/local.borg-wrapper.plist
+cat << "EOF" > ~/Library/LaunchAgents/local.borg-wrapper.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">

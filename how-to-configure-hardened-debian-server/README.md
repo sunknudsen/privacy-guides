@@ -212,9 +212,9 @@ See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wi
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 15: configure sysctl (if server is IPv4-only)
+### Step 15: configure sysctl (if network is IPv4-only)
 
-> Heads-up: only run the following if server is IPv4-only.
+> Heads-up: only run the following if network is IPv4-only.
 
 ```shell
 cp /etc/sysctl.conf /etc/sysctl.conf.backup
@@ -257,7 +257,7 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 ```
 
-If server is IPv4-only, run:
+If network is IPv4-only, run:
 
 ```shell
 ip6tables -P FORWARD DROP
@@ -265,7 +265,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-If server is dual stack (IPv4 + IPv6) run:
+If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
 ip6tables -A INPUT -i lo -j ACCEPT

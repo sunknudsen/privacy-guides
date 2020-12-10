@@ -12,7 +12,7 @@ Listed: true
 
 [![How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube](how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos.png)](https://www.youtube.com/watch?v=HY3F_vHuTFQ "How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS - YouTube")
 
-> Heads-up: when following this guide on IPv4-only servers (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) infrastructure. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos).
+> Heads-up: when following this guide on servers with upstream IPv4-only networks (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) networks. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos).
 
 ## Requirements
 
@@ -48,22 +48,22 @@ Enter same passphrase again:
 Your identification has been saved in vpn-server.
 Your public key has been saved in vpn-server.pub.
 The key fingerprint is:
-SHA256:4On7WymZIcM5p8SbsybwJpaFIUrnTUMf/1fdAhI1WPY vpn-server
+SHA256:KJ8pRZUCVtFh5JEUprW+iFolSYJoA4KxdIcK2puBQaE vpn-server
 The key's randomart image is:
 +---[RSA 3072]----+
-|          .==    |
-|     . .  o..o   |
-|    . o o  . .E o|
-|.... * = .    ..o|
-|o.ooo % S .   .. |
-|. o..+ O + o .   |
-|   =  * + o .    |
-|  + + .+ o       |
-| . o oo.o.       |
+|*=..++o=@=       |
+|Xo.o. .B+o       |
+|E*o . o.o        |
+|+.+o o o         |
+|   ++ + S        |
+|  o  B + .       |
+|    + = .        |
+|   o .           |
+|  .              |
 +----[SHA256]-----+
 
 $ cat vpn-server.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu4k9OcJlatGgUoo41m18Hekv+nSHq1w7qcuAuOZWLI8y5aYkLzyEgyp7EibB0rcmwiZfwx/RDb5zAvlr9KGsOWOYJ/gRIf4AwK1PdBPDo8jaa02J/H585NHV7T7XJ7Ycl/LeJh+oDXGs4OOspiFM/7NuleqCA0sSuJEnnuuTZsIDAlJwtWIJTM8lg4nWCQx2xAGkRyx4eNHE2vmlg+xHu3PbHg9kpSIaBWpx0WsysypyaB77+pkid6kYzxPXexoxFm4FnkoY7PZGb97wl4FwW1EK/yo9rnwbtEq5ny96JEHqeJdxeBGHYrsAoRro4jPWYXvdXZV2s27NYC6S3yHsJdaLfyfJXyTaygOyyaf39GcwqfJZpmVYwVyfZ2Go6ec9R/dFbKEA4Ue7aeCkDskSTiMuUZjYjfhezpa4Y0Jiy+lDZFVSv3tsBYu7Nxq0erZ2ygRJAXUMvvyFICJQGUhblRGXAOwYUt72CSUM0ZMsr84aOWsyzRwVQXzxETuDgnXk= vpn-server
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDACoPiTWsEeNyp/aGvCgeAU2qryRDPWr6MniXMLmZCSw0p68IkppYDLC+xDJCNIdwe8X4d892ROvEpCc7JVVfSDhF5lTS8qMJPMlmcJHjVRBwd/+VItD386LlltQMNtl0v8D2NY9ho+6yWJPuMBggu2zMe6ubnNaiJmdenqWktjawru0HsoRmz33jtNSk12e/yFw9xyXK9cYbrCBj17Gcts7mvhndHB0bfeSSozDx2cd/QRw3RE088AZpyUCVG3UpfyhcZK62btT/OaPTBkIYiLst7VuPtNwm7tAVDdy+JoFN+/mPlnQIG+Dmn36IFlK8gBTIu7ahR2omKYBuYfQwfqE24QTfHsVEYIR/fI1EHg0yAu+QTtyv8pUX7vs6qgQVYLVMdPsO510SOZyfNvLQfPmCCk5yif53V74x9Ft56ja92ktw/IXgal48LUNNybO4l0Q8Jf1j2DvTaq6VGBxqE3p6pcDlaNyWGFitdvBzPJrGc/hdJ7HLdDQS47xQM3SM= vpn-server
 ```
 
 ### Step 2: log in to server as root
@@ -215,7 +215,7 @@ See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wi
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 15: detect network interface and save to environment variables
+### Step 15: save default network interface as environment variable
 
 ```console
 $ ip -4 route | grep "default" | awk '{print "STRONGSWAN_INTERFACE="$5}' | tee -a ~/.bashrc
@@ -224,9 +224,9 @@ STRONGSWAN_INTERFACE=eth0
 $ source ~/.bashrc
 ```
 
-### Step 16: install cURL and Python, generate random IPv6 ULA and save to environment variables (if server is dual stack)
+### Step 16: install cURL and Python, generate and save random IPv6 ULA as environment variable (if network is dual stack)
 
-> Heads-up: only run the following if server is dual stack (IPv4 + IPv6).
+> Heads-up: only run the following if network is dual stack (IPv4 + IPv6).
 
 #### Install cURL and Python
 
@@ -234,7 +234,7 @@ $ source ~/.bashrc
 apt install -y curl python3
 ```
 
-#### Generate random IPv6 ULA and save to environment variables
+#### Generate and save random IPv6 ULA as environment variable
 
 Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977aab368e6280a8) for `ulagen.py`.
 
@@ -286,7 +286,7 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 ```
 
-If server is IPv4-only, run:
+If network is IPv4-only, run:
 
 ```shell
 ip6tables -P FORWARD DROP
@@ -294,7 +294,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-If server is dual stack (IPv4 + IPv6) run:
+If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
 ip6tables -A INPUT -i lo -j ACCEPT
@@ -405,7 +405,7 @@ systemctl restart systemd-networkd
 
 #### Install dnsmasq
 
-Please ignore systemd port conflict error (if present).
+> Heads-up: please ignore systemd address already in use error (if present).
 
 ```shell
 apt install -y dnsmasq
@@ -429,7 +429,7 @@ systemctl restart dnsmasq
 
 ### Step 23: install strongSwan
 
-If you are shown an “Old runlevel management superseded” warning, answer “Ok”.
+> Heads-up: if you are shown an “Old runlevel management superseded” warning, answer “Ok”.
 
 ```shell
 apt install -y strongswan libcharon-extra-plugins
@@ -463,7 +463,7 @@ $ systemd-resolve --status | grep "DNS Servers" | awk '{print $3}'
 95.215.19.53
 ```
 
-#### Set DNS nameserver(s)
+#### Set DNS nameservers environment variable
 
 Replace `95.215.19.53` with server DNS nameserver(s).
 
@@ -479,7 +479,7 @@ STRONGSWAN_DNS_NAMESERVERS=95.215.19.53
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
 ```
 
-If server is IPv4-only, run:
+If network is IPv4-only, run:
 
 ```shell
 cat << EOF > /etc/ipsec.conf
@@ -513,7 +513,7 @@ conn ikev2
 EOF
 ```
 
-If server is dual stack (IPv4 + IPv6) run:
+If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
 cat << EOF > /etc/ipsec.conf
@@ -562,16 +562,16 @@ EOF
 cp /etc/strongswan.d/charon-logging.conf /etc/strongswan.d/charon-logging.conf.backup
 cat << "EOF" > /etc/strongswan.d/charon-logging.conf
 charon {
-    filelog {
-        charon {
-            default = 1
-        }
+  filelog {
+    charon {
+      default = 1
     }
-    syslog {
-        auth {
-            default = 1
-        }
+  }
+  syslog {
+    auth {
+      default = 1
     }
+  }
 }
 EOF
 ```
@@ -582,11 +582,11 @@ EOF
 cp /etc/strongswan.d/charon/dhcp.conf /etc/strongswan.d/charon/dhcp.conf.backup
 cat << "EOF" > /etc/strongswan.d/charon/dhcp.conf
 dhcp {
-    force_server_address = yes
-    identity_lease = yes
-    interface = strongswan0
-    load = yes
-    server = 10.0.2.1
+  force_server_address = yes
+  identity_lease = yes
+  interface = strongswan0
+  load = yes
+  server = 10.0.2.1
 }
 EOF
 ```
@@ -610,7 +610,7 @@ systemctl daemon-reload
 
 ### Step 25: create `strongswan-certs` folder
 
-> Heads-up: for security reasons, steps 23 to 27 are done on Mac vs server.
+> Heads-up: for security reasons, steps 25 to 29 are done on Mac vs server.
 
 > Heads-up: store `strongswan-certs` folder in a safe place if you wish to issue additional certificates in the future.
 
@@ -621,12 +621,10 @@ cd ~/Desktop/strongswan-certs
 
 ### Step 26: create OpenSSL config file
 
-#### Set client common name
-
-Each client is configured using a unique common name ending with `@vpn-server.com`.
+#### Set client name environment variable
 
 ```shell
-STRONGSWAN_CLIENT_COMMON_NAME=alice@vpn-server.com
+STRONGSWAN_CLIENT_NAME=alice
 ```
 
 #### Create OpenSSL config file
@@ -659,30 +657,30 @@ subjectAltName = DNS:vpn-server.com
 extendedKeyUsage = serverAuth, 1.3.6.1.5.5.8.2.2
 [ client ]
 authorityKeyIdentifier = keyid
-subjectAltName = email:$STRONGSWAN_CLIENT_COMMON_NAME
+subjectAltName = email:$STRONGSWAN_CLIENT_NAME@vpn-server.com
 extendedKeyUsage = serverAuth, 1.3.6.1.5.5.8.2.2
 EOF
 ```
 
-### Step 27: generate certificate authority cert
+### Step 27: generate certificate authority key and cert
 
 ```console
 $ openssl genrsa -out ca.key 4096
 Generating RSA private key, 4096 bit long modulus
-......................................++
-........................................................................................................................................................................................................................................................................................++
+.........................................................................................++
+........................................................................................................++
 e is 65537 (0x10001)
 
 $ openssl req -x509 -new -nodes -config openssl.cnf -extensions ca -key ca.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=vpn-server.com" -days 3650 -out ca.crt
 ```
 
-### Step 28: generate server cert
+### Step 28: generate server key, csr and cert
 
 ```console
 $ openssl genrsa -out server.key 4096
 Generating RSA private key, 4096 bit long modulus
-.................................................................................................................................................................................................................................................++
-................................................................................++
+.............................................................................................................................................................................................++
+....................................................................................................................................++
 e is 65537 (0x10001)
 
 $ openssl req -new -config openssl.cnf -extensions server -key server.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=vpn-server.com" -out server.csr
@@ -693,44 +691,197 @@ subject=/C=US/O=Self-hosted strongSwan VPN/CN=vpn-server.com
 Getting CA Private Key
 ```
 
-### Step 29: generate client cert
+### Step 29: generate client key, csr, cert and pkcs12
 
 When asked for export password, use output from `openssl rand -base64 24` (and store password in password manager).
 
 ```console
-$ openssl genrsa -out alice.key 4096
+$ openssl genrsa -out $STRONGSWAN_CLIENT_NAME.key 4096
 Generating RSA private key, 4096 bit long modulus
-.........++
-............................................................................++
+....................................................................................................................................................................................++
+...........................................++
 e is 65537 (0x10001)
 
-$ openssl req -new -config openssl.cnf -extensions client -key alice.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=$STRONGSWAN_CLIENT_COMMON_NAME" -out alice.csr
+$ openssl req -new -config openssl.cnf -extensions client -key $STRONGSWAN_CLIENT_NAME.key -subj "/C=US/O=Self-hosted strongSwan VPN/CN=$STRONGSWAN_CLIENT_NAME@vpn-server.com" -out $STRONGSWAN_CLIENT_NAME.csr
 
-$ openssl x509 -req -extfile openssl.cnf -extensions client -in alice.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650 -out alice.crt
+$ openssl x509 -req -extfile openssl.cnf -extensions client -in $STRONGSWAN_CLIENT_NAME.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650 -out $STRONGSWAN_CLIENT_NAME.crt
 Signature ok
 subject=/C=US/O=Self-hosted strongSwan VPN/CN=alice@vpn-server.com
 Getting CA Private Key
 
-$ openssl pkcs12 -in alice.crt -inkey alice.key -certfile ca.crt -export -out alice.p12
+$ openssl pkcs12 -in $STRONGSWAN_CLIENT_NAME.crt -inkey $STRONGSWAN_CLIENT_NAME.key -certfile ca.crt -export -out $STRONGSWAN_CLIENT_NAME.p12
 Enter Export Password:
 Verifying - Enter Export Password:
 ```
 
-### Step 30: copy/paste content of `ca.crt`, `server.key` and `server.crt` to server and make private key root-only.
+### Step 30: copy certs and key to server and make private folder root-only.
 
-On Mac: run `cat ca.crt`
+On Mac, run:
 
-On server: run `vi /etc/ipsec.d/cacerts/ca.crt`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
+```shell
+cat << EOF
+cat << "_EOF" > /etc/ipsec.d/cacerts/ca.crt
+$(cat ca.crt)
+_EOF
+EOF
+```
 
-On Mac: run `cat server.key`
+On server, run output from previous command:
 
-On server: run `vi /etc/ipsec.d/private/server.key`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
+```shell
+cat << "_EOF" > /etc/ipsec.d/cacerts/ca.crt
+-----BEGIN CERTIFICATE-----
+MIIFWzCCA0OgAwIBAgIJANPds/Etli3LMA0GCSqGSIb3DQEBCwUAMEsxCzAJBgNV
+BAYTAlVTMSMwIQYDVQQKDBpTZWxmLWhvc3RlZCBzdHJvbmdTd2FuIFZQTjEXMBUG
+A1UEAwwOdnBuLXNlcnZlci5jb20wHhcNMjAxMjA4MjE1OTUxWhcNMzAxMjA2MjE1
+OTUxWjBLMQswCQYDVQQGEwJVUzEjMCEGA1UECgwaU2VsZi1ob3N0ZWQgc3Ryb25n
+U3dhbiBWUE4xFzAVBgNVBAMMDnZwbi1zZXJ2ZXIuY29tMIICIjANBgkqhkiG9w0B
+AQEFAAOCAg8AMIICCgKCAgEAqVjPlFA8RzUbJVAoAlL/g+d78TrfDsX0yiFna2nc
+hB2uN2RfTur1p0rF2Ea9lm4Z3TTopuBDDs6B+of1o6yM0wf9/gqXPEaKmgHxHEEO
+9olovjH9mD/hvaAwJO52uIbUi1sMfxHspyOUmhxU61Ri3v1hQrBl7d5XK6n3thCF
+03um9uMLnxDr0N4fV7lT41CYITPpKeLFMX+IT2saHbAnhQS+6jGpLiuwXbejlVO7
+5+RECO/8bSNGr1NrnHw5FNc9ugtLoRvvsAoGsCCpXX41T5mITm0fdo+K/vRK9hr2
+NDcy5WKGWV43eBAr2BqmDESmDR9WbtOCAIcW5bhZeK18/oDd9frswmsDPIhCKIVg
+VBc9te+oVnFQCq8dtd0ofqtF27AtnL0qQKtNqtbc1FPCGmcabq1Vqts/1vtsu13W
+33V4s/q2+gvlDB8aCcDxppHji/lh9sgFHud/md2b66Lb24UK8c/VP5oUY0AfLhD1
+SAeP++j0H9g54yubDcqasSLwrGqLPzEykeSgPWk1la4u8qv4V+In5RHksLaQHV8r
+hWPwfc955IDQER9qCiLgatzW9RO/hegmmK7ftK6UXzMhG2NgtkrftQVMCiFT0Y7f
+y0EotceuqMqqGWCixnI/YilGnLDVegNclq1lOtA18npHNfZTuuV4UAXXClV9BDty
+JW0CAwEAAaNCMEAwHQYDVR0OBBYEFEPDTIrkb2mgz3vsioEMyb4s4GFOMA8GA1Ud
+EwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEBCwUAA4ICAQA1
+bqXeP2ngjGlki4TomYCAKXJJdOoHDIeXzFrPpaDpfza+JP5/VNVuTH0gM774oWgO
+JqpD/2ZIVfBdwLjsAGB0vx5of19Y+HpCoTfC4onoG40LJS+2w6OWg14dgiyxOpU8
+PhTGqY7Josfo9RwmNeVot0AYqrOIQLERmWm04uJ8ojYherH7qGX0pSU9rHptnG8J
+kagP6V9/auH6MXqdgEbstKa66yZKKI84mgDMIu5ExPTC7EXmjCkiAsRu+gJAxCi2
+B01xcCT7fYVGSgC+abziFhDJIuaGGgiWPdMiZ+709Pm1XeXAjyTj0JCU8+HsS8oS
+olK9ZInvY6qKqA0pnzgohp5NGkmIRZahgZLu40va7wZBhu52cGTfOa2A8nMoltJ+
+uxtTS8SaLI1eXdNl/IegN6uy+1BwHhCa1uTwG8tt0ld+UI9S1c6YVum7o5m3dRyj
++UJFTltK9rKMXHLEzMKE/rZEKailY8lADpur4sEsp9vVPmUqUr7Yd5P2p4yDNb+d
+ECJH7z7TGc0jK3RteSjEWpZ/rc1yrnJaNrVgwxe6nni58kxd7awdmMGVyL14HGWh
+HePRFQM4zSD3SiazdYVPtVX0XyQKL/9rGN2tR2sGilTKC0yBkQ/gHIYOBIJGyzrh
+wuMHH9d46B2ks8UzUf7w304bk6RaOqU6794WXoEE0Q==
+-----END CERTIFICATE-----
+_EOF
+```
 
-On Mac: run `cat server.crt`
+On Mac, run:
 
-On server: run `vi /etc/ipsec.d/certs/server.crt`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
+```shell
+cat << EOF
+cat << "_EOF" > /etc/ipsec.d/private/server.key
+$(cat server.key)
+_EOF
+EOF
+```
 
-On server: run `chmod -R 600 /etc/ipsec.d/private`
+On server, run output from previous command:
+
+```shell
+cat << "_EOF" > /etc/ipsec.d/private/server.key
+-----BEGIN RSA PRIVATE KEY-----
+MIIJKAIBAAKCAgEAviBI5I0qkJfLYiXS8cMjAx7LxkHnygkXSs4jCZVjwPB+eoBr
+4lGrKLe6pwcS4+0xADeVwfR1VGJcpjlGs7epoUxcCGobMJWP87evb93U/A/3S7la
+tv+BjC/Dl6PumDgan7GrBaWwUWit5COjKm5BcTkR4aav9WWKuuzrG969Onw8ZaMe
+QPvqqGHOjKAntCE6X+BGJN7nPnn7d3JXQWbOVrIgMduZsPX1ikzxLb2Gs0QHOdnn
+lWrZrbJZ5z5rgDZQ5FYChnBNS2i63ptO6eggyjX4fb/wd0hOPVwlqIIPxt1qDyWA
+V5CzlH7cAUFfoq8GP1b3ZPmLiCAYwccZEMldpqWOz0xaGDYEsT26q2cbdgNV2Qgk
+vmLO7AGhf1Cr+XuKwgCESzN0T3gZXdtRm3urxilQCPl9Hbr4EubqOIQaJUQbauaX
+adUkqHPhwpI5AiW1qpbQIw9Yq1hLrjuN4iYgPqJ7D0LJ0R+2qQMbkTW8sCXPcWSu
+7gA7g+D9/764GV/nAvBxaFyVnNqW8nJM4pCS+26A+gXcPVUCZYfBaih8xdeYlRiJ
+BSxyQiw1AR1gN9/L//P2kM6YterUg28MiDlyDCF3lvTrqwPzaHsxPkQdiErHje8M
+gTJxXoOMk/1WBptzfWngvrM87nXziV7hG8vijWJ4rXFJduYFfRuUK15kuzMCAwEA
+AQKCAgB10sAZkzo7nTZXPqV5WbrK5jzWQmWImRWsMA8ak0/cc62N8SPqfz4Y37N2
+azXTtlxVjBzss7g6cTKFeJ1OJpWi9hVayZbMBwPMv5qjMtAY3TQd42JKYhFAdSE7
+SkZEYxBswsf/meyopryM02D8nJNFvV5NfuUwqJrOuKADB4gxRGiRfAL1tqh3bRV5
+pI62XJk2bWBK3TBlUWb7YQqd5z4cEAtPmo2mUua1rHUSKY/ebFwmB9oyiKMZt5tr
+aQ1pyT9cIcky00mzX9XeulSvNEGNzuCN3XMCGPcTo5Va1i88yF4/wLfGjFAdyHhC
+9uZzhQ/UFOr/0n4b//gXrnDkLEYyO6CMyq8IrhyL1es9rRzM0fYlIOq+ztv90Pa3
+nVaRviz40PG7IJRfo8+2a2ijsgDBHwfWMhI6iqHE3RZYBr1L+Lb9yefPP7GDbFAH
+hXKg8nNMfMMp9vzMbFc4mWBIRBKjyE7IVPnY/9OdCxzn/xg2lBkkN6hVzo6Y0BP8
+yF1HgyJVh01xmzvlDWrF7YdmnT0amn9tNKhIGf6xKkRY0wmNu1qc1Frpech2y3Mc
+pTkD/ecrxo7TW2klrcDUuN8hsPOeMNlpHgjuBx/JpnhWVKu0iwK+mqfwJiOgHEZi
+70Hf0AEpPVCDyGt2ftvs2rVIZpN1Tcn6FFKqjAKE5akNqVimgQKCAQEA8ApZpLwD
+d4Wr8JPgwWn8aqiioNhBObE71W1aUqhy1hDBHXJ8YmUEDH8VAAJOmrAhWahYShQE
+mPxaNTkjsv8TrEHrxle7WU3n+rtab6Gocs8cj2cZG/ojMMJldkx0wguZEJrExdpb
+iVsrCkLTQx9A+xc5aNyC5j8TzcpLt9DEw9c9+1Dbire1Q4IkJaZ2AZCtAr75MkQ8
+37eFAHmQtzztyN0oFluWkosWbJzHPjTD5AwWoKA+aZ/6kWd+uY90zAOHvckMdRXr
+eOqjZ6wmbbtobFI/GhKWYf0ULrySp18pgRjEz0KCKQ9Ob1p1AmRpaGOEfhdQP1Nc
+DGO/+0rQ/M8c4QKCAQEAysRb97HtevSaDhZK0LDlQELesYbO6ot/wfpgvyTgPGwU
+Y8dD510gLcwQ8JhvqzAxc1Togd+Lfk+vEejR+GrDMX3OcLsq4AfL8j0jJ9wai85r
+iYYq+ozW1kOz/2DocM64LwMxvjXuBOmWQpuHzYZ+FBFIE77ee6vV+0uGKY747r+g
+L8qoBTQeXqSjLu2f5p0AZuEBJCPNkGQ1c8tKVl62YUCGI8aASKEc7HlthLhmCOqF
+/PQn2JUiOad/NUTVtJ/6UfWniRzvya1Uf6iQDyZs07wO2F0s+P+HCDzRGwlWisKk
+JAFURZqKFqS0W95W95+V4A+S70skjYhEmCY8UyXmkwKCAQBcNh2pwvAyAg/DI4u7
+wVNORenzkB++Ye9yVcfU6RD0WwtUnJ5bziJ4CnmuvzQjCHZHUvxXuMjrXEXrHEAy
+ivqruccxMpKuA9eR4lcjex6SvC1kiV6D+Nt757HCeCyCPqJWVp4ww2lWosct8e3m
+YyM7Ufij59IBUUnyTDw6KODtusn8uVsdNuVTQbNRI1lB0Kol2+cvADfCWWWmgQyu
+16EhAJRdwmFdekDrCG8h3nNCL8Khge139hTztqZf8lQT62dB6PH4KKuEj96l/OPm
+U5ARzKahBXLvwaD3M0nDMjNnfHReilYmH9Mpw74fZSN5DoHfTmVtbkB2IfumNV+D
+Pq0BAoIBAQCDSn+OM8xkV+tEgdSxqkjWwjW112c1YVw4+ukX+0Wiegz9ynHCZn9G
+iCLT1rA/tTXfyrO+HEQTZn8iZpFGe8Kl0iMQxXBunT3GPSX9UjxyGBdzdcdwci9N
+j4sGKfZ3zLJf5n6X/g1/asxblp9pSdNrJQF5n5Ypl8s3KuDVGfk/hh6vs1X2AJhF
+ie8LnNtzlGdFNh3qC7C39NrTfmdE45DOCdyRX5+C56d1yu5KCKgwz8IwVttSFsaR
+dE4e7NI/YXLRDPINCwqMmMnk2v1kgennc5ZdLH/JPpNtlwuCqRo7QOrNUXsCkp0l
+KkKKVb4UGmYOLadjgFFLv1dC+UcIQ7s3AoIBAEw4WSORIykzSfxGTYDQ8DE0CEQC
+4VaDp73DWm15qfx5JDIT7UxwYKLLxss7u0PoX3IGH3KIwW7wJHsDWaXdYDHTzZ+U
+Uq4hPHOSKGO6gTadhxU7g6mC9/M0VssQUHwarimXGhdEbx6giXmcumyaJroKS9vV
+7Jy7eW2jTBh8OVf0JrU0HyamjgBOwThdUvROytX4jNRQ4ykZRvAeW5rriORgoNeh
+W8f2MIdq4QdYo2/BY3uymlJtPQDYlz9HXSlpUyKeS2WSNynf5PIgyVAFGAh4e2za
+T5DeQg/LK+0Xe4cilPIqo7uU4l4Z+ALHT+884i0XhwwDfBO3Mhmxndv50c4=
+-----END RSA PRIVATE KEY-----
+_EOF
+```
+
+On Mac, run:
+
+```shell
+cat << EOF
+cat << "_EOF" > /etc/ipsec.d/certs/server.crt
+$(cat server.crt)
+_EOF
+EOF
+```
+
+On server, run output from previous command:
+
+```shell
+cat << "_EOF" > /etc/ipsec.d/certs/server.crt
+-----BEGIN CERTIFICATE-----
+MIIFdjCCA16gAwIBAgIJANL3OkwHc0s+MA0GCSqGSIb3DQEBBQUAMEsxCzAJBgNV
+BAYTAlVTMSMwIQYDVQQKDBpTZWxmLWhvc3RlZCBzdHJvbmdTd2FuIFZQTjEXMBUG
+A1UEAwwOdnBuLXNlcnZlci5jb20wHhcNMjAxMjA4MjIwMDAyWhcNMzAxMjA2MjIw
+MDAyWjBLMQswCQYDVQQGEwJVUzEjMCEGA1UECgwaU2VsZi1ob3N0ZWQgc3Ryb25n
+U3dhbiBWUE4xFzAVBgNVBAMMDnZwbi1zZXJ2ZXIuY29tMIICIjANBgkqhkiG9w0B
+AQEFAAOCAg8AMIICCgKCAgEAviBI5I0qkJfLYiXS8cMjAx7LxkHnygkXSs4jCZVj
+wPB+eoBr4lGrKLe6pwcS4+0xADeVwfR1VGJcpjlGs7epoUxcCGobMJWP87evb93U
+/A/3S7latv+BjC/Dl6PumDgan7GrBaWwUWit5COjKm5BcTkR4aav9WWKuuzrG969
+Onw8ZaMeQPvqqGHOjKAntCE6X+BGJN7nPnn7d3JXQWbOVrIgMduZsPX1ikzxLb2G
+s0QHOdnnlWrZrbJZ5z5rgDZQ5FYChnBNS2i63ptO6eggyjX4fb/wd0hOPVwlqIIP
+xt1qDyWAV5CzlH7cAUFfoq8GP1b3ZPmLiCAYwccZEMldpqWOz0xaGDYEsT26q2cb
+dgNV2QgkvmLO7AGhf1Cr+XuKwgCESzN0T3gZXdtRm3urxilQCPl9Hbr4EubqOIQa
+JUQbauaXadUkqHPhwpI5AiW1qpbQIw9Yq1hLrjuN4iYgPqJ7D0LJ0R+2qQMbkTW8
+sCXPcWSu7gA7g+D9/764GV/nAvBxaFyVnNqW8nJM4pCS+26A+gXcPVUCZYfBaih8
+xdeYlRiJBSxyQiw1AR1gN9/L//P2kM6YterUg28MiDlyDCF3lvTrqwPzaHsxPkQd
+iErHje8MgTJxXoOMk/1WBptzfWngvrM87nXziV7hG8vijWJ4rXFJduYFfRuUK15k
+uzMCAwEAAaNdMFswHwYDVR0jBBgwFoAUQ8NMiuRvaaDPe+yKgQzJvizgYU4wGQYD
+VR0RBBIwEIIOdnBuLXNlcnZlci5jb20wHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsG
+AQUFCAICMA0GCSqGSIb3DQEBBQUAA4ICAQCKzJgEz7WM+Wg8AKk/q3gT45in50yG
+YF9i1jbbtgq2QKA261BI6Y8hUSNoRHNNPD8fll3hDbDTxboKFM3zP3BHBTm89uY5
+b+bE2mLwvNTYcStw/rhi3I1eYNhIa05LIz+EEcl7EG5lzsOD1jSF7SwN3qGJhOCg
+2B71rmyCqLYMELtFLXq46/MNuqg/gGV27Wijg84RsltDIqFK8DrmrnZEa56gPOIs
+3zpLs2rxg5ufh8L2eX39gxT7ocNHHlSfbGGoIIvYywY95GuO6WYmmBdbVA7JZlQj
+QMYaYs2HQTcYDesqXgdJEN2OPadxwlo9xDezy8UUaqvbXa8emsRCL/BOI6O7yHT/
+6Yso0iVlAjSPWB1WYxKfwDJR4G5yvgOk8hdOEo82X5Pkt4BP8fXDuIzysityl0FG
+nHgiRCl4AsXC+1502FuwvqBIjPwBtTBS1CvxeH3CBSMwuCqMly+AUkwUaOw8yTIS
+UYsVvM7cE3t1EYj70tcGAOZjy4QcodgHE5jXKiKzEw8cZ3tPxd3pOiGEm0l8q2oJ
+uWt8HPc++++4v1feUx3Qf2roTTDnK0KNY16wDx/UbHkSNitr62aT+Z+EnvthJ70V
+XPO3OQ496jhylWgBapWIQGD8nZgdPgVp3PdrIqzpCF1+NYQl4as8AmJwCKDpu230
+uEErfEZ7mAYftQ==
+-----END CERTIFICATE-----
+_EOF
+```
+
+On server, run `chmod -R 600 /etc/ipsec.d/private`
 
 ### Step 31: restart strongSwan
 
@@ -749,7 +900,7 @@ sed -i -E 's/#net.ipv4.conf.all.accept_redirects = 0/net.ipv4.conf.all.accept_re
 sed -i -E 's/#net.ipv4.conf.all.send_redirects = 0/net.ipv4.conf.all.send_redirects = 0/' /etc/sysctl.conf
 ```
 
-If server is IPv4-only, run:
+If network is IPv4-only, run:
 
 ```shell
 cat << "EOF" >> /etc/sysctl.conf
@@ -759,7 +910,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 EOF
 ```
 
-If server is dual stack (IPv4 + IPv6) run:
+If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
 sed -i -E 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/' /etc/sysctl.conf
@@ -781,7 +932,7 @@ In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
 ![apple-configurator-general](apple-configurator-general.png?shadow=1)
 
-In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “alice.p12”. The password is the one from [step 29](#step-29-generate-client-cert).
+In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “alice.p12”. The password is the one from [step 29](#step-29-generate-client-key-csr-cert-and-pkcs12).
 
 ![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
 
@@ -829,10 +980,10 @@ On Mac, open “System Preferences”, click “Network”, then “Self-hosted 
 
 Open Firefox and go to [https://ipleak.net/](https://ipleak.net/).
 
-Make sure listed IPv4, IPv6 (if server is dual stack) and DNS servers do not match the ones supplied by client ISP.
+Make sure listed IPv4, IPv6 (if network is dual stack) and DNS servers do not match the ones provided by ISP.
 
 ### Step 38: create additional provisioning profiles
 
-Repeat steps [26](#step-26-create-openssl-config-file), [29](#step-29-generate-client-cert) and [33](#step-33-create-vpn-profile-for-ios-and-macos-using-apple-configurator-2).
+Repeat steps [26](#step-26-create-openssl-config-file), [29](#step-29-generate-client-key-csr-cert-and-pkcs12) and [33](#step-33-create-vpn-profile-for-ios-and-macos-using-apple-configurator-2).
 
 👍

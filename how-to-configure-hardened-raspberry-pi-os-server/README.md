@@ -57,14 +57,14 @@ The key's randomart image is:
 +----[SHA256]-----+
 
 $ cat pi.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqEWjWQZY8HoLQEF7SmU/7f8dJuy/4r7/X6PbwrDzASym+5vCLz3QJIlLuJuQL557FsTzsz/sLFoTJnDkiQ3lZtFOofynyYQQiRDkZPy9nGz/j+rTHm6vfp17o8k1LeADKRq2mHpAljlf6/ywkKbzmGhXwnVsvxA0RvvNoujnpiLoSZFrq0wsfzIOi67ZzySlzxKmL0/Uxs9LJ+XFyKlVOILD+TMCayB6UNJ38PkghDZ/8spSSH44jkhmElPdqsqaJ/hqYYXT8q4sSB7Yp5RSYWDYIQiIs2cailho/gOCq/0AskREuGEuwPGL3ivOa2uBN544zrJHbegeliRwTwxSvFat9MoXjpWpEtTVpR5Skr2nGxwXZWYEGZ1u+iJc+Y67k7vabZYADAk1Q8VePAh2BOfhkhZfdAnBZJn9s/XISi/T8WxsLoG3twu1OMWtoiNMlwCUzeIzVRg5BMiFJjEtsANiETdrCuH/Ms9G/EMRo9gKh7moVbfwI+Urf0StIx3k= pi
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCzQpX9uqDP8L2gSZNJxYEi04Y1pZWz28v4zANY5dU6M35OFzXZcRcBqi2ZxiQofgxRrX9QlAcmcPFz8/CkpPw2WgQTflm+46ZrVEZcwwGwJsJwm7QVLQLd44/xtejEvMjzsuYDjJ1q4WhEvMSleTfOrix4yP0mjn83Zk1l6AMxR5J8DDumiHsGSYfcp+1XS9x4r4HP0mS2RpIy3rcoxLoJaYEKvVTj9qdvPMK7SDymZcvuBsgObEARVr77q4qhUfTP+xR91hHNEYD9FnCHF3qQBzlTlmTwpwhH6vOdWE3uUXCug9Ugw42Zj3PW0zd5rQ7EEpD9SDLbUqajpn2M5AlhkS9OrLpnIptocetRKNI9HzyAV1KqdNiQeL7/59d4y+HuZ9y032SaNzR1fw0nYMoHzTN9d+zPvziDZ183/pwtEXZNVVGzYO1r56n3S4vLx8YCpYqiHYVQVDF8aweoHYs3dAGAfPxmQ85+45UKpFR18XSGCqCO2fwbyTGDhkxCzU= pi
 ```
 
 ### Step 2: generate heredoc (the output of following command will be used at [step 10](#step-10-configure-pi-ssh-authorized-keys))
 
 ```shell
 cat << EOF
-cat << _EOF > /home/pi/.ssh/authorized_keys
+cat << "_EOF" > /home/pi/.ssh/authorized_keys
 $(cat ~/.ssh/pi.pub)
 _EOF
 EOF
@@ -168,8 +168,8 @@ mkdir -p /home/pi/.ssh
 #### Create `/home/pi/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-10)
 
 ```shell
-cat << _EOF > /home/pi/.ssh/authorized_keys
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqEWjWQZY8HoLQEF7SmU/7f8dJuy/4r7/X6PbwrDzASym+5vCLz3QJIlLuJuQL557FsTzsz/sLFoTJnDkiQ3lZtFOofynyYQQiRDkZPy9nGz/j+rTHm6vfp17o8k1LeADKRq2mHpAljlf6/ywkKbzmGhXwnVsvxA0RvvNoujnpiLoSZFrq0wsfzIOi67ZzySlzxKmL0/Uxs9LJ+XFyKlVOILD+TMCayB6UNJ38PkghDZ/8spSSH44jkhmElPdqsqaJ/hqYYXT8q4sSB7Yp5RSYWDYIQiIs2cailho/gOCq/0AskREuGEuwPGL3ivOa2uBN544zrJHbegeliRwTwxSvFat9MoXjpWpEtTVpR5Skr2nGxwXZWYEGZ1u+iJc+Y67k7vabZYADAk1Q8VePAh2BOfhkhZfdAnBZJn9s/XISi/T8WxsLoG3twu1OMWtoiNMlwCUzeIzVRg5BMiFJjEtsANiETdrCuH/Ms9G/EMRo9gKh7moVbfwI+Urf0StIx3k= pi
+cat << "_EOF" > /home/pi/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCzQpX9uqDP8L2gSZNJxYEi04Y1pZWz28v4zANY5dU6M35OFzXZcRcBqi2ZxiQofgxRrX9QlAcmcPFz8/CkpPw2WgQTflm+46ZrVEZcwwGwJsJwm7QVLQLd44/xtejEvMjzsuYDjJ1q4WhEvMSleTfOrix4yP0mjn83Zk1l6AMxR5J8DDumiHsGSYfcp+1XS9x4r4HP0mS2RpIy3rcoxLoJaYEKvVTj9qdvPMK7SDymZcvuBsgObEARVr77q4qhUfTP+xR91hHNEYD9FnCHF3qQBzlTlmTwpwhH6vOdWE3uUXCug9Ugw42Zj3PW0zd5rQ7EEpD9SDLbUqajpn2M5AlhkS9OrLpnIptocetRKNI9HzyAV1KqdNiQeL7/59d4y+HuZ9y032SaNzR1fw0nYMoHzTN9d+zPvziDZ183/pwtEXZNVVGzYO1r56n3S4vLx8YCpYqiHYVQVDF8aweoHYs3dAGAfPxmQ85+45UKpFR18XSGCqCO2fwbyTGDhkxCzU= pi
 _EOF
 ```
 
@@ -299,9 +299,9 @@ See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wi
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 23: configure sysctl (if server is IPv4-only)
+### Step 23: configure sysctl (if network is IPv4-only)
 
-> Heads-up: only run the following if server is IPv4-only.
+> Heads-up: only run the following if network is IPv4-only.
 
 ```shell
 cp /etc/sysctl.conf /etc/sysctl.conf.backup
@@ -344,7 +344,7 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 ```
 
-If server is IPv4-only, run:
+If network is IPv4-only, run:
 
 ```shell
 ip6tables -P FORWARD DROP
@@ -352,7 +352,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-If server is dual stack (IPv4 + IPv6) run:
+If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
 ip6tables -A INPUT -i lo -j ACCEPT
