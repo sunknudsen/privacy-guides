@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import hashlib
 import time
@@ -16,13 +16,13 @@ def time_ntpformat():
     
 def main():
   h = hashlib.sha1()
-  h.update(get_eui64() + str(time_ntpformat()))
+  h.update(str(get_eui64() + str(time_ntpformat())).encode("utf-8"))
   globalid = h.hexdigest()[0:10]
 
   prefix = ":".join(("fd" + globalid[0:2], globalid[2:6], globalid[6:10]))
-  print "Prefix:       " + prefix + "::/48"
-  print "First subnet: " + prefix + "::/64"
-  print "Last subnet:  " + prefix + ":ffff::/64"
+  print("Prefix:       " + prefix + "::/48")
+  print("First subnet: " + prefix + "::/64")
+  print("Last subnet:  " + prefix + ":ffff::/64")
 
 if __name__ == "__main__":
   main()

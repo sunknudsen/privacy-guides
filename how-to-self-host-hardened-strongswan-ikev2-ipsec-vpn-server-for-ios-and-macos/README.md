@@ -231,7 +231,7 @@ $ source ~/.bashrc
 #### Install cURL and Python
 
 ```shell
-apt install -y curl python
+apt install -y curl python3
 ```
 
 #### Generate random IPv6 ULA and save to environment variables
@@ -241,8 +241,8 @@ Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977a
 The following command downloads and runs [ulagen.py](./ulagen.py) ([PGP signature](./ulagen.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc)).
 
 ```console
-$ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
-STRONGSWAN_IPV6_ULA=fdcb:f7a1:38ec::/64
+$ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python3 | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
+STRONGSWAN_IPV6_ULA=fdba:8ce0:c301::/64
 
 $ source ~/.bashrc
 ```
