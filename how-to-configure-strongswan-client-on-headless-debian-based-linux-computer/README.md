@@ -91,10 +91,10 @@ Getting CA Private Key
 
 ### Step 2: log in to client computer
 
-Replace `pi@10.0.1.69` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
+Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
 
 ```shell
-ssh pi@10.0.1.69 -i ~/.ssh/pi
+ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
 ### Step 3: switch to root
@@ -390,7 +390,7 @@ systemctl restart strongswan
 ```shell
 $ ipsec status
 Security Associations (1 up, 0 connecting):
-       ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.69[bob@vpn-server.com]...185.193.126.203[vpn-server.com]
+       ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.248[bob@vpn-server.com]...185.193.126.203[vpn-server.com]
        ikev2{1}:  INSTALLED, TUNNEL, reqid 1, ESP in UDP SPIs: c3fcabed_i c2b0c4cd_o
        ikev2{1}:   10.0.2.171/32 === 0.0.0.0/0
 ```
@@ -449,10 +449,10 @@ systemctl restart dnsmasq
 
 ### Step 17: log in to client computer
 
-Replace `pi@10.0.1.69` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
+Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
 
 ```shell
-ssh pi@10.0.1.69 -i ~/.ssh/pi
+ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
 ### Step 18: switch to root
@@ -472,7 +472,7 @@ systemctl restart strongswan
 ```shell
 $ ipsec status
 Security Associations (1 up, 0 connecting):
-       ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.69[bob@vpn-server.com]...185.193.126.203[vpn-server.com]
+       ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.248[bob@vpn-server.com]...185.193.126.203[vpn-server.com]
        ikev2{1}:  INSTALLED, TUNNEL, reqid 1, ESP in UDP SPIs: c3fcabed_i c2b0c4cd_o
        ikev2{1}:   10.0.2.2/32 === 0.0.0.0/0
 ```

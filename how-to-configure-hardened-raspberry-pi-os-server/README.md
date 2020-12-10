@@ -149,12 +149,12 @@ ip a
 
 ### Step 9: log in to Raspberry Pi over SSH
 
-Replace `10.0.1.69` with IP of Raspberry Pi.
+Replace `10.0.1.248` with IP of Raspberry Pi.
 
 When asked for password, enter password from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
 
 ```shell
-ssh pi@10.0.1.69
+ssh pi@10.0.1.248
 ```
 
 ### Step 10: configure pi SSH authorized keys
@@ -181,12 +181,12 @@ exit
 
 ### Step 12: log in to Raspberry Pi over SSH (using `pi` private key)
 
-Replace `10.0.1.69` with IP of Raspberry Pi.
+Replace `10.0.1.248` with IP of Raspberry Pi.
 
 When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
-ssh pi@10.0.1.69 -i ~/.ssh/pi
+ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
 ### Step 13: disable pi Bash history
@@ -395,12 +395,12 @@ exit
 
 #### Log in
 
-Replace `10.0.1.69` with IP of Raspberry Pi.
+Replace `10.0.1.248` with IP of Raspberry Pi.
 
 When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
-ssh pi@10.0.1.69 -i ~/.ssh/pi
+ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
 #### Switch to root
