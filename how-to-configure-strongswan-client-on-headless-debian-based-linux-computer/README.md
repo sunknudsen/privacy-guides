@@ -10,6 +10,8 @@ Listed: true
 
 # How to configure strongSwan client on headless Debian-based Linux computer
 
+[![How to configure strongSwan client on headless Debian-based Linux computer - YouTube](how-to-configure-strongswan-client-on-headless-debian-based-linux-computer.png)](https://www.youtube.com/watch?v=fW1TUByQqk8 "How to configure strongSwan client on headless Debian-based Linux computer - YouTube")
+
 ## Requirements
 
 - [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos) 📦
@@ -410,7 +412,7 @@ curl https://checkip.amazonaws.com
 
 👍
 
-> Heads-up: use following steps to assign static private IP to strongSwan client
+> Heads-up: use following steps to assign static IP to strongSwan client
 
 ### Step 12: log in to server
 
@@ -428,7 +430,7 @@ su -
 
 ### Step 14: get virtual MAC address assigned to strongSwan client
 
-Replace `10.0.2.171` with private IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
+Replace `10.0.2.171` with IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
 
 ```shell
 $ cat /var/lib/misc/dnsmasq.leases | grep "10.0.2.171" | awk '{print $2}'

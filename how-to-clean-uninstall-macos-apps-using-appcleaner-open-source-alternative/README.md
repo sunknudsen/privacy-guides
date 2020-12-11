@@ -39,8 +39,8 @@ $ app-cleaner.sh /Applications/AppCleaner.app
 Checking for running processes...
 Finding application data...
 /Applications/AppCleaner.app
-/Users/johndoe/Library/Preferences/net.freemacsoft.AppCleaner.plist
-/Users/johndoe/Library/Saved Application State/net.freemacsoft.AppCleaner.savedState
+/Users/sunknudsen/Library/Preferences/net.freemacsoft.AppCleaner.plist
+/Users/sunknudsen/Library/Saved Application State/net.freemacsoft.AppCleaner.savedState
 Move application data to trash (y or n)? y
 Moving application data to trash...
 Done

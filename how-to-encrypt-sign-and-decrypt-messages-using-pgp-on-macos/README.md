@@ -42,8 +42,8 @@ gpg (GnuPG) 2.2.20; Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
-gpg: directory '/Users/johndoe/.gnupg' created
-gpg: keybox '/Users/johndoe/.gnupg/pubring.kbx' created
+gpg: directory '/Users/sunknudsen/.gnupg' created
+gpg: keybox '/Users/sunknudsen/.gnupg/pubring.kbx' created
 Please select what kind of key you want:
    (1) RSA and RSA (default)
    (2) DSA and Elgamal
@@ -81,10 +81,10 @@ We need to generate a lot of random bytes. It is a good idea to perform
 some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
-gpg: /Users/johndoe/.gnupg/trustdb.gpg: trustdb created
+gpg: /Users/sunknudsen/.gnupg/trustdb.gpg: trustdb created
 gpg: key 1BDC94DFB97BE4D4 marked as ultimately trusted
-gpg: directory '/Users/johndoe/.gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/Users/johndoe/.gnupg/openpgp-revocs.d/F365EDCF06F4D9F09BB7D4EB1BDC94DFB97BE4D4.rev'
+gpg: directory '/Users/sunknudsen/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/Users/sunknudsen/.gnupg/openpgp-revocs.d/F365EDCF06F4D9F09BB7D4EB1BDC94DFB97BE4D4.rev'
 public and secret key created and signed.
 
 pub   rsa4096 2020-06-16 [SC]
@@ -163,7 +163,7 @@ This is a test!
 ### Decrypt message to stdout and decode quoted-printable characters
 
 ```console
-$ gpg --decrypt /Users/johndoe/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
+$ gpg --decrypt /Users/sunknudsen/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
 gpg: encrypted with 4096-bit RSA key, ID 5574F4B0B0F67D7F, created 2019-10-17
       "Sun Knudsen <hello@sunknudsen.com>"
 gpg: encrypted with 4096-bit RSA key, ID 0DA22A1AC7DBA3F9, created 2020-06-16

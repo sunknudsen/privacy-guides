@@ -10,6 +10,8 @@ Listed: true
 
 # How to configure hardened Raspberry Pi OS server
 
+[![How to configure hardened Raspberry Pi OS server - YouTube](how-to-configure-hardened-raspberry-pi-os-server.png)](https://www.youtube.com/watch?v=6R8uKdstnts "How to configure hardened Raspberry Pi OS server - YouTube")
+
 ## Requirements
 
 - [Raspberry Pi](https://www.raspberrypi.org/)
