@@ -10,7 +10,7 @@ Listed: true
 
 # How to use multiple compartmentalized Firefox instances simultaneously using profiles
 
-[![How to use multiple compartmentalized Firefox instances simultaneously using profiles - YouTube](how-to-use-multiple-compartmentalized-firefox-instances-simultaneously-using-profiles.png)](https://www.youtube.com/watch?v=Upib_vq_EB8 "How to use multiple compartmentalized Firefox instances simultaneously using profiles - YouTube")
+[![How to use multiple compartmentalized Firefox instances using profiles - YouTube](how-to-use-multiple-compartmentalized-firefox-instances-using-profiles.png)](https://www.youtube.com/watch?v=Upib_vq_EB8 "How to use multiple compartmentalized Firefox instances using profiles - YouTube")
 
 ### Step 1: create Firefox profile
 
