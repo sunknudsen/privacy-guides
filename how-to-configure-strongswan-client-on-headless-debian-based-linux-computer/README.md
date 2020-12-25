@@ -76,7 +76,7 @@ EOF
 
 #### Generate client cert
 
-```
+```console
 $ openssl genrsa -out $STRONGSWAN_CLIENT_NAME.key 4096
 Generating RSA private key, 4096 bit long modulus
 ............................++
@@ -389,7 +389,7 @@ systemctl restart strongswan
 
 ### Step 10: confirm strongSwan client is connected
 
-```shell
+```console
 $ ipsec status
 Security Associations (1 up, 0 connecting):
        ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.248[bob@vpn-server.com]...185.193.126.203[vpn-server.com]
@@ -432,7 +432,7 @@ su -
 
 Replace `10.0.2.171` with IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
 
-```shell
+```console
 $ cat /var/lib/misc/dnsmasq.leases | grep "10.0.2.171" | awk '{print $2}'
 7a:a7:9f:c0:9d:b0
 ```
@@ -471,7 +471,7 @@ systemctl restart strongswan
 
 ### Step 20: confirm strongSwan client has IP `10.0.2.2`
 
-```shell
+```console
 $ ipsec status
 Security Associations (1 up, 0 connecting):
        ikev2[1]: ESTABLISHED 3 minutes ago, 10.0.1.248[bob@vpn-server.com]...185.193.126.203[vpn-server.com]

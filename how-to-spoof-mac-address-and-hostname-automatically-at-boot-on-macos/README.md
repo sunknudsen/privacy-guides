@@ -130,7 +130,7 @@ EOF
 
 ### Step 8: reboot and confirm hostname and MAC address have been spoofed
 
-```shell
+```console
 # Spoofed hostname
 $ scutil --get HostName
 Gatlins-MacBook-Pro

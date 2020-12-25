@@ -31,7 +31,7 @@ When asked for file in which to save key, enter `pi`.
 
 When asked for passphrase, use output from `openssl rand -base64 24` (and store passphrase in password manager).
 
-```shell
+```console
 $ mkdir -p ~/.ssh
 
 $ cd ~/.ssh
