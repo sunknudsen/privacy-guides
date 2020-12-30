@@ -74,7 +74,7 @@ EOF
 
 ### Step 3: download latest version of [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
 
-### Step 4: clone "Raspberry Pi OS Lite" to SD card
+### Step 4: clone “Raspberry Pi OS Lite”to SD card
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
