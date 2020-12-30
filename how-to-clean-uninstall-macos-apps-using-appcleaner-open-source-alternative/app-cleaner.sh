@@ -114,8 +114,7 @@ read -r answer
 if [ "$answer" = "y" ]; then
   printf "%s\n" "Moving app data to trash..."
   sleep 1
-  for path in "${paths[@]}"; do
-    osascript -e "tell application \"Finder\" to delete POSIX file \"$path\"" > /dev/null
-  done
+  posixFiles=$(printf ", POSIX file \"%s\"" "${paths[@]}" | awk '{print substr($0,3)}')
+  osascript -e "tell application \"Finder\" to delete { $posixFiles }" > /dev/null
   printf "%s\n" "Done"
 fi
