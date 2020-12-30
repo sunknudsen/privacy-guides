@@ -2,7 +2,7 @@
 name: Found a bug?
 about: Use this template if you found a bug
 title: ""
-labels: ""
+labels: bug
 assignees: ""
 ---
 

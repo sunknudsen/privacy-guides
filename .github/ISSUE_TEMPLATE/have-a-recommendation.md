@@ -2,14 +2,13 @@
 name: Have a recommendation?
 about: Use this template if you have a recommendation
 title: ""
-labels: ""
+labels: recommendation
 assignees: ""
 ---
 
 ## Branch
 
-- [ ] master
-- [ ] draft
+`draft` or `master`?
 
 ## Guide
 
