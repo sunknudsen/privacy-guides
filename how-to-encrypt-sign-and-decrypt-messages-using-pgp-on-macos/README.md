@@ -14,7 +14,7 @@ Listed: true
 
 > WARNING: this is a getting started guide. For a hardened guide, see [https://github.com/drduh/YubiKey-Guide](https://github.com/drduh/YubiKey-Guide).
 
-## Installation guide
+## Setup guide
 
 ### Step 1: install [Homebrew](https://brew.sh/)
 

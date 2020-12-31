@@ -23,7 +23,7 @@ Listed: true
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 - When copy/pasting commands that start with `cat << "EOF"`, select all lines at once (from `cat << "EOF"` to `EOF` inclusively) as they are part of the same (single) command
 
-## Installation guide
+## Setup guide
 
 ### Step 1: check if Backports repository is enabled
 

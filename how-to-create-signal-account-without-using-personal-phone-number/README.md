@@ -12,7 +12,9 @@ Listed: true
 
 [![How to create Signal account without using personal phone number - YouTube](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number - YouTube")
 
-Don’t forger to replace `+12345678901` with your mobile phone number.
+## Guide
+
+> Heads-up: don’t forget to replace `+12345678901` with your mobile phone number.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

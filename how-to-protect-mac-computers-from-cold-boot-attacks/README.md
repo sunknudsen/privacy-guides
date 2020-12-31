@@ -12,7 +12,9 @@ Listed: true
 
 [![How to protect Mac computers from cold boot attacks - YouTube](how-to-protect-mac-computers-from-cold-boot-attacks.png)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks - YouTube")
 
-### Run the following `pmset` command using the Terminal.
+## Guide
+
+### Run following command using “Terminal” app.
 
 ```shell
 sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 standbydelaylow 0 standbydelayhigh 0
@@ -28,7 +30,7 @@ sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 standbydelaylow 0 standby
 
 `standbydelayhigh 0` tells macOS to enable standby mode immediately when battery is high and computer is put to sleep.
 
-See `man pmset` for more information.
+Run `man pmset` using “Terminal” app for more information.
 
 ---
 

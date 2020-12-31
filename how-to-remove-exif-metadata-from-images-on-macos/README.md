@@ -12,7 +12,7 @@ Listed: true
 
 [![How to remove EXIF metadata from images on macOS - YouTube](how-to-remove-exif-metadata-from-images-on-macos.png)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS - YouTube")
 
-## Installation guide
+## Setup guide
 
 ### Step 1: install [Homebrew](https://brew.sh/)
 

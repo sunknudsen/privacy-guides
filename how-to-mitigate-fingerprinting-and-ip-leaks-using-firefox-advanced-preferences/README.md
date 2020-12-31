@@ -12,6 +12,8 @@ Listed: true
 
 [![How to mitigate fingerprinting and IP leaks using Firefox advanced preferences - YouTube](how-to-mitigate-fingerprinting-and-ip-leaks-using-firefox-advanced-preferences.png)](https://www.youtube.com/watch?v=uYoJ7U0OMCY "How to mitigate fingerprinting and IP leaks using Firefox advanced preferences - YouTube")
 
+## Guide
+
 ### Step 1: make sure you are running the latest version of Firefox
 
 ### Step 2: make sure you configured Firefox for privacy using [https://www.youtube.com/watch?v=NH4DdXC0RFw](https://www.youtube.com/watch?v=NH4DdXC0RFw)
