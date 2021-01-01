@@ -10,9 +10,11 @@ Listed: true
 
 # How to reset app privacy permissions on macOS
 
+[![How to reset app privacy permissions on macOS - YouTube](how-to-reset-app-privacy-permissions-on-macos.png)](https://www.youtube.com/watch?v=g_5uk5UkLgw "How to reset app privacy permissions on macOS - YouTube")
+
 ## Guide
 
-> Heads-up: make sure [System Integrity Protection](https://support.apple.com/en-us/HT204899) (SPI) is enabled using `csrutil status`.
+> Heads-up: make sure [System Integrity Protection](https://support.apple.com/en-us/HT204899) (SIP) is enabled using `csrutil status`.
 
 > Heads-up: available privacy permissions are `Accessibility`, `AddressBook`, `All`, `AppleEvents`, `Calendar`, `Camera`, `ContactsFull`, `ContactsLimited`, `Facebook`, `FileProviderDomain`, `FileProviderPresence`, `LinkedIn`, `Liverpool`, `Location`, `MediaLibrary`, `Microphone`, `Motion`, `Photos`, `PhotosAdd`, `PostEvent`, `Reminders`, `ScreenCapture`, `ShareKit`, `SinaWeibo`, `Siri`, `SpeechRecognition`, `SystemPolicyAllFiles`, `SystemPolicyDesktopFolder`, `SystemPolicyDeveloperFiles`, `SystemPolicyDocumentsFolder`, `SystemPolicyNetworkVolumes`, `SystemPolicyRemovableVolumes`, `SystemPolicySysAdminFiles`, `SystemPolicyDownloadsFolder`, `TencentWeibo`, `Twitter`, `Ubiquity`, `Willow`.
 
