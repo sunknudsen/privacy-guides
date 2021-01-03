@@ -230,7 +230,7 @@ if [ "\$(find "\$mount_point/Versioning" -type f -ctime +90)" != "" ]; then
   fi
 fi
 
-open /Volumes/Backup
+open "\$mount_point"
 
 printf "Inspect backup and press enter"
 
@@ -304,7 +304,7 @@ trap dismount ERR INT
 volume_path="$BACKUP_VOLUME_PATH"
 mount_point="/Volumes/Backup"
 
-veracrypt --text --mount --mount-options "readonly" --pim "0" --keyfiles "" --protect-hidden "no" "$volume_path" "$mount_point"
+veracrypt --text --mount --mount-options "readonly" --pim "0" --keyfiles "" --protect-hidden "no" "\$volume_path" "\$mount_point"
 
 open "\$mount_point"
 
