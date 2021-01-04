@@ -30,6 +30,10 @@ $ tccutil reset Camera org.whispersystems.signal-desktop
 Successfully reset Camera approval status for org.whispersystems.signal-desktop
 ```
 
+Successfully reset Camera approval status for org.whispersystems.signal-desktop
+
+👍
+
 ### Reset single privacy permission for all apps
 
 ```console
@@ -37,9 +41,17 @@ $ tccutil reset Camera
 Successfully reset Camera
 ```
 
+Successfully reset Camera
+
+👍
+
 ### Reset all privacy permissions for all apps
 
 ```console
 $ tccutil reset All
 Successfully reset All
 ```
+
+Successfully reset All
+
+👍
