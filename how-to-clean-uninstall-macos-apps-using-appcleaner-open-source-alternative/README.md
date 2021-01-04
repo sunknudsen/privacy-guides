@@ -2,7 +2,7 @@
 Title: How to clean uninstall macOS apps using AppCleaner open source alternative
 Description: Learn how to clean uninstall macOS apps using AppCleaner open source alternative.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Jona Fellisch <https://github.com/jonafe>
 Reviewers:
 Publication date: 2020-09-21T15:50:15.415Z
 Listed: true
