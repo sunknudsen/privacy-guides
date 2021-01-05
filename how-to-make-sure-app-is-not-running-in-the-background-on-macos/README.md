@@ -10,6 +10,8 @@ Listed: true
 
 # How to make sure app is not running in the background on macOS
 
+[![How to make sure app is not running in the background on macOS - YouTube](how-to-make-sure-app-is-not-running-in-the-background-on-macos.png)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS - YouTube")
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
@@ -38,7 +40,6 @@ com.adobe.ARMDC.Communicator.plist
 com.adobe.ARMDC.SMJobBlessHelper.plist
 com.adobe.acc.installer.v2.plist
 com.adobe.agsservice.plist
-com.apogee.DuetDetect.plist
 com.apple.installer.osmessagetracing.plist
 local.pf.plist
 local.pmset.plist
@@ -87,10 +88,10 @@ function kill-apps() {
   fi
   printf "%s\n" "Finding apps that match \"$1\"..."
   pgrep -afil "$1"
-  printf "%s" "Kill apps (y or n)? "
+  printf "%s" "Kill found apps (y or n)? "
   read -r answer
   if [ "$answer" = "y" ]; then
-    pgrep -afi "$1" | xargs sudo kill 2>&1 && echo "Done"
+    pgrep -afi "$1" | xargs sudo kill 2>&1 && printf "%s\n" "Done"
   fi
 }
 EOF
@@ -110,7 +111,7 @@ Finding apps that match "adobe"...
 46645 /Library/Application Support/Adobe/Creative Cloud Libraries/CCLibrary.app/Contents/MacOS/../libs/node /Library/Application Support/Adobe/Creative Cloud Libraries/CCLibrary.app/Contents/MacOS/../js/server.js
 46653 /Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app/Contents/MacOS/../libs/Adobe_CCXProcess.node /Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app/Contents/MacOS/../js/main.js
 46655 /Applications/Adobe Premiere Pro 2020/Adobe Premiere Pro 2020.app/Contents/MacOS/LogTransport2.app/Contents/MacOS/LogTransport2 86E222CE52861AEA0A490D4D@AdobeID 1 0 NOVALUE NOVALUE
-Kill apps (y or n)? y
+Kill found apps (y or n)? y
 Password:
 Done
 ```
