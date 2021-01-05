@@ -45,3 +45,7 @@ Move application data to trash (y or n)? y
 Moving application data to trash...
 Done
 ```
+
+Done
+
+👍
