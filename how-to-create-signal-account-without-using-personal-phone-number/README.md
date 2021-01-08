@@ -14,7 +14,30 @@ Listed: true
 
 ## Guide
 
+### Step 1: create [Twilio](https://www.twilio.com/) account
+
+Go to [https://www.twilio.com/](https://www.twilio.com/) and sign up.
+
+### Step 2: create “Forward voice” bin (used for phone call verification)
+
 > Heads-up: don’t forget to replace `+12345678901` with your mobile phone number.
+
+Go to [https://www.twilio.com/console/twiml-bins](https://www.twilio.com/console/twiml-bins), click +, set friendly name to `Forward voice` and paste snippet bellow in TwiML text area.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Dial>
+    +12345678901
+  </Dial>
+</Response>
+```
+
+### Step 3: create “Forward messaging” bin (used for SMS verification)
+
+> Heads-up: don’t forget to replace `+12345678901` with your mobile phone number.
+
+Go to [https://www.twilio.com/console/twiml-bins](https://www.twilio.com/console/twiml-bins), click +, set friendly name to `Forward messaging` and paste snippet bellow in TwiML text area.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -24,5 +47,13 @@ Listed: true
   </Message>
 </Response>
 ```
+
+### Step 4: buy phone number
+
+Go to [https://www.twilio.com/console/phone-numbers/search](https://www.twilio.com/console/phone-numbers/search) and buy phone number.
+
+### Step 5: configure phone number
+
+Go to [https://www.twilio.com/console/phone-numbers/incoming](https://www.twilio.com/console/phone-numbers/incoming), click phone number, set “A Call Comes In” to “TwiML Bin” / “Forward voice”, set “A Message Comes In” to “TwiML Bin” / “Forward messaging” and click “Save”.
 
 👍
