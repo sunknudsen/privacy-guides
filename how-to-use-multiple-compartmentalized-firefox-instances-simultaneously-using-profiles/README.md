@@ -36,20 +36,20 @@ Click “File”, then “Export…”, set “Export As” filename to “Firef
 
 ![script-editor-step-2](./script-editor-step-2.png?shadow=1)
 
-### Step 4: configure app as agent app
+### Step 4: set Firefox app environment variable
 
 > Heads-up: replace `Firefox work` with filename from [step 3](#step-3-export-script-as-application).
 
 ```shell
-defaults write "/Applications/Firefox work.app/Contents/Info.plist" LSUIElement -bool yes
+FIREFOX_APP="Firefox work.app"
 ```
 
-### Step 5 (optional): replace default icon with Firefox icon
-
-> Heads-up: replace `Firefox work` with filename from [step 3](#step-3-export-script-as-application).
+### Step 5: configure app as agent and set icon
 
 ```shell
-cp "/Applications/Firefox.app/Contents/Resources/firefox.icns" "/Applications/Firefox work.app/Contents/Resources/applet.icns"
+defaults write "/Applications/$FIREFOX_APP/Contents/Info.plist" LSUIElement -bool yes
+cp "/Applications/Firefox.app/Contents/Resources/firefox.icns" "/Applications/$FIREFOX_APP/Contents/Resources/applet.icns"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "/Applications/$FIREFOX_APP"
 ```
 
 👍
