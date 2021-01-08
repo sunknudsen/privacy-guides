@@ -82,16 +82,32 @@ cat << "EOF" >> ~/.zshrc
 
 # Kill apps that match string
 function kill-apps() {
+  IFS=$'\n'
+  red=$'\e[1;31m'
+  nc=$'\e[0m'
   if [ -z "$1" ]; then
     printf "%s\n" "Usage: kill-apps string"
     return 1
   fi
   printf "%s\n" "Finding apps that match \"$1\"..."
-  pgrep -afil "$1"
-  printf "%s" "Kill found apps (y or n)? "
-  read -r answer
-  if [ "$answer" = "y" ]; then
-    pgrep -afi "$1" | xargs sudo kill 2>&1 && printf "%s\n" "Done"
+  sleep 1
+  processes=($(pgrep -afil "$1"))
+  if [ ${#processes[@]} -eq 0 ]; then
+    printf "%s\n" "No apps found"
+    return 0
+  else
+    printf "%s\n" "${processes[@]}"
+    printf "${red}%s${nc}" "Kill found apps (y or n)? "
+    read -r answer
+    if [ "$answer" = "y" ]; then
+      printf "%s\n" "Killing found apps..."
+      sleep 1
+      for process in "${processes[@]}"; do
+        echo $process | awk '{print $1}' | xargs sudo kill 2>&1 | grep -v "No such process"
+      done
+      printf "%s\n" "Done"
+      return 0
+    fi
   fi
 }
 EOF
