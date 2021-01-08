@@ -37,7 +37,7 @@ if [ ${#processes[@]} -gt 0 ]; then
     printf "%s\n" "Killing running processes..."
     sleep 1
     for process in "${processes[@]}"; do
-      echo $process | awk '{print $1}' | xargs kill 2>&1 | grep -v "No such process"
+      echo $process | awk '{print $1}' | xargs sudo kill 2>&1 | grep -v "No such process"
     done
   fi
 fi
