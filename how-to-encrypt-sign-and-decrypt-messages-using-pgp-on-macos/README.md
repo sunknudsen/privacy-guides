@@ -2,7 +2,7 @@
 Title: How to encrypt, sign and decrypt messages using PGP on macOS
 Description: Learn how to encrypt, sign and decrypt messages using PGP on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Albert <https://github.com/farwel>
 Reviewers:
 Publication date: 2020-06-18T00:00:00.000Z
 Listed: true
@@ -163,7 +163,7 @@ This is a test!
 ### Decrypt message to stdout and decode quoted-printable characters
 
 ```console
-$ gpg --decrypt /Users/sunknudsen/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
+$ gpg --decrypt ~/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
 gpg: encrypted with 4096-bit RSA key, ID 5574F4B0B0F67D7F, created 2019-10-17
       "Sun Knudsen <hello@sunknudsen.com>"
 gpg: encrypted with 4096-bit RSA key, ID 0DA22A1AC7DBA3F9, created 2020-06-16
