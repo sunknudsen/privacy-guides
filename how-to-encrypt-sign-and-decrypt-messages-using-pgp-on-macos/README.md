@@ -2,7 +2,7 @@
 Title: How to encrypt, sign and decrypt messages using PGP on macOS
 Description: Learn how to encrypt, sign and decrypt messages using PGP on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Albert <https://github.com/farwel>
 Reviewers:
 Publication date: 2020-06-18T00:00:00.000Z
 Listed: true
