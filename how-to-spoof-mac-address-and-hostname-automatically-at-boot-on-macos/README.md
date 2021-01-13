@@ -25,7 +25,7 @@ Listed: true
 
 ```shell
 sudo mkdir -p /usr/local/sbin
-sudo chown $USER:admin /usr/local/sbin
+sudo chown ${USER}:admin /usr/local/sbin
 ```
 
 ### Step 2: source `/usr/local/sbin` folder

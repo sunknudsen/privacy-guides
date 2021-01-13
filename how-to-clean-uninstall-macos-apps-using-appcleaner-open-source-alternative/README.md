@@ -18,7 +18,7 @@ Listed: true
 
 ```shell
 sudo mkdir -p /usr/local/bin
-sudo chown $USER:admin /usr/local/bin
+sudo chown ${USER}:admin /usr/local/bin
 ```
 
 ### Step 2: download [app-cleaner.sh](app-cleaner.sh) ([PGP signature](./app-cleaner.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
