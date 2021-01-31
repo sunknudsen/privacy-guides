@@ -62,7 +62,7 @@ Listed: true
 
 ### Step 1: add PGP public key to GitHub account
 
-Go to [https://github.com/settings/keys](https://github.com/settings/keys), click “New GPG key”, paste your PGP public key and click “Add GPG key”.
+Go to https://github.com/settings/keys, click “New GPG key”, paste your PGP public key and click “Add GPG key”.
 
 ### Step 2: enable Git [signing](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
 

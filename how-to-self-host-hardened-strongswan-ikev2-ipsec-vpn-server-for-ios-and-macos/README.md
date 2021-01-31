@@ -209,7 +209,7 @@ EOF
 
 ### Step 14: set timezone (the following is for Montreal time)
 
-See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for available timezones.
+See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for available timezones.
 
 ```shell
 timedatectl set-timezone America/Montreal
@@ -978,7 +978,7 @@ On Mac, open “System Preferences”, click “Network”, then “Self-hosted 
 
 ### Step 37: test for leaks
 
-Open Firefox and go to [https://ipleak.net/](https://ipleak.net/).
+Open Firefox and go to https://ipleak.net/.
 
 Make sure listed IPv4, IPv6 (if network is dual stack) and DNS servers do not match the ones provided by ISP.
 

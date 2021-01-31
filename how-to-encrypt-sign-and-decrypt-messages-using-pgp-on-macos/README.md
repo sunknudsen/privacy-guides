@@ -12,7 +12,7 @@ Listed: true
 
 [![How to encrypt, sign and decrypt messages using PGP on macOS - YouTube](how-to-encrypt-sign-and-decrypt-messages-using-pgp-on-macos.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using PGP on macOS - YouTube")
 
-> WARNING: this is a getting started guide. For a hardened guide, see [https://github.com/drduh/YubiKey-Guide](https://github.com/drduh/YubiKey-Guide).
+> WARNING: this is a getting started guide. For a hardened guide, see https://github.com/drduh/YubiKey-Guide
 
 ## Setup guide
 
@@ -138,7 +138,7 @@ sub   rsa4096 2019-10-17 [E] [expires: 2020-10-16]
 sub   rsa4096 2019-10-17 [S] [expires: 2020-10-16]
 ```
 
-See [https://sunknudsen.com/](https://sunknudsen.com/), [https://github.com/sunknudsen/pgp-public-key](https://github.com/sunknudsen/pgp-public-key) and [https://www.youtube.com/sunknudsen/about](https://www.youtube.com/sunknudsen/about) and make sure fingerprint `C4FB DDC1 6A26 2672 920D 0A0F C132 3A37 7DE1 4C8B` matches the one published.
+See https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and https://www.youtube.com/sunknudsen/about and make sure fingerprint `C4FB DDC1 6A26 2672 920D 0A0F C132 3A37 7DE1 4C8B` matches the one published.
 
 👍
 

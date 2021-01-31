@@ -58,7 +58,7 @@ gpg:               imported: 1
 
 ### Step 5: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 
-Go to [https://www.veracrypt.fr/en/Downloads.html](https://www.veracrypt.fr/en/Downloads.html) and download latest release and its associated PGP signature to `~/Downloads` folder.
+Go to https://www.veracrypt.fr/en/Downloads.htmld PGP signature to `~/Downloads` folder.
 
 ### Step 6: verify VeraCrypt release signature using GnuPG
 

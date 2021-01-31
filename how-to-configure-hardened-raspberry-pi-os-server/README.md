@@ -295,7 +295,7 @@ EOF
 
 ### Step 22: set timezone (the following is for Montreal time)
 
-See [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for available timezones.
+See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 ```shell
 timedatectl set-timezone America/Montreal

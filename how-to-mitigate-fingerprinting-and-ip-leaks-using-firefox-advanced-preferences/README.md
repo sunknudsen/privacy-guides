@@ -16,7 +16,7 @@ Listed: true
 
 ### Step 1: make sure you are running the latest version of Firefox
 
-### Step 2: make sure you configured Firefox for privacy using [https://www.youtube.com/watch?v=NH4DdXC0RFw](https://www.youtube.com/watch?v=NH4DdXC0RFw)
+### Step 2: make sure you configured Firefox for privacy using https://www.youtube.com/watch?v=NH4DdXC0RFw
 
 ### Step 3: in `Privacy & Security`, disable `Deceptive Content and Dangerous Software Protection`
 
