@@ -10,7 +10,7 @@ Listed: true
 
 # How to make sure app is not running in the background on macOS
 
-[![How to make sure app is not running in the background on macOS - YouTube](how-to-make-sure-app-is-not-running-in-the-background-on-macos.png)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS - YouTube")
+[![How to make sure app is not running in the background on macOS](how-to-make-sure-app-is-not-running-in-the-background-on-macos.png)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS")
 
 ## Caveats
 

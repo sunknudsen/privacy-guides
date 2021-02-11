@@ -10,7 +10,7 @@ Listed: true
 
 # How to configure hardened Debian server
 
-[![How to configure hardened Debian server - YouTube](how-to-configure-hardened-debian-server.png)](https://www.youtube.com/watch?v=z8hizZRX5-4 "How to configure hardened Debian server - YouTube")
+[![How to configure hardened Debian server](how-to-configure-hardened-debian-server.png)](https://www.youtube.com/watch?v=z8hizZRX5-4 "How to configure hardened Debian server")
 
 ## Requirements
 

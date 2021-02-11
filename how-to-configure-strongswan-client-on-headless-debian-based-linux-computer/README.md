@@ -10,7 +10,7 @@ Listed: true
 
 # How to configure strongSwan client on headless Debian-based Linux computer
 
-[![How to configure strongSwan client on headless Debian-based Linux computer - YouTube](how-to-configure-strongswan-client-on-headless-debian-based-linux-computer.png)](https://www.youtube.com/watch?v=fW1TUByQqk8 "How to configure strongSwan client on headless Debian-based Linux computer - YouTube")
+[![How to configure strongSwan client on headless Debian-based Linux computer](how-to-configure-strongswan-client-on-headless-debian-based-linux-computer.png)](https://www.youtube.com/watch?v=fW1TUByQqk8 "How to configure strongSwan client on headless Debian-based Linux computer")
 
 ## Requirements
 
