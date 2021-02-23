@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../how-to-configure-hardened-debian-server) 📦 or [hardened Raspberry Pi OS server](../how-to-configure-hardened-raspberry-pi-os-server) 📦
+- [Hardened Debian server](../how-to-configure-hardened-debian-server) 📦 or [hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) 📦
 - Linux or macOS computer
 
 ## Caveats

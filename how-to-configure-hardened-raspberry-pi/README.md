@@ -1,6 +1,6 @@
 <!--
-Title: How to configure hardened Raspberry Pi OS server
-Description: Learn how to configure hardened Raspberry Pi OS server.
+Title: How to configure hardened Raspberry Pi
+Description: Learn how to configure hardened Raspberry Pi.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,9 +8,9 @@ Publication date: 2020-11-27T10:00:26.807Z
 Listed: true
 -->
 
-# How to configure hardened Raspberry Pi OS server
+# How to configure hardened Raspberry Pi
 
-[![How to configure hardened Raspberry Pi OS server](how-to-configure-hardened-raspberry-pi-os-server.png)](https://www.youtube.com/watch?v=6R8uKdstnts "How to configure hardened Raspberry Pi OS server")
+[![How to configure hardened Raspberry Pi](how-to-configure-hardened-raspberry-pi.png)](https://www.youtube.com/watch?v=6R8uKdstnts "How to configure hardened Raspberry Pi")
 
 ## Requirements
 
@@ -66,7 +66,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCzQpX9uqDP8L2gSZNJxYEi04Y1pZWz28v4zANY5dU
 
 ```shell
 cat << EOF
-cat << "_EOF" > /home/pi/.ssh/authorized_keys
+cat << "_EOF" > ~/.ssh/authorized_keys
 $(cat ~/.ssh/pi.pub)
 _EOF
 EOF
@@ -80,7 +80,7 @@ EOF
 
 Run `diskutil list` to find disk ID of SD card to override with "Raspberry Pi OS Lite" (`disk2` in the following example).
 
-Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example) and `2020-12-02-raspios-buster-armhf-lite.img` with current image.
+Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example) and `2021-01-11-raspios-buster-armhf-lite.img` with current image.
 
 ```console
 $ diskutil list
@@ -112,7 +112,7 @@ disk2 was already unmounted or it has a partitioning scheme so use "diskutil unm
 $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk2 was successful
 
-$ sudo dd bs=1m if=/Users/sunknudsen/Downloads/2020-12-02-raspios-buster-armhf-lite.img of=/dev/rdiskn
+$ sudo dd bs=1m if=/Users/sunknudsen/Downloads/2021-01-11-raspios-buster-armhf-lite.img of=/dev/rdiskn
 1772+0 records in
 1772+0 records out
 1858076672 bytes transferred in 40.449002 secs (45936280 bytes/sec)
@@ -123,7 +123,16 @@ Unmount of all volumes on disk2 was successful
 
 ### Step 5: log in as pi (using keyboard) and change password using `passwd`
 
-> Heads-up: default password is `raspberry`.
+> Heads-up: current password is `raspberry`.
+
+```console
+$ passwd
+Changing password for pi.
+Current password:
+New password:
+Retype new password:
+passwd: password updated successfully
+```
 
 ### Step 6: configure Wi-Fi (if not using ethernet)
 
@@ -164,13 +173,13 @@ ssh pi@10.0.1.248
 #### Create `.ssh` folder
 
 ```shell
-mkdir -p /home/pi/.ssh
+mkdir -p ~/.ssh
 ```
 
-#### Create `/home/pi/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-10)
+#### Create `~/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-10)
 
 ```shell
-cat << "_EOF" > /home/pi/.ssh/authorized_keys
+cat << "_EOF" > ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCzQpX9uqDP8L2gSZNJxYEi04Y1pZWz28v4zANY5dU6M35OFzXZcRcBqi2ZxiQofgxRrX9QlAcmcPFz8/CkpPw2WgQTflm+46ZrVEZcwwGwJsJwm7QVLQLd44/xtejEvMjzsuYDjJ1q4WhEvMSleTfOrix4yP0mjn83Zk1l6AMxR5J8DDumiHsGSYfcp+1XS9x4r4HP0mS2RpIy3rcoxLoJaYEKvVTj9qdvPMK7SDymZcvuBsgObEARVr77q4qhUfTP+xR91hHNEYD9FnCHF3qQBzlTlmTwpwhH6vOdWE3uUXCug9Ugw42Zj3PW0zd5rQ7EEpD9SDLbUqajpn2M5AlhkS9OrLpnIptocetRKNI9HzyAV1KqdNiQeL7/59d4y+HuZ9y032SaNzR1fw0nYMoHzTN9d+zPvziDZ183/pwtEXZNVVGzYO1r56n3S4vLx8YCpYqiHYVQVDF8aweoHYs3dAGAfPxmQ85+45UKpFR18XSGCqCO2fwbyTGDhkxCzU= pi
 _EOF
 ```
@@ -181,7 +190,7 @@ _EOF
 exit
 ```
 
-### Step 12: log in to Raspberry Pi over SSH (using `pi` private key)
+### Step 12: log in
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
@@ -197,84 +206,17 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 sed -i -E 's/^HISTSIZE=/#HISTSIZE=/' ~/.bashrc
 sed -i -E 's/^HISTFILESIZE=/#HISTFILESIZE=/' ~/.bashrc
 echo "HISTFILESIZE=0" >> ~/.bashrc
+history -c; history -w
 source ~/.bashrc
 ```
 
-### Step 14: switch to root
+### Step 14: disable pi sudo `nopassword` “feature”
 
 ```shell
-sudo su -
+sudo rm /etc/sudoers.d/010_*
 ```
 
-### Step 15: disable root Bash history
-
-```shell
-echo "HISTFILESIZE=0" >> ~/.bashrc
-source ~/.bashrc
-```
-
-### Step 16: set root password
-
-When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
-
-```shell
-passwd
-```
-
-### Step 17: uninstall sudo
-
-```shell
-apt remove -y sudo
-```
-
-### Step 18: disable root login and password authentication
-
-```shell
-sed -i -E 's/^(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
-sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-systemctl restart ssh
-```
-
-### Step 19: disable Bluetooth and Wi-Fi
-
-> Heads-up: will take effect after reboot.
-
-#### Disable Bluetooth
-
-```shell
-echo "dtoverlay=disable-bt" | tee -a /boot/config.txt
-systemctl disable hciuart
-```
-
-#### Disable Wi-Fi (if using ethernet)
-
-```shell
-echo "dtoverlay=disable-wifi" | tee -a /boot/config.txt
-```
-
-### Step 20: update APT index and upgrade packages
-
-#### Update APT index
-
-```shell
-apt update
-```
-
-#### Upgrade packages
-
-```shell
-apt upgrade -y
-```
-
-### Step 21: install and configure Vim
-
-#### Install Vim
-
-```shell
-apt install -y vim
-```
-
-#### Configure Vim
+### Step 15: configure pi `.vimrc`
 
 ```shell
 cat << "EOF" > ~/.vimrc
@@ -293,7 +235,119 @@ syntax on
 EOF
 ```
 
-### Step 22: set timezone (the following is for Montreal time)
+### Step 16: switch to root
+
+```shell
+sudo su -
+```
+
+### Step 17: disable root Bash history
+
+```shell
+echo "HISTFILESIZE=0" >> ~/.bashrc
+history -c; history -w
+source ~/.bashrc
+```
+
+### Step 18: set root password
+
+When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
+
+```console
+$ passwd
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+### Step 19: configure root `.vimrc`
+
+```shell
+cat << "EOF" > ~/.vimrc
+set encoding=UTF-8
+set termencoding=UTF-8
+set nocompatible
+set backspace=indent,eol,start
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set ruler
+set paste
+syntax on
+EOF
+```
+
+### Step 20: disable root login and password authentication
+
+```shell
+sed -i -E 's/^(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+systemctl restart ssh
+```
+
+### Step 21: disable Bluetooth and Wi-Fi
+
+> Heads-up: will take effect after reboot.
+
+#### Disable Bluetooth
+
+```shell
+echo "dtoverlay=disable-bt" >> /boot/config.txt
+```
+
+#### Disable Wi-Fi (if using ethernet)
+
+```shell
+echo "dtoverlay=disable-wifi" >> /boot/config.txt
+```
+
+### Step 22: update APT index, install `iptables-persistent` and Vim and upgrade system
+
+#### Update APT index
+
+```shell
+apt update
+```
+
+#### Install `iptables-persistent` and Vim
+
+When asked to save current IPv4 or IPv6 rules, answer `Yes`.
+
+```shell
+apt install -y iptables-persistent vim
+```
+
+#### Upgrade packages
+
+```shell
+apt upgrade -y
+```
+
+### Step 23: reboot
+
+```shell
+systemctl reboot
+```
+
+### Step 24: log in
+
+Replace `10.0.1.248` with IP of Raspberry Pi.
+
+When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+
+```shell
+ssh pi@10.0.1.248 -i ~/.ssh/pi
+```
+
+### Step 25: switch to root
+
+```shell
+sudo su -
+```
+
+### Step 26: set timezone (the following is for Montreal time)
 
 See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
@@ -301,7 +355,7 @@ See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 23: configure sysctl (if network is IPv4-only)
+### Step 27: configure sysctl (if network is IPv4-only)
 
 > Heads-up: only run the following if network is IPv4-only.
 
@@ -315,15 +369,7 @@ EOF
 sysctl -p
 ```
 
-### Step 24: install iptables-persistent
-
-When asked to save current IPv4 or IPv6 rules, answer `Yes`.
-
-```shell
-apt install -y iptables-persistent
-```
-
-### Step 25: configure iptables
+### Step 28: configure iptables
 
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
@@ -386,7 +432,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-### Step 26: log out and log in to confirm iptables didn’t block SSH
+### Step 29: log out and log in to confirm iptables didn’t block SSH
 
 #### Log out
 
@@ -399,21 +445,17 @@ exit
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
-
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
-#### Switch to root
-
-When asked, enter root password.
+### Step 30: switch to root
 
 ```shell
-su -
+sudo su -
 ```
 
-### Step 27: make iptables rules persistent
+### Step 31: make iptables rules persistent
 
 ```shell
 iptables-save > /etc/iptables/rules.v4
