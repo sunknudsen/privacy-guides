@@ -84,8 +84,11 @@ source ~/.bashrc
 
 When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
 
-```shell
-passwd
+```console
+$ passwd
+New password:
+Retype new password:
+passwd: password updated successfully
 ```
 
 ### Step 5: create server-admin user
