@@ -113,7 +113,7 @@ _EOF
 EOF
 ```
 
-### Step 4: log in to server
+### Step 4: log in to server or Raspberry Pi
 
 Replace `server-admin@185.112.147.115` with SSH destination of server and `~/.ssh/server` with path to associated private key.
 
