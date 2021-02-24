@@ -87,7 +87,7 @@ EOF
 chmod +x /usr/local/sbin/spoof.sh
 ```
 
-### Step 5: download [first-names.txt](first-names.txt)
+### Step 5: download [first-names.txt](./first-names.txt)
 
 This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
 
@@ -95,7 +95,7 @@ This list includes the top 2048 most popular baby names from the [USA Social Sec
 curl -o /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
 ```
 
-### Step 6: download [mac-address-prefixes.txt](mac-address-prefixes.txt)
+### Step 6: download [mac-address-prefixes.txt](./mac-address-prefixes.txt)
 
 This list includes 768 Apple MAC address prefixes.
 
