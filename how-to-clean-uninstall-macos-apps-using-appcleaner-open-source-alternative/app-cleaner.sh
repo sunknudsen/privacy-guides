@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 if [ -z "$1" ]; then
   printf "%s\n" "Usage: app-cleaner.sh /path/to/app.app"
@@ -22,7 +22,7 @@ if [ "$bundle_identifier" = "" ]; then
   exit 1
 fi
 
-printf "%s\n" "Checking for running processes..."
+printf "%s\n" "Checking for running processes…"
 sleep 1
 
 app_name=$(basename $1 .app)
@@ -34,7 +34,7 @@ if [ ${#processes[@]} -gt 0 ]; then
   printf "${red}%s${nc}" "Kill running processes (y or n)? "
   read -r answer
   if [ "$answer" = "y" ]; then
-    printf "%s\n" "Killing running processes..."
+    printf "%s\n" "Killing running processes…"
     sleep 1
     for process in "${processes[@]}"; do
       echo $process | awk '{print $1}' | xargs sudo kill 2>&1 | grep -v "No such process"
@@ -50,7 +50,7 @@ paths+=($(find /private/var/db/receipts -iname "*$app_name*.bom" -maxdepth 1 -pr
 paths+=($(find /private/var/db/receipts -iname "*$bundle_identifier*.bom" -maxdepth 1 -prune 2>&1 | grep -v "Permission denied"))
 
 if [ ${#paths[@]} -gt 0 ]; then
-  printf "%s\n" "Saving bill of material logs to desktop..."
+  printf "%s\n" "Saving bill of material logs to desktop…"
   sleep 1
   for path in "${paths[@]}"; do
     mkdir -p "$home_dir/Desktop/$app_name"
@@ -58,7 +58,7 @@ if [ ${#paths[@]} -gt 0 ]; then
   done
 fi
 
-printf "%s\n" "Finding app data..."
+printf "%s\n" "Finding app data…"
 sleep 1
 
 locations=(
@@ -116,7 +116,7 @@ printf "%s\n" "${paths[@]}"
 printf "${red}%s${nc}" "Move app data to trash (y or n)? "
 read -r answer
 if [ "$answer" = "y" ]; then
-  printf "%s\n" "Moving app data to trash..."
+  printf "%s\n" "Moving app data to trash…"
   sleep 1
   posixFiles=$(printf ", POSIX file \"%s\"" "${paths[@]}" | awk '{print substr($0,3)}')
   osascript -e "tell application \"Finder\" to delete { $posixFiles }" > /dev/null
