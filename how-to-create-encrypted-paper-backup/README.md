@@ -136,7 +136,7 @@ qr-backup.sh
 
 ### Restore encrypted paper backup
 
-> Heads-up: use `--split-words` to split secret into word list.
+> Heads-up: use `--word-list` to split secret into word list.
 
 ```shell
 qr-restore.sh

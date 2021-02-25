@@ -89,7 +89,7 @@ if [ "$bip39" = true ]; then
   words=($secret)
   for word in ${words[@]}; do
     if ! exists $word; then
-      printf "$red%s$normal\n" "Invalid word $bold$word$normal"
+      printf "$red%s $bold%s$normal\n" "Invalid word" "$word"
       exit 1
     fi
   done
@@ -102,8 +102,8 @@ encrypted_secret_hash=$(echo -n "$encrypted_secret" | openssl dgst -sha512 | sed
 encrypted_secret_short_hash=$(echo -n "$encrypted_secret_hash" | head -c 8)
 
 printf "%s\n" "$encrypted_secret"
-printf "SHA512 hash: $bold%s$normal\n" "$encrypted_secret_hash"
-printf "SHA512 short hash: $bold%s$normal\n" "$encrypted_secret_short_hash"
+printf "%s: $bold%s$normal\n" "SHA512 hash" "$encrypted_secret_hash"
+printf "%s: $bold%s$normal\n" "SHA512 short hash" "$encrypted_secret_short_hash"
 
 echo -n "$encrypted_secret" | qr --error-correction=H > "$tmp/secret.png"
 

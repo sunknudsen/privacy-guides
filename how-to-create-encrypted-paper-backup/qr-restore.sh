@@ -6,8 +6,8 @@ positional=()
 while [[ $# -gt 0 ]]; do
   argument="$1"
   case $argument in
-    --split-words)
-    split_words=true
+    --word-list)
+    word_list=true
     shift
     ;;
     *)
@@ -22,6 +22,8 @@ set -- "${positional[@]}"
 bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
+
+tput reset
 
 printf "%s\n" "Scan QR code…"
 
@@ -45,8 +47,8 @@ encrypted_secret_hash=$(echo -n "$encrypted_secret" | openssl dgst -sha512 | sed
 encrypted_secret_short_hash=$(echo -n "$encrypted_secret_hash" | head -c 8)
 
 printf "%s\n" "$encrypted_secret"
-printf "SHA512 hash: $bold%s$normal\n" "$encrypted_secret_hash"
-printf "SHA512 short hash: $bold%s$normal\n" "$encrypted_secret_short_hash"
+printf "%s: $bold%s$normal\n" "SHA512 hash" "$encrypted_secret_hash"
+printf "%s: $bold%s$normal\n" "SHA512 short hash" "$encrypted_secret_short_hash"
 
 printf "$bold$red%s$normal\n" "Show secret? (y or n)? "
 
@@ -54,12 +56,12 @@ read -r answer
 if [ "$answer" = "y" ]; then
   secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
   gpg-connect-agent reloadagent /bye > /dev/null 2>&1
-  if [ "$split_words" = true ]; then
+  if [ "$word_list" = true ]; then
     printf "%s" "Secret: "
     array=($secret)
     for i in ${!array[@]}; do
       position=$(($i + 1))
-      printf "%s" "$position.$bold${array[$i]}$normal "
+      printf "%d. $bold%s$normal " "$position" "${array[$i]}"
     done
     printf "\n"
   else

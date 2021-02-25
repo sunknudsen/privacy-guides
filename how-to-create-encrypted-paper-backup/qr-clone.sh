@@ -2,6 +2,8 @@
 
 set -e
 
+tput reset
+
 printf "%s\n" "Restoring…"
 . qr-restore.sh
 
