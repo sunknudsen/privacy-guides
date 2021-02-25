@@ -87,28 +87,35 @@ $ echo "export PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-### Step 5: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 5: download [bip39.txt](./bip39.txt) ([PGP signature](./bip39.txt.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+
+```shell
+sudo curl -o /usr/local/sbin/bip39.txt https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/bip39.txt
+sudo chmod +x /usr/local/sbin/bip39.txt
+```
+
+### Step 6: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
 sudo chmod +x /usr/local/sbin/qr-backup.sh
 ```
 
-### Step 6: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 7: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
 sudo chmod +x /usr/local/sbin/qr-restore.sh
 ```
 
-### Step 7: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 8: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
 sudo chmod +x /usr/local/sbin/qr-clone.sh
 ```
 
-### Step 8: reboot
+### Step 9: reboot
 
 ```shell
 sudo systemctl reboot
