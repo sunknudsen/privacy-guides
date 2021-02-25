@@ -122,11 +122,15 @@ sudo systemctl reboot
 
 ### Create encrypted paper backup
 
+> Heads-up: use `--bip39` to test secret against BIP39 [dictionary](https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt).
+
 ```shell
 qr-backup.sh
 ```
 
 ### Restore encrypted paper backup
+
+> Heads-up: use `--split-words` to split secret into word list.
 
 ```shell
 qr-restore.sh

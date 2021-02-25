@@ -2,23 +2,54 @@
 
 set -e
 
+positional=()
+while [[ $# -gt 0 ]]; do
+  argument="$1"
+  case $argument in
+    --bip39)
+    bip39=true
+    shift
+    ;;
+    *)
+    positional+=("$1")
+    shift
+    ;;
+  esac
+done
+
+set -- "${positional[@]}"
+
 bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
+
+basedir=$(dirname "$0")
 
 dev="/dev/sda1"
 tmp="/home/pi/tmp"
 usb="/home/pi/usb"
 
-waitForUsb () {
+tput reset
+
+waitForUsbThumbDrive () {
   if [ ! -e $dev ]; then
     printf "Insert USB thumb drive and press enter"
     read -r confirmation
-    waitForUsb
+    waitForUsbThumbDrive
   fi
 }
 
-waitForUsb
+waitForUsbThumbDrive
+
+printf "%s\n" "Format USB thumb drive? (y or n)? "
+
+read -r answer
+if [ "$answer" = "y" ]; then
+  if mount | grep $usb > /dev/null; then
+    sudo umount $dev
+  fi
+  sudo mkfs -t vfat $dev
+fi
 
 sudo mkdir -p $tmp
 if ! mount | grep $tmp > /dev/null; then
@@ -31,8 +62,37 @@ if ! mount | grep $usb > /dev/null; then
 fi
 
 if [ -z $secret ]; then
+  tput sc
   printf "%s\n" "Type secret and press enter"
   read -r secret
+  tput rc
+  tput ed
+  printf "%s\n" "Type secret and press enter (again)"
+  read -r secret_confirmation
+  if [ ! "$secret" = "$secret_confirmation" ]; then
+    printf "$red%s$normal\n" "Secrets do not match"
+    exit 1
+  fi
+fi
+
+function exists {
+  bip39_words=($(cat "$basedir/bip39.txt"))
+  for bip39_word in ${bip39_words[@]}; do
+    if [ "$bip39_word" = "$1" ]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+if [ "$bip39" = true ]; then
+  words=($secret)
+  for word in ${words[@]}; do
+    if ! exists $word; then
+      printf "$red%s$normal\n" "Invalid word $bold$word$normal"
+      exit 1
+    fi
+  done
 fi
 
 encrypted_secret=$(echo -n "$secret" | gpg --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor)

@@ -1,10 +1,27 @@
 #! /bin/bash
 
+set -e
+
+positional=()
+while [[ $# -gt 0 ]]; do
+  argument="$1"
+  case $argument in
+    --split-words)
+    split_words=true
+    shift
+    ;;
+    *)
+    positional+=("$1")
+    shift
+    ;;
+  esac
+done
+
+set -- "${positional[@]}"
+
 bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
-
-set -e
 
 printf "%s\n" "Scan QR code…"
 
@@ -37,7 +54,17 @@ read -r answer
 if [ "$answer" = "y" ]; then
   secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
   gpg-connect-agent reloadagent /bye > /dev/null 2>&1
-  printf "Secret: $bold%s$normal\n" "$secret"
+  if [ "$split_words" = true ]; then
+    printf "%s" "Secret: "
+    array=($secret)
+    for i in ${!array[@]}; do
+      position=$(($i + 1))
+      printf "%s" "$position.$bold${array[$i]}$normal "
+    done
+    printf "\n"
+  else
+    printf "Secret: $bold%s$normal\n" "$secret"
+  fi
 fi
 
 printf "%s\n" "Done"
