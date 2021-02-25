@@ -91,7 +91,6 @@ $ source ~/.bashrc
 
 ```shell
 sudo curl -o /usr/local/sbin/bip39.txt https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/bip39.txt
-sudo chmod +x /usr/local/sbin/bip39.txt
 ```
 
 ### Step 6: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
