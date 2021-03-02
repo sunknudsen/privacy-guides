@@ -127,7 +127,15 @@ sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media
 sudo chmod +x /usr/local/sbin/secure-erase.sh
 ```
 
-### Step 10: reboot
+### Step 10: disable Wi-Fi (if not using ethernet) or disconnect ethernet cable
+
+> WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW “COLD”).
+
+```shell
+echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
+```
+
+### Step 11: reboot
 
 ```shell
 sudo systemctl reboot
