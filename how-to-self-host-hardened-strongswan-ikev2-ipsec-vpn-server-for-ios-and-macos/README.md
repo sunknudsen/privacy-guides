@@ -70,7 +70,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDACoPiTWsEeNyp/aGvCgeAU2qryRDPWr6MniXMLmZC
 
 Replace `185.193.126.203` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh root@185.193.126.203 -i ~/.ssh/vpn-server
@@ -135,7 +135,7 @@ exit
 
 Replace `185.193.126.203` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
@@ -347,7 +347,7 @@ exit
 
 Replace `185.193.126.203` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-mac).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server

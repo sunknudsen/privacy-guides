@@ -27,7 +27,7 @@ Listed: true
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi

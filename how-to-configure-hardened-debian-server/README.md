@@ -67,7 +67,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP58i1vuFEe3zoHT+hZRh0YaXQY+ADa8OgBIoTji+A
 
 Replace `185.112.147.115` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh root@185.112.147.115 -i ~/.ssh/server
@@ -135,7 +135,7 @@ exit
 
 Replace `185.112.147.115` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh server-admin@185.112.147.115 -i ~/.ssh/server
@@ -313,7 +313,7 @@ exit
 
 Replace `185.112.147.115` with IP of server.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh server-admin@185.112.147.115 -i ~/.ssh/server

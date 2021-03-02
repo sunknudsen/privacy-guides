@@ -16,7 +16,7 @@ Listed: true
 
 - [Raspberry Pi](https://www.raspberrypi.org/)
 - Power adapter, keyboard and HDMI cable (and SD card reader if computer doesn’t have one built-in)
-- Linux or macOS computer
+- macOS computer
 
 ## Caveats
 
@@ -25,7 +25,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create SSH key pair (on computer)
+### Step 1: create SSH key pair (on macOS)
 
 When asked for file in which to save key, enter `pi`.
 
@@ -78,7 +78,7 @@ EOF
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
-Run `diskutil list` to find disk ID of SD card to override with "Raspberry Pi OS Lite" (`disk2` in the following example).
+Run `diskutil list` to find disk ID of SD card to override with “Raspberry Pi OS Lite” (`disk2` in the following example).
 
 Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example) and `2021-01-11-raspios-buster-armhf-lite.img` with current image.
 
@@ -162,7 +162,7 @@ ip a
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for password, enter password from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
+When asked for passphrase, enter passphrase from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
 
 ```shell
 ssh pi@10.0.1.248
@@ -194,7 +194,7 @@ exit
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
@@ -335,7 +335,7 @@ systemctl reboot
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for password, enter password from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
