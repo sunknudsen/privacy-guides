@@ -120,7 +120,14 @@ sudo curl -o /usr/local/sbin/qr-clone.sh https://sunknudsen.com/static/media/pri
 sudo chmod +x /usr/local/sbin/qr-clone.sh
 ```
 
-### Step 9: reboot
+### Step 9: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+
+```shell
+sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
+sudo chmod +x /usr/local/sbin/secure-erase.sh
+```
+
+### Step 10: reboot
 
 ```shell
 sudo systemctl reboot
