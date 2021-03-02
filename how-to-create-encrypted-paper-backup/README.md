@@ -13,6 +13,7 @@ Listed: true
 ## Requirements
 
 - [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) 📦
+- Raspberry Pi OS-compatible auto-focus HD USB webcam
 - [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) (optional)
 - macOS computer
 
