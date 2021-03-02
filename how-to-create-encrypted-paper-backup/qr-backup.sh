@@ -6,6 +6,15 @@ positional=()
 while [[ $# -gt 0 ]]; do
   argument="$1"
   case $argument in
+    -h|--help)
+    printf "%s\n" \
+    "Usage: qr-backup.sh [options]" \
+    "" \
+    "Options:" \
+    "  --bip39      test secret against BIP39 word list" \
+    "  -h, --help   display help for command"
+    exit 0
+    ;;
     --bip39)
     bip39=true
     shift
@@ -33,7 +42,7 @@ tput reset
 
 waitForUsbThumbDrive () {
   if [ ! -e $dev ]; then
-    printf "Insert USB thumb drive and press enter"
+    printf "Insert USB flash drive and press enter"
     read -r confirmation
     waitForUsbThumbDrive
   fi
@@ -41,7 +50,7 @@ waitForUsbThumbDrive () {
 
 waitForUsbThumbDrive
 
-printf "%s\n" "Format USB thumb drive? (y or n)? "
+printf "%s\n" "Format USB flash drive? (y or n)? "
 
 read -r answer
 if [ "$answer" = "y" ]; then
@@ -61,7 +70,7 @@ if ! mount | grep $usb > /dev/null; then
   sudo mount $dev $usb -o uid=pi,gid=pi
 fi
 
-if [ -z $secret ]; then
+if [ -z "$secret" ]; then
   tput sc
   printf "%s\n" "Type secret and press enter"
   read -r secret

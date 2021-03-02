@@ -14,7 +14,7 @@ Listed: true
 
 - [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) 📦
 - [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) (optional)
-- Linux or macOS computer
+- macOS computer
 
 ## Caveats
 
@@ -39,7 +39,9 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 
 > Heads-up: don’t worry about `PITFT Failed to disable unit: Unit file fbcp.service does not exist.`.
 
-```shell
+> Heads-up: when asked to reboot, type `n` and press enter.
+
+```console
 $ sudo apt update
 
 $ sudo apt install -y git python3-pip
@@ -55,6 +57,8 @@ $ sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=cons
 
 #### Disable console auto login
 
+> Heads-up: when asked to reboot, select “No” and press enter.
+
 ```shell
 sudo raspi-config
 ```
@@ -65,6 +69,8 @@ Select “System Options”, then “Boot / Auto Login”, then “Console” an
 
 > Heads-up: following instructions are for [Raspberry Pi keyboard](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) (US model).
 
+> Heads-up: when asked to reboot, select “No” and press enter.
+
 ```shell
 sudo raspi-config
 ```
@@ -73,7 +79,7 @@ Select “Localisation Options”, then “Keyboard”, then “Generic 105-key 
 
 ### Step 4: install dependencies
 
-```shell
+```console
 $ sudo apt update
 
 $ sudo apt install -y fim imagemagick zbar-tools
@@ -128,24 +134,145 @@ sudo systemctl reboot
 
 ### Create encrypted paper backup
 
-> Heads-up: use `--bip39` to test secret against BIP39 [dictionary](https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt).
+> Heads-up: use `--bip39` to test secret against BIP39 [word list](https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt).
 
-```shell
-qr-backup.sh
+```console
+$ qr-backup.sh --help
+Usage: qr-backup.sh [options]
+
+Options:
+  --bip39      test secret against BIP39 word list
+  -h, --help   display help for command
+
+$ qr-backup.sh
+Format USB flash drive? (y or n)?
+y
+mkfs.fat 4.1 (2017-01-24)
+Type secret and press enter (again)
+this is a test yo
+-----BEGIN PGP MESSAGE-----
+
+jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
+i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
+=xkQH
+-----END PGP MESSAGE-----
+SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
+SHA512 short hash: 177cc163
+Show SHA512 hash as QR code? (y or n)?
+n
+Done
 ```
+
+The following image is now available on USB flash drive.
+
+![177cc163](./177cc163.jpg?shadow=1)
 
 ### Restore encrypted paper backup
 
 > Heads-up: use `--word-list` to split secret into word list.
 
-```shell
-qr-restore.sh
+```console
+$ qr-restore.sh
+Usage: qr-restore.sh [options]
+
+Options:
+  --word-list    split secret into word list
+  -h, --help     display help for command
+
+$ qr-restore.sh
+Scan QR code…
+-----BEGIN PGP MESSAGE-----
+
+jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
+i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
+=xkQH
+-----END PGP MESSAGE-----
+SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
+SHA512 short hash: 177cc163
+Show secret? (y or n)?
+y
+gpg: AES256 encrypted data
+gpg: encrypted with 1 passphrase
+Secret: this is a test yo
+Done
 ```
 
 ### Clone encrypted paper backup
 
-```shell
-qr-clone.sh
+```console
+$ qr-clone.sh --help
+Usage: qr-clone.sh [options]
+
+Options:
+  -h, --help   display help for command
+
+$ qr-clone.sh
+Scan QR code…
+-----BEGIN PGP MESSAGE-----
+
+jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
+i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
+=xkQH
+-----END PGP MESSAGE-----
+SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
+SHA512 short hash: 177cc163
+Show secret? (y or n)?
+y
+gpg: AES256 encrypted data
+gpg: encrypted with 1 passphrase
+Secret: this is a test yo
+Done
+Backing up…
+Format USB flash drive? (y or n)?
+y
+mkfs.fat 4.1 (2017-01-24)
+-----BEGIN PGP MESSAGE-----
+
+jA0ECQMKAWdJZylXXDf/0kUB/rRdX1+5OYVh7iwzM0julwIfDe57slc6LeGeRtDa
+KfY4QZkCrseEoZdSZd5mGYQ0ItW9exfBiXN5AU+rbEmzF6VuEWY=
+=ul1g
+-----END PGP MESSAGE-----
+SHA512 hash: 524d8219b17aad59d7cec70f901dfdd449d15f21479740b0111b621cc870e6d82f2f4a0ea8303fb478b24500195325be9c3256d4d5b19700a1cdd1329fc2c71f
+SHA512 short hash: 524d8219
+Show SHA512 hash as QR code? (y or n)?
+n
+Done
+```
+
+The following image is now available on USB flash drive.
+
+![524d8219](./524d8219.jpg?shadow=1)
+
+### Secure erase flash drive
+
+```console
+$ secure-erase.sh --help
+Usage: secure-erase.sh [options]
+
+Options:
+  --iterations   overwrite n times (defauls to 3)
+  --zero         overwrite with zeros to hide secure erase
+  -h, --help     display help for command
+
+$ secure-erase.sh
+Secure erase USB flash drive? (y or n)?
+y
+Erasing… (iteration 1 of 3)
+dd: error writing '/dev/sda1': No space left on device
+1868+0 records in
+1867+0 records out
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 181.888 s, 10.8 MB/s
+Erasing… (iteration 2 of 3)
+dd: error writing '/dev/sda1': No space left on device
+1868+0 records in
+1867+0 records out
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 195.606 s, 10.0 MB/s
+Erasing… (iteration 3 of 3)
+dd: error writing '/dev/sda1': No space left on device
+1868+0 records in
+1867+0 records out
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 195.558 s, 10.0 MB/s
+Done
 ```
 
 👍

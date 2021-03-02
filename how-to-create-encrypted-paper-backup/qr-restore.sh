@@ -6,6 +6,15 @@ positional=()
 while [[ $# -gt 0 ]]; do
   argument="$1"
   case $argument in
+    -h|--help)
+    printf "%s\n" \
+    "Usage: qr-restore.sh [options]" \
+    "" \
+    "Options:" \
+    "  --word-list    split secret into word list" \
+    "  -h, --help     display help for command"
+    exit 0
+    ;;
     --word-list)
     word_list=true
     shift
