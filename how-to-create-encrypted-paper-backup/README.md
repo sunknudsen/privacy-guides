@@ -194,31 +194,41 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-#### Disable `/boot` macOS `fseventsd` logging and Spotlight indexing
+### Step 11: delete macOS hidden files (if present)
 
 ```shell
-sudo touch /boot/.metadata_never_index
-sudo mkdir -p /boot/.fseventsd
-sudo touch /boot/.fseventsd/no_log
+sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 11: disable Wi-Fi (if not using ethernet) or disconnect ethernet cable
+### Step 12: disable Wi-Fi (if not using ethernet) or disconnect ethernet cable
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 12: reboot
+### Step 13: reboot
 
 ```shell
-sudo systemctl reboot
+sudo systemctl poweroff
 ```
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
 
-### Step 13 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
+### Step 14 (optional): disable auto-mount of `boot` volume (on macOS)
 
-Run `diskutil list` to find disk ID of SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
+> Heads-up: done to prevent macOS from writing [hidden files](#step-11-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+
+Insert micro SD card into macOS computer, run following and eject card.
+
+```shell
+volume_path="/Volumes/boot"
+volume_uuid=`diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }'`
+echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
+```
+
+### Step 15 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
+
+Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
 ```console
 $ diskutil list
@@ -248,7 +258,7 @@ $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk2 was successful
 
 $ sudo openssl dgst -sha512 /dev/rdisk2
-SHA512(/dev/rdisk3)= 353af7e9bd78d7d98875f0e2a58da3d7cdfc494f2ab5474b2ab4a8fd212ac6a37c996d54f6c650838adb61e4b30801bcf1150081f6dbb51998cf33a74fa7f0fe
+SHA512(/dev/rdisk2)= 353af7e9bd78d7d98875f0e2a58da3d7cdfc494f2ab5474b2ab4a8fd212ac6a37c996d54f6c650838adb61e4b30801bcf1150081f6dbb51998cf33a74fa7f0fe
 ```
 
 👍
