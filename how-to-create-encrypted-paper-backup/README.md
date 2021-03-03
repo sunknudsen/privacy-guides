@@ -183,7 +183,7 @@ sudo systemctl enable tmp.mount
 ```shell
 sudo cp /boot/cmdline.txt /boot/cmdline.txt.backup
 sudo sed -i 's/fsck.repair=yes/fsck.repair=skip/' /boot/cmdline.txt
-sudo sed -i '$ s/$/ noswap ro systemd.volatile=state/' /boot/cmdline.txt
+sudo sed -i '$ s/$/ fastboot noswap ro systemd.volatile=state/' /boot/cmdline.txt
 ```
 
 #### Edit `/etc/fstab`
