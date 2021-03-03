@@ -2,7 +2,7 @@
 Title: How to create encrypted paper backup
 Description: Learn how to create encrypted paper backup.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>
 Reviewers:
 Publication date: 2021-02-23T21:53:38.495Z
 Listed: true
@@ -54,6 +54,10 @@ $ git clone https://github.com/adafruit/Raspberry-Pi-Installer-Scripts.git
 $ cd Raspberry-Pi-Installer-Scripts
 
 $ sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=console
+
+$ cd ~
+
+$ rm -fr Raspberry-Pi-Installer-Scripts
 ```
 
 #### Disable console auto login
@@ -87,9 +91,7 @@ $ sudo apt install -y fim imagemagick zbar-tools
 
 $ pip3 install pillow qrcode --user
 
-$ echo "export GPG_TTY=\"\$(tty)\"" >> ~/.bashrc
-
-$ echo "export PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
+$ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
 
 $ source ~/.bashrc
 ```
@@ -128,18 +130,125 @@ sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media
 sudo chmod +x /usr/local/sbin/secure-erase.sh
 ```
 
-### Step 10: disable Wi-Fi (if not using ethernet) or disconnect ethernet cable
+### Step 10: make filesystem read-only
 
-> WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW “COLD”).
+> Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
+
+#### Disable swap
+
+```shell
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo systemctl disable dphys-swapfile.service
+```
+
+#### Remove `dphys-swapfile` `fake-hwclock` and `logrotate`
+
+```shell
+sudo apt remove -y --purge dphys-swapfile fake-hwclock logrotate
+```
+
+#### Link `/etc/console-setup` to `/tmp/console-setup`
+
+```shell
+sudo mv /etc/console-setup /tmp/console-setup
+sudo ln -s /tmp/console-setup /etc/console-setup
+```
+
+#### Link `/etc/resolv.conf` to `/tmp/resolv.conf`
+
+```shell
+sudo mv /etc/resolv.conf /tmp/resolv.conf
+sudo ln -s /tmp/resolv.conf /etc/resolv.conf
+```
+
+#### Link `/home/pi/.gnupg` to `/tmp/pi/.gnupg`
+
+```shell
+mkdir -m 700 /tmp/pi
+mv /home/pi/.gnupg /tmp/pi/.gnupg
+ln -s /tmp/pi/.gnupg /home/pi/.gnupg
+```
+
+#### Enable `tmp.mount`
+
+```shell
+echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
+sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/
+sudo systemctl enable tmp.mount
+```
+
+#### Edit `/boot/cmdline.txt`
+
+```shell
+sudo cp /boot/cmdline.txt /boot/cmdline.txt.backup
+sudo sed -i 's/fsck.repair=yes/fsck.repair=skip/' /boot/cmdline.txt
+sudo sed -i '$ s/$/ noswap ro systemd.volatile=state/' /boot/cmdline.txt
+```
+
+#### Edit `/etc/fstab`
+
+```shell
+sudo cp /etc/fstab /etc/fstab.backup
+sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
+sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
+```
+
+#### Disable `/boot` macOS `fseventsd` logging and Spotlight indexing
+
+```shell
+sudo touch /boot/.metadata_never_index
+sudo mkdir -p /boot/.fseventsd
+sudo touch /boot/.fseventsd/no_log
+```
+
+### Step 11: disable Wi-Fi (if not using ethernet) or disconnect ethernet cable
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 11: reboot
+### Step 12: reboot
 
 ```shell
 sudo systemctl reboot
+```
+
+> WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
+
+### Step 13 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
+
+Run `diskutil list` to find disk ID of SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
+
+```console
+$ diskutil list
+/dev/disk0 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *500.3 GB   disk0
+   1:                        EFI EFI                     209.7 MB   disk0s1
+   2:                 Apple_APFS Container disk1         500.1 GB   disk0s2
+
+/dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +500.1 GB   disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD - Data     340.9 GB   disk1s1
+   2:                APFS Volume Preboot                 85.9 MB    disk1s2
+   3:                APFS Volume Recovery                529.0 MB   disk1s3
+   4:                APFS Volume VM                      3.2 GB     disk1s4
+   5:                APFS Volume Macintosh HD            11.3 GB    disk1s5
+
+/dev/disk2 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *15.9 GB    disk2
+   1:             Windows_FAT_32 boot                    268.4 MB   disk2s1
+   2:                      Linux                         15.7 GB    disk2s2
+
+$ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
+Unmount of all volumes on disk2 was successful
+
+$ sudo openssl dgst -sha512 /dev/rdisk2
+SHA512(/dev/rdisk3)= 353af7e9bd78d7d98875f0e2a58da3d7cdfc494f2ab5474b2ab4a8fd212ac6a37c996d54f6c650838adb61e4b30801bcf1150081f6dbb51998cf33a74fa7f0fe
 ```
 
 👍

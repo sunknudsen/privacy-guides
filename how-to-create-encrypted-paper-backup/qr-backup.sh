@@ -35,8 +35,8 @@ normal=$(tput sgr0)
 basedir=$(dirname "$0")
 
 dev="/dev/sda1"
-tmp="/home/pi/tmp"
-usb="/home/pi/usb"
+tmp="/tmp/pi"
+usb="/tmp/usb"
 
 tput reset
 
@@ -58,11 +58,6 @@ if [ "$answer" = "y" ]; then
     sudo umount $dev
   fi
   sudo mkfs -t vfat $dev
-fi
-
-sudo mkdir -p $tmp
-if ! mount | grep $tmp > /dev/null; then
-  sudo mount -t tmpfs -o size=100m tmp $tmp
 fi
 
 sudo mkdir -p $usb
@@ -130,8 +125,6 @@ if [ "$answer" = "y" ]; then
   echo -n "$encrypted_secret_hash" | qr --error-correction=L > "$tmp/secret-hash.png"
   sudo fim --autozoom --quiet --vt 1 "$tmp/secret-hash.png"
 fi
-
-sudo umount $tmp
 
 sudo umount $usb
 
