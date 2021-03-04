@@ -214,9 +214,10 @@ echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 
 ### Step 13: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
-```shell
-sudo systemctl disable dhcpcd networking wpa_supplicant
-sudo rm /etc/profile.d/wifi-check.sh
+```console
+$ sudo systemctl disable dhcpcd networking wpa_supplicant
+
+$ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
 ### Step 14: delete macOS hidden files (if present)
@@ -273,10 +274,10 @@ $ diskutil list
    1:             Windows_FAT_32 boot                    268.4 MB   disk2s1
    2:                      Linux                         15.7 GB    disk2s2
 
-$ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
+$ sudo diskutil unmountDisk /dev/diskn
 Unmount of all volumes on disk2 was successful
 
-$ sudo openssl dgst -sha512 /dev/rdisk2
+$ sudo openssl dgst -sha512 /dev/rdiskn
 SHA512(/dev/rdisk2)= 353af7e9bd78d7d98875f0e2a58da3d7cdfc494f2ab5474b2ab4a8fd212ac6a37c996d54f6c650838adb61e4b30801bcf1150081f6dbb51998cf33a74fa7f0fe
 ```
 
