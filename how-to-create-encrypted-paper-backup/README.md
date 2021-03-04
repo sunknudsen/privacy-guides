@@ -182,7 +182,7 @@ mv /home/pi/.gnupg /tmp/pi/.gnupg
 ln -s /tmp/pi/.gnupg /home/pi/.gnupg
 ```
 
-#### Enable `tmp.mount`
+#### Enable `tmp.mount` service
 
 ```shell
 echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
@@ -206,22 +206,23 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 12: delete macOS hidden files (if present)
-
-```shell
-sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
-```
-
-### Step 13: disable Wi-Fi (if not using ethernet)
+### Step 12: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 14: disable `dhcpcd`
+### Step 13: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```shell
-sudo systemctl disable dhcpcd
+sudo systemctl disable dhcpcd networking wpa_supplicant
+sudo rm /etc/profile.d/wifi-check.sh
+```
+
+### Step 14: delete macOS hidden files (if present)
+
+```shell
+sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
 ### Step 15: reboot
