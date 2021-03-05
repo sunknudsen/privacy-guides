@@ -90,6 +90,7 @@ function exists {
 }
 
 if [ "$bip39" = true ]; then
+  printf "%s\n" "Testing secret against BIP39 word list…"
   words=($secret)
   for word in ${words[@]}; do
     if ! exists $word; then

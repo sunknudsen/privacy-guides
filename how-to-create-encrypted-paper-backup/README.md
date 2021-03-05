@@ -28,8 +28,6 @@ Listed: true
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
-
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
@@ -229,7 +227,7 @@ sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ### Step 15: reboot
 
 ```shell
-sudo systemctl poweroff
+sudo systemctl reboot
 ```
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
