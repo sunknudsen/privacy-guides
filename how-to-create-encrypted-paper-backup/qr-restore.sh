@@ -11,8 +11,8 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-restore.sh [options]" \
     "" \
     "Options:" \
-    "  --word-list    split secret into word list" \
-    "  -h, --help     display help for command"
+    "  --word-list  split secret into word list" \
+    "  -h, --help   display help for command"
     exit 0
     ;;
     --word-list)
@@ -68,9 +68,13 @@ if [ "$answer" = "y" ]; then
   if [ "$word_list" = true ]; then
     printf "%s" "Secret: "
     array=($secret)
-    for i in ${!array[@]}; do
-      position=$(($i + 1))
-      printf "%d. $bold%s$normal " "$position" "${array[$i]}"
+    last_index=$(echo "${#array[@]} - 1" | bc)
+    for index in ${!array[@]}; do
+      position=$(($index + 1))
+      printf "%d. $bold%s$normal" "$position" "${array[$index]}"
+      if [ $index -lt $last_index ]; then
+        printf " "
+      fi
     done
     printf "\n"
   else

@@ -11,7 +11,7 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-clone.sh [options]" \
     "" \
     "Options:" \
-    "  -h, --help   display help for command"
+    "  -h, --help  display help for command"
     exit 0
     ;;
     *)

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-iterations=3
+rounds=3
 
 positional=()
 while [[ $# -gt 0 ]]; do
@@ -11,13 +11,13 @@ while [[ $# -gt 0 ]]; do
     "Usage: secure-erase.sh [options]" \
     "" \
     "Options:" \
-    "  --iterations   overwrite n times (defauls to 3)" \
-    "  --zero         overwrite with zeros to hide secure erase" \
-    "  -h, --help     display help for command"
+    "  --rounds <rounds>  overwrite n times (defauls to 3)" \
+    "  --zero             overwrite with zeros obfuscating secure erase" \
+    "  -h, --help         display help for command"
     exit 0
     ;;
-    --iterations)
-    iterations=$2
+    --rounds)
+    rounds=$2
     shift
     shift
     ;;
@@ -55,13 +55,12 @@ printf "$red%s$normal\n" "Secure erase USB flash drive? (y or n)? "
 
 read -r answer
 if [ "$answer" = "y" ]; then
-  array=($(seq 1 1 $iterations))
-  for iteration in ${array[@]}; do
-    printf "%s\n" "Erasing… (iteration $iteration of $iterations)"
+  for round in $(seq 1 1 $rounds); do
+    printf "%s\n" "Overwriting with random data… (round $round of $rounds)"
     sudo dd bs=1M if=/dev/urandom of=$dev
   done
   if [ "$zero" = true ]; then
-    printf "%s\n" "Writing zeros…"
+    printf "%s\n" "Overwriting with zeros…"
     sudo dd bs=1M if=/dev/zero of=$dev
   fi
 else
