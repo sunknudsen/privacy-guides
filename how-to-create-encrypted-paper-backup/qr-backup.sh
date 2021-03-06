@@ -11,9 +11,14 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-backup.sh [options]" \
     "" \
     "Options:" \
-    "  --bip39      test secret against BIP39 word list" \
-    "  -h, --help   display help for command"
+    "  --create-seed  create random 24-word BIP39 seed phrase" \
+    "  --bip39        test secret against BIP39 word list" \
+    "  -h, --help     display help for command"
     exit 0
+    ;;
+    --create-seed)
+    create_seed=true
+    shift
     ;;
     --bip39)
     bip39=true
@@ -63,6 +68,13 @@ fi
 sudo mkdir -p $usb
 if ! mount | grep $usb > /dev/null; then
   sudo mount $dev $usb -o uid=pi,gid=pi
+fi
+
+if [ "$create_seed" = true ]; then
+  printf "%s\n" "Creating random 24-word BIP39 seed phrase…"
+  secret=$(cat "$basedir/bip39.txt" | shuf --head-count 24 --random-source=/dev/urandom --repeat | tr "\n" " ")
+  echo $secret
+  sleep 1
 fi
 
 if [ -z "$secret" ]; then
