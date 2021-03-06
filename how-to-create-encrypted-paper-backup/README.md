@@ -294,8 +294,9 @@ $ qr-backup.sh --help
 Usage: qr-backup.sh [options]
 
 Options:
-  --bip39      test secret against BIP39 word list
-  -h, --help   display help for command
+  --create-seed  create random 24-word BIP39 seed phrase
+  --bip39        test secret against BIP39 word list
+  -h, --help     display help for command
 
 $ qr-backup.sh
 Format USB flash drive? (y or n)?
@@ -329,8 +330,8 @@ $ qr-restore.sh
 Usage: qr-restore.sh [options]
 
 Options:
-  --word-list    split secret into word list
-  -h, --help     display help for command
+  --word-list  split secret into word list
+  -h, --help   display help for command
 
 $ qr-restore.sh
 Scan QR code…
@@ -357,7 +358,7 @@ $ qr-clone.sh --help
 Usage: qr-clone.sh [options]
 
 Options:
-  -h, --help   display help for command
+  -h, --help  display help for command
 
 $ qr-clone.sh
 Scan QR code…
@@ -403,9 +404,9 @@ $ secure-erase.sh --help
 Usage: secure-erase.sh [options]
 
 Options:
-  --iterations   overwrite n times (defauls to 3)
-  --zero         overwrite with zeros to hide secure erase
-  -h, --help     display help for command
+  --rounds <rounds>  overwrite n times (defauls to 3)
+  --zero             overwrite with zeros obfuscating secure erase
+  -h, --help         display help for command
 
 $ secure-erase.sh
 Secure erase USB flash drive? (y or n)?
