@@ -87,7 +87,7 @@ $ sudo apt update
 
 $ sudo apt install -y fim imagemagick zbar-tools
 
-$ pip3 install pillow qrcode --user
+$ pip3 install mnemonic pillow qrcode --user
 
 $ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
 
@@ -96,7 +96,7 @@ $ source ~/.bashrc
 
 ### Step 5 (optional): install `screen` and [Trezor](https://trezor.io/)’s [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor)
 
-> Heads-up: we will likely use `screen` and `trezorcrl` command line utilities in the future and this guide is designed to configure a [read-only](#step-11-make-filesystem-read-only) Raspberry Pi.
+> Heads-up: we will likely use `screen` and `trezorcrl` command line utilities in the future and this guide is designed to configure a [read-only](#step-12-make-filesystem-read-only) Raspberry Pi.
 
 ```console
 $ sudo apt install -y screen
@@ -106,41 +106,47 @@ $ pip3 install attrs trezor --user
 $ sudo curl https://data.trezor.io/udev/51-trezor.rules -o /etc/udev/rules.d/51-trezor.rules
 ```
 
-### Step 6: download [bip39.txt](./bip39.txt) ([PGP signature](./bip39.txt.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 6: download [create-seed.py](./create-seed.py) ([PGP signature](./create-seed.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
-sudo curl -o /usr/local/sbin/bip39.txt https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/bip39.txt
+sudo curl -o /usr/local/sbin/create-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-seed.py
 ```
 
-### Step 7: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 7: download [validate-seed.py](./validate-seed.py) ([PGP signature](./validate-seed.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+
+```shell
+sudo curl -o /usr/local/sbin/validate-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-validate-encrypted-paper-backup/validate-seed.py
+```
+
+### Step 8: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
 sudo chmod +x /usr/local/sbin/qr-backup.sh
 ```
 
-### Step 8: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 9: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
 sudo chmod +x /usr/local/sbin/qr-restore.sh
 ```
 
-### Step 9: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 10: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
 sudo chmod +x /usr/local/sbin/qr-clone.sh
 ```
 
-### Step 10: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 11: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
 sudo chmod +x /usr/local/sbin/secure-erase.sh
 ```
 
-### Step 11: make filesystem read-only
+### Step 12: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -204,13 +210,13 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 12: disable Wi-Fi (if not using ethernet)
+### Step 13: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 13: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 14: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -218,13 +224,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 14: delete macOS hidden files (if present)
+### Step 15: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 15: reboot
+### Step 16: reboot
 
 ```shell
 sudo systemctl reboot
@@ -232,9 +238,9 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
 
-### Step 16 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 17 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-11-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-15-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
 Insert micro SD card into macOS computer, run following and eject card.
 
@@ -244,7 +250,7 @@ volume_uuid=`diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }'`
 echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 17 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
+### Step 18 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
@@ -294,9 +300,9 @@ $ qr-backup.sh --help
 Usage: qr-backup.sh [options]
 
 Options:
-  --create-seed  create random 24-word BIP39 seed phrase
-  --bip39        test secret against BIP39 word list
-  -h, --help     display help for command
+  --create-seed    create 24-word BIP39 seed
+  --validate-seed  validate if secret is BIP39 seed
+  -h, --help       display help for command
 
 $ qr-backup.sh
 Format USB flash drive? (y or n)?

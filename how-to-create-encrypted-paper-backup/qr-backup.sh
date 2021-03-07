@@ -11,17 +11,17 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-backup.sh [options]" \
     "" \
     "Options:" \
-    "  --create-seed  create random 24-word BIP39 seed phrase" \
-    "  --bip39        test secret against BIP39 word list" \
-    "  -h, --help     display help for command"
+    "  --create-seed    create 24-word BIP39 seed" \
+    "  --validate-seed  validate if secret is BIP39 seed" \
+    "  -h, --help       display help for command"
     exit 0
     ;;
     --create-seed)
     create_seed=true
     shift
     ;;
-    --bip39)
-    bip39=true
+    --validate-seed)
+    validate_seed=true
     shift
     ;;
     *)
@@ -71,8 +71,8 @@ if ! mount | grep $usb > /dev/null; then
 fi
 
 if [ "$create_seed" = true ]; then
-  printf "%s\n" "Creating random 24-word BIP39 seed phrase…"
-  secret=$(cat "$basedir/bip39.txt" | shuf --head-count 24 --random-source=/dev/urandom --repeat | tr "\n" " ")
+  printf "%s\n" "Creating 24-word BIP39 seed…"
+  secret=$(python3 $basedir/create-seed.py)
   echo $secret
   sleep 1
 fi
@@ -91,25 +91,12 @@ if [ -z "$secret" ]; then
   fi
 fi
 
-function exists {
-  bip39_words=($(cat "$basedir/bip39.txt"))
-  for bip39_word in ${bip39_words[@]}; do
-    if [ "$bip39_word" = "$1" ]; then
-      return 0
-    fi
-  done
-  return 1
-}
-
-if [ "$bip39" = true ]; then
-  printf "%s\n" "Testing secret against BIP39 word list…"
-  words=($secret)
-  for word in ${words[@]}; do
-    if ! exists $word; then
-      printf "$red%s $bold%s$normal\n" "Invalid word" "$word"
-      exit 1
-    fi
-  done
+if [ "$validate_seed" = true ]; then
+  printf "%s\n" "Validate if secret is BIP39 seed…"
+  if ! echo -n $secret | python3 $basedir/validate-seed.py; then
+    printf "$red%s$normal\n" "Invalid BIP39 seed"
+    exit 1
+  fi
 fi
 
 encrypted_secret=$(echo -n "$secret" | gpg --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor)
