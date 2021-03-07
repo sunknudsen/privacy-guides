@@ -115,7 +115,7 @@ sudo curl -o /usr/local/sbin/create-seed.py https://sunknudsen.com/static/media/
 ### Step 7: download [validate-seed.py](./validate-seed.py) ([PGP signature](./validate-seed.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
-sudo curl -o /usr/local/sbin/validate-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-validate-encrypted-paper-backup/validate-seed.py
+sudo curl -o /usr/local/sbin/validate-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-seed.py
 ```
 
 ### Step 8: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
