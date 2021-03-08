@@ -12,13 +12,15 @@ Listed: false
 
 First, thanks for contributing. 🙌
 
-**Like the project?** Please star the [repo](https://github.com/sunknudsen/privacy-guides).
+**Like the project?** Please star [repo](https://github.com/sunknudsen/privacy-guides).
 
-**Have a recommendation or found a bug?** Please submit an [issue](https://github.com/sunknudsen/privacy-guides/issues).
+**Have a recommendation or found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues).
 
 **Found a security vulnerability?** Please report vulnerability using the PGP public key and email found on [sunknudsen.com](https://sunknudsen.com/).
 
-**Fellow privacy and security researcher?** Please [peer review and sign](#how-to-peer-review-and-sign-a-guide) a guide.
+**Fellow privacy and security researcher?** Please [peer review and sign guides](#how-to-peer-review-and-sign-guide).
+
+**Wish to donate?** Please visit [sunknudsen.com/donate](https://sunknudsen.com/donate).
 
 ## How to get help
 
@@ -26,7 +28,7 @@ We have you back, you are not alone!
 
 Please use comments on [YouTube](https://www.youtube.com/sunknudsen) or [PeerTube](https://peertube.sunknudsen.com/video-channels/sunknudsen_channel/videos) when possible as others may be able to help (two brains are better than one).
 
-## How to peer review and sign a guide
+## How to peer review and sign guide
 
 > Heads-up: in order to establish a web of trust, peer reviewers are expected to have public track records.
 
