@@ -20,7 +20,7 @@ First, thanks for contributing. 🙌
 
 **Fellow privacy and security researcher?** Please [peer review and sign guides](#how-to-peer-review-and-sign-guide).
 
-**Wish to donate?** Please visit [sunknudsen.com/donate](https://sunknudsen.com/donate).
+**Wish to support the project?** Please visit [sunknudsen.com/donate](https://sunknudsen.com/donate).
 
 ## How to get help
 
