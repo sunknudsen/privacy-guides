@@ -24,9 +24,9 @@ First, thanks for contributing. 🙌
 
 ## How to get help
 
-We have you back, you are not alone!
+We have you back, **you are not alone!**
 
-Please use comments on [YouTube](https://www.youtube.com/sunknudsen) or [PeerTube](https://peertube.sunknudsen.com/video-channels/sunknudsen_channel/videos) when possible as others may be able to help (two brains are better than one).
+Please search for answers on privacy guides [discussions](https://github.com/sunknudsen/privacy-guides/discussions) and, if you don’t find what you are looking for, please start a new discussion.
 
 ## How to peer review and sign guide
 
