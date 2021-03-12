@@ -145,7 +145,7 @@ See https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and ht
 ### Paste, encrypt and sign message (enter line break and use command `ctrl+d` to quit edit mode)
 
 ```console
-$ gpg --encrypt --sign --armor --output ~/Desktop/encrypted.asc -r john@example.net -r hello@sunknudsen.com
+$ gpg --encrypt --sign --armor --output ~/Desktop/encrypted.asc --recipient john@example.net --recipient hello@sunknudsen.com
 gpg: 5574F4B0B0F67D7F: There is no assurance this key belongs to the named user
 
 sub  rsa4096/5574F4B0B0F67D7F 2019-10-17 Sun Knudsen <hello@sunknudsen.com>
