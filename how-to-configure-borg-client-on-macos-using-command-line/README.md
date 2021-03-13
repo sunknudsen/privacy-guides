@@ -159,10 +159,10 @@ brew analytics off
 
 > Heads-up: when installing Borg using `brew install borgbackup`, one can no longer run `brew mount` (see [issue](https://github.com/borgbackup/borg/issues/5522)) so I created a [tap](https://github.com/borgbackup/homebrew-tap) that includes a patched version of [borgbackup](https://formulae.brew.sh/formula/borgbackup) called [borgbackup-fuse](https://github.com/borgbackup/homebrew-tap/blob/master/Formula/borgbackup-fuse.rb).
 
-> Heads-up: if `brew install --cask osxfuse` fails, try `brew cask install osxfuse` (see [issue](https://github.com/Homebrew/brew/issues/9382)).
+> Heads-up: if `brew install --cask macfuse` fails, try `brew cask install macfuse` (see [issue](https://github.com/Homebrew/brew/issues/9382)).
 
 ```shell
-brew install --cask osxfuse
+brew install --cask macfuse
 brew install borgbackup/tap/borgbackup-fuse
 brew install --cask sunknudsen/tap/borg-wrapper
 ```
@@ -473,7 +473,7 @@ Done
 
 ```console
 $ borg-restore.sh
-mount_osxfuse: the file system is not available (1)
+mount_macfuse: the file system is not available (1)
 umount: /var/folders/dl/mbmsd2m51nb8dvhmtz114j8w0000gn/T/borg: not currently mounted
 ```
 
