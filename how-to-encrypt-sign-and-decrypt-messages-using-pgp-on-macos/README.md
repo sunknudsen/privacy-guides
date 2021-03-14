@@ -179,3 +179,7 @@ This is a test!
 ```shell
 gpg-connect-agent reloadagent /bye
 ```
+
+> Heads-up: when sending [encrypted messages](#paste-encrypt-and-sign-message-enter-line-break-and-use-command-ctrld-to-quit-edit-mode), don’t forget to include your [public key](#export-johns-pgp-public-key).
+
+👍
