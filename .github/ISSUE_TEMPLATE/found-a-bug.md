@@ -1,12 +1,16 @@
 ---
 name: Found a bug?
-about: Use this template if you found a bug
+about: Use this template to submit a bug report
 title: ""
 labels: bug
 assignees: ""
 ---
 
-<!-- Please use PeerTube or YouTube comments for questions and issues for bug reports. -->
+<!-- Please use discussions if you need help. -->
+
+## Branch
+
+`draft` or `master`?
 
 ## Guide
 

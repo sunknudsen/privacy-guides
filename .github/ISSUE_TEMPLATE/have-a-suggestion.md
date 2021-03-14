@@ -1,10 +1,12 @@
 ---
-name: Have a recommendation?
-about: Use this template if you have a recommendation
+name: Have a suggestion?
+about: Use this template to submit a suggestion
 title: ""
-labels: recommendation
+labels: suggestion
 assignees: ""
 ---
+
+<!-- Please use discussions if you need help. -->
 
 ## Branch
 
@@ -20,4 +22,4 @@ assignees: ""
 
 ## Description
 
-What do you recommend?
+What do you suggest?
