@@ -412,7 +412,7 @@ curl https://checkip.amazonaws.com
 
 👍
 
-> Heads-up: use following steps to assign static IP to strongSwan client
+> Heads-up: use following steps to assign static IP to strongSwan client.
 
 ### Step 12: log in to server
 
@@ -428,28 +428,35 @@ ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
 su -
 ```
 
-### Step 14: get virtual MAC address assigned to strongSwan client
+### Step 14: assign static IP to strongSwan client
 
 Replace `10.0.2.171` with IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
 
 ```console
-$ cat /var/lib/misc/dnsmasq.leases | grep "10.0.2.171" | awk '{print $2}'
-7a:a7:9f:c0:9d:b0
+$ client_ip=10.0.2.171
+
+$ client_mac=$(cat /var/lib/misc/dnsmasq.leases | grep $client_ip | awk '{print $2}')
+
+$ echo "dhcp-host=$client_mac,10.0.2.2" >> /etc/dnsmasq.d/01-dhcp-strongswan.conf
+
+$ cat /etc/dnsmasq.d/01-dhcp-strongswan.conf
+interface=strongswan0
+dhcp-range=10.0.2.10,10.0.2.254,255.255.255.0
+port=0
+dhcp-host=7a:a7:9f:c0:9d:b0,10.0.2.2
 ```
 
-### Step 15: assign static IP to strongSwan client
+dhcp-host=7a:a7:9f:c0:9d:b0,10.0.2.2
 
-```shell
-echo "dhcp-host=7a:a7:9f:c0:9d:b0,10.0.2.2" >> /etc/dnsmasq.d/01-dhcp-strongswan.conf
-```
+👍
 
-### Step 16: restart dnsmasq
+### Step 15: restart dnsmasq
 
 ```shell
 systemctl restart dnsmasq
 ```
 
-### Step 17: log in to client computer
+### Step 16: log in to client computer
 
 Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
 
@@ -457,19 +464,19 @@ Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` 
 ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
-### Step 18: switch to root
+### Step 17: switch to root
 
 ```shell
 su -
 ```
 
-### Step 19: restart strongSwan
+### Step 18: restart strongSwan
 
 ```shell
 systemctl restart strongswan
 ```
 
-### Step 20: confirm strongSwan client has IP `10.0.2.2`
+### Step 19: confirm strongSwan client has IP `10.0.2.2`
 
 ```console
 $ ipsec status
