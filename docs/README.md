@@ -14,9 +14,9 @@ First, thanks for contributing. 🙌
 
 **Like the project?** Please star [repo](https://github.com/sunknudsen/privacy-guides).
 
-**Have a recommendation or found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues).
+**Have a suggestion or found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues).
 
-**Found a security vulnerability?** Please report vulnerability using the PGP public key and email found on [sunknudsen.com](https://sunknudsen.com/).
+**Found a security vulnerability?** Please report vulnerability privately using the PGP public key and email found on [sunknudsen.com/contact](https://sunknudsen.com/contact).
 
 **Fellow privacy and security researcher?** Please [peer review and sign guides](#how-to-peer-review-and-sign-guide).
 
