@@ -246,7 +246,7 @@ Insert micro SD card into macOS computer, run following and eject card.
 
 ```shell
 volume_path="/Volumes/boot"
-volume_uuid=`diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }'`
+volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
 ```
 

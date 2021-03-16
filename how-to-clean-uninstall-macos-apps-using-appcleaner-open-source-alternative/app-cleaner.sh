@@ -7,8 +7,8 @@ fi
 
 IFS=$'\n'
 
-red=$'\e[1;31m'
-nc=$'\e[0m'
+red=$(tput setaf 1)
+normal=$(tput sgr0)
 
 if [ ! -e "$1/Contents/Info.plist" ]; then
   printf "%s\n" "Cannot find app plist"
@@ -31,7 +31,7 @@ processes=($(pgrep -afil "$app_name" | grep -v "app-cleaner.sh"))
 
 if [ ${#processes[@]} -gt 0 ]; then
   printf "%s\n" "${processes[@]}"
-  printf "${red}%s${nc}" "Kill running processes (y or n)? "
+  printf "$red%s$normal" "Kill running processes (y or n)? "
   read -r answer
   if [ "$answer" = "y" ]; then
     printf "%s\n" "Killing running processes…"
@@ -113,7 +113,7 @@ paths=($(printf "%s\n" "${paths[@]}" | sort -u));
 
 printf "%s\n" "${paths[@]}"
 
-printf "${red}%s${nc}" "Move app data to trash (y or n)? "
+printf "$red%s$normal" "Move app data to trash (y or n)? "
 read -r answer
 if [ "$answer" = "y" ]; then
   printf "%s\n" "Moving app data to trash…"

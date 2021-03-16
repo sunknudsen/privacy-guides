@@ -18,7 +18,7 @@ Listed: true
 
 ```shell
 sudo mkdir -p /usr/local/bin
-sudo chown ${USER}:admin /usr/local/bin
+sudo chown ${USER}:staff /usr/local/bin
 ```
 
 ### Step 2: download [app-cleaner.sh](./app-cleaner.sh) ([PGP signature](./app-cleaner.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
@@ -36,13 +36,13 @@ chmod +x /usr/local/bin/app-cleaner.sh
 
 ```console
 $ app-cleaner.sh /Applications/AppCleaner.app
-Checking for running processes...
-Finding application data...
+Checking for running processes…
+Finding application data…
 /Applications/AppCleaner.app
 /Users/sunknudsen/Library/Preferences/net.freemacsoft.AppCleaner.plist
 /Users/sunknudsen/Library/Saved Application State/net.freemacsoft.AppCleaner.savedState
 Move application data to trash (y or n)? y
-Moving application data to trash...
+Moving application data to trash…
 Done
 ```
 

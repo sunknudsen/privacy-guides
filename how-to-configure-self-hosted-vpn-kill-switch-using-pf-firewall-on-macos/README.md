@@ -256,7 +256,7 @@ sudo pfctl -F all -f /etc/pf.conf
 
 ```shell
 sudo mkdir -p /usr/local/sbin
-sudo chown $USER:admin /usr/local/sbin
+sudo chown ${USER}:admin /usr/local/sbin
 ```
 
 ### Step 11: source `/usr/local/sbin` folder
@@ -294,8 +294,8 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
-green=$'\e[1;32m'
-nc=$'\e[0m'
+green=$(tput setaf 2)
+normal=$(tput sgr0)
 
 # /usr/libexec/ApplicationFirewall/socketfilterfw --blockapp /Applications/1Password\ 7.app
 # /usr/libexec/ApplicationFirewall/socketfilterfw --blockapp /usr/local/Cellar/squid/4.8/sbin/squid
@@ -309,7 +309,7 @@ printf "\n"
 
 pfctl -F all -f /etc/pf.conf
 
-printf "\n${green}%s${nc}\n" "Strict mode enabled"
+printf "\n$green%s$normal\n" "Strict mode enabled"
 EOF
 chmod +x /usr/local/sbin/strict.sh
 ```
@@ -335,8 +335,8 @@ function disable()
 
 trap disable INT
 
-red=$'\e[1;31m'
-nc=$'\e[0m'
+red=$(tput setaf 1)
+normal=$(tput sgr0)
 
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /Applications/1Password\ 7.app
 # /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /usr/local/Cellar/squid/4.8/sbin/squid
@@ -350,7 +350,7 @@ printf "\n"
 
 pfctl -F all -f /etc/pf.conf
 
-printf "\n${red}%s${nc}\n\n" "Trusted mode enabled (press ctrl+c to disable)"
+printf "\n$red%s$normal\n\n" "Trusted mode enabled (press ctrl+c to disable)"
 
 while :
 do
@@ -379,12 +379,12 @@ function disable()
 
 trap disable INT
 
-red=$'\e[1;31m'
-nc=$'\e[0m'
+red=$(tput setaf 1)
+normal=$(tput sgr0)
 
 pfctl -d
 
-printf "\n${red}%s${nc}\n\n" "Firewall disabled (press ctrl+c to enable)"
+printf "\n$red%s$normal\n\n" "Firewall disabled (press ctrl+c to enable)"
 
 while :
 do

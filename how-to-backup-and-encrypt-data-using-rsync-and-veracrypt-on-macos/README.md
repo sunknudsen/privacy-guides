@@ -265,8 +265,8 @@ cat << EOF > /usr/local/bin/check.sh
 
 set -e
 
-red=$'\e[1;31m'
-nc=$'\e[0m'
+red=\$(tput setaf 1)
+normal=\$(tput sgr0)
 
 printf "Backup hash: "
 
@@ -275,7 +275,7 @@ read -r previous
 current=\$(openssl dgst -sha512 "$BACKUP_VOLUME_PATH")
 
 if [ "\$current" != "\$previous" ]; then
-  printf "\${red}%s\${nc}\n" "Integrity check failed"
+  printf "\$red%s\$normal\n" "Integrity check failed"
   exit 1
 fi
 

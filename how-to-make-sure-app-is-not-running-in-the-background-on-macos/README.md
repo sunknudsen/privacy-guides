@@ -83,13 +83,13 @@ cat << "EOF" >> ~/.zshrc
 # Kill apps that match string
 function kill-apps() {
   IFS=$'\n'
-  red=$'\e[1;31m'
-  nc=$'\e[0m'
+  red=$(tput setaf 1)
+  normal=$(tput sgr0)
   if [ -z "$1" ]; then
     printf "%s\n" "Usage: kill-apps string"
     return 1
   fi
-  printf "%s\n" "Finding apps that match \"$1\"..."
+  printf "%s\n" "Finding apps that match \"$1\"…"
   sleep 1
   processes=($(pgrep -afil "$1"))
   if [ ${#processes[@]} -eq 0 ]; then
@@ -97,10 +97,10 @@ function kill-apps() {
     return 0
   else
     printf "%s\n" "${processes[@]}"
-    printf "${red}%s${nc}" "Kill found apps (y or n)? "
+    printf "$red%s$normal" "Kill found apps (y or n)? "
     read -r answer
     if [ "$answer" = "y" ]; then
-      printf "%s\n" "Killing found apps..."
+      printf "%s\n" "Killing found apps…"
       sleep 1
       for process in "${processes[@]}"; do
         echo $process | awk '{print $1}' | xargs sudo kill 2>&1 | grep -v "No such process"
@@ -122,7 +122,7 @@ source ~/.zshrc
 
 ```console
 $ kill-apps adobe
-Finding apps that match "adobe"...
+Finding apps that match "adobe"…
 46639 /Library/Application Support/Adobe/Adobe Desktop Common/IPCBox/AdobeIPCBroker.app/Contents/MacOS/AdobeIPCBroker -launchedbyvulcan /Applications/Adobe Premiere Pro 2020/Adobe Premiere Pro 2020.app/Contents/MacOS/Adobe Premiere Pro 2020
 46645 /Library/Application Support/Adobe/Creative Cloud Libraries/CCLibrary.app/Contents/MacOS/../libs/node /Library/Application Support/Adobe/Creative Cloud Libraries/CCLibrary.app/Contents/MacOS/../js/server.js
 46653 /Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app/Contents/MacOS/../libs/Adobe_CCXProcess.node /Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app/Contents/MacOS/../js/main.js
