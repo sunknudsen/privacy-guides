@@ -26,7 +26,7 @@ First, thanks for contributing. 🙌
 
 We have you back, **you are not alone!**
 
-Please search for answers on privacy guides [discussions](https://github.com/sunknudsen/privacy-guides/discussions) and, if you don’t find what you are looking for, please start a new discussion.
+Please search for answers on privacy guides [discussions](https://github.com/sunknudsen/privacy-guides/discussions) and, if you don’t find what you are looking for, please start new discussion.
 
 ## How to peer review and sign guide
 
@@ -36,7 +36,7 @@ Please search for answers on privacy guides [discussions](https://github.com/sun
 
 ### Step 2: checkout [draft](https://github.com/sunknudsen/privacy-guides/tree/draft)
 
-### Step 3: review guide and submit recommendations using [issues](https://github.com/sunknudsen/privacy-guides/issues)
+### Step 3: review guide and submit suggestions using [issues](https://github.com/sunknudsen/privacy-guides/issues)
 
 Once consensus has been reached (issues are closed) and updated guide has been published to [draft.sunknudsen.com](https://draft.sunknudsen.com/), time for [step 4](#step-4-append-yourself-to-reviewers-comma-separated).
 
