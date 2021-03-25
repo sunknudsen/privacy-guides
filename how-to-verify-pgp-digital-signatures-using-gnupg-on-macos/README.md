@@ -40,7 +40,7 @@ brew install gnupg
 
 ## Usage guide
 
-### Import signer’s public key using key server or public key URL…
+### Import signer’s public key using key server…
 
 > Heads-up: replace `0xC1323A377DE14C8B` with signer’s public key ID.
 
