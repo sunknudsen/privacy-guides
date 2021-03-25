@@ -323,6 +323,10 @@ n
 Done
 ```
 
+Done
+
+👍
+
 The following image is now available on USB flash drive.
 
 ![177cc163](./177cc163.jpg?shadow=1)
@@ -356,6 +360,10 @@ gpg: encrypted with 1 passphrase
 Secret: this is a test yo
 Done
 ```
+
+Done
+
+👍
 
 ### Clone encrypted paper backup
 
@@ -399,6 +407,10 @@ n
 Done
 ```
 
+Done
+
+👍
+
 The following image is now available on USB flash drive.
 
 ![524d8219](./524d8219.jpg?shadow=1)
@@ -434,5 +446,7 @@ dd: error writing '/dev/sda1': No space left on device
 1957691392 bytes (2.0 GB, 1.8 GiB) copied, 195.558 s, 10.0 MB/s
 Done
 ```
+
+Done
 
 👍

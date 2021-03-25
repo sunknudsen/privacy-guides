@@ -114,6 +114,8 @@ Network download speed: 95.82 Mbps
 
 Network upload speed: 95.63 Mbps
 
+👍
+
 ### Benchmark CPU
 
 ```console
@@ -151,6 +153,8 @@ Threads fairness:
 ```
 
 CPU events per second: 403.87
+
+👍
 
 ### Benchmark memory
 
@@ -195,6 +199,8 @@ Threads fairness:
 ```
 
 Memory speed: 3926.74 MiB/sec
+
+👍
 
 ### Benchmark disk
 
@@ -271,3 +277,5 @@ Removing test files..
 Disk read throughput: 42.61 MiB/s
 
 Disk write throughput: 28.41 MiB/s
+
+👍
