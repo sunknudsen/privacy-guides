@@ -146,7 +146,7 @@ Filesystem:
  3) Mac OS Extended
  4) exFAT
  5) APFS
-Select [3]:
+Select [4]:
 
 Enter password:
 Re-enter password:
