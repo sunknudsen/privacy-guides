@@ -16,7 +16,7 @@ Listed: true
 
 ### Step 1: create [Twilio](https://www.twilio.com/) account
 
-Go to https://www.twilio.com/ and sign up (please consider using my [referral link](www.twilio.com/referral/EwWmgH) so we are both eligible to a 10$ credit).
+Go to https://www.twilio.com/ and sign up (please consider using my [referral link](https://www.twilio.com/referral/EwWmgH) so we are both eligible to a 10$ credit).
 
 ### Step 2: create “Forward voice” bin (used for phone call verification)
 
