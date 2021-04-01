@@ -218,7 +218,15 @@ files=(
 )
 
 for file in "\${files[@]}"; do
-  rsync -axRS --delete --backup --backup-dir "\$mount_point/Versioning" --suffix="\$(date +".%F-%H%M%S")" "\$file" "\$mount_point"
+  rsync \
+    -axRS \
+    --backup \
+    --backup-dir \
+    "\$mount_point/Versioning" \
+    --delete \
+    --suffix="\$(date +".%F-%H%M%S")" \
+    "\$file" \
+    "\$mount_point"
 done
 
 if [ "\$(find "\$mount_point/Versioning" -type f -ctime +90)" != "" ]; then
