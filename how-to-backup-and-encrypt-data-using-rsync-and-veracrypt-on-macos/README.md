@@ -160,8 +160,75 @@ Please type at least 320 randomly chosen characters and then press Enter:
 
 Done: 100.000%  Speed:  24 MiB/s  Left: 0 s
 
+Error: mount_macfuse: the file system is not available (1)
+```
+
+> Heads-up: given “FUSE for macOS” is a third-party extension, macOS prevents using the extension without explicit user consent (granted by clicking “Allow” in “System Preferences” / “Privacy & Security”).
+
+![Allow extension 1](./allow-extension-1.png?shadow=1&width=420)
+
+![Allow extension 2](./allow-extension-2.png?shadow=1&width=668)
+
+```console
+$ veracrypt --text --create "$BACKUP_VOLUME_PATH"
+Volume type:
+ 1) Normal
+ 2) Hidden
+Select [1]:
+
+Enter volume size (sizeK/size[M]/sizeG): 1G
+
+Encryption Algorithm:
+ 1) AES
+ 2) Serpent
+ 3) Twofish
+ 4) Camellia
+ 5) Kuznyechik
+ 6) AES(Twofish)
+ 7) AES(Twofish(Serpent))
+ 8) Camellia(Kuznyechik)
+ 9) Camellia(Serpent)
+ 10) Kuznyechik(AES)
+ 11) Kuznyechik(Serpent(Camellia))
+ 12) Kuznyechik(Twofish)
+ 13) Serpent(AES)
+ 14) Serpent(Twofish(AES))
+ 15) Twofish(Serpent)
+Select [7]:
+
+Hash algorithm:
+ 1) SHA-512
+ 2) Whirlpool
+ 3) SHA-256
+ 4) Streebog
+Select [1]:
+
+Filesystem:
+ 1) None
+ 2) FAT
+ 3) Mac OS Extended
+ 4) exFAT
+ 5) APFS
+Select [3]:
+
+Enter password:
+Re-enter password:
+
+Enter PIM:
+
+Enter keyfile path [none]:
+
+Please type at least 320 randomly chosen characters and then press Enter:
+
+
+Done: 100.000%  Speed:  24 MiB/s  Left: 0 s
+
 The VeraCrypt volume has been successfully created.
 ```
+
+The VeraCrypt volume has been successfully created.
+
+👍
 
 ### Step 11 (optional): mount, rename and dismount encrypted volume
 
@@ -180,6 +247,10 @@ Enter password for /Volumes/Samsung BAR/backup:
 $ diskutil rename "untitled" "Backup"
 Volume on disk3 renamed to Backup
 ```
+
+Volume on disk3 renamed to Backup
+
+👍
 
 #### Dismount encrypted volume
 
