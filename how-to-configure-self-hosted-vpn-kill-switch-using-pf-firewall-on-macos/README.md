@@ -267,7 +267,7 @@ Find which shell is configured using `echo $SHELL`.
 
 ```shell
 cat << "EOF" >> ~/.bash_profile
-export PATH=${PATH}:/usr/local/sbin
+export PATH=$PATH:/usr/local/sbin
 EOF
 source ~/.bash_profile
 ```
@@ -276,7 +276,7 @@ source ~/.bash_profile
 
 ```shell
 cat << "EOF" >> ~/.zshrc
-export PATH=${PATH}:/usr/local/sbin
+export PATH=$PATH:/usr/local/sbin
 EOF
 source ~/.zshrc
 ```
