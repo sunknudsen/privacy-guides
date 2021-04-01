@@ -196,7 +196,7 @@ pass on \$hardware_interfaces proto { tcp, udp } from any to \$vpn_endpoint_ips
 # Allow all requests on VPN interface
 pass on \$vpn_interface all
 EOF
-sudo chmod 600 /etc/pf.anchors/local.pf.strict
+sudo chmod 644 /etc/pf.anchors/local.pf.strict
 ```
 
 ### Step 7: create PF trusted anchor
@@ -237,7 +237,7 @@ pass on \$hardware_interfaces proto { tcp, udp } from any to \$vpn_endpoint_ips
 # Allow all requests on VPN interface
 pass on \$vpn_interface all
 EOF
-sudo chmod 600 /etc/pf.anchors/local.pf.trusted
+sudo chmod 644 /etc/pf.anchors/local.pf.trusted
 ```
 
 ### Step 8: create `/etc/pf.anchors/local.pf` symlink
