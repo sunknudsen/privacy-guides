@@ -23,6 +23,9 @@ Listed: true
 ### Step 4: open `about:config` and set the following
 
 ```
+beacon.enabled = false
+browser.send_pings = false
+dom.battery.enabled = false
 dom.event.clipboardevents.enabled = false
 geo.enabled = false
 media.eme.enabled = false
