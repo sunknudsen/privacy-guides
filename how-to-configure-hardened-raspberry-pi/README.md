@@ -194,7 +194,7 @@ exit
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
@@ -335,7 +335,7 @@ systemctl reboot
 
 Replace `10.0.1.248` with IP of Raspberry Pi.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
+When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
 ssh pi@10.0.1.248 -i ~/.ssh/pi
