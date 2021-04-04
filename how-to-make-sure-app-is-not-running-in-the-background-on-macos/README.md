@@ -89,7 +89,7 @@ function kill-apps() {
     printf "%s\n" "Usage: kill-apps string"
     return 1
   fi
-  printf "%s\n" "Finding apps that match \"$1\"…"
+  printf "%s\n" "Finding apps that match “$1”…"
   sleep 1
   processes=($(pgrep -afil "$1"))
   if [ ${#processes[@]} -eq 0 ]; then
