@@ -97,7 +97,7 @@ uid                      John Doe <john@example.net>
 sub   rsa4096 2021-03-24 [E]
 ```
 
-### Step 5: back up `~/.gnupg` folder (learn how [here](http://localhost:3001/privacy-guides/how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
+### Step 5: back up `~/.gnupg` folder (learn how [here](../how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
 
 > Heads-up: files stored in `~/.gnupg` include private keys which, if lost, results in loosing one’s cryptographic identity (safeguard backup carefully).
 

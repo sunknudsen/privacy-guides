@@ -201,7 +201,7 @@ Write down the passphrase. Store both at safe place(s).
 
 ```
 
-#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](http://localhost:3001/privacy-guides/how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
+#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](../how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
 
 > Heads-up: both key (stored in `~/.config/borg`) and passphrase (stored in `~/Library/Keychains`) are required to decrypt backup.
 
