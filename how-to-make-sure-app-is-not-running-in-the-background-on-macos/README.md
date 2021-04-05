@@ -24,8 +24,8 @@ Listed: true
 ### Step 1: find app launch agent and daemon bundle identifier prefix
 
 ```console
-$ ls -A1 {,~}/Library/LaunchAgents/ /Library/LaunchDaemons
-/Library/LaunchAgents/:
+$ ls -A1 {,~}/Library/LaunchAgents /Library/LaunchDaemons
+/Library/LaunchAgents:
 at.obdev.LittleSnitchHelper.plist
 at.obdev.LittleSnitchUIAgent.plist
 com.adobe.ARMDCHelper.cc24aef4a1b90ed56a725c38014c95072f92651fb65e1bf9c8e43c37a23d420d.plist
@@ -64,7 +64,7 @@ com.adobe
 ```shell
 BUNDLE_IDENTIFIER_PREFIX="com.adobe"
 sudo launchctl unload -w /Library/{LaunchAgents,LaunchDaemons}/$BUNDLE_IDENTIFIER_PREFIX*.plist
-launchctl unload -w ~/Library/LaunchAgents/$BUNDLE_IDENTIFIER_PREFIX*.plist
+launchctl unload -w {,~}/Library/LaunchAgents/$BUNDLE_IDENTIFIER_PREFIX*.plist
 ```
 
 ### Step 3: disable app extensions
