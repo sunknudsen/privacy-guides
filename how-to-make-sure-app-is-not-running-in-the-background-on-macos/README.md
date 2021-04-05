@@ -63,8 +63,8 @@ com.adobe
 
 ```shell
 BUNDLE_IDENTIFIER_PREFIX="com.adobe"
-launchctl unload -w {,~}/Library/LaunchAgents/$BUNDLE_IDENTIFIER_PREFIX*.plist
-sudo launchctl unload -w /Library/LaunchDaemons/$BUNDLE_IDENTIFIER_PREFIX*.plist
+sudo launchctl unload -w /Library/{LaunchAgents,LaunchDaemons}/$BUNDLE_IDENTIFIER_PREFIX*.plist
+launchctl unload -w ~/Library/LaunchAgents/$BUNDLE_IDENTIFIER_PREFIX*.plist
 ```
 
 ### Step 3: disable app extensions
