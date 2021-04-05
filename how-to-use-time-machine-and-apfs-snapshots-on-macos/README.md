@@ -46,33 +46,48 @@ Click “Time Machine” menu bar icon and then “Back Up Now” or run `tmutil
 
 Heads-up: use `tmutil listbackups` to list backups.
 
-```shell
-sudo tmutil delete "/Volumes/LaCie/Backups.backupdb/Sun’s MacBook Pro/2021-04-05-082332"
+```console
+$ sudo tmutil delete "/Volumes/LaCie/Backups.backupdb/Sun’s MacBook Pro/2021-04-05-161636"
+Deleting: /Volumes/LaCie/Backups.backupdb/Sun’s MacBook Pro/2021-04-05-161636
+Deleted (43.5M): /Volumes/LaCie/Backups.backupdb/Sun’s MacBook Pro/2021-04-05-161636
+Total deleted: 43.5M
 ```
+
+Total deleted: 43.5M
+
+👍
 
 ## APFS snapshot usage guide
 
 ### Create local APFS snapshot
 
-```shell
-tmutil localsnapshot
+```console
+$ tmutil localsnapshot
+Created local snapshot with date: 2021-04-05-162425
 ```
+
+Created local snapshot with date: 2021-04-05-162425
+
+👍
 
 ### List local APFS snapshots
 
-```shell
-tmutil listlocalsnapshots /
+```console
+$ tmutil listlocalsnapshots /
+Snapshots for volume group containing disk /:
+com.apple.TimeMachine.2021-04-05-162416.local
+com.apple.TimeMachine.2021-04-05-162425.local
 ```
 
 ### Mount local read-only APFS snapshot
 
 Heads-up: use `umount /tmp/snapshot` to unmount snapshot.
 
-Replace `com.apple.TimeMachine.2021-04-05-082935.local` with snapshot from [List local APFS snapshots](#list-local-apfs-snapshots).
+Replace `com.apple.TimeMachine.2021-04-05-162416.local` with snapshot from [List local APFS snapshots](#list-local-apfs-snapshots).
 
 ```shell
 mkdir -p /tmp/snapshot
-mount_apfs -s com.apple.TimeMachine.2021-04-05-082935.local / /tmp/snapshot
+mount_apfs -s com.apple.TimeMachine.2021-04-05-162416.local / /tmp/snapshot
 open /tmp/snapshot
 ```
 
@@ -86,12 +101,23 @@ Select “Restore From Time Machine Backup”, then “Macintosh HD”, choose l
 
 > Heads-up: use `tmutil listlocalsnapshotdates` to list local snapshot dates.
 
+```console
+$ tmutil deletelocalsnapshots 2021-04-05-162416
+Deleted local snapshot '2021-04-05-162416'
 ```
-tmutil deletelocalsnapshots 2021-04-05-082935
-```
+
+Deleted local snapshot '2021-04-05-162416'
+
+👍
 
 ### Delete all local APFS snapshot
 
+```console
+$ tmutil deletelocalsnapshots /
+Deleted 1 Time Machine local snapshots for volume group containing disk '/'
+com.apple.TimeMachine.2021-04-05-162425.local
 ```
-tmutil deletelocalsnapshots /
-```
+
+Deleted 1 Time Machine local snapshots for volume group containing disk '/'
+
+👍
