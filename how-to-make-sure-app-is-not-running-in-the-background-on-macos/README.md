@@ -69,7 +69,7 @@ sudo launchctl unload -w /Library/LaunchDaemons/$BUNDLE_IDENTIFIER_PREFIX*.plist
 
 ### Step 3: disable app extensions
 
-Open “System Preferences”, then click “Extensions” and uncheck app extensions (if any).
+Open “System Preferences”, click “Extensions” and disable app extensions (if any).
 
 ![core-sync](./core-sync.png?shadow=1)
 
