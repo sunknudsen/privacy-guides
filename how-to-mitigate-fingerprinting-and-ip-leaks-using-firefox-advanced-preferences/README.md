@@ -2,7 +2,7 @@
 Title: How to mitigate fingerprinting and IP leaks using Firefox advanced preferences
 Description: Learn how to mitigate fingerprinting and IP leaks using Firefox advanced preferences.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, AmadeuszL <https://github.com/AmadeuszL>
 Reviewers:
 Publication date: 2020-05-15T00:00:00.000Z
 Listed: true
