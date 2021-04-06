@@ -10,6 +10,8 @@ Listed: true
 
 # How to use Time Machine and APFS snapshots on macOS
 
+[![How to use Time Machine and APFS snapshots on macOS](how-to-use-time-machine-and-apfs-snapshots-on-macos.png)](https://www.youtube.com/watch?v=PY2gzNrK9Wc "How to use Time Machine and APFS snapshots on macOS")
+
 ## Time Machine setup guide
 
 ### Step 1: exclude folders from Time Machine
