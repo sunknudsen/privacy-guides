@@ -11,17 +11,28 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-backup.sh [options]" \
     "" \
     "Options:" \
-    "  --create-seed    create 24-word BIP39 seed" \
-    "  --validate-seed  validate if secret is BIP39 seed" \
-    "  -h, --help       display help for command"
+    "  --create-bip39-mnemonic      create BIP39 mnemonic" \
+    "  --create-electrum-mnemonic   create Electrum mnemonic" \
+    "  --validate-bip39-mnemonic    validate if secret is valid BIP39 mnemonic" \
+    "  --label <label>              print label after short hash" \
+    "  -h, --help                   display help for command"
     exit 0
     ;;
-    --create-seed)
-    create_seed=true
+    --create-bip39-mnemonic)
+    create_bip39_mnemonic=true
     shift
     ;;
-    --validate-seed)
-    validate_seed=true
+    --create-electrum-mnemonic)
+    create_electrum_mnemonic=true
+    shift
+    ;;
+    --validate-bip39-mnemonic)
+    validate_bip39_mnemonic=true
+    shift
+    ;;
+    --label)
+    label=$2
+    shift
     shift
     ;;
     *)
@@ -70,9 +81,16 @@ if ! mount | grep $usb > /dev/null; then
   sudo mount $dev $usb -o uid=pi,gid=pi
 fi
 
-if [ "$create_seed" = true ]; then
-  printf "%s\n" "Creating 24-word BIP39 seed…"
-  secret=$(python3 $basedir/create-seed.py)
+if [ "$create_bip39_mnemonic" = true ]; then
+  printf "%s\n" "Creating BIP39 mnemonic…"
+  secret=$(python3 $basedir/create-bip39-mnemonic.py)
+  echo $secret
+  sleep 1
+fi
+
+if [ "$create_electrum_mnemonic" = true ]; then
+  printf "%s\n" "Creating Electrum mnemonic…"
+  secret=$(electrum make_seed --nbits 264 --offline)
   echo $secret
   sleep 1
 fi
@@ -91,10 +109,10 @@ if [ -z "$secret" ]; then
   fi
 fi
 
-if [ "$validate_seed" = true ]; then
-  printf "%s\n" "Validate if secret is BIP39 seed…"
-  if ! echo -n $secret | python3 $basedir/validate-seed.py; then
-    printf "$red%s$normal\n" "Invalid BIP39 seed"
+if [ "$validate_bip39_mnemonic" = true ]; then
+  printf "%s\n" "Validating if secret is valid BIP39 mnemonic…"
+  if ! echo -n $secret | python3 $basedir/validate-bip39-mnemonic.py; then
+    printf "$red%s$normal\n" "Invalid BIP39 mnemonic"
     exit 1
   fi
 fi
@@ -114,7 +132,13 @@ echo -n "$encrypted_secret" | qr --error-correction=H > "$tmp/secret.png"
 font_size=$(echo "$(convert "$tmp/secret.png" -format "%h" info:) / 8" | bc)
 text_offset=$(echo "$font_size * 1.5" | bc)
 
-convert "$tmp/secret.png" -gravity center -scale 200% -extent 125% -scale 125% -gravity south -font /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf -pointsize $font_size -fill black -draw "text 0,$text_offset '$encrypted_secret_short_hash'" "$usb/$encrypted_secret_short_hash.jpg"
+if [ -z "$label" ]; then
+  text="$encrypted_secret_short_hash"
+else
+  text="$encrypted_secret_short_hash $label"
+fi
+
+convert "$tmp/secret.png" -gravity center -scale 200% -extent 125% -scale 125% -gravity south -font /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf -pointsize $font_size -fill black -draw "text 0,$text_offset '$text'" "$usb/$encrypted_secret_short_hash.jpg"
 
 printf "%s\n" "Show SHA512 hash as QR code? (y or n)? "
 

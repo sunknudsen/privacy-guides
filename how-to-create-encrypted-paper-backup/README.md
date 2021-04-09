@@ -94,9 +94,72 @@ $ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >
 $ source ~/.bashrc
 ```
 
-### Step 5 (optional): install `screen` and [Trezor](https://trezor.io/)’s [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor)
+### Step 5 (optional): install [Electrum](https://electrum.org/#home) (required to generate Electrum mnemonic)
 
-> Heads-up: we will likely use `screen` and `trezorcrl` command line utilities in the future and this guide is designed to configure a [read-only](#step-12-make-filesystem-read-only) Raspberry Pi.
+#### Install Electrum dependencies
+
+```shell
+apt install -y libsecp256k1-0 python3-cryptography
+```
+
+#### Set Electrum release semver environment variable
+
+> Heads-up: replace `4.1.2` with [latest release](https://electrum.org/#download).
+
+```shell
+ELECTRUM_RELEASE_SEMVER=4.1.2
+```
+
+#### Download Electrum release and PGP signature
+
+```shell
+curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz"
+curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
+```
+
+#### Import ThomasV’s PGP public key
+
+```console
+$ curl https://raw.githubusercontent.com/spesmilo/electrum/master/pubkeys/ThomasV.asc | gpg --import
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  4739  100  4739    0     0  22459      0 --:--:-- --:--:-- --:--:-- 22459
+gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
+gpg: key 2BD5824B7F9470E6: public key "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+```
+
+imported: 1
+
+👍
+
+#### Verify Electrum release using GnuPG (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+
+```console
+$ gpg --verify Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc
+gpg: assuming signed data in 'Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz'
+gpg: Signature made Thu 08 Apr 2021 09:47:30 EDT
+gpg:                using RSA key 6694D8DE7BE8EE5631BED9502BD5824B7F9470E6
+gpg: Good signature from "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" [unknown]
+gpg:                 aka "ThomasV <thomasv1@gmx.de>" [unknown]
+gpg:                 aka "Thomas Voegtlin <thomasv1@gmx.de>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 6694 D8DE 7BE8 EE56 31BE  D950 2BD5 824B 7F94 70E6
+```
+
+Good signature
+
+👍
+
+#### Install Electrum
+
+```shell
+pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
+```
+
+### Step 6 (optional): install `screen` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (required to validate integrity of [Trezor](https://trezor.io/) encrypted paper backups)
 
 ```console
 $ sudo apt install -y screen
@@ -106,47 +169,47 @@ $ pip3 install attrs trezor --user
 $ sudo curl https://data.trezor.io/udev/51-trezor.rules -o /etc/udev/rules.d/51-trezor.rules
 ```
 
-### Step 6: download [create-seed.py](./create-seed.py) ([PGP signature](./create-seed.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 7: download [create-bip39-mnemonic.py](./create-bip39-mnemonic.py) ([PGP signature](./create-bip39-mnemonic.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
-sudo curl -o /usr/local/sbin/create-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-seed.py
+sudo curl -o /usr/local/sbin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
 ```
 
-### Step 7: download [validate-seed.py](./validate-seed.py) ([PGP signature](./validate-seed.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 8: download [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py) ([PGP signature](./validate-bip39-mnemonic.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
-sudo curl -o /usr/local/sbin/validate-seed.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-seed.py
+sudo curl -o /usr/local/sbin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
 ```
 
-### Step 8: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 9: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
 sudo chmod +x /usr/local/sbin/qr-backup.sh
 ```
 
-### Step 9: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 10: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
 sudo chmod +x /usr/local/sbin/qr-restore.sh
 ```
 
-### Step 10: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 11: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
 sudo chmod +x /usr/local/sbin/qr-clone.sh
 ```
 
-### Step 11: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 12: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ```shell
 sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
 sudo chmod +x /usr/local/sbin/secure-erase.sh
 ```
 
-### Step 12: make filesystem read-only
+### Step 13: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -210,13 +273,13 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 13: disable Wi-Fi (if not using ethernet)
+### Step 14: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 14: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 15: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -224,13 +287,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 15: delete macOS hidden files (if present)
+### Step 16: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 16: reboot
+### Step 17: reboot
 
 ```shell
 sudo systemctl reboot
@@ -238,9 +301,9 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
 
-### Step 17 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 18 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-15-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-16-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
 Insert micro SD card into macOS computer, run following and eject card.
 
@@ -250,7 +313,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 18 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
+### Step 19 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
@@ -293,16 +356,16 @@ SHA512(/dev/rdisk2)= 353af7e9bd78d7d98875f0e2a58da3d7cdfc494f2ab5474b2ab4a8fd212
 
 ### Create encrypted paper backup
 
-> Heads-up: use `--bip39` to test secret against BIP39 [word list](https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt).
-
 ```console
 $ qr-backup.sh --help
 Usage: qr-backup.sh [options]
 
 Options:
-  --create-seed    create 24-word BIP39 seed
-  --validate-seed  validate if secret is BIP39 seed
-  -h, --help       display help for command
+  --create-bip39-mnemonic      create BIP39 mnemonic
+  --create-electrum-mnemonic   create Electrum mnemonic
+  --validate-bip39-mnemonic    validate if secret is valid BIP39 mnemonic
+  --label <label>              print label after short hash
+  -h, --help                   display help for command
 
 $ qr-backup.sh
 Format USB flash drive? (y or n)?
@@ -336,7 +399,7 @@ The following image is now available on USB flash drive.
 > Heads-up: use `--word-list` to split secret into word list.
 
 ```console
-$ qr-restore.sh
+$ qr-restore.sh --help
 Usage: qr-restore.sh [options]
 
 Options:
