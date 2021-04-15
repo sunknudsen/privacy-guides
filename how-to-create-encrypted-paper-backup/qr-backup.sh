@@ -1,6 +1,9 @@
 #! /bin/bash
 
 set -e
+set -o pipefail
+
+shamir_secret_sharing=false
 
 number_of_shares=5
 share_threshold=3
@@ -20,8 +23,7 @@ while [[ $# -gt 0 ]]; do
     "  --shamir-secret-sharing      split secret using Shamir Secret Sharing" \
     "  --number-of-shares           number of shares (defaults to 5)" \
     "  --share-threshold            shares required to access secret (defaults to 3)" \
-    "  --no-encryption              disable symmetric encryption (shamir-only)" \
-    "  --no-qr                      disable “Show SHA512 hash as QR code”" \
+    "  --no-qr                      disable show SHA512 hash as QR code prompt" \
     "  --label <label>              print label after short hash" \
     "  -h, --help                   display help for command"
     exit 0
@@ -50,10 +52,6 @@ while [[ $# -gt 0 ]]; do
     --share-threshold)
     share_threshold=$2
     shift
-    shift
-    ;;
-    --no-encryption)
-    no_encryption=true
     shift
     ;;
     --no-qr)
@@ -96,19 +94,20 @@ wait_for_usb_flash_drive () {
 
 wait_for_usb_flash_drive
 
-printf "$bold%s$normal\n" "Format USB flash drive? (y or n)? "
+printf "$bold%s$normal\n" "Format USB flash drive (y or n)?"
 
 read -r answer
 if [ "$answer" = "y" ]; then
-  if mount | grep $usb > /dev/null; then
+  if mount | grep $dev > /dev/null; then
     sudo umount $dev
   fi
   sudo mkfs -t vfat $dev
 fi
 
 sudo mkdir -p $usb
-if ! mount | grep $usb > /dev/null; then
-  sudo mount $dev $usb -o uid=pi,gid=pi
+
+if ! mount | grep $dev > /dev/null; then
+  sudo mount $dev $usb --options uid=pi,gid=pi
 fi
 
 if [ -z "$duplicate" ] && [ "$create_bip39_mnemonic" = true ]; then
@@ -127,16 +126,16 @@ fi
 
 if [ -z "$duplicate" ] && [ -z "$secret" ]; then
   tput sc
-  printf "$bold%s$normal\n" "Type secret and press enter, then ctrl-d"
+  printf "$bold%s$normal\n" "Please type secret and press enter, then ctrl+d"
   readarray -t secret_array
   secret=$(printf "%s\n" "${secret_array[@]}")
   tput rc
   tput ed
-  printf "$bold%s$normal\n" "Type secret and press enter, then ctrl-d (again)"
+  printf "$bold%s$normal\n" "Please type secret and press enter, then ctrl+d (again)"
   readarray -t secret_confirmation_array
   secret_confirmation=$(printf "%s\n" "${secret_confirmation_array[@]}")
   if [ ! "$secret" = "$secret_confirmation" ]; then
-    printf "$red%s$normal\n" "Secrets do not match"
+    printf "$bold$red%s$normal\n" "Secrets do not match"
     exit 1
   fi
 fi
@@ -149,25 +148,36 @@ if [ -z "$duplicate" ] && [ "$validate_bip39_mnemonic" = true ]; then
   fi
 fi
 
-if [ "$duplicate" = true ] && [ -n "$encrypted_secret" ]; then
-  printf "%s\n" "Duplicating encrypted secret…"
-else
-  if [ -z "$shamir_secret_sharing" ] || ([ "$shamir_secret_sharing" = true ] && [ -z "$no_encryption" ]); then
-    encrypted_secret=$(echo -n "$secret" | gpg --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor)
-    gpg-connect-agent reloadagent /bye > /dev/null 2>&1
+read_passphrase () {
+  local -n data=$1
+
+  printf "$bold%s$normal\n" "Please type passphrase and press enter"
+  read -rs data
+  printf "$bold%s$normal\n" "Please type passphrase and press enter (again)"
+  read -rs data_confirmation
+  if [ ! "$data" = "$data_confirmation" ]; then
+    printf "$red%s$normal\n" "Passphrases do not match"
+    return 1
   fi
-fi
+
+  printf "$bold%s$normal\n" "Show passphrase (y or n)?"
+
+  read -r answer
+  if [ "$answer" = "y" ]; then
+    printf "%s\n" $data
+  fi
+}
 
 if [ "$shamir_secret_sharing" = true ]; then
-  if [ -n "$encrypted_secret" ]; then
-    secret="$encrypted_secret"
-  fi
+  read_passphrase passphrase
 
   share_number=1
-  for share in $(echo -n "$secret" | secret-share-split -n $number_of_shares -t $share_threshold); do
-    printf "$bold%s$normal\n" "Generating share $share_number or $number_of_shares…"
 
-    encrypted_secret="$share"
+  for share in $(echo -n "$secret" | secret-share-split -n $number_of_shares -t $share_threshold); do
+    printf "$bold%s$normal\n" "Encrypting secret share $share_number of $number_of_shares…"
+
+    encrypted_secret=$(echo -n "$share" | gpg --batch --passphrase-fd 3 --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor 3<<<"$passphrase")
+
     encrypted_secret_hash=$(echo -n "$encrypted_secret" | openssl dgst -sha512 | sed 's/^.* //')
     encrypted_secret_short_hash=$(echo -n "$encrypted_secret_hash" | head -c 8)
 
@@ -181,15 +191,15 @@ if [ "$shamir_secret_sharing" = true ]; then
     text_offset=$(echo "$font_size * 1.5" | bc)
 
     if [ -z "$label" ]; then
-      text="$encrypted_secret_short_hash $share_number"
+      text="$encrypted_secret_short_hash"
     else
-      text="$encrypted_secret_short_hash $label-$share_number"
+      text="$encrypted_secret_short_hash $label"
     fi
 
     convert "$tmp/secret.png" -gravity center -scale 200% -extent 125% -scale 125% -gravity south -font /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf -pointsize $font_size -fill black -draw "text 0,$text_offset '$text'" "$usb/$encrypted_secret_short_hash.jpg"
 
     if [ -z "$no_qr" ]; then
-      printf "$bold%s$normal\n" "Show SHA512 hash as QR code? (y or n)? "
+      printf "$bold%s$normal\n" "Show SHA512 hash as QR code (y or n)?"
 
       read -r answer
       if [ "$answer" = "y" ]; then
@@ -203,6 +213,16 @@ if [ "$shamir_secret_sharing" = true ]; then
     share_number=$((share_number+1))
   done
 else
+  if [ "$duplicate" = true ] && [ -n "$encrypted_secret" ]; then
+    printf "%s\n" "Duplicating encrypted secret…"
+  else
+    read_passphrase passphrase
+
+    printf "$bold%s$normal\n" "Encrypting secret…"
+
+    encrypted_secret=$(echo -n "$secret" | gpg --batch --passphrase-fd 3 --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor 3<<<"$passphrase")
+  fi
+
   encrypted_secret_hash=$(echo -n "$encrypted_secret" | openssl dgst -sha512 | sed 's/^.* //')
   encrypted_secret_short_hash=$(echo -n "$encrypted_secret_hash" | head -c 8)
 
@@ -224,7 +244,7 @@ else
   convert "$tmp/secret.png" -gravity center -scale 200% -extent 125% -scale 125% -gravity south -font /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf -pointsize $font_size -fill black -draw "text 0,$text_offset '$text'" "$usb/$encrypted_secret_short_hash.jpg"
 
   if [ -z "$no_qr" ]; then
-    printf "$bold%s$normal\n" "Show SHA512 hash as QR code? (y or n)? "
+    printf "$bold%s$normal\n" "Show SHA512 hash as QR code (y or n)?"
 
     read -r answer
     if [ "$answer" = "y" ]; then
@@ -236,6 +256,6 @@ else
   fi
 fi
 
-sudo umount $usb
+sudo umount $dev
 
 printf "%s\n" "Done"

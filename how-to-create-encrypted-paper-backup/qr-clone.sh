@@ -1,6 +1,7 @@
 #! /bin/bash
 
 set -e
+set -o pipefail
 
 positional=()
 while [[ $# -gt 0 ]]; do
@@ -11,12 +12,24 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-clone.sh [options]" \
     "" \
     "Options:" \
-    "  --duplicate    duplicate content" \
-    "  -h, --help     display help for command"
+    "  --duplicate            duplicate content" \
+    "  --qr-restore-options   see \`qr-restore.sh --help\`" \
+    "  --qr-backup-options    see \`qr-backup.sh --help\`" \
+    "  -h, --help             display help for command"
     exit 0
     ;;
     --duplicate)
     duplicate=true
+    shift
+    ;;
+    --qr-restore-options)
+    qr_restore_options=$2
+    shift
+    shift
+    ;;
+    --qr-backup-options)
+    qr_backup_options=$2
+    shift
     shift
     ;;
     *)
@@ -34,19 +47,9 @@ normal=$(tput sgr0)
 tput reset
 
 printf "%s\n" "Restoring…"
-
-if [ -z "$duplicate" ]; then
-  printf "$bold%s$normal\n" "Type qr-restore.sh options and press enter (see “qr-restore.sh --help”)"
-  read -r qr_restore_options
-fi
-
-. qr-restore.sh $qr_restore_options
+eval . qr-restore.sh $qr_restore_options
 
 if [ -n "$secret" ] || [ -n "$encrypted_secret" ]; then
   printf "%s\n" "Backing up…"
-
-  printf "$bold%s$normal\n" "Type qr-backup.sh options and press enter (see “qr-backup.sh --help”)"
-  read -r qr_backup_options
-
-  . qr-backup.sh $qr_backup_options
+  eval . qr-backup.sh $qr_backup_options
 fi

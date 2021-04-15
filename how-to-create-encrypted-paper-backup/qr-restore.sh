@@ -1,6 +1,7 @@
 #! /bin/bash
 
 set -e
+set -o pipefail
 
 share_threshold=3
 
@@ -18,6 +19,11 @@ while [[ $# -gt 0 ]]; do
     "  --word-list                split secret into word list" \
     "  -h, --help                 display help for command"
     exit 0
+    ;;
+    --images)
+    images=$2
+    shift
+    shift
     ;;
     --shamir-secret-sharing)
     shamir_secret_sharing=true
@@ -45,7 +51,21 @@ bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
 
+dev="/dev/sda1"
+tmp="/tmp/pi"
+usb="/tmp/usb"
+
 tput reset
+
+if [ -n "$images" ]; then
+  IFS=',' read -r -a images <<< "$images"
+
+  sudo mkdir -p $usb
+
+  if ! mount | grep $usb > /dev/null; then
+    sudo mount $dev $usb --options uid=pi,gid=pi
+  fi
+fi
 
 scan_qr_code () {
   local -n data=$1
@@ -62,28 +82,59 @@ scan_qr_code () {
   printf "%s: $bold%s$normal\n" "SHA512 short hash" "$data_short_hash"
 }
 
+read_passphrase () {
+  local -n data=$1
+
+  printf "$bold%s$normal\n" "Please type passphrase and press enter"
+  read -rs data
+}
+
 if [ -z "$duplicate" ] && [ "$shamir_secret_sharing" = true ]; then
-  for share_number in $(seq 1 $share_threshold); do
-    printf "$bold%s$normal" "Prepare share $share_number or $share_threshold and press enter"
-    read -r confirmation
-    scan_qr_code share
-    shares="$share\n$shares"
-  done
-  encrypted_secret="$(echo -e "$shares" | secret-share-combine)"
+  read_passphrase passphrase
+
+  if [ -n "$images" ]; then
+    for image in ${images[@]}; do
+      printf "%s\n" "Processing $image…"
+
+      encrypted_share=$(zbarimg --quiet $usb/$image | sed 's/QR-Code://')
+
+      share=$(echo -e "$encrypted_share" | gpg --batch --passphrase-fd 3 --decrypt 3<<<"$passphrase")
+
+      shares="$share\n$shares"
+    done
+  else
+    for share_number in $(seq 1 $share_threshold); do
+      printf "$bold%s$normal" "Prepare secret share $share_number of $share_threshold and press enter"
+      read -r confirmation
+
+      scan_qr_code encrypted_share
+
+      share=$(echo -e "$encrypted_share" | gpg --batch --passphrase-fd 3 --decrypt 3<<<"$passphrase")
+
+      shares="$share\n$shares"
+    done
+  fi
+
+  secret="$(echo -e "$shares" | secret-share-combine)"
 else
-  scan_qr_code encrypted_secret
+  if [ -n "$images" ]; then
+    printf "%s\n" "Processing ${images[0]}…"
+
+    encrypted_secret=$(zbarimg --quiet $usb/${images[0]} | sed 's/QR-Code://')
+  else
+    scan_qr_code encrypted_secret
+  fi
+  if [ -z "$duplicate" ]; then
+    read_passphrase passphrase
+    
+    secret=$(echo -e "$encrypted_secret" | gpg --batch --passphrase-fd 3 --decrypt 3<<<"$passphrase")
+  fi
 fi
 
 if [ -z "$duplicate" ]; then
-  printf "$bold$red%s$normal\n" "Show secret? (y or n)? "
+  printf "$bold$red%s$normal\n" "Show secret (y or n)?"
   read -r answer
   if [ "$answer" = "y" ]; then
-    if [[ "$encrypted_secret" =~ "-----BEGIN PGP MESSAGE-----" ]]; then
-      secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
-    else
-      secret=$encrypted_secret
-    fi
-
     if [ "$word_list" = true ]; then
       printf "%s\n" "Secret:"
       array=($secret)
@@ -101,6 +152,10 @@ if [ -z "$duplicate" ]; then
       echo "$bold$secret$normal"
     fi
   fi
+fi
+
+if mount | grep $dev > /dev/null; then
+  sudo umount $dev
 fi
 
 printf "%s\n" "Done"

@@ -1,5 +1,8 @@
 #! /bin/bash
 
+set -e
+set -o pipefail
+
 rounds=3
 
 positional=()
@@ -52,7 +55,7 @@ waitForUsbThumbDrive () {
 
 waitForUsbThumbDrive
 
-printf "$bold$red%s$normal\n" "Secure erase USB flash drive? (y or n)? "
+printf "$bold$red%s$normal\n" "Secure erase USB flash drive (y or n)?"
 
 read -r answer
 if [ "$answer" = "y" ]; then

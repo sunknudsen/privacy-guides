@@ -101,7 +101,7 @@ $ source ~/.bashrc
 ```console
 $ sudo apt update
 
-$ sudo apt install -y autopoint build-essential git libv4l-dev libtool
+$ sudo apt install -y autopoint build-essential git libjpeg-dev libmagickwand-dev libtool libv4l-dev
 ```
 
 #### Clone zbar repository
@@ -684,8 +684,7 @@ Options:
   --shamir-secret-sharing      split secret using Shamir Secret Sharing
   --number-of-shares           number of shares (defaults to 5)
   --share-threshold            shares required to access secret (defaults to 3)
-  --no-encryption              disable symmetric encryption (shamir-only)
-  --no-qr                      disable “Show SHA512 hash as QR code”
+  --no-qr                      disable show SHA512 hash as QR code prompt
   --label <label>              print label after short hash
   -h, --help                   display help for command
 
@@ -725,7 +724,7 @@ $ qr-restore.sh --help
 Usage: qr-restore.sh [options]
 
 Options:
-  --shamir-secret-sharing    split secret using Shamir Secret Sharing
+  --shamir-secret-sharing    combine secret using Shamir Secret Sharing
   --share-threshold          shares required to access secret (defaults to 3)
   --word-list                split secret into word list
   -h, --help                 display help for command
@@ -759,8 +758,10 @@ $ qr-clone.sh --help
 Usage: qr-clone.sh [options]
 
 Options:
-  --duplicate    duplicate content
-  -h, --help     display help for command
+  --duplicate            duplicate content
+  --qr-restore-options   see `qr-restore.sh --help`
+  --qr-backup-options    see `qr-backup.sh --help`
+  -h, --help             display help for command
 
 $ qr-clone.sh
 Scan QR code…
