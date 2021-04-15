@@ -2,7 +2,7 @@
 Title: How to create encrypted paper backup
 Description: Learn how to create encrypted paper backup.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>, Daan Sprenkels<https://github.com/dsprenkels>
 Reviewers:
 Publication date: 2021-02-23T21:53:38.495Z
 Listed: false
@@ -80,12 +80,12 @@ sudo raspi-config
 
 Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and finally “Finish”.
 
-### Step 4: install dependencies
+### Step 4: install dependencies available on repositories
 
 ```console
 $ sudo apt update
 
-$ sudo apt install -y fim imagemagick zbar-tools
+$ sudo apt install -y fim imagemagick
 
 $ pip3 install mnemonic pillow qrcode --user
 
@@ -94,12 +94,149 @@ $ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >
 $ source ~/.bashrc
 ```
 
-### Step 5 (optional): install [Electrum](https://electrum.org/#home) (required to generate Electrum mnemonic)
+### Step 5: install [zbar](https://github.com/mchehab/zbar) from source
+
+#### Install zbar dependencies
+
+```console
+$ sudo apt update
+
+$ sudo apt install -y autopoint build-essential git libv4l-dev libtool
+```
+
+#### Clone zbar repository
+
+```console
+$ cd ~
+
+$ git clone https://github.com/mchehab/zbar
+
+$ cd zbar
+
+$ git checkout 0.23.90
+```
+
+#### Configure, compile and install zbar
+
+```console
+$ autoreconf -vfi
+
+$ ./configure --without-python
+
+$ make
+
+$ sudo make install
+
+$ sudo ldconfig
+
+$ rm -fr ~/zbar
+```
+
+### Step 6: install [sss-cli](https://github.com/dsprenkels/sss-cli) from source
+
+#### Install [Rust](https://www.rust-lang.org/)
+
+```console
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+info: downloading installer
+
+Welcome to Rust!
+
+This will download and install the official compiler for the Rust
+programming language, and its package manager, Cargo.
+
+Rustup metadata and toolchains will be installed into the Rustup
+home directory, located at:
+
+  /home/pi/.rustup
+
+This can be modified with the RUSTUP_HOME environment variable.
+
+The Cargo home directory located at:
+
+  /home/pi/.cargo
+
+This can be modified with the CARGO_HOME environment variable.
+
+The cargo, rustc, rustup and other commands will be added to
+Cargo's bin directory, located at:
+
+  /home/pi/.cargo/bin
+
+This path will then be added to your PATH environment variable by
+modifying the profile files located at:
+
+  /home/pi/.profile
+  /home/pi/.bashrc
+
+You can uninstall at any time with rustup self uninstall and
+these changes will be reverted.
+
+Current installation options:
+
+
+   default host triple: armv7-unknown-linux-gnueabihf
+     default toolchain: stable (default)
+               profile: default
+  modify PATH variable: yes
+
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+>1
+
+info: profile set to 'default'
+info: default host triple is armv7-unknown-linux-gnueabihf
+info: syncing channel updates for 'stable-armv7-unknown-linux-gnueabihf'
+info: latest update on 2021-03-25, rust version 1.51.0 (2fd73fabe 2021-03-23)
+info: downloading component 'cargo'
+info: downloading component 'clippy'
+info: downloading component 'rust-std'
+ 19.6 MiB /  19.6 MiB (100 %)  11.0 MiB/s in  2s ETA:  0s
+info: downloading component 'rustc'
+ 81.9 MiB /  81.9 MiB (100 %)  10.6 MiB/s in 10s ETA:  0s
+info: downloading component 'rustfmt'
+info: installing component 'cargo'
+info: using up to 500.0 MiB of RAM to unpack components
+  5.5 MiB /   5.5 MiB (100 %)   3.5 MiB/s in  1s ETA:  0s
+info: installing component 'clippy'
+info: installing component 'rust-std'
+ 19.6 MiB /  19.6 MiB (100 %)   3.1 MiB/s in  6s ETA:  0s
+info: installing component 'rustc'
+ 81.9 MiB /  81.9 MiB (100 %)   3.0 MiB/s in 33s ETA:  0s
+info: installing component 'rustfmt'
+  3.3 MiB /   3.3 MiB (100 %)   3.1 MiB/s in  2s ETA:  0s
+info: default toolchain set to 'stable-armv7-unknown-linux-gnueabihf'
+
+  stable-armv7-unknown-linux-gnueabihf installed - rustc 1.51.0 (2fd73fabe 2021-03-23)
+
+
+Rust is installed now. Great!
+
+To get started you need Cargo's bin directory ($HOME/.cargo/bin) in your PATH
+environment variable. Next time you log in this will be done
+automatically.
+
+To configure your current shell, run:
+source $HOME/.cargo/env
+```
+
+#### Install sss-cli
+
+```console
+$ cd ~
+
+$ cargo install --git https://github.com/dsprenkels/sss-cli --branch v0.1
+
+$ cp ~/.cargo/bin/secret-share* ~/.local/bin/
+```
+
+### Step 7 (optional): install [Electrum](https://electrum.org/#home) (required to generate Electrum mnemonic)
 
 #### Install Electrum dependencies
 
 ```shell
-apt install -y libsecp256k1-0 python3-cryptography
+sudo apt install -y libsecp256k1-0 python3-cryptography
 ```
 
 #### Set Electrum release semver environment variable
@@ -159,7 +296,7 @@ Good signature
 pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
 ```
 
-### Step 6 (optional): install `screen` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (required to validate integrity of [Trezor](https://trezor.io/) encrypted paper backups)
+### Step 8 (optional): install `screen` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (required to validate integrity of [Trezor](https://trezor.io/) encrypted paper backups)
 
 ```console
 $ sudo apt install -y screen
@@ -169,47 +306,227 @@ $ pip3 install attrs trezor --user
 $ sudo curl https://data.trezor.io/udev/51-trezor.rules -o /etc/udev/rules.d/51-trezor.rules
 ```
 
-### Step 7: download [create-bip39-mnemonic.py](./create-bip39-mnemonic.py) ([PGP signature](./create-bip39-mnemonic.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 9: import Sun’s PGP public key (used to verify downloads bellow)
 
-```shell
-sudo curl -o /usr/local/sbin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
+```console
+$ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  6896  100  6896    0     0   6499      0  0:00:01  0:00:01 --:--:--  6499
+gpg: key C1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
 ```
 
-### Step 8: download [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py) ([PGP signature](./validate-bip39-mnemonic.py.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+imported: 1
 
-```shell
-sudo curl -o /usr/local/sbin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
+👍
+
+### Step 10: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
+
+```console
+$ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
+
+$ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
+
+$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
+gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
+gpg: Signature made Fri 09 Apr 2021 13:53:03 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 600 /home/pi/.local/bin/create-bip39-mnemonic.py
 ```
 
-### Step 9: download [qr-backup.sh](./qr-backup.sh) ([PGP signature](./qr-backup.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
 
-```shell
-sudo curl -o /usr/local/sbin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
-sudo chmod +x /usr/local/sbin/qr-backup.sh
+👍
+
+Good signature
+
+👍
+
+### Step 11: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
+
+```console
+$ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  6217  100  6217    0     0   8234      0 --:--:-- --:--:-- --:--:--  8234
+
+$ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  6217  100  6217    0     0  10361      0 --:--:-- --:--:-- --:--:-- 10344
+
+$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
+gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
+gpg: Signature made Fri 09 Apr 2021 13:53:03 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 600 /home/pi/.local/bin/validate-bip39-mnemonic.py
 ```
 
-### Step 10: download [qr-restore.sh](./qr-restore.sh) ([PGP signature](./qr-restore.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
 
-```shell
-sudo curl -o /usr/local/sbin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
-sudo chmod +x /usr/local/sbin/qr-restore.sh
+👍
+
+Good signature
+
+👍
+
+### Step 12: download and verify [qr-backup.sh](./qr-backup.sh)
+
+```console
+$ curl -o /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3956  100  3956    0     0   3971      0 --:--:-- --:--:-- --:--:--  3967
+
+$ curl -o /home/pi/.local/bin/qr-backup.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    620      0  0:00:01  0:00:01 --:--:--   620
+
+$ gpg --verify /home/pi/.local/bin/qr-backup.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/qr-backup.sh'
+gpg: Signature made Fri 09 Apr 2021 13:52:01 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/qr-backup.sh
 ```
 
-### Step 11: download [qr-clone.sh](./qr-clone.sh) ([PGP signature](./qr-clone.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
 
-```shell
-sudo curl -o /usr/local/sbin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
-sudo chmod +x /usr/local/sbin/qr-clone.sh
+👍
+
+Good signature
+
+👍
+
+### Step 13: download and verify [qr-restore.sh](./qr-restore.sh)
+
+```console
+$ curl -o /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1904  100  1904    0     0   1715      0  0:00:01  0:00:01 --:--:--  1715
+
+$ curl -o /home/pi/.local/bin/qr-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    908      0 --:--:-- --:--:-- --:--:--   908
+
+$ gpg --verify /home/pi/.local/bin/qr-restore.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/qr-restore.sh'
+gpg: Signature made Fri 09 Apr 2021 13:52:34 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/qr-restore.sh
 ```
 
-### Step 12: download [secure-erase.sh](./secure-erase.sh) ([PGP signature](./secure-erase.sh.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
 
-```shell
-sudo curl -o /usr/local/sbin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
-sudo chmod +x /usr/local/sbin/secure-erase.sh
+👍
+
+Good signature
+
+👍
+
+### Step 14: download and verify [qr-clone.sh](./qr-clone.sh)
+
+```console
+$ curl -o /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   481  100   481    0     0    440      0  0:00:01  0:00:01 --:--:--   440
+
+$ curl -o /home/pi/.local/bin/qr-clone.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    783      0  0:00:01  0:00:01 --:--:--   784
+
+$ gpg --verify /home/pi/.local/bin/qr-clone.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/qr-clone.sh'
+gpg: Signature made Fri 09 Apr 2021 13:52:14 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/qr-clone.sh
 ```
 
-### Step 13: make filesystem read-only
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 15: download and verify [secure-erase.sh](./secure-erase.sh)
+
+```console
+$ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
+
+$ curl -o /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
+
+$ gpg --verify /home/pi/.local/bin/secure-erase.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
+gpg: Signature made Fri 09 Apr 2021 13:52:46 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/secure-erase.sh
+```
+
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 16: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -273,13 +590,13 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 14: disable Wi-Fi (if not using ethernet)
+### Step 17: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 15: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 18: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -287,13 +604,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 16: delete macOS hidden files (if present)
+### Step 19: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 17: reboot
+### Step 20: reboot
 
 ```shell
 sudo systemctl reboot
@@ -301,7 +618,7 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
 
-### Step 18 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 21 (optional): disable auto-mount of `boot` volume (on macOS)
 
 > Heads-up: done to prevent macOS from writing [hidden files](#step-16-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
@@ -313,7 +630,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 19 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
+### Step 22 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
@@ -364,6 +681,11 @@ Options:
   --create-bip39-mnemonic      create BIP39 mnemonic
   --create-electrum-mnemonic   create Electrum mnemonic
   --validate-bip39-mnemonic    validate if secret is valid BIP39 mnemonic
+  --shamir-secret-sharing      split secret using Shamir Secret Sharing
+  --number-of-shares           number of shares (defaults to 5)
+  --share-threshold            shares required to access secret (defaults to 3)
+  --no-encryption              disable symmetric encryption (shamir-only)
+  --no-qr                      disable “Show SHA512 hash as QR code”
   --label <label>              print label after short hash
   -h, --help                   display help for command
 
@@ -403,8 +725,10 @@ $ qr-restore.sh --help
 Usage: qr-restore.sh [options]
 
 Options:
-  --word-list  split secret into word list
-  -h, --help   display help for command
+  --shamir-secret-sharing    split secret using Shamir Secret Sharing
+  --share-threshold          shares required to access secret (defaults to 3)
+  --word-list                split secret into word list
+  -h, --help                 display help for command
 
 $ qr-restore.sh
 Scan QR code…

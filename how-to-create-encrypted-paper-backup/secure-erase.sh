@@ -34,6 +34,7 @@ done
 
 set -- "${positional[@]}"
 
+bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
 
@@ -43,7 +44,7 @@ tput reset
 
 waitForUsbThumbDrive () {
   if [ ! -e $dev ]; then
-    printf "Insert USB flash drive and press enter"
+    "$bold%s$normal" "Insert USB flash drive and press enter"
     read -r confirmation
     waitForUsbThumbDrive
   fi
@@ -51,7 +52,7 @@ waitForUsbThumbDrive () {
 
 waitForUsbThumbDrive
 
-printf "$red%s$normal\n" "Secure erase USB flash drive? (y or n)? "
+printf "$bold$red%s$normal\n" "Secure erase USB flash drive? (y or n)? "
 
 read -r answer
 if [ "$answer" = "y" ]; then

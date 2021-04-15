@@ -2,6 +2,8 @@
 
 set -e
 
+share_threshold=3
+
 positional=()
 while [[ $# -gt 0 ]]; do
   argument="$1"
@@ -11,9 +13,20 @@ while [[ $# -gt 0 ]]; do
     "Usage: qr-restore.sh [options]" \
     "" \
     "Options:" \
-    "  --word-list  split secret into word list" \
-    "  -h, --help   display help for command"
+    "  --shamir-secret-sharing    combine secret using Shamir Secret Sharing" \
+    "  --share-threshold          shares required to access secret (defaults to 3)" \
+    "  --word-list                split secret into word list" \
+    "  -h, --help                 display help for command"
     exit 0
+    ;;
+    --shamir-secret-sharing)
+    shamir_secret_sharing=true
+    shift
+    ;;
+    --share-threshold)
+    share_threshold=$2
+    shift
+    shift
     ;;
     --word-list)
     word_list=true
@@ -34,39 +47,45 @@ normal=$(tput sgr0)
 
 tput reset
 
-printf "%s\n" "Scan QR code…"
+scan_qr_code () {
+  local -n data=$1
 
-data=""
+  printf "%s\n" "Scanning QR code…"
+  
+  data=$(zbarcam --nodisplay --oneshot --quiet --set disable --set qrcode.enable | sed 's/QR-Code://')
 
-while read line; do
-  if echo -n $line | grep -Eq "^QR-Code:"; then
-    line=$(echo -n $line | sed 's/QR-Code://')
-  fi
-  data="$data$line"
-  if [ "$line" = "-----END PGP MESSAGE-----" ]; then
-    killall zbarcam --signal SIGINT
-  else
-    data="$data\n"
-  fi
-done < <(zbarcam --nodisplay --quiet)
+  data_hash=$(echo -n "$data" | openssl dgst -sha512 | sed 's/^.* //')
+  data_short_hash=$(echo -n "$data_hash" | head -c 8)
 
-encrypted_secret=$(echo -e $data)
+  printf "%s\n" "$data"
+  printf "%s: $bold%s$normal\n" "SHA512 hash" "$data_hash"
+  printf "%s: $bold%s$normal\n" "SHA512 short hash" "$data_short_hash"
+}
 
-encrypted_secret_hash=$(echo -n "$encrypted_secret" | openssl dgst -sha512 | sed 's/^.* //')
-encrypted_secret_short_hash=$(echo -n "$encrypted_secret_hash" | head -c 8)
-
-printf "%s\n" "$encrypted_secret"
-printf "%s: $bold%s$normal\n" "SHA512 hash" "$encrypted_secret_hash"
-printf "%s: $bold%s$normal\n" "SHA512 short hash" "$encrypted_secret_short_hash"
+if [ "$shamir_secret_sharing" = true ]; then
+  for share_number in $(seq 1 $share_threshold); do
+    printf "$bold%s$normal" "Prepare share $share_number or $share_threshold and press enter"
+    read -r confirmation
+    scan_qr_code share
+    shares="$share\n$shares"
+  done
+  encrypted_secret="$(echo -e "$shares" | secret-share-combine)"
+else
+  scan_qr_code encrypted_secret
+fi
 
 printf "$bold$red%s$normal\n" "Show secret? (y or n)? "
 
 read -r answer
 if [ "$answer" = "y" ]; then
-  secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
-  gpg-connect-agent reloadagent /bye > /dev/null 2>&1
+  if [[ "$encrypted_secret" =~ "-----BEGIN PGP MESSAGE-----" ]]; then
+    secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
+  else
+    secret=$encrypted_secret
+  fi
+
   if [ "$word_list" = true ]; then
-    printf "%s" "Secret: "
+    printf "%s\n" "Secret:"
     array=($secret)
     last_index=$(echo "${#array[@]} - 1" | bc)
     for index in ${!array[@]}; do
@@ -78,7 +97,8 @@ if [ "$answer" = "y" ]; then
     done
     printf "\n"
   else
-    printf "Secret: $bold%s$normal\n" "$secret"
+    printf "%s\n" "Secret:"
+    echo "$bold$secret$normal"
   fi
 fi
 

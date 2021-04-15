@@ -26,9 +26,17 @@ set -- "${positional[@]}"
 tput reset
 
 printf "%s\n" "Restoring…"
-. qr-restore.sh
+
+printf "%s\n" "Type qr-restore.sh options and press enter (see “qr-restore.sh --help”)"
+read -r qr_restore_options
+
+. qr-restore.sh $qr_restore_options
 
 if [ -n "$secret" ]; then
   printf "%s\n" "Backing up…"
-  . qr-backup.sh
+
+  printf "%s\n" "Type qr-backup.sh options and press enter (see “qr-backup.sh --help”)"
+  read -r qr_backup_options
+
+  . qr-backup.sh $qr_backup_options
 fi
