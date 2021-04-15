@@ -759,7 +759,8 @@ $ qr-clone.sh --help
 Usage: qr-clone.sh [options]
 
 Options:
-  -h, --help  display help for command
+  --duplicate    duplicate content
+  -h, --help     display help for command
 
 $ qr-clone.sh
 Scan QR code…

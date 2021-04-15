@@ -62,7 +62,7 @@ scan_qr_code () {
   printf "%s: $bold%s$normal\n" "SHA512 short hash" "$data_short_hash"
 }
 
-if [ "$shamir_secret_sharing" = true ]; then
+if [ -z "$duplicate" ] && [ "$shamir_secret_sharing" = true ]; then
   for share_number in $(seq 1 $share_threshold); do
     printf "$bold%s$normal" "Prepare share $share_number or $share_threshold and press enter"
     read -r confirmation
@@ -74,31 +74,32 @@ else
   scan_qr_code encrypted_secret
 fi
 
-printf "$bold$red%s$normal\n" "Show secret? (y or n)? "
+if [ -z "$duplicate" ]; then
+  printf "$bold$red%s$normal\n" "Show secret? (y or n)? "
+  read -r answer
+  if [ "$answer" = "y" ]; then
+    if [[ "$encrypted_secret" =~ "-----BEGIN PGP MESSAGE-----" ]]; then
+      secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
+    else
+      secret=$encrypted_secret
+    fi
 
-read -r answer
-if [ "$answer" = "y" ]; then
-  if [[ "$encrypted_secret" =~ "-----BEGIN PGP MESSAGE-----" ]]; then
-    secret=$(echo -e "$encrypted_secret" | gpg --decrypt)
-  else
-    secret=$encrypted_secret
-  fi
-
-  if [ "$word_list" = true ]; then
-    printf "%s\n" "Secret:"
-    array=($secret)
-    last_index=$(echo "${#array[@]} - 1" | bc)
-    for index in ${!array[@]}; do
-      position=$(($index + 1))
-      printf "%d. $bold%s$normal" "$position" "${array[$index]}"
-      if [ $index -lt $last_index ]; then
-        printf " "
-      fi
-    done
-    printf "\n"
-  else
-    printf "%s\n" "Secret:"
-    echo "$bold$secret$normal"
+    if [ "$word_list" = true ]; then
+      printf "%s\n" "Secret:"
+      array=($secret)
+      last_index=$(echo "${#array[@]} - 1" | bc)
+      for index in ${!array[@]}; do
+        position=$(($index + 1))
+        printf "%d. $bold%s$normal" "$position" "${array[$index]}"
+        if [ $index -lt $last_index ]; then
+          printf " "
+        fi
+      done
+      printf "\n"
+    else
+      printf "%s\n" "Secret:"
+      echo "$bold$secret$normal"
+    fi
   fi
 fi
 

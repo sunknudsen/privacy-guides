@@ -111,21 +111,21 @@ if ! mount | grep $usb > /dev/null; then
   sudo mount $dev $usb -o uid=pi,gid=pi
 fi
 
-if [ "$create_bip39_mnemonic" = true ]; then
+if [ -z "$duplicate" ] && [ "$create_bip39_mnemonic" = true ]; then
   printf "%s\n" "Creating BIP39 mnemonic…"
   secret=$(python3 $basedir/create-bip39-mnemonic.py)
   echo $secret
   sleep 1
 fi
 
-if [ "$create_electrum_mnemonic" = true ]; then
+if [ -z "$duplicate" ] && [ "$create_electrum_mnemonic" = true ]; then
   printf "%s\n" "Creating Electrum mnemonic…"
   secret=$(electrum make_seed --nbits 264 --offline)
   echo $secret
   sleep 1
 fi
 
-if [ -z "$secret" ]; then
+if [ -z "$duplicate" ] && [ -z "$secret" ]; then
   tput sc
   printf "$bold%s$normal\n" "Type secret and press enter, then ctrl-d"
   readarray -t secret_array
@@ -141,7 +141,7 @@ if [ -z "$secret" ]; then
   fi
 fi
 
-if [ "$validate_bip39_mnemonic" = true ]; then
+if [ -z "$duplicate" ] && [ "$validate_bip39_mnemonic" = true ]; then
   printf "%s\n" "Validating if secret is valid BIP39 mnemonic…"
   if ! echo -n "$secret" | python3 $basedir/validate-bip39-mnemonic.py; then
     printf "$bold$red%s$normal\n" "Invalid BIP39 mnemonic"
@@ -149,9 +149,13 @@ if [ "$validate_bip39_mnemonic" = true ]; then
   fi
 fi
 
-if [ -z "$shamir_secret_sharing" ] || ([ "$shamir_secret_sharing" = true ] && [ -z "$no_encryption" ]); then
-  encrypted_secret=$(echo -n "$secret" | gpg --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor)
-  gpg-connect-agent reloadagent /bye > /dev/null 2>&1
+if [ "$duplicate" = true ] && [ -n "$encrypted_secret" ]; then
+  printf "%s\n" "Duplicating encrypted secret…"
+else
+  if [ -z "$shamir_secret_sharing" ] || ([ "$shamir_secret_sharing" = true ] && [ -z "$no_encryption" ]); then
+    encrypted_secret=$(echo -n "$secret" | gpg --s2k-mode 3 --s2k-count 65011712 --s2k-digest-algo sha512 --cipher-algo AES256 --symmetric --armor)
+    gpg-connect-agent reloadagent /bye > /dev/null 2>&1
+  fi
 fi
 
 if [ "$shamir_secret_sharing" = true ]; then
