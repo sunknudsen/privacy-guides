@@ -59,6 +59,7 @@ cat << "EOF" > /usr/local/sbin/spoof.sh
 #! /bin/sh
 
 set -e
+set -o pipefail
 
 export LC_CTYPE=C
 

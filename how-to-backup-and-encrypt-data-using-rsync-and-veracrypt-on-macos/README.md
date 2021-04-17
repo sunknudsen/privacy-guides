@@ -265,6 +265,7 @@ cat << EOF > /usr/local/bin/backup.sh
 #! /bin/sh
 
 set -e
+set -o pipefail
 
 function dismount()
 {
@@ -343,6 +344,7 @@ cat << EOF > /usr/local/bin/check.sh
 #! /bin/sh
 
 set -e
+set -o pipefail
 
 red=\$(tput setaf 1)
 normal=\$(tput sgr0)
