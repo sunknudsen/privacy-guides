@@ -1,0 +1,190 @@
+#!/usr/bin/expect
+
+# exp_internal 1
+# log_file -noappend ~/expect.log
+
+set timeout 30
+
+proc bold {} {
+  return [exec tput bold]
+}
+proc red {} {
+  return [exec tput setaf 1]
+}
+proc green {} {
+  return [exec tput setaf 2]
+}
+proc normal {} {
+  return [exec tput sgr0]
+}
+
+set bip39_mnemonic "online pipe enough dutch decorate want moment scheme rigid enlist blast boat purse sick chalk shop brush all return betray jacket salon abandon retire"
+set electrum_mnemonic "month pet slice know amused leave now vague palm guess cattle element cross truly auto put among craft repeat van sample nephew sad family"
+set failed "[bold][red]Failed[normal]"
+set ok "[bold][green]OK[normal]"
+
+puts "[bold]Should create BIP39 mnemonic[normal]"
+
+spawn qr-backup.sh --create-bip39-mnemonic
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Format USB flash drive \(y or n\)\?} {
+    send "n\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Creating BIP39 mnemonic…}
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {(([a-z]+ ?){24})} {
+    exit 0
+  }
+}
+
+puts "[bold]Should validate valid BIP39 mnemonic[normal]"
+
+spawn qr-backup.sh --validate-bip39-mnemonic
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Format USB flash drive \(y or n\)\?} {
+    send "n\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type secret and press enter, then ctrl\+d} {
+    sleep 0.1
+    send "$bip39_mnemonic\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type bip39_mnemonic and press enter, then ctrl\+d \(again\)} {
+    sleep 0.1
+    send "$secret\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type passphrase and press enter} {
+    puts $ok
+    exit 0
+  }
+}
+
+puts "[bold]Should fail to validate invalid BIP39 mnemonic[normal]"
+
+spawn qr-backup.sh --validate-bip39-mnemonic
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Format USB flash drive \(y or n\)\?} {
+    send "n\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type secret and press enter, then ctrl\+d} {
+    sleep 0.1
+    send "$electrum_mnemonic\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type electrum_mnemonic and press enter, then ctrl\+d \(again\)} {
+    sleep 0.1
+    send "$secret\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Invalid BIP39 mnemonic} {
+    puts $ok
+    exit 0
+  }
+}
+
+interact

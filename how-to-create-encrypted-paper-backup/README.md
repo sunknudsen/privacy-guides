@@ -85,7 +85,7 @@ Select “Localisation Options”, then “Keyboard”, then “Generic 105-key 
 ```console
 $ sudo apt update
 
-$ sudo apt install -y fim imagemagick
+$ sudo apt install -y expect fim imagemagick
 
 $ pip3 install mnemonic pillow qrcode --user
 

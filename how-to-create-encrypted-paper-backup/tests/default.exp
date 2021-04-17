@@ -1,0 +1,214 @@
+#!/usr/bin/expect
+
+# exp_internal 1
+# log_file -noappend ~/expect.log
+
+set timeout 30
+
+proc bold {} {
+  return [exec tput bold]
+}
+proc red {} {
+  return [exec tput setaf 1]
+}
+proc green {} {
+  return [exec tput setaf 2]
+}
+proc normal {} {
+  return [exec tput sgr0]
+}
+
+set secret "foo\nbar"
+set passphrase "asdasd"
+set failed "[bold][red]Failed[normal]"
+set ok "[bold][green]OK[normal]"
+
+puts "[bold]Should backup secret[normal]"
+
+spawn qr-backup.sh
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Format USB flash drive \(y or n\)\?} {
+    sleep 0.1
+    send "y\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    sleep 0.1
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {mkfs\.fat 4\.1 \(2017-01-24\)}
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type secret and press enter, then ctrl\+d} {
+    sleep 0.1
+    send "$secret\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type secret and press enter, then ctrl\+d \(again\)} {
+    sleep 0.1
+    send "$secret\r"
+    sleep 0.1
+    send "\x04"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type passphrase and press enter} {
+    sleep 0.1
+    send "$passphrase\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type passphrase and press enter \(again\)} {
+    sleep 0.1
+    send "$passphrase\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Show passphrase \(y or n\)\?} {
+    sleep 0.1
+    send "y\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  $passphrase
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set short_hash $expect_out(1,string)
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    sleep 0.1
+    send "n\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Done}
+}
+
+puts "[bold]Should restore secret[normal]"
+
+spawn qr-restore.sh --images $short_hash.jpg
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    sleep 0.1
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Please type passphrase and press enter} {
+    sleep 0.1
+    send "$passphrase\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Show secret \(y or n\)\?} {
+    sleep 0.1
+    send "y\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Secret:\r\n((.|\r\n)+?)\r\nDone} {
+    set restored_secret $expect_out(1,string)
+  }
+}
+
+regsub -all {(\e\(B)?\e\[[0-9]*?m} $restored_secret {} restored_secret
+regsub -all {\r} $restored_secret {} restored_secret
+
+if { "$restored_secret" != "$secret" } {
+  puts $failed
+  exit 1
+} else {
+  puts $ok
+  exit 0
+}
+
+interact

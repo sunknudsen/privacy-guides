@@ -1,0 +1,68 @@
+#!/usr/bin/expect
+
+# exp_internal 1
+# log_file -noappend ~/expect.log
+
+set timeout 30
+
+proc bold {} {
+  return [exec tput bold]
+}
+proc red {} {
+  return [exec tput setaf 1]
+}
+proc green {} {
+  return [exec tput setaf 2]
+}
+proc normal {} {
+  return [exec tput sgr0]
+}
+
+set passphrase "asdasd"
+set failed "[bold][red]Failed[normal]"
+set ok "[bold][green]OK[normal]"
+
+puts "[bold]Should create Electrum mnemonic[normal]"
+
+spawn qr-backup.sh --create-electrum-mnemonic
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Format USB flash drive \(y or n\)\?} {
+    send "n\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {\[sudo\] password for pi:} {
+    send "$env(password)\r"
+  }
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {Creating Electrum mnemonic…}
+}
+
+expect {
+  default {
+    puts $failed
+    exit 1
+  }
+  -re {(([a-z]+ ?){24})} {
+    puts $ok
+    exit 0
+  }
+}
+
+interact
