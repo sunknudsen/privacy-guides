@@ -30,17 +30,17 @@ sudo mkdir -p /usr/local/sbin
 sudo chown ${USER}:admin /usr/local/sbin
 ```
 
-### Step 2: source `/usr/local/sbin` folder
+### Step 2: add `/usr/local/sbin` folder to `PATH` environment variable
 
 Find which shell is configured using `echo $SHELL`.
 
 #### Bash (/bin/bash)
 
 ```shell
-cat << "EOF" >> ~/.bash_profile
+cat << "EOF" >> ~/.bashrc
 export PATH=$PATH:/usr/local/sbin
 EOF
-source ~/.bash_profile
+source ~/.bashrc
 ```
 
 #### Z Shell (/bin/zsh)
