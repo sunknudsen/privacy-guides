@@ -1,0 +1,99 @@
+#!/usr/bin/expect
+
+source ./test.exp
+
+set secret "foo\nbar"
+set passphrase "asdasd"
+
+test_label "Should clone backup"
+
+source ./tests/helpers/backup.exp
+
+spawn qr-clone.sh --qr-restore-options "--images $short_hash.jpg"
+
+expect {
+  -re {Restoring…}
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show secret \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Done}
+}
+
+expect {
+  -re {Backing up…}
+}
+
+expect {
+  -re {Format USB flash drive \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter \(again\)} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show passphrase \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set new_short_hash $expect_out(1,string)
+  }
+}
+
+expect {
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Done}
+}
+
+if { "$new_short_hash" == "$short_hash" } {
+  test_failed
+}
+
+set short_hash "$new_short_hash"
+
+source ./tests/helpers/restore.exp
+
+regsub -all {(\e\(B)?\e\[[0-9]*?m} $restored_secret {} restored_secret
+regsub -all {\r} $restored_secret {} restored_secret
+
+if { "$restored_secret" != "$secret" } {
+  test_failed
+} else {
+  test_ok
+}

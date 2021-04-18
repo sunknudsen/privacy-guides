@@ -1,0 +1,45 @@
+#!/usr/bin/expect
+
+# exp_internal 1
+# log_file -noappend ~/expect.log
+
+set timeout 30
+
+set bold [exec tput bold]
+set red [exec tput setaf 1]
+set green [exec tput setaf 2]
+set normal [exec tput sgr0]
+
+proc test_label {value} {
+  upvar bold bold
+  upvar normal normal
+  puts "Running ${bold}${value}${normal}…"
+}
+proc test_send {value} {
+  sleep 0.1
+  send "$value"
+}
+proc test_failed {} {
+  upvar bold bold
+  upvar red red
+  upvar normal normal
+  sleep 0.1
+  puts "${bold}${red}Failed${normal}"
+  exit 1
+}
+proc test_ok {{force_close false}} {
+  upvar bold bold
+  upvar green green
+  upvar normal normal
+  sleep 0.1
+  puts "${bold}${green}OK${normal}"
+  if {$force_close} {
+    close
+  }
+}
+
+expect_before {
+  default {
+    test_failed
+  }
+}

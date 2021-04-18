@@ -1,0 +1,27 @@
+#!/usr/bin/expect
+
+spawn qr-restore.sh --images $short_hash.jpg
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show secret \(y or n\)\?} {
+    test_send "y\r"
+  }
+}
+
+expect {
+  -re {Secret:\r\n((.|\r\n)+?)\r\nDone} {
+    set restored_secret $expect_out(1,string)
+  }
+}

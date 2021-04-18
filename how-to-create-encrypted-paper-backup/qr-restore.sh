@@ -3,6 +3,8 @@
 set -e
 set -o pipefail
 
+shamir_secret_sharing=false
+
 share_threshold=3
 
 positional=()

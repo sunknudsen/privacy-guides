@@ -156,7 +156,7 @@ read_passphrase () {
   printf "$bold%s$normal\n" "Please type passphrase and press enter (again)"
   read -rs data_confirmation
   if [ ! "$data" = "$data_confirmation" ]; then
-    printf "$red%s$normal\n" "Passphrases do not match"
+    printf "$bold$red%s$normal\n" "Passphrases do not match"
     return 1
   fi
 

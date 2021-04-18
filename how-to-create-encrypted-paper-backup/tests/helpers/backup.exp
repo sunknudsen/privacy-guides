@@ -1,0 +1,63 @@
+#!/usr/bin/expect
+
+spawn qr-backup.sh
+
+expect {
+  -re {Format USB flash drive \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Please type secret and press enter, then ctrl\+d} {
+    test_send "$secret\r"
+    test_send "\x04"
+  }
+}
+
+expect {
+  -re {Please type secret and press enter, then ctrl\+d \(again\)} {
+    test_send "$secret\r"
+    test_send "\x04"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter \(again\)} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show passphrase \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set short_hash $expect_out(1,string)
+  }
+}
+
+expect {
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Done}
+}

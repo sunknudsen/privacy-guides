@@ -1,0 +1,129 @@
+#!/usr/bin/expect
+
+source ./test.exp
+
+set secret "foo\nbar"
+set passphrase "asdasd"
+
+test_label "Should convert default backup to 2-of-3 Shamir Secret Sharing"
+
+source ./tests/helpers/backup.exp
+
+spawn qr-clone.sh --qr-restore-options "--images $short_hash.jpg" --qr-backup-options "--shamir-secret-sharing --number-of-shares 3 --share-threshold 2"
+
+expect {
+  -re {Restoring…}
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show secret \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Done}
+}
+
+expect {
+  -re {Backing up…}
+}
+
+expect {
+  -re {Format USB flash drive \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Please type passphrase and press enter \(again\)} {
+    test_send "$passphrase\r"
+  }
+}
+
+expect {
+  -re {Show passphrase \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Encrypting secret share 1 of 3…}
+}
+
+expect {
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set short_hash_1 $expect_out(1,string)
+  }
+}
+
+expect {
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Encrypting secret share 2 of 3…}
+}
+
+expect {
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set short_hash_2 $expect_out(1,string)
+  }
+}
+
+expect {
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Encrypting secret share 3 of 3…}
+}
+
+expect {
+  -re {SHA512 short hash: .+?([a-f0-9]{8})} {
+    set short_hash_3 $expect_out(1,string)
+  }
+}
+
+expect {
+  -re {Show SHA512 hash as QR code \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {Done}
+}
+
+source ./tests/helpers/shamir-2-of-3-restore.exp
+
+regsub -all {(\e\(B)?\e\[[0-9]*?m} $restored_secret {} restored_secret
+regsub -all {\r} $restored_secret {} restored_secret
+
+if { "$restored_secret" != "$secret" } {
+  test_failed
+} else {
+  test_ok
+}
