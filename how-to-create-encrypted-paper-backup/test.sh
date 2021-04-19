@@ -6,6 +6,8 @@ set -o pipefail
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+mkdir -p /tmp/pi
+
 printf "$bold%s$normal\n" "Please type root password and press enter"
 read -rs password
 
@@ -22,3 +24,4 @@ expect ./tests/clone.exp
 expect ./tests/convert-default-to-shamir-2-of-3.exp
 expect ./tests/convert-shamir-2-of-3-to-default.exp
 expect ./tests/duplicate.exp
+expect ./tests/secure-erase.exp

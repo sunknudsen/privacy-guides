@@ -89,13 +89,13 @@ expect {
   }
 }
 
-test_label "Should format USB flash drive and backup secret showing passphrase"
+test_label "Should backup secret showing passphrase"
 
 spawn qr-backup.sh
 
 expect {
   -re {Format USB flash drive \(y or n\)\?} {
-    test_send "y\r"
+    test_send "n\r"
   }
 }
 
@@ -103,10 +103,6 @@ expect {
   -re {\[sudo\] password for pi:} {
     test_send "$env(password)\r"
   }
-}
-
-expect {
-  -re {mkfs\.fat 4\.1 \(2017-01-24\)}
 }
 
 expect {
@@ -191,7 +187,7 @@ expect {
   }
 }
 
-regsub -all {(\e\(B)?\e\[[0-9]*?m} $restored_secret {} restored_secret
+regsub -all {\033\[[0-9]*m(\017)?} $restored_secret {} restored_secret
 regsub -all {\r} $restored_secret {} restored_secret
 
 if { "$restored_secret" != "$secret" } {

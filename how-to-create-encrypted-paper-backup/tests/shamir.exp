@@ -167,7 +167,7 @@ expect {
   }
 }
 
-regsub -all {(\e\(B)?\e\[[0-9]*?m} $restored_secret {} restored_secret
+regsub -all {\033\[[0-9]*m(\017)?} $restored_secret {} restored_secret
 regsub -all {\r} $restored_secret {} restored_secret
 
 if { "$restored_secret" != "$secret" } {

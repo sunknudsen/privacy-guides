@@ -5,13 +5,13 @@ source ./test.exp
 set bip39_mnemonic "online pipe enough dutch decorate want moment scheme rigid enlist blast boat purse sick chalk shop brush all return betray jacket salon abandon retire"
 set electrum_mnemonic "month pet slice know amused leave now vague palm guess cattle element cross truly auto put among craft repeat van sample nephew sad family"
 
-test_label "Should create BIP39 mnemonic"
+test_label "Should format flash drive and create BIP39 mnemonic"
 
 spawn qr-backup.sh --create-bip39-mnemonic
 
 expect {
   -re {Format USB flash drive \(y or n\)\?} {
-    test_send "n\r"
+    test_send "y\r"
   }
 }
 
@@ -19,6 +19,10 @@ expect {
   -re {\[sudo\] password for pi:} {
     test_send "$env(password)\r"
   }
+}
+
+expect {
+  -re {mkfs\.fat 4\.1 \(2017-01-24\)}
 }
 
 expect {

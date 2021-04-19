@@ -3,6 +3,8 @@
 # exp_internal 1
 # log_file -noappend ~/expect.log
 
+# Use `send_log` to print to log file
+
 set timeout 30
 
 set bold [exec tput bold]

@@ -1,0 +1,87 @@
+#!/usr/bin/expect
+
+source ./test.exp
+
+test_label "Should secure erase USB flash drive"
+
+spawn secure-erase.sh
+
+expect {
+  -re {Secure erase USB flash drive \(y or n\)\?} {
+    test_send "y\r" 
+  }
+}
+
+expect {
+  -re {Overwriting with random data… \(round 1 of 3\)}
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {dd: error writing '\/dev\/sda1': No space left on device}
+}
+
+expect {
+  -re {Overwriting with random data… \(round 2 of 3\)}
+}
+
+expect {
+  -re {dd: error writing '\/dev\/sda1': No space left on device}
+}
+
+expect {
+  -re {Overwriting with random data… \(round 3 of 3\)}
+}
+
+expect {
+  -re {dd: error writing '\/dev\/sda1': No space left on device}
+}
+
+expect {
+  -re {Done} {
+    test_ok
+  }
+}
+
+test_label "Should secure erase flash drive using single round random overwrite and zero overwrite"
+
+spawn secure-erase.sh --rounds 1 --zero
+
+expect {
+  -re {Secure erase USB flash drive \(y or n\)\?} {
+    test_send "y\r" 
+  }
+}
+
+expect {
+  -re {Overwriting with random data… \(round 1 of 1\)}
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {dd: error writing '\/dev\/sda1': No space left on device}
+}
+
+expect {
+  -re {Overwriting with zeros…}
+}
+
+expect {
+  -re {dd: error writing '\/dev\/sda1': No space left on device}
+}
+
+expect {
+  -re {Done} {
+    test_ok
+  }
+}
