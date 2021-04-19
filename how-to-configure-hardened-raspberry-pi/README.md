@@ -78,7 +78,7 @@ EOF
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
-Run `diskutil list` to find disk ID of SD card to override with “Raspberry Pi OS Lite” (`disk2` in the following example).
+Run `diskutil list` to find disk ID of SD card to overwrite with “Raspberry Pi OS Lite” (`disk2` in the following example).
 
 Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example) and `2021-03-04-raspios-buster-armhf-lite.img` with current image.
 

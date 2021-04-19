@@ -561,12 +561,14 @@ Insert micro SD card into macOS computer, run following and eject card.
 ```shell
 volume_path="/Volumes/boot"
 volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
-echo "UUID=$volume_uuid none msdos rw,noauto" | sudo tee -a /etc/fstab
+echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 22 (optional): compute SHA512 hash of micro SD card and store in password manager (on macOS)
+### Step 22 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
+
+Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example).
 
 ```console
 $ diskutil list

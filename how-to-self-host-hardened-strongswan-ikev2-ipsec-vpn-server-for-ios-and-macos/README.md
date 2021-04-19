@@ -473,7 +473,7 @@ Separate nameservers using commas with no leading spaces (example: `93.95.224.28
 STRONGSWAN_DNS_NAMESERVERS=95.215.19.53
 ```
 
-#### Backup and override `/etc/ipsec.conf`
+#### Backup and overwrite `/etc/ipsec.conf`
 
 ```shell
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
@@ -547,7 +547,7 @@ conn ikev2
 EOF
 ```
 
-#### Backup and override `/etc/ipsec.secrets`
+#### Backup and overwrite `/etc/ipsec.secrets`
 
 ```shell
 cp /etc/ipsec.secrets /etc/ipsec.secrets.backup
@@ -556,7 +556,7 @@ cat << "EOF" > /etc/ipsec.secrets
 EOF
 ```
 
-#### Backup and override `/etc/strongswan.d/charon-logging.conf`
+#### Backup and overwrite `/etc/strongswan.d/charon-logging.conf`
 
 ```shell
 cp /etc/strongswan.d/charon-logging.conf /etc/strongswan.d/charon-logging.conf.backup
@@ -576,7 +576,7 @@ charon {
 EOF
 ```
 
-#### Backup and override `/etc/strongswan.d/charon/dhcp.conf`
+#### Backup and overwrite `/etc/strongswan.d/charon/dhcp.conf`
 
 ```shell
 cp /etc/strongswan.d/charon/dhcp.conf /etc/strongswan.d/charon/dhcp.conf.backup

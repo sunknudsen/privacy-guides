@@ -49,7 +49,7 @@ Status: Enabled
 
 👍
 
-### Step 3: backup and override `/etc/pf.conf`
+### Step 3: backup and overwrite `/etc/pf.conf`
 
 > Heads-up: software updates will likely restore `/etc/pf.conf` to default. Remember to check `/etc/pf.conf` using `cat /etc/pf.conf` after updates and test kill switch.
 
