@@ -556,7 +556,7 @@ sudo systemctl reboot
 
 > Heads-up: done to prevent macOS from writing [hidden files](#step-16-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
-Insert micro SD card into macOS computer, run following and eject card.
+Insert micro SD card (in read-only mode using switch) into macOS computer, run following and eject card.
 
 ```shell
 volume_path="/Volumes/boot"
