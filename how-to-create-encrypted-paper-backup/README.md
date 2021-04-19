@@ -2,9 +2,9 @@
 Title: How to create encrypted paper backup
 Description: Learn how to create encrypted paper backup.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>, Daan Sprenkels<https://github.com/dsprenkels>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>, Daan Sprenkels <https://github.com/dsprenkels>
 Reviewers:
-Publication date: 2021-02-23T21:53:38.495Z
+Publication date: 2021-04-19T14:05:38.426Z
 Listed: false
 -->
 
@@ -106,6 +106,8 @@ $ sudo apt install -y autopoint build-essential git libjpeg-dev libmagickwand-de
 
 #### Clone zbar repository
 
+> Heads-up: replace `0.23.90` with [latest release](https://github.com/mchehab/zbar/releases/latest) semver.
+
 ```console
 $ cd ~
 
@@ -129,103 +131,26 @@ $ sudo make install
 
 $ sudo ldconfig
 
-$ rm -fr ~/zbar
+$ cd ~
+
+$ rm -fr zbar
 ```
 
 ### Step 6: install [sss-cli](https://github.com/dsprenkels/sss-cli) from source
 
 #### Install [Rust](https://www.rust-lang.org/)
 
-```console
+> Heads-up: when asked for installation option, select “Proceed with installation (default)”.
+
+```shell
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-info: downloading installer
 
-Welcome to Rust!
-
-This will download and install the official compiler for the Rust
-programming language, and its package manager, Cargo.
-
-Rustup metadata and toolchains will be installed into the Rustup
-home directory, located at:
-
-  /home/pi/.rustup
-
-This can be modified with the RUSTUP_HOME environment variable.
-
-The Cargo home directory located at:
-
-  /home/pi/.cargo
-
-This can be modified with the CARGO_HOME environment variable.
-
-The cargo, rustc, rustup and other commands will be added to
-Cargo's bin directory, located at:
-
-  /home/pi/.cargo/bin
-
-This path will then be added to your PATH environment variable by
-modifying the profile files located at:
-
-  /home/pi/.profile
-  /home/pi/.bashrc
-
-You can uninstall at any time with rustup self uninstall and
-these changes will be reverted.
-
-Current installation options:
-
-
-   default host triple: armv7-unknown-linux-gnueabihf
-     default toolchain: stable (default)
-               profile: default
-  modify PATH variable: yes
-
-1) Proceed with installation (default)
-2) Customize installation
-3) Cancel installation
->1
-
-info: profile set to 'default'
-info: default host triple is armv7-unknown-linux-gnueabihf
-info: syncing channel updates for 'stable-armv7-unknown-linux-gnueabihf'
-info: latest update on 2021-03-25, rust version 1.51.0 (2fd73fabe 2021-03-23)
-info: downloading component 'cargo'
-info: downloading component 'clippy'
-info: downloading component 'rust-std'
- 19.6 MiB /  19.6 MiB (100 %)  11.0 MiB/s in  2s ETA:  0s
-info: downloading component 'rustc'
- 81.9 MiB /  81.9 MiB (100 %)  10.6 MiB/s in 10s ETA:  0s
-info: downloading component 'rustfmt'
-info: installing component 'cargo'
-info: using up to 500.0 MiB of RAM to unpack components
-  5.5 MiB /   5.5 MiB (100 %)   3.5 MiB/s in  1s ETA:  0s
-info: installing component 'clippy'
-info: installing component 'rust-std'
- 19.6 MiB /  19.6 MiB (100 %)   3.1 MiB/s in  6s ETA:  0s
-info: installing component 'rustc'
- 81.9 MiB /  81.9 MiB (100 %)   3.0 MiB/s in 33s ETA:  0s
-info: installing component 'rustfmt'
-  3.3 MiB /   3.3 MiB (100 %)   3.1 MiB/s in  2s ETA:  0s
-info: default toolchain set to 'stable-armv7-unknown-linux-gnueabihf'
-
-  stable-armv7-unknown-linux-gnueabihf installed - rustc 1.51.0 (2fd73fabe 2021-03-23)
-
-
-Rust is installed now. Great!
-
-To get started you need Cargo's bin directory ($HOME/.cargo/bin) in your PATH
-environment variable. Next time you log in this will be done
-automatically.
-
-To configure your current shell, run:
-source $HOME/.cargo/env
+$ source ~/.bashrc
 ```
 
 #### Install sss-cli
 
 ```console
-$ cd ~
-
 $ cargo install --git https://github.com/dsprenkels/sss-cli --branch v0.1
 
 $ cp ~/.cargo/bin/secret-share* ~/.local/bin/
@@ -236,12 +161,14 @@ $ cp ~/.cargo/bin/secret-share* ~/.local/bin/
 #### Install Electrum dependencies
 
 ```shell
-sudo apt install -y libsecp256k1-0 python3-cryptography
+$ sudo apt update
+
+$ sudo apt install -y libsecp256k1-0 python3-cryptography
 ```
 
 #### Set Electrum release semver environment variable
 
-> Heads-up: replace `4.1.2` with [latest release](https://electrum.org/#download).
+> Heads-up: replace `4.1.2` with [latest release](https://electrum.org/#download) semver.
 
 ```shell
 ELECTRUM_RELEASE_SEMVER=4.1.2
@@ -250,8 +177,11 @@ ELECTRUM_RELEASE_SEMVER=4.1.2
 #### Download Electrum release and PGP signature
 
 ```shell
-curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz"
-curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
+$ cd ~
+
+$ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz"
+
+$ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
 ```
 
 #### Import ThomasV’s PGP public key
@@ -293,17 +223,21 @@ Good signature
 #### Install Electrum
 
 ```shell
-pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
+$ pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
+
+$ rm Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz*
 ```
 
 ### Step 8 (optional): install `screen` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (required to validate integrity of [Trezor](https://trezor.io/) encrypted paper backups)
 
 ```console
+$ sudo apt update
+
 $ sudo apt install -y screen
 
 $ pip3 install attrs trezor --user
 
-$ sudo curl https://data.trezor.io/udev/51-trezor.rules -o /etc/udev/rules.d/51-trezor.rules
+$ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
 ### Step 9: import Sun’s PGP public key (used to verify downloads bellow)
@@ -337,7 +271,7 @@ $ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py.sig https://sunknudsen.co
 
 $ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
 gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
-gpg: Signature made Fri 09 Apr 2021 13:53:03 EDT
+gpg: Signature made Thu 15 Apr 2021 12:54:22 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -371,7 +305,7 @@ $ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py.sig https://sunknudsen.
 
 $ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
 gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
-gpg: Signature made Fri 09 Apr 2021 13:53:03 EDT
+gpg: Signature made Thu 15 Apr 2021 12:54:22 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -405,7 +339,7 @@ $ curl -o /home/pi/.local/bin/qr-backup.sh.sig https://sunknudsen.com/static/med
 
 $ gpg --verify /home/pi/.local/bin/qr-backup.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/qr-backup.sh'
-gpg: Signature made Fri 09 Apr 2021 13:52:01 EDT
+gpg: Signature made Sun 18 Apr 2021 19:03:07 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -439,7 +373,7 @@ $ curl -o /home/pi/.local/bin/qr-restore.sh.sig https://sunknudsen.com/static/me
 
 $ gpg --verify /home/pi/.local/bin/qr-restore.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/qr-restore.sh'
-gpg: Signature made Fri 09 Apr 2021 13:52:34 EDT
+gpg: Signature made Sun 18 Apr 2021 18:47:17 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -473,7 +407,7 @@ $ curl -o /home/pi/.local/bin/qr-clone.sh.sig https://sunknudsen.com/static/medi
 
 $ gpg --verify /home/pi/.local/bin/qr-clone.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/qr-clone.sh'
-gpg: Signature made Fri 09 Apr 2021 13:52:14 EDT
+gpg: Signature made Sat 17 Apr 2021 15:37:07 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -507,7 +441,7 @@ $ curl -o /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/
 
 $ gpg --verify /home/pi/.local/bin/secure-erase.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
-gpg: Signature made Fri 09 Apr 2021 13:52:46 EDT
+gpg: Signature made Sat 17 Apr 2021 15:37:12 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
