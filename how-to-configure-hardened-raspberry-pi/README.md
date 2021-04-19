@@ -321,6 +321,8 @@ apt install -y iptables-persistent vim
 
 #### Upgrade packages
 
+> Heads-up: if asked which version of `/etc/ssh/sshd_config` to keep, select “keep the local version currently installed”.
+
 ```shell
 apt upgrade -y
 ```
