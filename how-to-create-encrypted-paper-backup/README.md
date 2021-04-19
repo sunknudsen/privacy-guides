@@ -441,7 +441,7 @@ $ curl -o /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/
 
 $ gpg --verify /home/pi/.local/bin/secure-erase.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
-gpg: Signature made Sat 17 Apr 2021 15:37:12 EDT
+gpg: Signature made Mon 19 Apr 2021 12:51:50 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!

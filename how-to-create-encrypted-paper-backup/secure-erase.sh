@@ -1,8 +1,5 @@
 #! /bin/bash
 
-set -e
-set -o pipefail
-
 rounds=3
 
 positional=()
