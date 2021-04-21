@@ -5,7 +5,7 @@ Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, Nico Kaiser <https://github.com/nicokaiser>, Daan Sprenkels <https://github.com/dsprenkels>
 Reviewers:
 Publication date: 2021-04-19T14:05:38.426Z
-Listed: false
+Listed: true
 -->
 
 # How to create encrypted paper backup
@@ -13,8 +13,10 @@ Listed: false
 ## Requirements
 
 - [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) 📦
-- Raspberry Pi OS-compatible auto-focus HD USB webcam
 - [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) (optional)
+- [Compatible USB webcam](https://elinux.org/RPi_USB_Webcams) (720P or 1080P, powered directly by Raspberry Pi)
+- USB keyboard ([Raspberry Pi keyboard and hub](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) recommended)
+- USB flash drive (faster is better)
 - macOS computer
 
 ## Caveats
@@ -34,7 +36,7 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 
 ### Step 2 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
 
-#### Install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers
+#### Install Adafruit PiTFT monitor drivers
 
 > Heads-up: don’t worry about `PITFT Failed to disable unit: Unit file fbcp.service does not exist.`.
 
@@ -156,7 +158,7 @@ $ cargo install --git https://github.com/dsprenkels/sss-cli --branch v0.1
 $ cp ~/.cargo/bin/secret-share* ~/.local/bin/
 ```
 
-### Step 7 (optional): install [Electrum](https://electrum.org/#home) (required to generate Electrum mnemonic)
+### Step 7: install [Electrum](https://electrum.org/#home) (used to generate Electrum mnemonics)
 
 #### Install Electrum dependencies
 
@@ -228,19 +230,29 @@ $ pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
 $ rm Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz*
 ```
 
-### Step 8 (optional): install `screen` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (required to validate integrity of [Trezor](https://trezor.io/) encrypted paper backups)
+### Step 8: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of [Trezor](https://trezor.io/) devices)
 
 ```console
 $ sudo apt update
 
-$ sudo apt install -y screen
+$ sudo apt install -y tmux
 
 $ pip3 install attrs trezor --user
 
 $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
-### Step 9: import Sun’s PGP public key (used to verify downloads bellow)
+### Step 9: install `python3-rpi.gpio` and `keyboard` (used to control `tmux` panes)
+
+```console
+$ sudo apt update
+
+$ sudo apt install -y python3-rpi.gpio
+
+$ sudo pip3 install keyboard
+```
+
+### Step 10: import Sun’s PGP public key (used to verify downloads bellow)
 
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
@@ -256,7 +268,7 @@ imported: 1
 
 👍
 
-### Step 10: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
+### Step 11: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
@@ -290,7 +302,7 @@ Good signature
 
 👍
 
-### Step 11: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
+### Step 12: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
@@ -324,7 +336,41 @@ Good signature
 
 👍
 
-### Step 12: download and verify [qr-backup.sh](./qr-backup.sh)
+### Step 13: download and verify [tmux-buttons.py](./tmux-buttons.py)
+
+```console
+$ curl -o /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
+
+$ curl -o /home/pi/.local/bin/tmux-buttons.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
+
+$ gpg --verify /home/pi/.local/bin/tmux-buttons.py.sig
+gpg: assuming signed data in '/home/pi/.local/bin/tmux-buttons.py'
+gpg: Signature made Wed 21 Apr 2021 09:23:12 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 600 /home/pi/.local/bin/tmux-buttons.py
+```
+
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 14: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
@@ -358,7 +404,7 @@ Good signature
 
 👍
 
-### Step 13: download and verify [qr-restore.sh](./qr-restore.sh)
+### Step 15: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
@@ -392,7 +438,7 @@ Good signature
 
 👍
 
-### Step 14: download and verify [qr-clone.sh](./qr-clone.sh)
+### Step 16: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
@@ -426,7 +472,7 @@ Good signature
 
 👍
 
-### Step 15: download and verify [secure-erase.sh](./secure-erase.sh)
+### Step 17: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
@@ -460,7 +506,41 @@ Good signature
 
 👍
 
-### Step 16: make filesystem read-only
+### Step 18: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to validate Trezor devices)
+
+```console
+$ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
+
+$ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
+
+$ gpg --verify /home/pi/.local/bin/trezor-verify-integrity.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/trezor-verify-integrity.sh'
+gpg: Signature made Wed Apr 21 13:15:30 2021 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/trezor-verify-integrity.sh
+```
+
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 19: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -524,13 +604,13 @@ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 17: disable Wi-Fi (if not using ethernet)
+### Step 20: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 18: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 21: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -538,13 +618,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 19: delete macOS hidden files (if present)
+### Step 22: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 20: reboot
+### Step 23: reboot
 
 ```shell
 sudo systemctl reboot
@@ -552,11 +632,17 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW "READ-ONLY" AND “COLD”).
 
-### Step 21 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 24 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-16-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-22-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
-Insert micro SD card (in read-only mode using switch) into macOS computer, run following and eject card.
+#### Enable read-only mode using switch on micro SD to SD adapter
+
+![micro-sd-card-adapter](./micro-sd-card-adapter.png)
+
+#### Insert micro SD card into adapter and insert adapter into computer
+
+#### Run following and eject micro SD card
 
 ```shell
 volume_path="/Volumes/boot"
@@ -564,7 +650,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 22 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
+### Step 25 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
@@ -625,20 +711,25 @@ Options:
   -h, --help                   display help for command
 
 $ qr-backup.sh
-Format USB flash drive? (y or n)?
+Format USB flash drive (y or n)?
 y
 mkfs.fat 4.1 (2017-01-24)
-Type secret and press enter (again)
+Please type secret and press enter, then ctrl+d (again)
 this is a test yo
+Please type passphrase and press enter
+Please type passphrase and press enter (again)
+Show passphrase (y or n)?
+n
+Encrypting secret…
 -----BEGIN PGP MESSAGE-----
 
-jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
-i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
-=xkQH
+jA0ECQMKkp57QW3BWCD/0kUBFlMcOcvR1PPNf+SEXrHKsNgpmAadIHyf+1SGDSLl
+AidLaa1d1+V5vFQowNv/6IyN+nDe/bS+qTFdPI5PptW+rVg+Rw0=
+=dWxd
 -----END PGP MESSAGE-----
-SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
-SHA512 short hash: 177cc163
-Show SHA512 hash as QR code? (y or n)?
+SHA512 hash: 0ed162fe43bedf052f5af54e0dc3861ec87b579d1b8f28d85daa93c8316546cf997cd5656a69baa41fbf65b25f1a9fe7626504d480c4103903d32536b61d715a
+SHA512 short hash: 0ed162fe
+Show SHA512 hash as QR code (y or n)?
 n
 Done
 ```
@@ -649,7 +740,7 @@ Done
 
 The following image is now available on USB flash drive.
 
-![177cc163](./177cc163.jpg?shadow=1)
+![0ed162fe](./0ed162fe.jpg?shadow=1)
 
 ### Restore encrypted paper backup
 
@@ -666,20 +757,22 @@ Options:
   -h, --help                 display help for command
 
 $ qr-restore.sh
-Scan QR code…
+Scanning QR code…
 -----BEGIN PGP MESSAGE-----
 
-jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
-i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
-=xkQH
+jA0ECQMKkp57QW3BWCD/0kUBFlMcOcvR1PPNf+SEXrHKsNgpmAadIHyf+1SGDSLl
+AidLaa1d1+V5vFQowNv/6IyN+nDe/bS+qTFdPI5PptW+rVg+Rw0=
+=dWxd
 -----END PGP MESSAGE-----
-SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
-SHA512 short hash: 177cc163
-Show secret? (y or n)?
-y
+SHA512 hash: 0ed162fe43bedf052f5af54e0dc3861ec87b579d1b8f28d85daa93c8316546cf997cd5656a69baa41fbf65b25f1a9fe7626504d480c4103903d32536b61d715a
+SHA512 short hash: 0ed162fe
+Please type passphrase and press enter
 gpg: AES256 encrypted data
 gpg: encrypted with 1 passphrase
-Secret: this is a test yo
+Show secret (y or n)?
+y
+Secret:
+this is a test yo
 Done
 ```
 
@@ -700,34 +793,40 @@ Options:
   -h, --help             display help for command
 
 $ qr-clone.sh
-Scan QR code…
+Restoring…
+Scanning QR code…
 -----BEGIN PGP MESSAGE-----
 
-jA0ECQMKmFCBKHBUX8z/0kUBxi8eP7LRqP0WgOF+VgTMYuvix7AMxWR/TRM+zQk/
-i9JLr52Odmxv23jEC/KfAUdigAqhs3/GJRtwWuC2IR5NzfBNvXM=
-=xkQH
+jA0ECQMKkp57QW3BWCD/0kUBFlMcOcvR1PPNf+SEXrHKsNgpmAadIHyf+1SGDSLl
+AidLaa1d1+V5vFQowNv/6IyN+nDe/bS+qTFdPI5PptW+rVg+Rw0=
+=dWxd
 -----END PGP MESSAGE-----
-SHA512 hash: 177cc163d89498b859ce06f6f2ac1cd2f9f493b848cdf08746bfb2f4a8bf958ebb45eb70f8f20141c12aa65387ee0545b7c0757cf8d6c808e2fa449fad0e986a
-SHA512 short hash: 177cc163
-Show secret? (y or n)?
-y
+SHA512 hash: 0ed162fe43bedf052f5af54e0dc3861ec87b579d1b8f28d85daa93c8316546cf997cd5656a69baa41fbf65b25f1a9fe7626504d480c4103903d32536b61d715a
+SHA512 short hash: 0ed162fe
+Please type passphrase and press enter
 gpg: AES256 encrypted data
 gpg: encrypted with 1 passphrase
-Secret: this is a test yo
+Show secret (y or n)?
+n
 Done
 Backing up…
-Format USB flash drive? (y or n)?
+Format USB flash drive (y or n)?
 y
 mkfs.fat 4.1 (2017-01-24)
+Please type passphrase and press enter
+Please type passphrase and press enter (again)
+Show passphrase (y or n)?
+n
+Encrypting secret…
 -----BEGIN PGP MESSAGE-----
 
-jA0ECQMKAWdJZylXXDf/0kUB/rRdX1+5OYVh7iwzM0julwIfDe57slc6LeGeRtDa
-KfY4QZkCrseEoZdSZd5mGYQ0ItW9exfBiXN5AU+rbEmzF6VuEWY=
-=ul1g
+jA0ECQMKx+JfTW34bTr/0kUBtxsz8phqCf3sSzUHqR/n2wGfZJka5hvt7vE/PQdm
+rXRpJmlufEyx4t1XXIidQbQjGGm11BXHjBQwhsgMSKC++NAr/PE=
+=DFgX
 -----END PGP MESSAGE-----
-SHA512 hash: 524d8219b17aad59d7cec70f901dfdd449d15f21479740b0111b621cc870e6d82f2f4a0ea8303fb478b24500195325be9c3256d4d5b19700a1cdd1329fc2c71f
-SHA512 short hash: 524d8219
-Show SHA512 hash as QR code? (y or n)?
+SHA512 hash: 305ca16cbcd23f782050c2ae5b0f440f549340b9d95826df2f4259100e12d4da076468a4e167070307e26b714de1587ba4d9828dbcebfd9af2e6ee345c56bd60
+SHA512 short hash: 305ca16c
+Show SHA512 hash as QR code (y or n)?
 n
 Done
 ```
@@ -738,7 +837,7 @@ Done
 
 The following image is now available on USB flash drive.
 
-![524d8219](./524d8219.jpg?shadow=1)
+![305ca16c](./305ca16c.jpg?shadow=1)
 
 ### Secure erase flash drive
 
@@ -752,23 +851,23 @@ Options:
   -h, --help         display help for command
 
 $ secure-erase.sh
-Secure erase USB flash drive? (y or n)?
+Secure erase USB flash drive (y or n)?
 y
-Erasing… (iteration 1 of 3)
+Overwriting with random data… (round 1 of 3)
 dd: error writing '/dev/sda1': No space left on device
 1868+0 records in
 1867+0 records out
-1957691392 bytes (2.0 GB, 1.8 GiB) copied, 181.888 s, 10.8 MB/s
-Erasing… (iteration 2 of 3)
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 180.327 s, 10.9 MB/s
+Overwriting with random data… (round 2 of 3)
 dd: error writing '/dev/sda1': No space left on device
 1868+0 records in
 1867+0 records out
-1957691392 bytes (2.0 GB, 1.8 GiB) copied, 195.606 s, 10.0 MB/s
-Erasing… (iteration 3 of 3)
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 179.563 s, 10.9 MB/s
+Overwriting with random data… (round 3 of 3)
 dd: error writing '/dev/sda1': No space left on device
 1868+0 records in
 1867+0 records out
-1957691392 bytes (2.0 GB, 1.8 GiB) copied, 195.558 s, 10.0 MB/s
+1957691392 bytes (2.0 GB, 1.8 GiB) copied, 179.09 s, 10.9 MB/s
 Done
 ```
 

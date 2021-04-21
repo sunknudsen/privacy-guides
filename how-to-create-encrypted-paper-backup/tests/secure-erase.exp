@@ -2,6 +2,10 @@
 
 source ./test.exp
 
+set timeout 300
+
+# Above timeout will likely not be long enough for all USB flash drives
+
 test_label "Should secure erase USB flash drive"
 
 spawn secure-erase.sh
