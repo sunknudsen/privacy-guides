@@ -8,7 +8,7 @@ normal=$(tput sgr0)
 
 mkdir -p /tmp/pi
 
-printf "$bold%s$normal\n" "Please type root password and press enter"
+printf "$bold%s$normal\n" "Please type sudo password and press enter"
 read -rs password
 
 export password=$password

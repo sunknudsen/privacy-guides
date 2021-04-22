@@ -496,7 +496,7 @@ Good signature
 
 👍
 
-### Step 17: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to validate Trezor devices)
+### Step 17: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
 
 ```console
 $ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
@@ -530,7 +530,7 @@ Good signature
 
 👍
 
-### Step 18: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to validate Trezor devices)
+### Step 18: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
 
 ```console
 $ curl -o /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh
