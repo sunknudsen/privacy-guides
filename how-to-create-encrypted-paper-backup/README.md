@@ -570,10 +570,12 @@ Good signature
 
 #### Disable swap
 
-```shell
-sudo dphys-swapfile swapoff
-sudo dphys-swapfile uninstall
-sudo systemctl disable dphys-swapfile.service
+```console
+$ sudo dphys-swapfile swapoff
+
+$ sudo dphys-swapfile uninstall
+
+$ sudo systemctl disable dphys-swapfile.service
 ```
 
 #### Remove `dphys-swapfile` `fake-hwclock` and `logrotate`
@@ -584,48 +586,58 @@ sudo apt remove -y --purge dphys-swapfile fake-hwclock logrotate
 
 #### Link `/etc/console-setup` to `/tmp/console-setup`
 
-```shell
-sudo mv /etc/console-setup /tmp/console-setup
-sudo ln -s /tmp/console-setup /etc/console-setup
+```console
+$ sudo mv /etc/console-setup /tmp/console-setup
+
+$ sudo ln -s /tmp/console-setup /etc/console-setup
 ```
 
 #### Link `/etc/resolv.conf` to `/tmp/resolv.conf`
 
-```shell
-sudo mv /etc/resolv.conf /tmp/resolv.conf
-sudo ln -s /tmp/resolv.conf /etc/resolv.conf
+```console
+$ sudo mv /etc/resolv.conf /tmp/resolv.conf
+
+$ sudo ln -s /tmp/resolv.conf /etc/resolv.conf
 ```
 
 #### Link `/home/pi/.gnupg` to `/tmp/pi/.gnupg`
 
-```shell
-mkdir -m 700 /tmp/pi
-mv /home/pi/.gnupg /tmp/pi/.gnupg
-ln -s /tmp/pi/.gnupg /home/pi/.gnupg
+```console
+$ mkdir -m 700 /tmp/pi
+
+$ mv /home/pi/.gnupg /tmp/pi/.gnupg
+
+$ ln -s /tmp/pi/.gnupg /home/pi/.gnupg
 ```
 
 #### Enable `tmp.mount` service
 
-```shell
-echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
-sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/
-sudo systemctl enable tmp.mount
+```console
+$ echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
+
+$ sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/
+
+$ sudo systemctl enable tmp.mount
 ```
 
 #### Edit `/boot/cmdline.txt`
 
-```shell
-sudo cp /boot/cmdline.txt /boot/cmdline.txt.backup
-sudo sed -i 's/fsck.repair=yes/fsck.repair=skip/' /boot/cmdline.txt
-sudo sed -i '$ s/$/ fastboot noswap ro systemd.volatile=state/' /boot/cmdline.txt
+```console
+$ sudo cp /boot/cmdline.txt /boot/cmdline.txt.backup
+
+$ sudo sed -i 's/fsck.repair=yes/fsck.repair=skip/' /boot/cmdline.txt
+
+$ sudo sed -i '$ s/$/ fastboot noswap ro systemd.volatile=state/' /boot/cmdline.txt
 ```
 
 #### Edit `/etc/fstab`
 
-```shell
-sudo cp /etc/fstab /etc/fstab.backup
-sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
-sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
+```console
+$ sudo cp /etc/fstab /etc/fstab.backup
+
+$ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
+
+$ sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
 ### Step 20: disable Wi-Fi (if not using ethernet)
