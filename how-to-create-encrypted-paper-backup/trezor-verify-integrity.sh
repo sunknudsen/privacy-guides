@@ -5,11 +5,11 @@ set -o pipefail
 
 function cleanup()
 {
-  sudo kill 0
+  kill 0
   exit 0
 }
 
-trap cleanup INT EXIT
+trap cleanup EXIT
 
 positional=()
 while [[ $# -gt 0 ]]; do
@@ -17,7 +17,7 @@ while [[ $# -gt 0 ]]; do
   case $argument in
     -h|--help)
     printf "%s\n" \
-    "Usage: trezor-validate.sh [options]" \
+    "Usage: trezor-verify-integrity.sh [options]" \
     "" \
     "Options:" \
     "  --qr-restore-options   see \`qr-restore.sh --help\`" \
@@ -49,21 +49,12 @@ printf "%s\n" "Spawning tmux panes…"
 
 sleep 1
 
-sudo bash -c "python3 $basedir/tmux-buttons.py &"
+python3 $basedir/tmux-buttons.py &
 
-tmux new -d -s trezor-validate
-tmux rename-window -t trezor-validate trezorctl
-tmux send-keys -t trezor-validate "trezorctl recovery-device --words 24 --type scrambled --dry-run" Enter
-tmux split-window -t trezor-validate
-tmux rename-window -t trezor-validate qr-restore
-tmux send-keys -t trezor-validate "qr-restore.sh $(echo $qr_restore_options | sed 's/--word-list *//') --word-list" Enter
-tmux attach -t trezor-validate
-
-tput reset
-
-printf "$bold%s$normal\n" "Press ctrl+c to exit"
-
-while :
-do
-  sleep 60
-done
+tmux new -d -s trezor-verify-integrity
+tmux rename-window -t trezor-verify-integrity trezorctl
+tmux send-keys -t trezor-verify-integrity "trezorctl recovery-device --words 24 --type scrambled --dry-run" Enter
+tmux split-window -t trezor-verify-integrity
+tmux rename-window -t trezor-verify-integrity qr-restore
+tmux send-keys -t trezor-verify-integrity "qr-restore.sh $(echo $qr_restore_options | sed 's/--word-list *//') --word-list" Enter
+tmux attach -t trezor-verify-integrity

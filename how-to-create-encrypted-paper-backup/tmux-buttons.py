@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import keyboard
+import subprocess
 import time
 
 GPIO.setmode(GPIO.BCM)
@@ -10,13 +10,14 @@ GPIO.setup(23, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 def click(channel):
   if channel == 17:
-    keyboard.send("ctrl+b, up")
+    subprocess.run(["tmux", "select-pane", "-t", "0"])
   elif channel == 22:
-    keyboard.send("ctrl+b, down")
+    subprocess.run(["tmux", "select-pane", "-t", "1"])
   elif channel == 23:
-    keyboard.send("ctrl+b, shift+7")
+    subprocess.run(["tmux", "kill-session"])
   # elif channel == 27:
-  #   keyboard.send("")
+  #   subprocess.run(["tmux"])
+  
 GPIO.add_event_detect(17, GPIO.RISING, callback=click, bouncetime=300)
 GPIO.add_event_detect(22, GPIO.RISING, callback=click, bouncetime=300)
 GPIO.add_event_detect(23, GPIO.RISING, callback=click, bouncetime=300)

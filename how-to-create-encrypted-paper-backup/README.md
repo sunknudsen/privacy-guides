@@ -45,7 +45,7 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```console
 $ sudo apt update
 
-$ sudo apt install -y git python3-pip
+$ sudo apt install -y git python3-pip python3-rpi.gpio
 
 $ sudo pip3 install adafruit-python-shell click==7.0
 
@@ -230,7 +230,7 @@ $ pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
 $ rm Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz*
 ```
 
-### Step 8: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of [Trezor](https://trezor.io/) devices)
+### Step 8: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of and restore [Trezor](https://trezor.io/) devices)
 
 ```console
 $ sudo apt update
@@ -242,17 +242,7 @@ $ pip3 install attrs trezor --user
 $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
-### Step 9: install `python3-rpi.gpio` and `keyboard` (used to control `tmux` panes)
-
-```console
-$ sudo apt update
-
-$ sudo apt install -y python3-rpi.gpio
-
-$ sudo pip3 install keyboard
-```
-
-### Step 10: import Sun’s PGP public key (used to verify downloads bellow)
+### Step 9: import Sun’s PGP public key (used to verify downloads bellow)
 
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
@@ -268,7 +258,7 @@ imported: 1
 
 👍
 
-### Step 11: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
+### Step 10: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
@@ -302,7 +292,7 @@ Good signature
 
 👍
 
-### Step 12: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
+### Step 11: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
@@ -336,7 +326,7 @@ Good signature
 
 👍
 
-### Step 13: download and verify [tmux-buttons.py](./tmux-buttons.py)
+### Step 12: download and verify [tmux-buttons.py](./tmux-buttons.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py
@@ -351,7 +341,7 @@ $ curl -o /home/pi/.local/bin/tmux-buttons.py.sig https://sunknudsen.com/static/
 
 $ gpg --verify /home/pi/.local/bin/tmux-buttons.py.sig
 gpg: assuming signed data in '/home/pi/.local/bin/tmux-buttons.py'
-gpg: Signature made Wed 21 Apr 2021 09:23:12 EDT
+gpg: Signature made Thu Apr 22 09:13:47 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -370,7 +360,7 @@ Good signature
 
 👍
 
-### Step 14: download and verify [qr-backup.sh](./qr-backup.sh)
+### Step 13: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
@@ -404,7 +394,7 @@ Good signature
 
 👍
 
-### Step 15: download and verify [qr-restore.sh](./qr-restore.sh)
+### Step 14: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
@@ -438,7 +428,7 @@ Good signature
 
 👍
 
-### Step 16: download and verify [qr-clone.sh](./qr-clone.sh)
+### Step 15: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
@@ -472,7 +462,7 @@ Good signature
 
 👍
 
-### Step 17: download and verify [secure-erase.sh](./secure-erase.sh)
+### Step 16: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
@@ -506,7 +496,7 @@ Good signature
 
 👍
 
-### Step 18: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to validate Trezor devices)
+### Step 17: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to validate Trezor devices)
 
 ```console
 $ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
@@ -521,7 +511,7 @@ $ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh.sig https://sunknudsen.
 
 $ gpg --verify /home/pi/.local/bin/trezor-verify-integrity.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/trezor-verify-integrity.sh'
-gpg: Signature made Wed Apr 21 13:15:30 2021 EDT
+gpg: Signature made Thu Apr 22 09:13:56 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -530,6 +520,40 @@ Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
      Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
 
 $ chmod 700 /home/pi/.local/bin/trezor-verify-integrity.sh
+```
+
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 18: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to validate Trezor devices)
+
+```console
+$ curl -o /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
+
+$ curl -o /home/pi/.local/bin/trezor-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
+
+$ gpg --verify /home/pi/.local/bin/trezor-restore.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/trezor-restore.sh'
+gpg: Signature made Thu Apr 22 09:14:04 2021 EDT
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/trezor-restore.sh
 ```
 
 Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
