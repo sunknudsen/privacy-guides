@@ -24,7 +24,7 @@ First, thanks for contributing. 🙌
 
 ## How to get help
 
-We have you back, **you are not alone!**
+We have your back, **you are not alone!**
 
 Please search for answers on privacy guides [discussions](https://github.com/sunknudsen/privacy-guides/discussions) and, if you don’t find what you are looking for, please start new discussion.
 
