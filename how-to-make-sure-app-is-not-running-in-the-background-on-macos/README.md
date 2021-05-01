@@ -85,9 +85,9 @@ function kill-apps() {
   IFS=$'\n'
   red=$(tput setaf 1)
   normal=$(tput sgr0)
-  if [ -z "$1" ]; then
+  if [ -z $1 ] || [ $1 = "--help" ]; then
     printf "%s\n" "Usage: kill-apps string"
-    return 1
+    return 0
   fi
   printf "%s\n" "Finding apps that match “$1”…"
   sleep 1

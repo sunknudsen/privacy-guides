@@ -1,8 +1,8 @@
 #! /bin/bash
 
-if [ -z "$1" ]; then
+if [ -z $1 ] || [ $1 = "--help" ]; then
   printf "%s\n" "Usage: app-cleaner.sh /path/to/app.app"
-  exit 1
+  exit 0
 fi
 
 IFS=$'\n'
