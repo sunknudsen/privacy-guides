@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -z $1 ] || [ $1 = "--help" ]; then
+if [ -z "$1" ] || [ "$1" = "--help" ]; then
   printf "%s\n" "Usage: app-cleaner.sh /path/to/app.app"
   exit 0
 fi

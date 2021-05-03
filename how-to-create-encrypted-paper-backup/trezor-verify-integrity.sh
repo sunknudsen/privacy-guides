@@ -12,7 +12,7 @@ function cleanup()
 trap cleanup EXIT
 
 positional=()
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   argument="$1"
   case $argument in
     -h|--help)

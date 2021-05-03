@@ -9,7 +9,7 @@ number_of_shares=5
 share_threshold=3
 
 positional=()
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   argument="$1"
   case $argument in
     -h|--help)

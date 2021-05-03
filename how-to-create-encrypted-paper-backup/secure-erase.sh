@@ -3,7 +3,7 @@
 rounds=3
 
 positional=()
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   argument="$1"
   case $argument in
     -h|--help)
@@ -60,7 +60,7 @@ if [ "$answer" = "y" ]; then
     printf "%s\n" "Overwriting with random data… (round $round of $rounds)"
     sudo dd bs=1M if=/dev/urandom of=$dev
   done
-  if [ "$zero" = true ]; then
+  if [ $zero = true ]; then
     printf "%s\n" "Overwriting with zeros…"
     sudo dd bs=1M if=/dev/zero of=$dev
   fi

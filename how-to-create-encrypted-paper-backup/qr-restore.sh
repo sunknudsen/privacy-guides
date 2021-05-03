@@ -8,7 +8,7 @@ shamir_secret_sharing=false
 share_threshold=3
 
 positional=()
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   argument="$1"
   case $argument in
     -h|--help)
