@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos) 📦
+- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos)
 - Linux or macOS computer (referred to as “certificate authority computer”)
 - Debian-based Linux computer (referred to as “client computer”)
 

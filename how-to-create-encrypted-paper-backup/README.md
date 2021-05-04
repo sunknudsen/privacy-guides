@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) 📦
+- [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi)
 - [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) (optional)
 - [Compatible USB webcam](https://elinux.org/RPi_USB_Webcams) (720P or 1080P, powered directly by Raspberry Pi)
 - USB keyboard ([Raspberry Pi keyboard and hub](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) recommended)
