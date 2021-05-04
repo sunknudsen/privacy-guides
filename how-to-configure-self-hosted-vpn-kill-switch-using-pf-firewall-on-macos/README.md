@@ -98,7 +98,7 @@ VLAN Configurations
 ===================
 ```
 
-### Step 4: find hardware network interface subnet prefix (example bellow is for `Wi-Fi` interface)
+### Step 4: find hardware network interface subnet prefix (example below is for `Wi-Fi` interface)
 
 ```console
 $ networksetup -getinfo "Wi-Fi"
