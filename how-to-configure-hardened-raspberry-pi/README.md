@@ -112,7 +112,7 @@ disk2 was already unmounted or it has a partitioning scheme so use "diskutil unm
 $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk2 was successful
 
-$ sudo dd bs=1m if=/Users/sunknudsen/Downloads/2021-03-04-raspios-buster-armhf-lite.img of=/dev/rdiskn
+$ sudo dd bs=1m if=$HOME/Downloads/2021-03-04-raspios-buster-armhf-lite.img of=/dev/rdiskn
 1772+0 records in
 1772+0 records out
 1858076672 bytes transferred in 40.449002 secs (45936280 bytes/sec)
