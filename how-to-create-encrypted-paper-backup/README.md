@@ -242,7 +242,7 @@ $ pip3 install attrs trezor --user
 $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
-### Step 9: import Sun’s PGP public key (used to verify downloads bellow)
+### Step 9: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import

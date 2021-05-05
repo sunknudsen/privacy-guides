@@ -22,7 +22,7 @@ Go to https://www.twilio.com/ and sign up (please consider using my [referral li
 
 > Heads-up: don’t forget to replace `+12345678901` with your mobile phone number.
 
-Go to https://www.twilio.com/console/twiml-bins, click +, set friendly name to `Forward voice` and paste snippet bellow in TwiML text area.
+Go to https://www.twilio.com/console/twiml-bins, click +, set friendly name to `Forward voice` and paste snippet below in TwiML text area.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -37,7 +37,7 @@ Go to https://www.twilio.com/console/twiml-bins, click +, set friendly name to `
 
 > Heads-up: don’t forget to replace `+12345678901` with your mobile phone number.
 
-Go to https://www.twilio.com/console/twiml-bins, click +, set friendly name to `Forward messaging` and paste snippet bellow in TwiML text area.
+Go to https://www.twilio.com/console/twiml-bins, click +, set friendly name to `Forward messaging` and paste snippet below in TwiML text area.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
