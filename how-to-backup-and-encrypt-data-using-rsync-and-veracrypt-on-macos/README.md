@@ -290,14 +290,14 @@ files=(
 )
 
 for file in "\${files[@]}"; do
-  rsync \
-    -axRS \
-    --backup \
-    --backup-dir \
-    "\$mount_point/Versioning" \
-    --delete \
-    --suffix="\$(date +".%F-%H%M%S")" \
-    "\$file" \
+  rsync \\
+    -axRS \\
+    --backup \\
+    --backup-dir \\
+    "\$mount_point/Versioning" \\
+    --delete \\
+    --suffix="\$(date +".%F-%H%M%S")" \\
+    "\$file" \\
     "\$mount_point"
 done
 
