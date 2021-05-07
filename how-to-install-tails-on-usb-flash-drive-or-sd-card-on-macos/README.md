@@ -10,6 +10,8 @@ Listed: true
 
 # How to install Tails on USB flash drive or SD card on macOS
 
+[![Why Tails is not only for hacktivists and whistleblowers and how to get started](why-tails-is-not-only-for-hacktivists-and-whistleblowers-and-how-to-get-started.png)](https://www.youtube.com/watch?v=kZ4NHz-gjLo "Why Tails is not only for hacktivists and whistleblowers and how to get started")
+
 ## Requirements
 
 - Computer running macOS Mojave or Catalina
