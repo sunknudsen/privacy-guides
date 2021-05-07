@@ -2,7 +2,7 @@
 Title: How to install Tails on USB flash drive or SD card on macOS
 Description: Learn how to install Tails on USB flash drive or SD card on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, 7aqdxe6f <https://github.com/7aqdxe6f>
 Reviewers:
 Publication date: 2021-05-05T14:49:08.692Z
 Listed: true
@@ -96,7 +96,7 @@ Good signature
 
 👍
 
-### Step 9: clone Tails to USB flash drive or SD card
+### Step 9: copy Tails to USB flash drive or SD card
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
@@ -134,7 +134,7 @@ disk2 was already unmounted or it has a partitioning scheme so use "diskutil unm
 $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk2 was successful
 
-$ sudo dd bs=1m if=$HOME/Downloads/tails-amd64-4.18.img of=/dev/rdisk2
+$ sudo dd bs=1m if=$HOME/Downloads/tails-amd64-4.18.img of=/dev/rdiskn
 1131+0 records in
 1131+0 records out
 1185939456 bytes transferred in 44.708618 secs (26525970 bytes/sec)
