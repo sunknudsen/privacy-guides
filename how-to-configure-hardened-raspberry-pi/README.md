@@ -32,7 +32,7 @@ When asked for file in which to save key, enter `pi`.
 When asked for passphrase, use output from `openssl rand -base64 24` (and store passphrase in password manager).
 
 ```console
-$ mkdir -p ~/.ssh
+$ mkdir ~/.ssh
 
 $ cd ~/.ssh
 
@@ -173,7 +173,7 @@ ssh pi@10.0.1.248
 #### Create `.ssh` folder
 
 ```shell
-mkdir -p ~/.ssh
+mkdir ~/.ssh
 ```
 
 #### Create `~/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-10)
