@@ -36,7 +36,7 @@ When asked for passphrase, use output from `openssl rand -base64 24` (and store 
 Use `vpn-server.pub` public key when setting up server.
 
 ```console
-$ mkdir -p ~/.ssh
+$ mkdir ~/.ssh
 
 $ cd ~/.ssh
 
