@@ -114,6 +114,6 @@ chmod +x veracrypt.AppImage
 
 ## Usage guide
 
-To use VeraCrypt, double click `veracrypt.AppImage`.
+To use VeraCrypt, double-click `veracrypt.AppImage`.
 
 👍
