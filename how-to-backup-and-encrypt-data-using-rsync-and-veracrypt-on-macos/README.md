@@ -58,9 +58,9 @@ gpg:               imported: 1
 
 ### Step 5: download [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 
-Go to https://www.veracrypt.fr/en/Downloads.html and download latest release and its associated PGP signature to `~/Downloads` folder.
+Go to https://www.veracrypt.fr/en/Downloads.html and download latest release and associated PGP signature to `~/Downloads` folder.
 
-### Step 6: verify VeraCrypt release signature using GnuPG
+### Step 6: verify VeraCrypt release signature (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 Replace `VeraCrypt_1.24-Update7` with current release.
 

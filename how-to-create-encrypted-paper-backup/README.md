@@ -202,7 +202,7 @@ imported: 1
 
 👍
 
-#### Verify Electrum release using GnuPG (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+#### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
 $ gpg --verify Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc

@@ -79,7 +79,7 @@ imported: 1
 
 👍
 
-### Step 8: verify Tails release using GnuPG (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 8: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
 $ gpg --verify ~/Downloads/tails-amd64-$TAILS_RELEASE_SEMVER.img.sig
