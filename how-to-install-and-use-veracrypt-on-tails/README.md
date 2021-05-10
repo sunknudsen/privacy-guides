@@ -10,6 +10,8 @@ Listed: true
 
 # How to install and use VeraCrypt on Tails
 
+[![How to install and use VeraCrypt on Tails](how-to-install-and-use-veracrypt-on-tails.png)](https://www.youtube.com/watch?v=AQvexq6O9Hg "How to install and use VeraCrypt on Tails")
+
 ## Requirements
 
 - [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
