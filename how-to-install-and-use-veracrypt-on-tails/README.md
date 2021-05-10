@@ -30,7 +30,7 @@ Click “+” under ”Additional Settings”, then “Administration Password�
 
 > Heads-up: partition used to move files between Tails and other operating systems such as macOS.
 
-Click “Applications”, then Utilities, then “Disks”, select USB flash drive or SD card, click “Free Space”, then “+”, set “Partition Size”, click “Next”, set “Volume Name”, select “Other”, click “Next”, select “exFAT” and finally click “Create”.
+Click “Applications”, then “Utilities”, then “Disks”, select USB flash drive or SD card, click “Free Space”, then “+”, set “Partition Size”, click “Next”, set “Volume Name”, select “Other”, click “Next”, select “exFAT” and finally click “Create”.
 
 ### Step 3: enable persistence
 
