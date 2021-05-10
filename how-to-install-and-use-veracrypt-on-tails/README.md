@@ -87,7 +87,7 @@ Good signature
 
 ```shell
 cd ~/Tor\ Browser
-tar --extract --file ~/Tor\ Browser/veracrypt-$TAILS_RELEASE_SEMVER-setup.tar.bz2 veracrypt-$TAILS_RELEASE_SEMVER-setup-gui-x64
+tar -xf ~/Tor\ Browser/veracrypt-$TAILS_RELEASE_SEMVER-setup.tar.bz2 veracrypt-$TAILS_RELEASE_SEMVER-setup-gui-x64
 ```
 
 ### Step 10: run installer, click “Extract .tar Package File”, accept license terms, click “OK” and finally “OK”.
@@ -100,7 +100,7 @@ tar --extract --file ~/Tor\ Browser/veracrypt-$TAILS_RELEASE_SEMVER-setup.tar.bz
 
 ```shell
 cd ~/Persistent
-tar --extract --file /tmp/veracrypt_${TAILS_RELEASE_SEMVER}_amd64.tar.gz --strip-components 2 usr/bin/veracrypt
+tar -xf /tmp/veracrypt_${TAILS_RELEASE_SEMVER}_amd64.tar.gz --strip-components 2 usr/bin/veracrypt
 ```
 
 ### Step 12: create `veracrypt.AppImage`
