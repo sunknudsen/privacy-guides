@@ -14,33 +14,45 @@ Listed: true
 
 - [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
 
+## Caveats
+
+- When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
+
 ## Setup guide
 
-### Step 1: boot to Tails
-
-> Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
-
-### Step 2: enable persistence
-
-Click “Applications”, then “Configure persistent volume”, set passphrase, click “Create”, make sure “Personal Data” is enabled, click “Save” and finally “Restart Now”.
-
-### Step 3: boot to Tails, unlock persistent storage and set admin password (required to mount VeraCrypt volumes)
+### Step 1: boot to Tails and set admin password (required to [create optional exFAT partition](#step-2-optional-create-exfat-partition-on-tails-usb-flash-drive-or-sd-card))
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
 Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
-### Step 4: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready.
+### Step 2 (optional): create exFAT partition on Tails USB flash drive or SD card
+
+> Heads-up: partition used to move files between Tails and other operating systems such as macOS.
+
+Click “Applications”, then Utilities, then “Disks”, select USB flash drive or SD card, click “Free Space”, then “+”, set “Partition Size”, click “Next”, set “Volume Name”, select “Other”, click “Next”, select “exFAT” and finally click “Create”.
+
+### Step 3: enable persistence
+
+Click “Applications”, then “Favorites”, then “Configure persistent volume”, set passphrase, click “Create”, make sure “Personal Data” is enabled, click “Save” and finally “Restart Now”.
+
+### Step 4: boot to Tails, unlock persistent storage and set admin password (required to mount VeraCrypt volumes)
+
+> Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
+
+Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+
+### Step 5: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready.
 
 Tor is ready
 
 👍
 
-### Step 5: download latest release of [VeraCrypt](https://veracrypt.fr/en/Home.html)
+### Step 6: download latest release of [VeraCrypt](https://veracrypt.fr/en/Home.html)
 
 Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
 
-### Step 6: set VeraCrypt release semver environment variable
+### Step 7: set VeraCrypt release semver environment variable
 
 > Heads-up: replace `1.24-Update7` with [latest release](https://veracrypt.fr/en/Home.html) semver.
 
@@ -48,7 +60,7 @@ Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr
 VERACRYPT_RELEASE_SEMVER=1.24-Update7
 ```
 
-### Step 7: import “VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393)” PGP public key
+### Step 8: import “VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393)” PGP public key
 
 ```console
 $ torsocks curl https://www.idrix.fr/VeraCrypt/VeraCrypt_PGP_public_key.asc | gpg --import
@@ -66,7 +78,7 @@ imported: 1
 
 👍
 
-### Step 8: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 9: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
 $ gpg --verify ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2.sig
@@ -83,27 +95,27 @@ Good signature
 
 👍
 
-### Step 9: extract VeraCrypt release
+### Step 10: extract VeraCrypt release
 
 ```shell
 cd ~/Tor\ Browser
 tar --extract --file ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2 veracrypt-$VERACRYPT_RELEASE_SEMVER-setup-gui-x64
 ```
 
-### Step 10: run installer, click “Extract .tar Package File”, accept license terms, click “OK” and finally “OK”.
+### Step 11: run installer, click “Extract .tar Package File”, accept license terms, click “OK” and finally “OK”.
 
 ```shell
 ./veracrypt-$VERACRYPT_RELEASE_SEMVER-setup-gui-x64
 ```
 
-### Step 11: extract `veracrypt` binary to ~/Persistent
+### Step 12: extract `veracrypt` binary to ~/Persistent
 
 ```shell
 cd ~/Persistent
 tar --extract --file /tmp/veracrypt_${VERACRYPT_RELEASE_SEMVER}_amd64.tar.gz --strip-components 2 usr/bin/veracrypt
 ```
 
-### Step 12: create `veracrypt.AppImage`
+### Step 13: create `veracrypt.AppImage`
 
 ```shell
 echo -n "./veracrypt" > veracrypt.AppImage
