@@ -30,7 +30,7 @@ Click “Applications”, then “Configure persistent volume”, set passphrase
 
 Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
-### Step 4: plug network cable or connect to Wi-Fi network and wait for Tor to be ready.
+### Step 4: plug in network cable or connect to Wi-Fi network and wait for Tor to be ready.
 
 Tor is ready
 
