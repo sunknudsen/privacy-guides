@@ -45,7 +45,7 @@ Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr
 > Heads-up: replace `1.24-Update7` with [latest release](https://veracrypt.fr/en/Home.html) semver.
 
 ```shell
-TAILS_RELEASE_SEMVER=1.24-Update7
+VERACRYPT_RELEASE_SEMVER=1.24-Update7
 ```
 
 ### Step 7: import “VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393)” PGP public key
@@ -66,10 +66,10 @@ imported: 1
 
 👍
 
-### Step 8: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 8: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
-$ gpg --verify ~/Tor\ Browser/veracrypt-$TAILS_RELEASE_SEMVER-setup.tar.bz2.sig
+$ gpg --verify ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2.sig
 gpg: assuming signed data in '/home/amnesia/Tor Browser/veracrypt-1.24-Update7-setup.tar.bz2'
 gpg: Signature made Sat 08 Aug 2020 06:22:10 PM UTC
 gpg:                using RSA key 5069A233D55A0EEB174A5FC3821ACD02680D16DE
@@ -83,24 +83,24 @@ Good signature
 
 👍
 
-### Step 9: extract Tails release
+### Step 9: extract VeraCrypt release
 
 ```shell
 cd ~/Tor\ Browser
-tar --extract --file ~/Tor\ Browser/veracrypt-$TAILS_RELEASE_SEMVER-setup.tar.bz2 veracrypt-$TAILS_RELEASE_SEMVER-setup-gui-x64
+tar --extract --file ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2 veracrypt-$VERACRYPT_RELEASE_SEMVER-setup-gui-x64
 ```
 
 ### Step 10: run installer, click “Extract .tar Package File”, accept license terms, click “OK” and finally “OK”.
 
 ```shell
-./veracrypt-$TAILS_RELEASE_SEMVER-setup-gui-x64
+./veracrypt-$VERACRYPT_RELEASE_SEMVER-setup-gui-x64
 ```
 
 ### Step 11: extract `veracrypt` binary to ~/Persistent
 
 ```shell
 cd ~/Persistent
-tar --extract --file /tmp/veracrypt_${TAILS_RELEASE_SEMVER}_amd64.tar.gz --strip-components 2 usr/bin/veracrypt
+tar --extract --file /tmp/veracrypt_${VERACRYPT_RELEASE_SEMVER}_amd64.tar.gz --strip-components 2 usr/bin/veracrypt
 ```
 
 ### Step 12: create `veracrypt.AppImage`
