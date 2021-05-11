@@ -70,7 +70,7 @@ $ source ~/.bashrc
 ```console
 $ sudo apt update
 
-$ sudo apt install -y git python3-pip
+$ sudo apt install -y git
 
 $ sudo pip3 install adafruit-python-shell click==7.0
 
