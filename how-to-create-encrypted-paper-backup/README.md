@@ -33,7 +33,33 @@ Replace `10.0.1.248` with IP of Raspberry Pi.
 ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
-### Step 2 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
+### Step 2: configure keyboard keymap
+
+> Heads-up: following instructions are for [Raspberry Pi keyboard](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) (US model).
+
+> Heads-up: when asked to reboot, select “No” and press enter.
+
+```shell
+sudo raspi-config
+```
+
+Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and finally “Finish”.
+
+### Step 3: install dependencies available on repositories
+
+```console
+$ sudo apt update
+
+$ sudo apt install -y expect fim imagemagick python3-pip python3-rpi.gpio
+
+$ pip3 install mnemonic pillow qrcode --user
+
+$ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
+
+$ source ~/.bashrc
+```
+
+### Step 4 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
 
 #### Install Adafruit PiTFT monitor drivers
 
@@ -44,7 +70,7 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```console
 $ sudo apt update
 
-$ sudo apt install -y git python3-pip python3-rpi.gpio
+$ sudo apt install -y git python3-pip
 
 $ sudo pip3 install adafruit-python-shell click==7.0
 
@@ -68,32 +94,6 @@ sudo raspi-config
 ```
 
 Select “System Options”, then “Boot / Auto Login”, then “Console” and finally “Finish”.
-
-### Step 3: configure keyboard keymap
-
-> Heads-up: following instructions are for [Raspberry Pi keyboard](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) (US model).
-
-> Heads-up: when asked to reboot, select “No” and press enter.
-
-```shell
-sudo raspi-config
-```
-
-Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and finally “Finish”.
-
-### Step 4: install dependencies available on repositories
-
-```console
-$ sudo apt update
-
-$ sudo apt install -y expect fim imagemagick
-
-$ pip3 install mnemonic pillow qrcode --user
-
-$ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
-
-$ source ~/.bashrc
-```
 
 ### Step 5: install [zbar](https://github.com/mchehab/zbar) from source
 
