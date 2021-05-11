@@ -31,7 +31,7 @@ When asked for file in which to save key, enter `borg`.
 When asked for passphrase, use output from `openssl rand -base64 24` (and store passphrase in password manager).
 
 ```console
-$ mkdir -p ~/.ssh
+$ mkdir ~/.ssh
 
 $ cd ~/.ssh
 

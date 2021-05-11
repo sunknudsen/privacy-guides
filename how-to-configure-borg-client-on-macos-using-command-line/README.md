@@ -35,7 +35,7 @@ When asked for passphrase, use output from `openssl rand -base64 24` (and store 
 Use `borg.pub` public key when configuring Borg server.
 
 ```console
-$ mkdir -p ~/.ssh
+$ mkdir ~/.ssh
 
 $ cd ~/.ssh
 
