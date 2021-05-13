@@ -22,6 +22,8 @@ Listed: true
 
 ### Reset single privacy permission for single app
 
+> Heads-up: Replace “/Applications/Signal.app” with path to app for which to reset privacy permissions.
+
 ```console
 $ mdls -name kMDItemCFBundleIdentifier -r /Applications/Signal.app
 org.whispersystems.signal-desktop
