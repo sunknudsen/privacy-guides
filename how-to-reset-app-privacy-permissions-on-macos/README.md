@@ -37,6 +37,9 @@ Successfully reset Camera approval status for org.whispersystems.signal-desktop
 ### Reset all privacy permissions for single app
 
 ```console
+$ mdls -name kMDItemCFBundleIdentifier -r /Applications/Signal.app
+org.whispersystems.signal-desktop
+
 $ tccutil reset All org.whispersystems.signal-desktop
 Successfully reset All approval status for org.whispersystems.signal-desktop
 ```
