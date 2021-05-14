@@ -2,7 +2,7 @@
 Title: How to reset app privacy permissions on macOS
 Description: Learn how to reset app privacy permissions on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, 7aqdxe6f <https://github.com/7aqdxe6f>, AmadeuszL <https://github.com/AmadeuszL>
 Reviewers:
 Publication date: 2020-12-31T14:52:42.907Z
 Listed: true
