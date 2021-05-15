@@ -210,13 +210,7 @@ history -c; history -w
 source ~/.bashrc
 ```
 
-### Step 14: disable pi sudo `nopassword` “feature”
-
-```shell
-sudo rm /etc/sudoers.d/010_*
-```
-
-### Step 15: configure pi `.vimrc`
+### Step 14: configure pi `.vimrc`
 
 ```shell
 cat << "EOF" > ~/.vimrc
@@ -235,10 +229,16 @@ syntax on
 EOF
 ```
 
-### Step 16: switch to root
+### Step 15: switch to root
 
 ```shell
 sudo su -
+```
+
+### Step 16: disable pi sudo `nopassword` “feature”
+
+```shell
+rm /etc/sudoers.d/010_*
 ```
 
 ### Step 17: disable root Bash history
