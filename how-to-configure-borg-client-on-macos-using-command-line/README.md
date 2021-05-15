@@ -131,7 +131,7 @@ BORG_HOSTNAME="ch-s011.rsync.net"
 #### Generate `authorized_keys` file
 
 ```shell
-cat << EOF > ~/Desktop/authorized_keys
+cat << "EOF" > ~/Desktop/authorized_keys
 command="borg1 serve --restrict-to-repository /data1/home/$BORG_USERNAME/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg.pub)
 command="borg1 serve --append-only --restrict-to-repository /data1/home/$BORG_USERNAME/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg-append-only.pub)
 EOF
@@ -217,7 +217,7 @@ BACKUP_NAME="$USER-macbook-pro"
 ### Step 10: create `/usr/local/bin/borg-backup.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/borg-backup.sh
+cat << "EOF" > /usr/local/bin/borg-backup.sh
 #! /bin/sh
 
 set -e
@@ -251,7 +251,7 @@ vi /usr/local/bin/borg-backup.sh
 ### Step 12: create `/usr/local/bin/borg-list.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/borg-list.sh
+cat << "EOF" > /usr/local/bin/borg-list.sh
 #! /bin/sh
 
 set -e
@@ -272,7 +272,7 @@ chmod +x /usr/local/bin/borg-list.sh
 ### Step 13: create `/usr/local/bin/borg-check.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/borg-check.sh
+cat << "EOF" > /usr/local/bin/borg-check.sh
 #! /bin/sh
 
 set -e
@@ -293,7 +293,7 @@ chmod +x /usr/local/bin/borg-check.sh
 ### Step 14: create `/usr/local/bin/borg-restore.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/borg-restore.sh
+cat << "EOF" > /usr/local/bin/borg-restore.sh
 #! /bin/sh
 
 set -e
@@ -334,7 +334,7 @@ chmod +x /usr/local/bin/borg-restore.sh
 ### Step 15: create `/usr/local/bin/borg-prune.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/borg-prune.sh
+cat << "EOF" > /usr/local/bin/borg-prune.sh
 #! /bin/sh
 
 set -e

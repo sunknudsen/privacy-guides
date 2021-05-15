@@ -173,7 +173,7 @@ KILLSWITCH_VPN_ENDPOINT_IPS="{ 185.193.126.203 }"
 This anchor blocks everything except DHCP and VPN requests.
 
 ```shell
-cat << EOF | sudo tee /etc/pf.anchors/local.pf.strict
+cat << "EOF" | sudo tee /etc/pf.anchors/local.pf.strict
 # Options
 set block-policy drop
 set ruleset-optimization basic
@@ -204,7 +204,7 @@ sudo chmod 644 /etc/pf.anchors/local.pf.strict
 Same as strict but allows multicast DNS and local network requests.
 
 ```shell
-cat << EOF | sudo tee /etc/pf.anchors/local.pf.trusted
+cat << "EOF" | sudo tee /etc/pf.anchors/local.pf.trusted
 # Options
 set block-policy drop
 set ruleset-optimization basic

@@ -482,7 +482,7 @@ cp /etc/ipsec.conf /etc/ipsec.conf.backup
 If network is IPv4-only, run:
 
 ```shell
-cat << EOF > /etc/ipsec.conf
+cat << "EOF" > /etc/ipsec.conf
 config setup
   charondebug="ike 1, knl 1, cfg 1"
 
@@ -516,7 +516,7 @@ EOF
 If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
-cat << EOF > /etc/ipsec.conf
+cat << "EOF" > /etc/ipsec.conf
 config setup
   charondebug="ike 1, knl 1, cfg 1"
 
@@ -630,7 +630,7 @@ STRONGSWAN_CLIENT_NAME=alice
 #### Create OpenSSL config file
 
 ```shell
-cat << EOF > openssl.cnf
+cat << "EOF" > openssl.cnf
 [ req ]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
@@ -719,7 +719,7 @@ Verifying - Enter Export Password:
 On Mac, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/cacerts/ca.crt
 $(cat ca.crt)
 _EOF
@@ -767,7 +767,7 @@ _EOF
 On Mac, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/private/server.key
 $(cat server.key)
 _EOF
@@ -835,7 +835,7 @@ _EOF
 On Mac, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/certs/server.crt
 $(cat server.crt)
 _EOF

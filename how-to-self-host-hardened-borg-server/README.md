@@ -105,7 +105,7 @@ BORG_STORAGE_QUOTA="10G"
 #### Generate heredoc (the output of following command will be used at [step 8](#create-homeborgsshauthorized_keys-using-heredoc-generated-at-step-2))
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /home/borg/.ssh/authorized_keys
 command="borg serve --restrict-to-repository /home/borg/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg.pub)
 command="borg serve --append-only --restrict-to-repository /home/borg/backup --storage-quota $BORG_STORAGE_QUOTA",restrict $(cat ~/.ssh/borg-append-only.pub)

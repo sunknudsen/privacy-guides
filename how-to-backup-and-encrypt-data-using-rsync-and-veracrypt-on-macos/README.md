@@ -261,7 +261,7 @@ veracrypt --text --dismount "$BACKUP_VOLUME_PATH"
 ### Step 12: create `/usr/local/bin/backup.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/backup.sh
+cat << "EOF" > /usr/local/bin/backup.sh
 #! /bin/sh
 
 set -e
@@ -340,7 +340,7 @@ Press <kbd>i</kbd> to enter insert mode, edit backup script, press <kbd>esc</kbd
 ### Step 14: create `/usr/local/bin/check.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/check.sh
+cat << "EOF" > /usr/local/bin/check.sh
 #! /bin/sh
 
 set -e
@@ -368,7 +368,7 @@ chmod +x /usr/local/bin/check.sh
 ### Step 15: create `/usr/local/bin/restore.sh` script
 
 ```shell
-cat << EOF > /usr/local/bin/restore.sh
+cat << "EOF" > /usr/local/bin/restore.sh
 #! /bin/sh
 
 set -e

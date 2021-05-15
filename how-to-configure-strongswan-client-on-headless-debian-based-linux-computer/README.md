@@ -42,7 +42,7 @@ STRONGSWAN_CLIENT_NAME=bob
 #### Update OpenSSL config file
 
 ```shell
-cat << EOF > openssl.cnf
+cat << "EOF" > openssl.cnf
 [ req ]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
@@ -161,7 +161,7 @@ STRONGSWAN_SERVER_IP=185.193.126.203
 
 ```shell
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
-cat << EOF > /etc/ipsec.conf
+cat << "EOF" > /etc/ipsec.conf
 conn ikev2
   auto=start
   ike=aes256gcm16-prfsha512-ecp384!
@@ -184,7 +184,7 @@ EOF
 
 ```shell
 cp /etc/ipsec.secrets /etc/ipsec.secrets.backup
-cat << EOF > /etc/ipsec.secrets
+cat << "EOF" > /etc/ipsec.secrets
 : RSA $STRONGSWAN_CLIENT_NAME.key
 EOF
 ```
@@ -217,7 +217,7 @@ On client computer: run `chmod -R 600 /etc/ipsec.d/private` -->
 On certificate authority computer, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/cacerts/ca.crt
 $(cat ca.crt)
 _EOF
@@ -265,7 +265,7 @@ _EOF
 On certificate authority computer, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/private/$STRONGSWAN_CLIENT_NAME.key
 $(cat $STRONGSWAN_CLIENT_NAME.key)
 _EOF
@@ -333,7 +333,7 @@ _EOF
 On certificate authority computer, run:
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > /etc/ipsec.d/certs/$STRONGSWAN_CLIENT_NAME.crt
 $(cat $STRONGSWAN_CLIENT_NAME.crt)
 _EOF

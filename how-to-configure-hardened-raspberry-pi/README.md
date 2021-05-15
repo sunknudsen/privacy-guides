@@ -65,7 +65,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCzQpX9uqDP8L2gSZNJxYEi04Y1pZWz28v4zANY5dU
 ### Step 2: generate heredoc (the output of following command will be used at [step 10](#step-10-configure-pi-ssh-authorized-keys))
 
 ```shell
-cat << EOF
+cat << "EOF"
 cat << "_EOF" > ~/.ssh/authorized_keys
 $(cat ~/.ssh/pi.pub)
 _EOF
