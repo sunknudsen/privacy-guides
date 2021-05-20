@@ -50,7 +50,7 @@ Select “Localisation Options”, then “Keyboard”, then “Generic 105-key 
 ```console
 $ sudo apt update
 
-$ sudo apt install -y expect fim imagemagick python3-pip python3-rpi.gpio
+$ sudo apt install -y bc expect fim imagemagick python3-pip python3-rpi.gpio
 
 $ pip3 install mnemonic pillow qrcode --user
 
