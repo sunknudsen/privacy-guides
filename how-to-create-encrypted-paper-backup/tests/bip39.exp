@@ -33,6 +33,9 @@ expect {
   -re {([a-z]+ ?){24}} {
     test_ok true
   }
+  eof {
+    test_failed
+  }
 }
 
 test_label "Should validate valid BIP39 mnemonic"
@@ -69,6 +72,9 @@ expect {
   -re {Please type passphrase and press enter} {
     test_ok true
   }
+  eof {
+    test_failed
+  }
 }
 
 test_label "Should fail to validate invalid BIP39 mnemonic"
@@ -104,5 +110,8 @@ expect {
 expect {
   -re {Invalid BIP39 mnemonic} {
     test_ok true
+  }
+  eof {
+    test_failed
   }
 }

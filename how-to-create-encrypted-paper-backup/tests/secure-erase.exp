@@ -50,6 +50,9 @@ expect {
   -re {Done} {
     test_ok
   }
+  eof {
+    test_failed
+  }
 }
 
 test_label "Should secure erase flash drive using single round random overwrite and zero overwrite"
@@ -87,5 +90,8 @@ expect {
 expect {
   -re {Done} {
     test_ok
+  }
+  eof {
+    test_failed
   }
 }

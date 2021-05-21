@@ -137,6 +137,9 @@ expect {
   -re {Done} {
     test_ok
   }
+  eof {
+    test_failed
+  }
 }
 
 test_label "Should restore secret using Shamir Secret Sharing"

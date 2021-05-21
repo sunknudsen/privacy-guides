@@ -26,4 +26,7 @@ expect {
   -re {([a-z]+ ?){24}} {
     test_ok true
   }
+  eof {
+    test_failed
+  }
 }

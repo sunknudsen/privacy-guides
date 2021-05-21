@@ -585,7 +585,7 @@ $ sudo dphys-swapfile uninstall
 $ sudo systemctl disable dphys-swapfile.service
 ```
 
-#### Remove `dphys-swapfile` `fake-hwclock` and `logrotate`
+#### Remove `dphys-swapfile`, `fake-hwclock` and `logrotate`
 
 ```shell
 sudo apt remove -y --purge dphys-swapfile fake-hwclock logrotate
@@ -594,25 +594,21 @@ sudo apt remove -y --purge dphys-swapfile fake-hwclock logrotate
 #### Link `/etc/console-setup` to `/tmp/console-setup`
 
 ```console
-$ sudo mv /etc/console-setup /tmp/console-setup
+$ sudo rm -fr /etc/console-setup
 
 $ sudo ln -s /tmp/console-setup /etc/console-setup
 ```
 
-#### Link `/etc/resolv.conf` to `/tmp/resolv.conf`
+#### Link `/home/pi/.electrum` to `/tmp/pi/.electrum`
 
 ```console
-$ sudo mv /etc/resolv.conf /tmp/resolv.conf
-
-$ sudo ln -s /tmp/resolv.conf /etc/resolv.conf
+$ ln -s /tmp/pi/.electrum /home/pi/.electrum
 ```
 
 #### Link `/home/pi/.gnupg` to `/tmp/pi/.gnupg`
 
 ```console
-$ mkdir -m 700 /tmp/pi
-
-$ mv /home/pi/.gnupg /tmp/pi/.gnupg
+$ rm -fr /home/pi/.gnupg
 
 $ ln -s /tmp/pi/.gnupg /home/pi/.gnupg
 ```
@@ -620,7 +616,7 @@ $ ln -s /tmp/pi/.gnupg /home/pi/.gnupg
 #### Enable `tmp.mount` service
 
 ```console
-$ echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
+$ echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.electrum 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
 
 $ sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/
 

@@ -39,6 +39,9 @@ expect {
   -re {Secrets do not match} {
     test_ok
   }
+  eof {
+    test_failed
+  }
 }
 
 test_label "Should fails to backup secret using passphrases that do not match"
@@ -86,6 +89,9 @@ expect {
 expect {
   -re {Passphrases do not match} {
     test_ok
+  }
+  eof {
+    test_failed
   }
 }
 
@@ -156,6 +162,9 @@ expect {
 expect {
   -re {Done} {
     test_ok
+  }
+  eof {
+    test_failed
   }
 }
 
