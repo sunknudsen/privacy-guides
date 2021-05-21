@@ -33,7 +33,15 @@ Replace `10.0.1.248` with IP of Raspberry Pi.
 ssh pi@10.0.1.248 -i ~/.ssh/pi
 ```
 
-### Step 2: configure keyboard keymap
+### Step 2: configure console font
+
+```console
+$ sudo sed -i 's/FONTFACE=""/FONTFACE="TerminusBold"/' /etc/default/console-setup
+
+$ sudo sed -i 's/FONTSIZE=""/FONTSIZE="10x20"/' /etc/default/console-setup
+```
+
+### Step 3: configure keyboard layout
 
 > Heads-up: following instructions are for [Raspberry Pi keyboard](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) (US model).
 
@@ -45,7 +53,7 @@ sudo raspi-config
 
 Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and finally “Finish”.
 
-### Step 3: install dependencies available on repositories
+### Step 4: install dependencies available on repositories
 
 ```console
 $ sudo apt update
@@ -59,7 +67,7 @@ $ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >
 $ source ~/.bashrc
 ```
 
-### Step 4 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
+### Step 5 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
 
 #### Install Adafruit PiTFT monitor drivers
 
@@ -95,7 +103,7 @@ sudo raspi-config
 
 Select “System Options”, then “Boot / Auto Login”, then “Console” and finally “Finish”.
 
-### Step 5: install [zbar](https://github.com/mchehab/zbar) from source
+### Step 6: install [zbar](https://github.com/mchehab/zbar) from source
 
 #### Install zbar dependencies
 
@@ -137,7 +145,7 @@ $ cd ~
 $ rm -fr zbar
 ```
 
-### Step 6: install [sss-cli](https://github.com/dsprenkels/sss-cli) from source
+### Step 7: install [sss-cli](https://github.com/dsprenkels/sss-cli) from source
 
 #### Install [Rust](https://www.rust-lang.org/)
 
@@ -157,7 +165,7 @@ $ cargo install --git https://github.com/dsprenkels/sss-cli --branch v0.1
 $ cp ~/.cargo/bin/secret-share* ~/.local/bin/
 ```
 
-### Step 7: install [Electrum](https://electrum.org/#home) (used to generate Electrum mnemonics)
+### Step 8: install [Electrum](https://electrum.org/#home) (used to generate Electrum mnemonics)
 
 #### Install Electrum dependencies
 
@@ -229,7 +237,7 @@ $ pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
 $ rm Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz*
 ```
 
-### Step 8: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of and restore [Trezor](https://trezor.io/) devices)
+### Step 9: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of and restore [Trezor](https://trezor.io/) devices)
 
 ```console
 $ sudo apt update
@@ -241,7 +249,7 @@ $ pip3 install attrs trezor --user
 $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
-### Step 9: import Sun’s PGP public key (used to verify downloads below)
+### Step 10: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
@@ -257,7 +265,7 @@ imported: 1
 
 👍
 
-### Step 10: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
+### Step 11: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
@@ -291,7 +299,7 @@ Good signature
 
 👍
 
-### Step 11: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
+### Step 12: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
@@ -325,7 +333,7 @@ Good signature
 
 👍
 
-### Step 12: download and verify [tmux-buttons.py](./tmux-buttons.py)
+### Step 13: download and verify [tmux-buttons.py](./tmux-buttons.py)
 
 ```console
 $ curl -o /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py
@@ -359,7 +367,7 @@ Good signature
 
 👍
 
-### Step 13: download and verify [qr-backup.sh](./qr-backup.sh)
+### Step 14: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
@@ -393,7 +401,7 @@ Good signature
 
 👍
 
-### Step 14: download and verify [qr-restore.sh](./qr-restore.sh)
+### Step 15: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
@@ -427,7 +435,7 @@ Good signature
 
 👍
 
-### Step 15: download and verify [qr-clone.sh](./qr-clone.sh)
+### Step 16: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
@@ -461,7 +469,7 @@ Good signature
 
 👍
 
-### Step 16: download and verify [secure-erase.sh](./secure-erase.sh)
+### Step 17: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
@@ -495,7 +503,7 @@ Good signature
 
 👍
 
-### Step 17: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
+### Step 18: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
 
 ```console
 $ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
@@ -529,7 +537,7 @@ Good signature
 
 👍
 
-### Step 18: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
+### Step 19: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
 
 ```console
 $ curl -o /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh
@@ -563,7 +571,7 @@ Good signature
 
 👍
 
-### Step 19: make filesystem read-only
+### Step 20: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -639,13 +647,13 @@ $ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 $ sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 20: disable Wi-Fi (if not using ethernet)
+### Step 21: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 21: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 22: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -653,13 +661,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 22: delete macOS hidden files (if present)
+### Step 23: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 23: reboot
+### Step 24: reboot
 
 ```shell
 sudo systemctl reboot
@@ -667,9 +675,9 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW “READ-ONLY” AND “COLD”).
 
-### Step 24 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 25 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-22-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-23-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
 #### Enable read-only mode using switch on micro SD to SD adapter
 
@@ -685,7 +693,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 25 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
+### Step 26 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
