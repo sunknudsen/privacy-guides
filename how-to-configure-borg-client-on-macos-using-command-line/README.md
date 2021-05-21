@@ -352,7 +352,7 @@ EOF
 chmod +x /usr/local/bin/borg-prune.sh
 ```
 
-### Step 16: create `/usr/local/var/log` folder
+### Step 16: create `/usr/local/var/log` directory
 
 ```shell
 mkdir -p /usr/local/var/log

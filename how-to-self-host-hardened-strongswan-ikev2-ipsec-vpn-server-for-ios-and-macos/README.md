@@ -117,7 +117,7 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n] Y
 ```
 
-### Step 6: copy root `authorized_keys` file to vpn-server-admin home folder
+### Step 6: copy root `authorized_keys` file to vpn-server-admin home directory
 
 ```shell
 mkdir /home/vpn-server-admin/.ssh
@@ -608,7 +608,7 @@ sed -i 's/After=network-online.target/After=dnsmasq.service/' /lib/systemd/syste
 systemctl daemon-reload
 ```
 
-### Step 25: create `strongswan-certs` folder
+### Step 25: create `strongswan-certs` directory
 
 > Heads-up: for security reasons, steps 25 to 29 are done on Mac vs server.
 
@@ -714,7 +714,7 @@ Enter Export Password:
 Verifying - Enter Export Password:
 ```
 
-### Step 30: copy certs and key to server and make private folder root-only.
+### Step 30: copy certs and key to server and make private directory root-only.
 
 On Mac, run:
 

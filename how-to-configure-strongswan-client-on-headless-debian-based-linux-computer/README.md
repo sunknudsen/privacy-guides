@@ -27,7 +27,7 @@ Listed: true
 
 ### Step 1: create client key and cert using certificate authority from [How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos) (on certificate authority computer).
 
-#### Navigate to `strongswan-certs` folder
+#### Navigate to `strongswan-certs` directory
 
 ```shell
 cd ~/Desktop/strongswan-certs
@@ -198,21 +198,7 @@ sed -i 's/load = no/load = yes/' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.co
 cd -
 ```
 
-### Step 8: copy certs and key to client and make private folder root-only.
-
-<!-- On certificate authority computer: run `cat ca.crt`
-
-On client computer: run `vi /etc/ipsec.d/cacerts/ca.crt`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
-
-On certificate authority computer: run `cat bob.key`
-
-On client computer: run `vi /etc/ipsec.d/private/bob.key`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
-
-On certificate authority computer: run `cat bob.crt`
-
-On client computer: run `vi /etc/ipsec.d/certs/bob.crt`, press <kbd>i</kbd>, paste output from previous step in window, press <kbd>esc</kbd> and press <kbd>shift+z+z</kbd>
-
-On client computer: run `chmod -R 600 /etc/ipsec.d/private` -->
+### Step 8: copy certs and key to client and make private directory root-only.
 
 On certificate authority computer, run:
 

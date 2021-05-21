@@ -117,7 +117,7 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n] Y
 ```
 
-### Step 6: copy root `authorized_keys` file to server-admin home folder
+### Step 6: copy root `authorized_keys` file to server-admin home directory
 
 ```shell
 mkdir /home/server-admin/.ssh

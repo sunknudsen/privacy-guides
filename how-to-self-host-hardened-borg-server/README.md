@@ -169,7 +169,7 @@ apt install -y borgbackup
 
 ### Step 9: configure borg SSH authorized keys
 
-#### Create `.ssh` folder
+#### Create `.ssh` directory
 
 ```shell
 mkdir -p /home/borg/.ssh

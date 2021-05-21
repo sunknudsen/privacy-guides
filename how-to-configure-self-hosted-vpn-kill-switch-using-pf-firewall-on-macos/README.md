@@ -252,14 +252,14 @@ sudo ln -s /etc/pf.anchors/local.pf.strict /etc/pf.anchors/local.pf
 sudo pfctl -F all -f /etc/pf.conf
 ```
 
-### Step 10: create `/usr/local/sbin` folder
+### Step 10: create `/usr/local/sbin` directory
 
 ```shell
 sudo mkdir -p /usr/local/sbin
 sudo chown ${USER}:admin /usr/local/sbin
 ```
 
-### Step 11: source `/usr/local/sbin` folder
+### Step 11: source `/usr/local/sbin` directory
 
 Find which shell is configured using `echo $SHELL`.
 

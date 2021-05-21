@@ -170,7 +170,7 @@ ssh pi@10.0.1.248
 
 ### Step 10: configure pi SSH authorized keys
 
-#### Create `.ssh` folder
+#### Create `.ssh` directory
 
 ```shell
 mkdir ~/.ssh

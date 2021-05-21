@@ -23,14 +23,14 @@ Listed: true
 
 ## Guide
 
-### Step 1: create `/usr/local/sbin` folder
+### Step 1: create `/usr/local/sbin` directory
 
 ```shell
 sudo mkdir -p /usr/local/sbin
 sudo chown ${USER}:admin /usr/local/sbin
 ```
 
-### Step 2: add `/usr/local/sbin` folder to `PATH` environment variable
+### Step 2: add `/usr/local/sbin` directory to `PATH` environment variable
 
 Find which shell is configured using `echo $SHELL`.
 

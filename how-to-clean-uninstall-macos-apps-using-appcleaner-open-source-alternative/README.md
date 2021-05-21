@@ -14,7 +14,7 @@ Listed: true
 
 ## Setup guide
 
-### Step 1: create `/usr/local/bin` folder
+### Step 1: create `/usr/local/bin` directory
 
 ```shell
 sudo mkdir -p /usr/local/bin
