@@ -103,7 +103,7 @@ sudo raspi-config
 
 Select “System Options”, then “Boot / Auto Login”, then “Console” and finally “Finish”.
 
-### Step 6: install [zbar](https://github.com/mchehab/zbar) from source
+### Step 6: build [zbar](https://github.com/mchehab/zbar) from source
 
 #### Install zbar dependencies
 
