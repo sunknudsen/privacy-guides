@@ -39,7 +39,7 @@ fi
 printf "$bold%s$normal\n" "Please type current date (ISO 8601 format) and press enter"
 read -r current_date
 
-if [[ "$current_date" =~ ^\d{4}-\d{2}-\d{2}$ ]]; then
+if [[ ! "$current_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
   printf "$bold$red%s$normal\n" "Invalid date"
   exit 1
 fi
@@ -49,7 +49,7 @@ sudo date --set="$current_date"
 
 gpg --import /home/pi/sunknudsen.asc
 
-update=$(ls -t $usb/pi-qr-update-*-*-*.zip | head -1  || echo "")
+update=$(ls -t $usb/*-*-*-pi-qr-update.zip | head -1  || echo "")
 
 if [ -z "$update" ]; then
   printf "$bold$red%s$normal\n" "Update archive not found"

@@ -12,6 +12,10 @@ bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
 
+dir_name=$(basename $1)
+dir_parent=$(dirname $1)
+archive="$dir_parent/$dir_name.zip"
+
 if [ ! -d "$1" ]; then
   printf "$bold$red%s$normal\n" "Update folder not found"
   exit 1
@@ -22,9 +26,10 @@ if [ ! -f "$1/run.sh" ]; then
   exit 1
 fi
 
-dir_name=$(basename $1)
-dir_parent=$(dirname $1)
-archive="$dir_parent/$dir_name.zip"
+if [[ ! "$dir_name" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}-pi-qr-update$ ]]; then
+  printf "$bold$red%s$normal\n" "Invalid update folder name"
+  exit 1
+fi
 
 rm "$archive" "$archive.sig" || true
 
