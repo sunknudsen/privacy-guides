@@ -252,10 +252,12 @@ $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-
 ### Step 10: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
-$ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
+$ curl -o /home/pi/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  6896  100  6896    0     0   6499      0  0:00:01  0:00:01 --:--:--  6499
+100  6896  100  6896    0     0   7569      0 --:--:-- --:--:-- --:--:--  7561
+
+$ gpg --import /home/pi/sunknudsen.asc
 gpg: key C1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
@@ -475,16 +477,16 @@ Good signature
 $ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
+100  1350  100  1350    0     0    992      0  0:00:01  0:00:01 --:--:--   992
 
 $ curl -o /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
+100   833  100   833    0     0    805      0  0:00:01  0:00:01 --:--:--   805
 
 $ gpg --verify /home/pi/.local/bin/secure-erase.sh.sig
 gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
-gpg: Signature made Mon 19 Apr 2021 12:51:50 EDT
+gpg: Signature made Thu 03 Jun 2021 19:34:35 BST
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -571,7 +573,41 @@ Good signature
 
 👍
 
-### Step 20: make filesystem read-only
+### Step 20: download and verify [update.sh](./update.sh) (uupdate Trezor devices)
+
+```console
+$ curl -o /home/pi/.local/bin/update.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1494  100  1494    0     0   1498      0 --:--:-- --:--:-- --:--:--  149
+
+$ curl -o /home/pi/.local/bin/update.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh.sig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   833  100   833    0     0    929      0 --:--:-- --:--:-- --:--:--   928
+
+$ gpg --verify /home/pi/.local/bin/update.sh.sig
+gpg: assuming signed data in '/home/pi/.local/bin/update.sh'
+gpg: Signature made Sat 05 Jun 2021 16:01:37 BST
+gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+
+$ chmod 700 /home/pi/.local/bin/update.sh
+```
+
+Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint) fingerprints
+
+👍
+
+Good signature
+
+👍
+
+### Step 21: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -643,13 +679,13 @@ $ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 $ sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 21: disable Wi-Fi (if not using ethernet)
+### Step 22: disable Wi-Fi (if not using ethernet)
 
 ```shell
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 22: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
+### Step 23: disable `dhcpcd`, `networking` and `wpa_supplicant` services and “fix” `rfkill` bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking wpa_supplicant
@@ -657,13 +693,13 @@ $ sudo systemctl disable dhcpcd networking wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 23: delete macOS hidden files (if present)
+### Step 24: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 24: reboot
+### Step 25: reboot
 
 ```shell
 sudo systemctl reboot
@@ -671,9 +707,9 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW “READ-ONLY” AND “COLD”).
 
-### Step 25 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 26 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-23-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-24-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
 
 #### Enable read-only mode using switch on micro SD to SD adapter
 
@@ -689,7 +725,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 26 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
+### Step 27 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
 
 Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
