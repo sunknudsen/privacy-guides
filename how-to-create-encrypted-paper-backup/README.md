@@ -23,6 +23,10 @@ Listed: true
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 
+## Store
+
+**Rather not build your own Raspberry Pi image from guide?** Signed images are sold on the [store](https://sunknudsen.com/store/products/pi-qr-image) **(profits are invested back into project)**.
+
 ## Setup guide
 
 ### Step 1: log in to Raspberry Pi
