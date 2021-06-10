@@ -709,15 +709,15 @@ sudo systemctl reboot
 
 ### Step 26 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-24-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of micro SD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-24-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of microSD card.
 
-#### Enable read-only mode using switch on micro SD to SD adapter
+#### Enable read-only mode using switch on microSD to SD adapter
 
 ![micro-sd-card-adapter](./micro-sd-card-adapter.png)
 
-#### Insert micro SD card into adapter and insert adapter into computer
+#### Insert microSD card into adapter and insert adapter into computer
 
-#### Run following and eject micro SD card
+#### Run following and eject microSD card
 
 ```shell
 volume_path="/Volumes/boot"
@@ -727,7 +727,7 @@ echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 
 ### Step 27 (optional): compute SHA512 hash of SD card and store in password manager (on macOS)
 
-Run `diskutil list` to find disk ID of micro SD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
+Run `diskutil list` to find disk ID of microSD card with “Raspberry Pi OS Lite” installed (`disk2` in the following example).
 
 Replace `diskn` and `rdiskn` with disk ID of SD card (`disk2` and `rdisk2` in the following example).
 
