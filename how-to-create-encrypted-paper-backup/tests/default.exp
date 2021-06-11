@@ -148,6 +148,12 @@ expect {
 }
 
 expect {
+  -re {Press enter to continue} {
+    test_send "\r"
+  }
+}
+
+expect {
   -re {SHA512 short hash: .+?([a-f0-9]{8})} {
     set short_hash $expect_out(1,string)
   }

@@ -165,6 +165,8 @@ read_passphrase () {
   read -r answer
   if [ "$answer" = "y" ]; then
     printf "%s\n" $data
+    printf "$bold%s$normal\n" "Press enter to continue"
+    read -r answer
   fi
 }
 
