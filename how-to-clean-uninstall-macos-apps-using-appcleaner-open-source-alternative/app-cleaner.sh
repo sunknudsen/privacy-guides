@@ -42,8 +42,6 @@ if [ ${#processes[@]} -gt 0 ]; then
   fi
 fi
 
-home_dir=~
-
 paths=()
 
 paths+=($(find /private/var/db/receipts -iname "*$app_name*.bom" -maxdepth 1 -prune 2>&1 | grep -v "Permission denied"))
@@ -53,8 +51,8 @@ if [ ${#paths[@]} -gt 0 ]; then
   printf "%s\n" "Saving bill of material logs to desktop…"
   sleep 1
   for path in "${paths[@]}"; do
-    mkdir -p "$home_dir/Desktop/$app_name"
-    lsbom -f -l -s -p f $path > "$home_dir/Desktop/$app_name/$(basename $path).log"
+    mkdir -p "$HOME/Desktop/$app_name"
+    lsbom -f -l -s -p f $path > "$HOME/Desktop/$app_name/$(basename $path).log"
   done
 fi
 
@@ -62,21 +60,21 @@ printf "%s\n" "Finding app data…"
 sleep 1
 
 locations=(
-  "$home_dir/Library"
-  "$home_dir/Library/Application Scripts"
-  "$home_dir/Library/Application Support"
-  "$home_dir/Library/Application Support/CrashReporter"
-  "$home_dir/Library/Containers"
-  "$home_dir/Library/Caches"
-  "$home_dir/Library/HTTPStorages"
-  "$home_dir/Library/Group Containers"
-  "$home_dir/Library/Internet Plug-Ins"
-  "$home_dir/Library/LaunchAgents"
-  "$home_dir/Library/Logs"
-  "$home_dir/Library/Preferences"
-  "$home_dir/Library/Preferences/ByHost"
-  "$home_dir/Library/Saved Application State"
-  "$home_dir/Library/WebKit"
+  "$HOME/Library"
+  "$HOME/Library/Application Scripts"
+  "$HOME/Library/Application Support"
+  "$HOME/Library/Application Support/CrashReporter"
+  "$HOME/Library/Containers"
+  "$HOME/Library/Caches"
+  "$HOME/Library/HTTPStorages"
+  "$HOME/Library/Group Containers"
+  "$HOME/Library/Internet Plug-Ins"
+  "$HOME/Library/LaunchAgents"
+  "$HOME/Library/Logs"
+  "$HOME/Library/Preferences"
+  "$HOME/Library/Preferences/ByHost"
+  "$HOME/Library/Saved Application State"
+  "$HOME/Library/WebKit"
   "/Library"
   "/Library/Application Support"
   "/Library/Application Support/CrashReporter"
