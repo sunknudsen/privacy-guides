@@ -63,7 +63,7 @@ if [ "$answer" = "y" ]; then
     printf "%s\n" "Overwriting with random data… (round $round of $rounds)"
     sudo dd bs=1M if=/dev/urandom of=$dev || true
   done
-  if [ $zero = true ]; then
+  if [ "$zero" = true ]; then
     printf "%s\n" "Overwriting with zeros…"
     sudo dd bs=1M if=/dev/zero of=$dev || true
   fi
