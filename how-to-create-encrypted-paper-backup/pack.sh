@@ -31,7 +31,7 @@ if [[ ! "$dir_name" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}-pi-qr-update$ ]]; then
   exit 1
 fi
 
-rm "$archive" "$archive.sig" || true
+rm "$1/.DS_Store" "$archive" "$archive.sig" || true
 
 cd "$dir_parent"
 
