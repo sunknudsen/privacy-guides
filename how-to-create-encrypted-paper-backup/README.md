@@ -179,6 +179,23 @@ $ sudo apt update
 $ sudo apt install -y libsecp256k1-0 python3-cryptography
 ```
 
+#### Import ThomasV’s PGP public key
+
+```console
+$ curl https://raw.githubusercontent.com/spesmilo/electrum/master/pubkeys/ThomasV.asc | gpg --import
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  4739  100  4739    0     0  22459      0 --:--:-- --:--:-- --:--:-- 22459
+gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
+gpg: key 2BD5824B7F9470E6: public key "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+```
+
+imported: 1
+
+👍
+
 #### Set Electrum release semver environment variable
 
 > Heads-up: replace `4.1.2` with [latest release](https://electrum.org/#download) semver.
@@ -196,23 +213,6 @@ $ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELEC
 
 $ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
 ```
-
-#### Import ThomasV’s PGP public key
-
-```console
-$ curl https://raw.githubusercontent.com/spesmilo/electrum/master/pubkeys/ThomasV.asc | gpg --import
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  4739  100  4739    0     0  22459      0 --:--:-- --:--:-- --:--:-- 22459
-gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
-gpg: key 2BD5824B7F9470E6: public key "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" imported
-gpg: Total number processed: 1
-gpg:               imported: 1
-```
-
-imported: 1
-
-👍
 
 #### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 

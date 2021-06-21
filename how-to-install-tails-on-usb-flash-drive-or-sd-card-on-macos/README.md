@@ -41,23 +41,7 @@ brew analytics off
 brew install gnupg
 ```
 
-### Step 4: download latest release of [Tails](https://tails.boum.org/install/download/index.en.html)
-
-### Step 5: set Tails release semver environment variable
-
-> Heads-up: replace `4.18` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
-
-```shell
-TAILS_RELEASE_SEMVER=4.18
-```
-
-### Step 6: download PGP signature of Tails release
-
-```shell
-curl -o ~/Downloads/tails-amd64-$TAILS_RELEASE_SEMVER.img.sig https://tails.boum.org/torrents/files/tails-amd64-$TAILS_RELEASE_SEMVER.img.sig
-```
-
-### Step 7: import “Tails developers” PGP public key
+### Step 4: import “Tails developers” PGP public key
 
 ```console
 $ curl https://tails.boum.org/tails-signing.key | gpg --import
@@ -79,10 +63,16 @@ imported: 1
 
 👍
 
-### Step 8: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 5: download latest release of [Tails](https://tails.boum.org/)
+
+Go to https://tails.boum.org/install/download/index.en.html and download latest release and associated PGP signature (found under “Verify using OpenPGP (optional)”) to `~/Downloads` folder.
+
+### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+
+> Heads-up: replace `4.19` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
 
 ```console
-$ gpg --verify ~/Downloads/tails-amd64-$TAILS_RELEASE_SEMVER.img.sig
+$ gpg --verify ~/Downloads/tails-amd64-4.19.img.sig
 gpg: assuming signed data in '/Users/sunknudsen/Downloads/tails-amd64-4.18.img'
 gpg: Signature made Mon 19 Apr 11:30:01 2021 EDT
 gpg:                using EDDSA key CD4D4351AFA6933F574A9AFB90B2B4BD7AED235F
@@ -98,7 +88,7 @@ Good signature
 
 👍
 
-### Step 9: copy Tails to USB flash drive or SD card
+### Step 7: copy Tails to USB flash drive or SD card
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 

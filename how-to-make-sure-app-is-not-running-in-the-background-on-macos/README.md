@@ -116,6 +116,8 @@ source ~/.zshrc
 
 👍
 
+---
+
 ## Usage guide
 
 ### Make sure “Adobe Creative Suite” is not running in the background

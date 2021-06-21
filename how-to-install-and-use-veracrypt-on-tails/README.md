@@ -50,19 +50,7 @@ Tor is ready
 
 👍
 
-### Step 6: download latest release of [VeraCrypt](https://veracrypt.fr/en/Home.html)
-
-Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
-
-### Step 7: set VeraCrypt release semver environment variable
-
-> Heads-up: replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
-
-```shell
-VERACRYPT_RELEASE_SEMVER=1.24-Update7
-```
-
-### Step 8: import “VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393)” PGP public key
+### Step 6: import “VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393)” PGP public key
 
 ```console
 $ torsocks curl https://www.idrix.fr/VeraCrypt/VeraCrypt_PGP_public_key.asc | gpg --import
@@ -79,6 +67,18 @@ gpg: no ultimately trusted keys found
 imported: 1
 
 👍
+
+### Step 7: download latest release of [VeraCrypt](https://veracrypt.fr/en/Home.html)
+
+Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
+
+### Step 8: set VeraCrypt release semver environment variable
+
+> Heads-up: replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
+
+```shell
+VERACRYPT_RELEASE_SEMVER=1.24-Update7
+```
 
 ### Step 9: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
@@ -125,6 +125,8 @@ chmod +x veracrypt.AppImage
 ```
 
 👍
+
+---
 
 ## Usage guide
 

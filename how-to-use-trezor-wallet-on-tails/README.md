@@ -34,15 +34,7 @@ Tor is ready
 
 👍
 
-### Step 3: set [Trezor Bridge](https://wiki.trezor.io/Trezor_Bridge) release semver environment variable
-
-> Heads-up: replace `2.0.30` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) semver.
-
-```shell
-TREZOR_BRIDGE_RELEASE_SEMVER=2.0.30
-```
-
-### Step 4: set Trezor Bridge release year environment variable
+### Step 3: set Trezor Bridge release year environment variable
 
 > Heads-up: replace `2020` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) year.
 
@@ -50,13 +42,7 @@ TREZOR_BRIDGE_RELEASE_SEMVER=2.0.30
 TREZOR_BRIDGE_RELEASE_YEAR=2020
 ```
 
-### Step 5: download Trezor Bridge
-
-```shell
-torsocks curl -O https://wallet.trezor.io/data/bridge/${TREZOR_BRIDGE_RELEASE_SEMVER}/trezor-bridge_${TREZOR_BRIDGE_RELEASE_SEMVER}_amd64.deb
-```
-
-### Step 6: import “SatoshiLabs Signing Key” PGP public key (used to verify downloads below)
+### Step 4: import “SatoshiLabs Signing Key” PGP public key (used to verify downloads below)
 
 ```console
 $ torsocks curl https://trezor.io/security/satoshilabs-${TREZOR_BRIDGE_RELEASE_YEAR}-signing-key.asc | gpg --import
@@ -73,6 +59,20 @@ gpg: no ultimately trusted keys found
 imported: 1
 
 👍
+
+### Step 5: set [Trezor Bridge](https://wiki.trezor.io/Trezor_Bridge) release semver environment variable
+
+> Heads-up: replace `2.0.30` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) semver.
+
+```shell
+TREZOR_BRIDGE_RELEASE_SEMVER=2.0.30
+```
+
+### Step 6: download Trezor Bridge
+
+```shell
+torsocks curl -O https://wallet.trezor.io/data/bridge/${TREZOR_BRIDGE_RELEASE_SEMVER}/trezor-bridge_${TREZOR_BRIDGE_RELEASE_SEMVER}_amd64.deb
+```
 
 ### Step 7: verify Trezor Bridge release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 

@@ -95,7 +95,7 @@ open /tmp/snapshot
 
 ### Restore local APFS snapshot
 
-Restart computer and press `cmd+r` to boot to recovery mode.
+Restart computer and press <kbd>cmd+r</kbd> to boot to recovery mode.
 
 Select “Restore From Time Machine Backup”, then “Macintosh HD”, choose local snapshot, click “Continue” and “Continue” again to confirm.
 
