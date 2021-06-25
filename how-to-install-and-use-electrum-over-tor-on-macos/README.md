@@ -10,6 +10,8 @@ Listed: true
 
 # How to install and use Electrum over Tor on macOS
 
+[![How to install and use Electrum over Tor on macOS](how-to-install-and-use-electrum-over-tor-on-macos.png)](https://www.youtube.com/watch?v=QQsAu-9brYY "How to install and use Electrum over Tor on macOS")
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
