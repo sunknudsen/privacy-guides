@@ -1,7 +1,9 @@
 #! /bin/bash
 
+script_name=$(basename $0)
+
 if [ -z "$1" ] || [ "$1" = "--help" ]; then
-  printf "%s\n" "Usage: app-cleaner.sh /path/to/app.app"
+  printf "%s\n" "Usage: $script_name /path/to/app.app"
   exit 0
 fi
 
@@ -27,7 +29,7 @@ sleep 1
 
 app_name=$(basename $1 .app)
 
-processes=($(pgrep -afil "$app_name" | grep -v "app-cleaner.sh"))
+processes=($(pgrep -afil "$app_name" | grep -v "$script_name"))
 
 if [ ${#processes[@]} -gt 0 ]; then
   printf "%s\n" "${processes[@]}"
