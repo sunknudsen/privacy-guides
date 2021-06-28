@@ -261,23 +261,19 @@ sudo chown ${USER}:admin /usr/local/sbin
 
 ### Step 11: source `/usr/local/sbin` directory
 
-Find which shell is configured using `echo $SHELL`.
+> Heads-up: find which shell is configured using `echo $SHELL`.
 
-#### Bash (/bin/bash)
+#### Bash (`/bin/bash`)
 
 ```shell
-cat << "EOF" >> ~/.bash_profile
-export PATH=$PATH:/usr/local/sbin
-EOF
-source ~/.bash_profile
+echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.bashrc
+source ~/.bashrc
 ```
 
-#### Z Shell (/bin/zsh)
+#### Z Shell (`/bin/zsh`)
 
 ```shell
-cat << "EOF" >> ~/.zshrc
-export PATH=$PATH:/usr/local/sbin
-EOF
+echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.zshrc
 source ~/.zshrc
 ```
 

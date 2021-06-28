@@ -32,23 +32,19 @@ sudo chown ${USER}:admin /usr/local/sbin
 
 ### Step 2: add `/usr/local/sbin` directory to `PATH` environment variable
 
-Find which shell is configured using `echo $SHELL`.
+> Heads-up: find which shell is configured using `echo $SHELL`.
 
-#### Bash (/bin/bash)
+#### Bash (`/bin/bash`)
 
 ```shell
-cat << "EOF" >> ~/.bashrc
-export PATH=$PATH:/usr/local/sbin
-EOF
+echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Z Shell (/bin/zsh)
+#### Z Shell (`/bin/zsh`)
 
 ```shell
-cat << "EOF" >> ~/.zshrc
-export PATH=$PATH:/usr/local/sbin
-EOF
+echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.zshrc
 source ~/.zshrc
 ```
 
