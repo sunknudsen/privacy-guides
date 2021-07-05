@@ -23,9 +23,19 @@ Listed: true
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 
-## Store
+## Signed releases
 
-**Rather not build your own Raspberry Pi image from guide?** Signed images are sold on the [store](https://sunknudsen.com/store/products/pi-qr-image) **(profits are invested back into project)**.
+Signed releases are available bellow.
+
+I’ve invested over one hundred hours into this guide.
+
+Maintaining and hosting them is a labor of love… please consider [supporting](https://sunknudsen.com/donate) the privacy guides. 🙌
+
+[pi-qr-adafruit](https://dl.sunknudsen.com/2021-06-11-pi-qr-adafruit.img.zip) ([PGP signature](https://dl.sunknudsen.com/2021-06-11-pi-qr-adafruit.img.zip.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+
+[pi-qr](https://dl.sunknudsen.com/2021-06-11-pi-qr.img.zip) ([PGP signature](https://dl.sunknudsen.com/2021-06-11-pi-qr.img.zip.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+
+Username: `pi` Password: `raspberry`
 
 ## Setup guide
 
@@ -577,7 +587,7 @@ Good signature
 
 👍
 
-### Step 20: download and verify [update.sh](./update.sh) (uupdate Trezor devices)
+### Step 20: download and verify [update.sh](./update.sh)
 
 ```console
 $ curl -o /home/pi/.local/bin/update.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh
