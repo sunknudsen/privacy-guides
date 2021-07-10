@@ -10,6 +10,8 @@ Listed: true
 
 # How to create encrypted paper backup
 
+[![The world’s MOST ADVANCED PAPER BACKUP hardware device is at your finger tips](the-world-s-most-advanced-paper-backup-hardware-device-is-at-your-finger-tips.png)](https://www.youtube.com/watch?v=2Em7jpxRrrk "The world’s MOST ADVANCED PAPER BACKUP hardware device is at your finger tips")
+
 ## Requirements
 
 - [Hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi)
@@ -251,7 +253,7 @@ $ pip3 install --user Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz
 $ rm Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz*
 ```
 
-### Step 9: install `tmux` and [trezorcrl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of and restore [Trezor](https://trezor.io/) devices)
+### Step 9: install `tmux` and [trezorctl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor) (used to verify integrity of and restore [Trezor](https://trezor.io/) devices)
 
 ```console
 $ sudo apt update
