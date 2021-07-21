@@ -96,7 +96,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2cmGUEKwopEN0vpHl2yNoV/wvm21D1hOP/8V886iC
 
 ### Step 3: generate SSH authorized keys heredoc (on computer)
 
-#### Set temporary environment variable
+#### Set Borg storage quota environment variable
 
 ```shell
 BORG_STORAGE_QUOTA="10G"

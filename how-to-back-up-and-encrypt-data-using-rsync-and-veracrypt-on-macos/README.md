@@ -1,6 +1,6 @@
 <!--
-Title: How to backup and encrypt data using rsync and VeraCrypt on macOS
-Description: Learn how to backup and encrypt data using rsync and VeraCrypt on macOS.
+Title: How to back up and encrypt data using rsync and VeraCrypt on macOS
+Description: Learn how to back up and encrypt data using rsync and VeraCrypt on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https://github.com/Serpent27>, J. Erik  <https://github.com/jerik>
 Reviewers: Alex Anderson <https://github.com/Serpent27>
@@ -8,9 +8,9 @@ Publication date: 2020-08-26T14:07:36.767Z
 Listed: true
 -->
 
-# How to backup and encrypt data using rsync and VeraCrypt on macOS
+# How to back up and encrypt data using rsync and VeraCrypt on macOS
 
-[![How to backup and encrypt data using rsync and VeraCrypt on macOS (see change log)](how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos-see-change-log.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to backup and encrypt data using rsync and VeraCrypt on macOS (see change log)")
+[![How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)](how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos-see-change-log.png)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)")
 
 > Heads-up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
 
@@ -94,7 +94,7 @@ VeraCrypt 1.24-Update7
 
 👍
 
-### Step 9: set temporary environment variable
+### Step 9: set backup volume path environment variable
 
 ```shell
 BACKUP_VOLUME_PATH="/Volumes/Samsung BAR/backup"

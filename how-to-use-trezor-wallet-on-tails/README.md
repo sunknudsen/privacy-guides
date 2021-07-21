@@ -10,7 +10,7 @@ Listed: true
 
 # How to use Trezor Wallet on Tails
 
-> Heads-up: guide is not persistent meaning steps have to be completed each time one wishes to use Trezor Wallet on Tails.
+> Heads-up: guide is not persistent meaning steps have to be completed each time one needs to use Trezor Wallet on Tails.
 
 ## Requirements
 
@@ -28,9 +28,9 @@ Listed: true
 
 Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
-### Step 2: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready.
+### Step 2: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready
 
-Tor is ready
+Connected to Tor successfully
 
 👍
 
@@ -68,7 +68,7 @@ imported: 1
 TREZOR_BRIDGE_RELEASE_SEMVER=2.0.30
 ```
 
-### Step 6: download Trezor Bridge
+### Step 6: download Trezor Bridge release
 
 ```shell
 torsocks curl -O https://wallet.trezor.io/data/bridge/${TREZOR_BRIDGE_RELEASE_SEMVER}/trezor-bridge_${TREZOR_BRIDGE_RELEASE_SEMVER}_amd64.deb

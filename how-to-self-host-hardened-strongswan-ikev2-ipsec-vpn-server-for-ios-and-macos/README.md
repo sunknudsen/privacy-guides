@@ -405,7 +405,7 @@ systemctl restart systemd-networkd
 
 #### Install dnsmasq
 
-> Heads-up: please ignore systemd address already in use error (if present).
+> Heads-up: ignore systemd address already in use error (if present).
 
 ```shell
 apt install -y dnsmasq
@@ -473,7 +473,7 @@ Separate nameservers using commas with no leading spaces (example: `93.95.224.28
 STRONGSWAN_DNS_NAMESERVERS=95.215.19.53
 ```
 
-#### Backup and overwrite `/etc/ipsec.conf`
+#### Back up and overwrite `/etc/ipsec.conf`
 
 ```shell
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
@@ -547,7 +547,7 @@ conn ikev2
 EOF
 ```
 
-#### Backup and overwrite `/etc/ipsec.secrets`
+#### Back up and overwrite `/etc/ipsec.secrets`
 
 ```shell
 cp /etc/ipsec.secrets /etc/ipsec.secrets.backup
@@ -556,7 +556,7 @@ cat << "EOF" > /etc/ipsec.secrets
 EOF
 ```
 
-#### Backup and overwrite `/etc/strongswan.d/charon-logging.conf`
+#### Back up and overwrite `/etc/strongswan.d/charon-logging.conf`
 
 ```shell
 cp /etc/strongswan.d/charon-logging.conf /etc/strongswan.d/charon-logging.conf.backup
@@ -576,7 +576,7 @@ charon {
 EOF
 ```
 
-#### Backup and overwrite `/etc/strongswan.d/charon/dhcp.conf`
+#### Back up and overwrite `/etc/strongswan.d/charon/dhcp.conf`
 
 ```shell
 cp /etc/strongswan.d/charon/dhcp.conf /etc/strongswan.d/charon/dhcp.conf.backup
@@ -600,7 +600,7 @@ sed -i 's/load = no/load = yes/' ./eap-tls.conf ./aes.conf ./dhcp.conf ./farp.co
 cd -
 ```
 
-#### Backup and edit `/lib/systemd/system/strongswan.service`
+#### Back up and edit `/lib/systemd/system/strongswan.service`
 
 ```shell
 cp /lib/systemd/system/strongswan.service /lib/systemd/system/strongswan.service.backup
@@ -891,7 +891,7 @@ systemctl restart strongswan
 
 ### Step 32: configure sysctl
 
-#### Backup and edit `/etc/sysctl.conf`
+#### Back up and edit `/etc/sysctl.conf`
 
 ```shell
 cp /etc/sysctl.conf /etc/sysctl.conf.backup

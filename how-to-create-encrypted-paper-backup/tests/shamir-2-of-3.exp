@@ -5,7 +5,7 @@ source ./test.exp
 set passphrase "asdasd"
 set secret "foo\nbar"
 
-test_label "Should backup secret using 2-of-3 Shamir Secret Sharing"
+test_label "Should back up secret using 2-of-3 Shamir Secret Sharing"
 
 source ./tests/helpers/shamir-2-of-3-backup.exp
 

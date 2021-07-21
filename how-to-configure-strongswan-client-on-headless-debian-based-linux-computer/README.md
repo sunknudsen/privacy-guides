@@ -157,7 +157,7 @@ STRONGSWAN_CLIENT_NAME=bob
 STRONGSWAN_SERVER_IP=185.193.126.203
 ```
 
-#### Backup and overwrite `/etc/ipsec.conf`
+#### Back up and overwrite `/etc/ipsec.conf`
 
 ```shell
 cp /etc/ipsec.conf /etc/ipsec.conf.backup
@@ -180,7 +180,7 @@ conn ikev2
 EOF
 ```
 
-#### Backup and overwrite `/etc/ipsec.secrets`
+#### Back up and overwrite `/etc/ipsec.secrets`
 
 ```shell
 cp /etc/ipsec.secrets /etc/ipsec.secrets.backup

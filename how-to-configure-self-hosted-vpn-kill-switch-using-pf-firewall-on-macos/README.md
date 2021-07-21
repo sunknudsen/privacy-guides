@@ -49,7 +49,7 @@ Status: Enabled
 
 👍
 
-### Step 3: backup and overwrite `/etc/pf.conf`
+### Step 3: back up and overwrite `/etc/pf.conf`
 
 > Heads-up: software updates will likely restore `/etc/pf.conf` to default. Remember to check `/etc/pf.conf` using `cat /etc/pf.conf` after updates and test kill switch.
 
@@ -151,7 +151,7 @@ For example, if subnet mask is `255.255.255.0`, bitmask is `/24` and subnet pref
 | 255.255.255.254 | /31     |
 | 255.255.255.255 | /32     |
 
-### Step 5: set temporary environment variables
+### Step 5: set environment variables
 
 `KILLSWITCH_HARDWARE_INTERFACES` should include all used hardware network interfaces.
 
@@ -261,7 +261,7 @@ sudo chown ${USER}:admin /usr/local/sbin
 
 ### Step 11: source `/usr/local/sbin` directory
 
-> Heads-up: find which shell is configured using `echo $SHELL`.
+> Heads-up: run `echo $SHELL` to find default shell.
 
 #### Bash (`/bin/bash`)
 

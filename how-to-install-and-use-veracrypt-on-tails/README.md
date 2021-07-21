@@ -44,9 +44,9 @@ Click “Applications”, then “Favorites”, then “Configure persistent vol
 
 Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
-### Step 5: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready.
+### Step 5: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready
 
-Tor is ready
+Connected to Tor successfully
 
 👍
 
@@ -68,17 +68,17 @@ imported: 1
 
 👍
 
-### Step 7: download latest release of [VeraCrypt](https://veracrypt.fr/en/Home.html)
-
-Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
-
-### Step 8: set VeraCrypt release semver environment variable
+### Step 7: set VeraCrypt release semver environment variable
 
 > Heads-up: replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
 
 ```shell
 VERACRYPT_RELEASE_SEMVER=1.24-Update7
 ```
+
+### Step 8: download [VeraCrypt](https://veracrypt.fr/en/Home.html) release
+
+Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
 
 ### Step 9: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 

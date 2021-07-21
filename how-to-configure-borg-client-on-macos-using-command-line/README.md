@@ -120,7 +120,7 @@ Go to [Repositories](https://www.borgbase.com/account) and add repository.
 
 ### Step 4: generate and upload `authorized_keys` file (if using rsync.net)
 
-#### Set temporary environment variables
+#### Set environment variables
 
 ```shell
 BORG_USERNAME="18434"
@@ -201,11 +201,11 @@ Write down the passphrase. Store both at safe place(s).
 
 ```
 
-#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](../how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
+#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](../how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
 
 > Heads-up: both key (stored in `~/.config/borg`) and passphrase (stored in `~/Library/Keychains`) are required to decrypt backup.
 
-### Step 9: set temporary environment variables
+### Step 9: set environment variables
 
 Replace `borg@185.112.147.115:backup` with self-hosted or cloud-based repo and set backup name.
 

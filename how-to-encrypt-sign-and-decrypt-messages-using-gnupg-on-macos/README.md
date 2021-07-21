@@ -12,7 +12,7 @@ Listed: true
 
 [![How to encrypt, sign and decrypt messages using GnuPG on macOS](how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using GnuPG on macOS")
 
-> WARNING: this is a “getting started” guide. For hardened guide, see https://github.com/drduh/YubiKey-Guide
+> Heads-up: this is a “getting started” guide which stores private keys on macOS. For sensitive use cases, one should store private keys on hardware devices such as [YubiKeys](https://www.yubico.com/) (learn how [here](../how-to-use-yubikey-to-store-pgp-private-keys)).
 
 ## Caveats
 
@@ -97,9 +97,9 @@ uid                      John Doe <john@example.net>
 sub   rsa4096 2021-03-24 [E]
 ```
 
-### Step 5: back up `~/.gnupg` folder (learn how [here](../how-to-backup-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
+### Step 5: back up `~/.gnupg` folder (learn how [here](../how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
 
-> Heads-up: files stored in `~/.gnupg` include private keys which, if lost, results in loosing one’s cryptographic identity (safeguard backup carefully).
+> Heads-up: files stored in `~/.gnupg` include private keys which, if lost, results in loosing one’s cryptographic identity (safeguard backup mindfully).
 
 👍
 
@@ -110,7 +110,7 @@ sub   rsa4096 2021-03-24 [E]
 ### Export John’s PGP public key
 
 ```shell
-gpg --armor --export john@example.net > ~/Desktop/john.asc
+gpg --armor --export john@example.net > ~/Desktop/johndoe.asc
 ```
 
 ### Import Sun’s public key using key server…

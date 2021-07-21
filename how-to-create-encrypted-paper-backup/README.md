@@ -216,7 +216,7 @@ imported: 1
 ELECTRUM_RELEASE_SEMVER=4.1.2
 ```
 
-#### Download Electrum release and PGP signature
+#### Download Electrum release and associated PGP signature
 
 ```shell
 $ cd ~

@@ -5,7 +5,7 @@ source ./test.exp
 set secret "foo\nbar"
 set passphrase "asdasd"
 
-test_label "Should fails to backup secret using secrets that do not match"
+test_label "Should fails to back up secret using secrets that do not match"
 
 spawn qr-backup.sh
 
@@ -44,7 +44,7 @@ expect {
   }
 }
 
-test_label "Should fails to backup secret using passphrases that do not match"
+test_label "Should fails to back up secret using passphrases that do not match"
 
 spawn qr-backup.sh
 
@@ -95,7 +95,7 @@ expect {
   }
 }
 
-test_label "Should backup secret showing passphrase"
+test_label "Should back up secret showing passphrase"
 
 spawn qr-backup.sh
 

@@ -55,7 +55,7 @@ imported: 1
 
 👍
 
-#### Download Electrum
+#### Download Electrum release
 
 Go to https://electrum.org/#download and download latest release and associated PGP signature to `~/Downloads` folder.
 
@@ -98,7 +98,7 @@ imported: 1
 
 👍
 
-#### Download “Tor Browser”
+#### Download “Tor Browser” release
 
 Go to https://www.torproject.org/download/ and download latest release and associated PGP signature to `~/Downloads` folder.
 

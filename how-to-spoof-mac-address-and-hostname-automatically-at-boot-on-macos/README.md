@@ -32,7 +32,7 @@ sudo chown ${USER}:admin /usr/local/sbin
 
 ### Step 2: add `/usr/local/sbin` directory to `PATH` environment variable
 
-> Heads-up: find which shell is configured using `echo $SHELL`.
+> Heads-up: run `echo $SHELL` to find default shell.
 
 #### Bash (`/bin/bash`)
 
