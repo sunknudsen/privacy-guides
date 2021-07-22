@@ -76,7 +76,7 @@ $ sudo apt update
 
 $ sudo apt install -y bc expect fim imagemagick python3-pip python3-rpi.gpio
 
-$ pip3 install mnemonic pillow qrcode --user
+$ pip3 install --user mnemonic pillow qrcode
 
 $ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
 
@@ -260,7 +260,7 @@ $ sudo apt update
 
 $ sudo apt install -y tmux
 
-$ pip3 install attrs trezor --user
+$ pip3 install --user attrs trezor
 
 $ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
