@@ -12,7 +12,7 @@ Listed: true
 
 [![How to encrypt, sign and decrypt messages using GnuPG on macOS](how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos.png)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using GnuPG on macOS")
 
-> Heads-up: this is a “getting started” guide which stores private keys on macOS. For sensitive use cases, one should store private keys on hardware devices such as [YubiKeys](https://www.yubico.com/) (learn how [here](../how-to-use-yubikey-to-store-pgp-private-keys)).
+> Heads-up: this is a “getting started” guide which stores private keys on macOS. For sensitive use cases, one should store private keys on hardware device such as [YubiKeys](https://www.yubico.com/) (learn how [here](../how-to-use-yubikey-to-store-pgp-private-keys)).
 
 ## Caveats
 

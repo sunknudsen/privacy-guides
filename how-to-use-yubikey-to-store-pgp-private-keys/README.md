@@ -1,6 +1,6 @@
 <!--
-Title: How to use YubiKey to secure PGP private keys
-Description: Learn how to use YubiKey to secure PGP private keys.
+Title: How to use YubiKey to store PGP private keys
+Description: Learn how to use YubiKey to store PGP private keys.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,7 +8,7 @@ Publication date: 2021-07-21T15:45:10.940Z
 Listed: true
 -->
 
-# How to use YubiKey to secure PGP private keys
+# How to use YubiKey to store PGP private keys
 
 > Heads-up: guide inspired by https://github.com/drduh/YubiKey-Guide.
 
