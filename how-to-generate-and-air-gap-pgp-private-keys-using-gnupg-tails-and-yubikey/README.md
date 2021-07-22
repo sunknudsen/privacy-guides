@@ -1,6 +1,6 @@
 <!--
-Title: How to use YubiKey to store PGP private keys
-Description: Learn how to use YubiKey to store PGP private keys.
+Title: How to generate and air gap PGP private keys using GnuPG, Tails and YubiKey
+Description: Learn how to generate and air gap PGP private keys using GnuPG, Tails and YubiKey.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,7 +8,7 @@ Publication date: 2021-07-21T15:45:10.940Z
 Listed: true
 -->
 
-# How to use YubiKey to store PGP private keys
+# How to generate and air gap PGP private keys using GnuPG, Tails and YubiKey
 
 > Heads-up: guide inspired by https://github.com/drduh/YubiKey-Guide.
 
