@@ -1002,6 +1002,8 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 👍
 
+---
+
 ## Usage guide (on macOS)
 
 ### Step 1: install [Homebrew](https://brew.sh/)
@@ -1038,7 +1040,47 @@ gpg:               imported: 1
 gpg: no ultimately trusted keys found
 ```
 
-### Step 5: set master key ID environment variable
+### Step 5: insert YubiKey and import private key stubs
+
+```console
+$ gpg --card-status
+Reader ...........: Yubico YubiKey CCID
+Application ID ...: D*******************************
+Application type .: OpenPGP
+Version ..........: 0.0
+Manufacturer .....: Yubico
+Serial number ....: 1*******
+Name of cardholder: John Doe
+Language prefs ...: en
+Salutation .......:
+URL of public key : [not set]
+Login data .......: john@example.net
+Signature PIN ....: not forced
+Key attributes ...: ed25519 cv25519 ed25519
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 0 3
+Signature counter : 0
+KDF setting ......: off
+UIF setting ......: Sign=on Decrypt=on Auth=on
+Signature key ....: ACE1 3F15 90C1 A8C9 D942  51E3 02ED C61B 6543 509B
+      created ....: 2021-07-21 18:44:34
+Encryption key....: 0524 00F4 8E1D 085A F3E1  61EC D463 4E0D 6E2D D8BF
+      created ....: 2021-07-21 18:44:52
+Authentication key: A27B 582F 1F62 03BA 549B  3D44 1E7B 69B2 38FF A21B
+      created ....: 2021-07-21 18:45:13
+General key info..: sub  ed25519/0x02EDC61B6543509B 2021-07-21 John Doe <john@example.net>
+sec#  ed25519/0xC2709D13BAB4763C  created: 2021-07-21  expires: never
+ssb>  ed25519/0x02EDC61B6543509B  created: 2021-07-21  expires: 2022-07-21
+                                  card-no: 0006 1*******
+ssb>  cv25519/0xD4634E0D6E2DD8BF  created: 2021-07-21  expires: 2022-07-21
+                                  card-no: 0006 1*******
+ssb>  ed25519/0x1E7B69B238FFA21B  created: 2021-07-21  expires: 2022-07-21
+                                  card-no: 0006 1*******
+```
+
+👍
+
+### Step 6: set master key ID environment variable
 
 > Heads-up: replace `0xC2709D13BAB4763C` with master key ID.
 
@@ -1046,7 +1088,7 @@ gpg: no ultimately trusted keys found
 KEY_ID=0xC2709D13BAB4763C
 ```
 
-### Step 6: configure GnuPG
+### Step 7: configure GnuPG
 
 #### Create or override `dirmngr.conf`
 
@@ -1104,7 +1146,7 @@ pinentry-program /usr/local/bin/pinentry-mac
 EOF
 ```
 
-### Step 7: configure shell
+### Step 8: configure shell
 
 > Heads-up: run `echo $SHELL` to find default shell.
 
@@ -1132,7 +1174,7 @@ EOF
 source ~/.zshrc
 ```
 
-### Step 8: insert YubiKey and generate SSH public key
+### Step 9: generate SSH public key
 
 > Heads-up: replace `john@example.net` with email and `johndoe` with name associated to master key.
 
@@ -1147,7 +1189,7 @@ ssh-ed25519 AAAAC3Nz… john@example.net
 
 👍
 
-### Step 9: reload `gpg-agent` (required to enable `pinentry-mac`)
+### Step 10: reload `gpg-agent` (required to enable `pinentry-mac`)
 
 ```console
 $ gpgconf --kill gpg-agent
@@ -1162,7 +1204,7 @@ OK
 
 👍
 
-### Step 10 (optional): enable Git [signing](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
+### Step 11 (optional): enable Git [signing](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
 
 ```shell
 git config --global commit.gpgsign true
@@ -1170,7 +1212,7 @@ git config --global gpg.program $(which gpg)
 git config --global user.signingkey $KEY_ID
 ```
 
-### Step 11 (optional): publish public key to hkps://keys.openpgp.org
+### Step 12 (optional): publish public key to hkps://keys.openpgp.org
 
 ```console
 $ gpg --send-keys $KEY_ID
