@@ -1,6 +1,6 @@
 <!--
 Title: How to manage Trezor devices using trezorctl on macOS or Tails
-Description: Learn how to how to manage Trezor devices using trezorctl on macOS. or Tails
+Description: Learn how to how to manage Trezor devices using trezorctl on macOS or Tails
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
