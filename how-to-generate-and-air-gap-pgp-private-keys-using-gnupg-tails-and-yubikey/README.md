@@ -538,10 +538,13 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 ### Step 16: rename VeraCrypt encrypted volume
 
-> Heads-up: ignore dirty bit is set error.
+> Heads-up: replace `tcrypt-1793` with directory found using `ls /dev/mapper` and ignore dirty bit is set error.
 
 ```console
-$ sudo fatlabel /dev/mapper/tcrypt-1794 Tails
+$ ls /dev/mapper
+control  TailsData_unlocked  tcrypt-1793  tcrypt-1793_1  tcrypt-1793_2
+
+$ sudo fatlabel /dev/mapper/tcrypt-1793 Tails
 
 We trust you have received the usual lecture from the local System
 Administrator. It usually boils down to these three things:
@@ -558,7 +561,7 @@ fatlabel: warning - lowercase labels might not work properly with DOS or Windows
 
 ### Step 17: set VeraCrypt encrypted volume name environment variable
 
-> Heads-up: find name using output of `ls /media/amnesia`.
+> Heads-up: replace `3FDC-B4EB` with directory found using `ls /media/amnesia`.
 
 ```console
 $ ls /media/amnesia
