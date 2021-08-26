@@ -37,7 +37,9 @@ Connected to Tor successfully
 
 👍
 
-### Step 3: import Dennis Fokin’s PGP public key (used to verify downloads below)
+### Step 3: import Dennis Fokin’s and Emil Lundberg’s PGP public keys (used to verify downloads below)
+
+> Heads-up: release may be signed by [another](https://developers.yubico.com/Software_Projects/Software_Signing.html) Yubico developer.
 
 ```console
 $ gpg --keyserver hkps://keys.openpgp.org --search-keys 9E885C0302F9BB9167529C2D5CBA11E6ADC7BCD1
@@ -46,6 +48,15 @@ gpg: data source: https://keys.openpgp.org:443
 	  4096 bit RSA key 0x5CBA11E6ADC7BCD1, created: 2019-09-17
 Keys 1-1 of 1 for "9E885C0302F9BB9167529C2D5CBA11E6ADC7BCD1".  Enter number(s), N)ext, or Q)uit > 1
 gpg: key 0x5CBA11E6ADC7BCD1: public key "Dennis Fokin <dennis.fokin@yubico.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+
+$ gpg --keyserver hkps://keys.openpgp.org --search-keys 57a9deed4c6d962a923bb691816f3ed99921835e
+gpg: data source: https://keys.openpgp.org:443
+(1)	Emil Lundberg (Software Developer) <emil@yubico.com>
+	  4096 bit RSA key 0x816F3ED99921835E, created: 2017-08-03
+Keys 1-1 of 1 for "57a9deed4c6d962a923bb691816f3ed99921835e".  Enter number(s), N)ext, or Q)uit > 1
+gpg: key 0x816F3ED99921835E: public key "Emil Lundberg (Software Developer) <emil@yubico.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
 ```
@@ -74,14 +85,14 @@ $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage.sig https://develo
 
 ```console
 $ gpg --verify ~/Downloads/yubikey-manager-qt.AppImage.sig
-gpg: assuming signed data in '/home/amnesia/Downloads/yubikey-manager-qt.AppImage'
-gpg: Signature made Tue 18 May 2021 07:16:45 AM UTC
-gpg:                using RSA key D6919FBF48C484F3CB7B71CD870B88256690D8BC
-gpg: Good signature from "Dennis Fokin <dennis.fokin@yubico.com>" [unknown]
+gpg: assuming signed data in '/Users/sunknudsen/Downloads/yubikey-manager-qt.AppImage'
+gpg: Signature made Mon 23 Aug 10:16:06 2021 EDT
+gpg:                using RSA key 159CD7E4AF75DF3C5638BBCDD8588A5844E2A774
+gpg: Good signature from "Emil Lundberg (Software Developer) <emil@yubico.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 9E88 5C03 02F9 BB91 6752  9C2D 5CBA 11E6 ADC7 BCD1
-     Subkey fingerprint: D691 9FBF 48C4 84F3 CB7B  71CD 870B 8825 6690 D8BC
+Primary key fingerprint: 57A9 DEED 4C6D 962A 923B  B691 816F 3ED9 9921 835E
+     Subkey fingerprint: 159C D7E4 AF75 DF3C 5638  BBCD D858 8A58 44E2 A774
 
 $ chmod +x ~/Downloads/yubikey-manager-qt.AppImage
 ```
@@ -90,39 +101,19 @@ Good signature
 
 👍
 
-### Step 6 (optional): copy “YubiKey Manager” AppImage to “Persistent” folder (requires Tails “Personal Data” persistence feature to be enabled)
+### Step 6: create and source `ykman` Bash alias
+
+```
+echo 'alias ykman="$HOME/Downloads/yubikey-manager-qt.AppImage ykman"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Step 7 (optional): copy “YubiKey Manager” AppImage to “Persistent” folder (requires Tails “Personal Data” persistence feature to be enabled)
+
+> Heads-up: once copied, one can persistently run `~/Downloads/yubikey-manager-qt.AppImage ykman` to manage YubiKeys.
 
 ```shell
 cp ~/Downloads/yubikey-manager-qt.AppImage ~/Persistent/
-```
-
-### Step 7: extract and patch “YubiKey Manager” AppImage (required to run bundled [ykman](https://support.yubico.com/hc/en-us/articles/360016614940-YubiKey-Manager-CLI-ykman-User-Manual), see [issue](https://github.com/Yubico/yubikey-manager/issues/436) on GitHub)
-
-> Heads-up: step is not persistent meaning it has to be completed each time one needs to run `ykman` on Tails.
-
-#### Extract “YubiKey Manager” AppImage
-
-> Heads-up: replace `Downloads` by `Persistent` if “YubiKey Manager” AppImage has been copied to “Persistent” folder.
-
-```console
-$ cd
-
-$ ~/Downloads/yubikey-manager-qt.AppImage --appimage-extract
-```
-
-#### Patch “YubiKey Manager” AppImage
-
-```console
-$ sed -i "s/ykman-gui/ykman/" ~/squashfs-root/AppRun
-
-$ sed -i -r "s/#\!.*(python[0-9.]+)$/#\!\/home\/amnesia\/squashfs-root\/usr\/bin\/\1/" ~/squashfs-root/usr/bin/ykman
-```
-
-#### Add and source `ykman` Bash alias
-
-```
-echo 'alias ykman="/home/amnesia/squashfs-root/AppRun"' >> ~/.bashrc
-source ~/.bashrc
 ```
 
 ### Step 8: generate master key (used to sign signing, encryption and authentication subkeys)
