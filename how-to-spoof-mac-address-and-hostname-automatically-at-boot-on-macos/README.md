@@ -129,16 +129,23 @@ EOF
 
 ### Step 8: reboot and confirm hostname and MAC address have been spoofed
 
+#### Spoofed hostname
+
 ```console
-# Spoofed hostname
 $ scutil --get HostName
 Gatlins-MacBook-Pro
+```
 
-# Spoofed MAC address
+#### Hardware MAC address
+
+```console
 $ ifconfig en0 | grep ether | awk '{print $2}'
 20:ee:28:31:03:f6
+```
 
-# Hardware MAC address
+#### Hardware MAC address
+
+```console
 $ networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}'
 9c:f4:8e:d6:2b:7d
 ```
