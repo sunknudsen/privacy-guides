@@ -27,7 +27,7 @@ Listed: true
 
 ## Signed releases
 
-Signed releases are available bellow.
+Signed releases are available below.
 
 I’ve invested over one hundred hours into this guide.
 

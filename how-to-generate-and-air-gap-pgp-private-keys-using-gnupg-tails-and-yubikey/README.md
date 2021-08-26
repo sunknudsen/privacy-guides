@@ -458,7 +458,7 @@ gpg> save
 
 ### Step 12: mount backup volume (formatted using exFAT)
 
-Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example bellow), enter admin password and finally click “Authenticate”.
+Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and finally click “Authenticate”.
 
 ### Step 13: set backup volume name environment variable
 
@@ -871,7 +871,7 @@ Lock configuration with this lock code? [y/N]: y
 
 #### Mount backup volume (formatted using exFAT)
 
-Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example bellow), enter admin password and finally click “Authenticate”.
+Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and finally click “Authenticate”.
 
 #### Mount VeraCrypt encrypted volume
 
