@@ -834,16 +834,35 @@ Enter Admin PIN:
 
 $ ykman openpgp keys set-touch aut on --force
 Enter Admin PIN:
+
+$ ykman openpgp keys set-touch att on --force
+Enter Admin PIN:
+
+$ ykman openpgp info
+OpenPGP version: 3.4
+Application version: 5.4.3
+
+PIN tries remaining: 3
+Reset code tries remaining: 0
+Admin PIN tries remaining: 3
+
+Touch policies
+Signature key           On
+Encryption key          On
+Authentication key      On
+Attestation key         On
 ```
+
+On
+
+👍
 
 ### Step 25 (optional): disable all YubiKey interfaces except for OpenPGP over USB
 
 > Heads-up: increase `sleep` delay if “Error: No YubiKey detected!” error is thrown.
 
 ```console
-$ ykman config usb --enable OPENPGP --force
-
-$ for interface in FIDO2 HSMAUTH OATH OTP PIV U2F; do ykman config usb --disable $interface --force; sleep 3; done
+$ ykman config usb --disable FIDO2 --disable HSMAUTH --disable OATH --disable OTP --disable PIV --disable U2F --enable OPENPGP --force
 
 $ ykman config nfc --disable-all --force
 ```
