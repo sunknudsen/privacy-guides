@@ -234,8 +234,8 @@ borg create \\
   --stats \\
   --verbose \\
   "\$repo::\$prefix{now:%F-%H%M%S}" \\
-  "/Users/$USER/.ssh" \\
-  "/Users/$USER/Library/Keychains"
+  "$HOME/.ssh" \\
+  "$HOME/Library/Keychains"
 
 printf "%s\n" "Done"
 EOF

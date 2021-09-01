@@ -284,9 +284,9 @@ veracrypt --text --mount --pim "0" --keyfiles "" --protect-hidden "no" "\$volume
 mkdir -p "\$mount_point/Versioning"
 
 files=(
-  "/Users/$USER/.gnupg"
-  "/Users/$USER/.ssh"
-  "/Users/$USER/Library/Keychains"
+  "$HOME/.gnupg"
+  "$HOME/.ssh"
+  "$HOME/Library/Keychains"
 )
 
 for file in "\${files[@]}"; do
