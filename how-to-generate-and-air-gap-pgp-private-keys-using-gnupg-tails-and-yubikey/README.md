@@ -85,7 +85,7 @@ $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage.sig https://develo
 
 ```console
 $ gpg --verify ~/Downloads/yubikey-manager-qt.AppImage.sig
-gpg: assuming signed data in '/Users/sunknudsen/Downloads/yubikey-manager-qt.AppImage'
+gpg: assuming signed data in '/home/amnesia/Downloads/yubikey-manager-qt.AppImage'
 gpg: Signature made Mon 23 Aug 10:16:06 2021 EDT
 gpg:                using RSA key 159CD7E4AF75DF3C5638BBCDD8588A5844E2A774
 gpg: Good signature from "Emil Lundberg (Software Developer) <emil@yubico.com>" [unknown]
