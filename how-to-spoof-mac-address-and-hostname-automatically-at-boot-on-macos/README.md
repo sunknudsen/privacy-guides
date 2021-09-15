@@ -136,7 +136,7 @@ $ scutil --get HostName
 Gatlins-MacBook-Pro
 ```
 
-#### Hardware MAC address
+#### Spoofed MAC address
 
 ```console
 $ ifconfig en0 | grep ether | awk '{print $2}'
