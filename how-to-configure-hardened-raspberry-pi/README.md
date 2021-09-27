@@ -15,7 +15,7 @@ Listed: true
 ## Requirements
 
 - [Raspberry Pi](https://www.raspberrypi.org/)
-- Power adapter, keyboard and HDMI cable (and SD card reader if computer doesn’t have one built-in)
+- Power adapter, keyboard and HDMI cable (and SD card reader if computer does not have one built-in)
 - macOS computer
 
 ## Caveats

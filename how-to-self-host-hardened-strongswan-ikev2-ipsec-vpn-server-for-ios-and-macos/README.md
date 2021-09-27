@@ -449,14 +449,14 @@ $ cat /etc/resolv.conf | grep "nameserver" | awk '{print $2}'
 93.95.224.29
 ```
 
-If that doesn’t output valid nameserver(s), run:
+If that does not output valid nameserver(s), run:
 
 ```console
 $ cat /etc/network/interfaces | grep "dns-nameservers" | awk '{$1="";$0=$0;} NF=NF'
 93.95.224.28 93.95.224.29
 ```
 
-If that doesn’t output valid nameserver(s), run:
+If that does not output valid nameserver(s), run:
 
 ```console
 $ systemd-resolve --status | grep "DNS Servers" | awk '{print $3}'
