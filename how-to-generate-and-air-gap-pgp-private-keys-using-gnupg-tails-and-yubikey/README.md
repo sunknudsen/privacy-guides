@@ -1149,13 +1149,13 @@ EOF
 Heads-up: back up current config using `cp ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf.backup` (if necessary).
 
 ```shell
-cat << "EOF" > ~/.gnupg/gpg-agent.conf
+cat << EOF > ~/.gnupg/gpg-agent.conf
 default-cache-ttl 60
 default-cache-ttl-ssh 60
 enable-ssh-support
 max-cache-ttl 120
 max-cache-ttl-ssh 120
-pinentry-program /usr/local/bin/pinentry-mac
+pinentry-program $(brew --prefix)/bin/pinentry-mac
 EOF
 ```
 
