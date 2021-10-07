@@ -85,13 +85,11 @@ sudo scutil --set LocalHostName "$host_name"
 sudo scutil --set HostName "$host_name"
 printf "%s\n" "Spoofed hostname to $host_name"
 
-# Turn on Wi-Fi interface
-networksetup -setairportpower en0 on
-
 # Spoof MAC address of Wi-Fi interface
 mac_address_prefix=$(sed "$(jot -r 1 1 768)q;d" $basedir/mac-address-prefixes.txt | sed -e 's/[^A-F0-9:]//g')
 mac_address_suffix=$(openssl rand -hex 3 | sed 's/\(..\)/\1:/g; s/.$//')
 mac_address=$(echo "$mac_address_prefix:$mac_address_suffix" | awk '{print toupper($0)}')
+networksetup -setairportpower en0 on
 sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport --disassociate
 sudo ifconfig en0 ether "$mac_address"
 printf "%s\n" "Spoofed MAC address of en0 interface to $mac_address"
