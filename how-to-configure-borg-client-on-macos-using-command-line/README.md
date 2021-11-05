@@ -147,7 +147,7 @@ scp ~/Desktop/authorized_keys $BORG_USERNAME@$BORG_HOSTNAME:.ssh/authorized_keys
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-uname -m | grep arm64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
+uname -m | grep arm64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc && source ~/.zshrc
 ```
 
 ### Step 6: disable Homebrew analytics
