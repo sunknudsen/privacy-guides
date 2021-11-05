@@ -35,6 +35,7 @@ network.http.sendRefererHeader = 0
 network.prefetch-next = false
 privacy.firstparty.isolate = true
 privacy.resistFingerprinting = true
+privacy.resistFingerprinting.letterboxing = true
 privacy.trackingprotection.enabled = true
 webgl.disabled =  true
 ```
