@@ -1021,9 +1021,10 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 ### Step 1: install [Homebrew](https://brew.sh/)
 
-```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-uname -m | grep arm64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc && source ~/.zshrc
+```console
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+$ uname -m | grep arm64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc && source ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics
