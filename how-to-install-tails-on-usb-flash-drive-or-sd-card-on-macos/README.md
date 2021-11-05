@@ -14,8 +14,8 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Mojave or Catalina
 - USB flash drive or SD card (faster is better)
+- Computer running macOS Catalina or Big Sur
 
 ## Caveats
 
@@ -27,6 +27,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics

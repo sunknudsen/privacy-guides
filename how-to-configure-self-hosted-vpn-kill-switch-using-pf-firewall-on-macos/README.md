@@ -17,7 +17,7 @@ Listed: true
 ## Requirements
 
 - Self-hosted virtual private network (VPN) with public IPv4 address
-- Computer running macOS Mojave or Catalina
+- Computer running macOS Catalina or Big Sur
 
 ## Caveats
 
@@ -260,17 +260,6 @@ sudo chown ${USER}:admin /usr/local/sbin
 ```
 
 ### Step 11: source `/usr/local/sbin` directory
-
-> Heads-up: run `echo $SHELL` to find default shell.
-
-#### Bash (`/bin/bash`)
-
-```shell
-echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### Z Shell (`/bin/zsh`)
 
 ```shell
 echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.zshrc

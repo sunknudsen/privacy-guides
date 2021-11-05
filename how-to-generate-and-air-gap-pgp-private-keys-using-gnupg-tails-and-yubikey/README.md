@@ -16,7 +16,7 @@ Listed: true
 
 - [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos) with VeraCrypt [installed](../how-to-install-and-use-veracrypt-on-tails)
 - YubiKey with [OpenPGP](https://www.yubico.com/us/store/compare/) support (firmware version `5.2.3` or higher)
-- Computer running macOS Catalina (should work on Big Sur)
+- Computer running macOS Catalina or Big Sur
 
 ## Caveats
 
@@ -1023,6 +1023,7 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics
@@ -1160,22 +1161,6 @@ EOF
 ```
 
 ### Step 8: configure shell
-
-> Heads-up: run `echo $SHELL` to find default shell.
-
-#### Bash (`/bin/bash`)
-
-```shell
-cat << "EOF" >> ~/.bashrc
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-gpg-connect-agent UPDATESTARTUPTTY /bye > /dev/null
-EOF
-source ~/.bashrc
-```
-
-#### Z Shell (`/bin/zsh`)
 
 ```shell
 cat << "EOF" >> ~/.zshrc

@@ -12,6 +12,10 @@ Listed: true
 
 [![How to install and use Electrum over Tor on macOS](how-to-install-and-use-electrum-over-tor-on-macos.png)](https://www.youtube.com/watch?v=QQsAu-9brYY "How to install and use Electrum over Tor on macOS")
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
@@ -23,6 +27,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics

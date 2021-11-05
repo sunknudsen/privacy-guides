@@ -12,12 +12,17 @@ Listed: true
 
 [![How to remove EXIF metadata from images on macOS](how-to-remove-exif-metadata-from-images-on-macos.png)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS")
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Setup guide
 
 ### Step 1: install [Homebrew](https://brew.sh/)
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable analytics

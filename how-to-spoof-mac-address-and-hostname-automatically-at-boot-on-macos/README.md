@@ -14,6 +14,10 @@ Listed: true
 
 > Heads-up: unfortunately, it is not possible to spoof MAC address on some Macs (see [issue](https://github.com/sunknudsen/privacy-guides/issues/15)).
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
@@ -29,17 +33,6 @@ sudo chown ${USER}:admin /usr/local/sbin
 ```
 
 ### Step 2: add `/usr/local/sbin` directory to `PATH` environment variable
-
-> Heads-up: run `echo $SHELL` to find default shell.
-
-#### Bash (`/bin/bash`)
-
-```shell
-echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### Z Shell (`/bin/zsh`)
 
 ```shell
 echo 'export PATH=$PATH:/usr/local/sbin' >> ~/.zshrc

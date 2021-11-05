@@ -12,6 +12,10 @@ Listed: true
 
 [![How to make sure app is not running in the background on macOS](how-to-make-sure-app-is-not-running-in-the-background-on-macos.png)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS")
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command

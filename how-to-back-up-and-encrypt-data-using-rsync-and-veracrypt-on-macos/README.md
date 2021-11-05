@@ -16,7 +16,7 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Mojave or Catalina
+- Computer running macOS Catalina or Big Sur
 - USB flash drive or SD card formatted using FAT (4GiB file size limit) or exFAT filesystem (see [Journaling File Systems](https://www.veracrypt.fr/en/Journaling%20File%20Systems.html))
 
 ## Caveats
@@ -30,6 +30,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics

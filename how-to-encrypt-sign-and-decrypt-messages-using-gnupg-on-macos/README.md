@@ -14,6 +14,10 @@ Listed: true
 
 > Heads-up: this is a “getting started” guide. Learn how to harden GnuPG [here](../how-to-generate-and-air-gap-pgp-private-keys-using-gnupg-tails-and-yubikey).
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
@@ -24,6 +28,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics

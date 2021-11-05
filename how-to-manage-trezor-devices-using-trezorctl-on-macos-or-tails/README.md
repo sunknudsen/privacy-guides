@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Mojave or Catalina or [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
+- Computer running macOS Catalina or Big Sur or [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
 - [Trezor One](https://shop.trezor.io/product/trezor-one-black) or [Trezor Model T](https://shop.trezor.io/product/trezor-model-t)
 
 ## Caveats
@@ -29,6 +29,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics
@@ -59,18 +60,7 @@ pip3 install --user attrs trezor
 
 ### Step 6: source Python 3 `bin` directory
 
-> Heads-up: run `echo $SHELL` to find default shell.
-
 > Heads-up: replace `3.8` with semver of latest version of Python 3 found using `ls $HOME/Library/Python`.
-
-#### Bash (`/bin/bash`)
-
-```shell
-echo 'export PATH=$PATH:$HOME/Library/Python/3.8/bin' >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### Z Shell (`/bin/zsh`)
 
 ```shell
 echo 'export PATH=$PATH:$HOME/Library/Python/3.8/bin' >> ~/.zshrc

@@ -15,7 +15,7 @@ Listed: true
 ## Requirements
 
 - Borg server ([self-hosted](../how-to-self-host-hardened-borg-server) or cloud-based such as [BorgBase](https://www.borgbase.com/) or [rsync.net](https://rsync.net/products/attic.html))
-- Computer running macOS Mojave or Catalina
+- Computer running macOS Catalina or Big Sur
 
 ## Caveats
 
@@ -147,6 +147,7 @@ scp ~/Desktop/authorized_keys $BORG_USERNAME@$BORG_HOSTNAME:.ssh/authorized_keys
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 6: disable Homebrew analytics

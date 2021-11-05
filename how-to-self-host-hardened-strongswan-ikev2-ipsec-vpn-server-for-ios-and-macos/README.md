@@ -17,7 +17,7 @@ Listed: true
 ## Requirements
 
 - Virtual private server (VPS) or dedicated server running Debian 10 (buster) with public IPv4 address
-- Computer running macOS Mojave or Catalina
+- Computer running macOS Catalina or Big Sur
 - Phone running iOS 12 or 13
 
 ## Caveats

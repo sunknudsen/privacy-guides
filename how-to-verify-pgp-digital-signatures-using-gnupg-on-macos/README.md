@@ -12,6 +12,10 @@ Listed: true
 
 [![How to verify PGP digital signatures using GnuPG on macOS](how-to-verify-pgp-digital-signatures-using-gnupg-on-macos.png)](https://www.youtube.com/watch?v=WnNfunEJdQY "How to verify PGP digital signatures using GnuPG on macOS")
 
+## Requirements
+
+- Computer running macOS Catalina or Big Sur
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
@@ -22,6 +26,7 @@ Listed: true
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+uname -m | grep amd64 && echo 'export PATH=$PATH:/opt/homebrew/bin' >> ~/.zshrc
 ```
 
 ### Step 2: disable Homebrew analytics
