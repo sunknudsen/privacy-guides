@@ -12,11 +12,11 @@ Listed: true
 
 [![How to benchmark server performance using Speedtest and SysBench](how-to-benchmark-server-performance-using-speedtest-and-sysbench.png)](https://www.youtube.com/watch?v=zcq2iZUcQQY "How to benchmark server performance using Speedtest and SysBench")
 
-> Heads-up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on disposable servers.
+> Heads-up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on staging servers.
 
 ## Requirements
 
-- Virtual private server (VPS) or dedicated server running Debian 10 (buster)
+- Virtual private server (VPS) or dedicated server running Debian 10 (buster) or Debian 11 (bullseye)
 
 ## Caveats
 
@@ -25,13 +25,15 @@ Listed: true
 
 ## Setup guide
 
-### Step 1: check if Backports repository is enabled
+### Step 1: check if [backports](https://backports.debian.org/) repository is enabled
 
 ```shell
-cat /etc/apt/sources.list | grep "buster-backports"
+cat /etc/apt/sources.list | grep "backports"
 ```
 
-### Step 2: enable Backports repository (only run command if previous step returned nothing)
+### Step 2: enable backports repository (required if previous command returned nothing)
+
+#### Debian 10 (buster)
 
 ```shell
 cat << "EOF" >> /etc/apt/sources.list
@@ -40,42 +42,45 @@ EOF
 apt update
 ```
 
-### Step 3: check if GnuPG is installed
+#### Debian 11 (bullseye)
 
-```console
-$ gpg --version
--bash: gpg: command not found
+```shell
+cat << "EOF" >> /etc/apt/sources.list
+deb http://deb.debian.org/debian bullseye-backports main
+EOF
+apt update
 ```
 
-### Step 4: install GnuPG (only run command if previous step returned `-bash: gpg: command not found`)
+### Step 3: install apt-transport-https, cURL and GnuPG
 
 ```shell
 apt update
-apt install -y gnupg2
+apt install -y apt-transport-https curl gnupg2
 ```
 
-### Step 5: install Common CA certificates
+### Step 4: import [Speedtest](https://www.speedtest.net/)’s PGP public key
 
 ```shell
-apt install -y ca-certificates
+curl -L https://packagecloud.io/ookla/speedtest-cli/gpgkey | gpg --dearmor > /usr/share/keyrings/speedtest-cli.gpg
 ```
 
-### Step 6: import [Speedtest](https://www.speedtest.net/)’s PGP public key and enable Speedtest’s repository
+### Step 5: enable Speedtest’s repository
 
-```console
-$ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-Executing: /tmp/apt-key-gpghome.hyKJZh5s4e/gpg.1.sh --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-gpg: key 379CE192D401AB61: public key "Bintray (by JFrog) <bintray@bintray.com>" imported
-gpg: Total number processed: 1
-gpg:               imported: 1
+#### Debian 10 (buster)
 
-$ echo "deb https://ookla.bintray.com/debian buster main" | tee /etc/apt/sources.list.d/speedtest.list
-deb https://ookla.bintray.com/debian buster main
-
-$ apt update
+```shell
+echo -e "deb [signed-by=/usr/share/keyrings/speedtest-cli.gpg] https://packagecloud.io/ookla/speedtest-cli/debian/ buster main\ndeb-src [signed-by=/usr/share/keyrings/speedtest-cli.gpg] https://packagecloud.io/ookla/speedtest-cli/debian/ buster main" > /etc/apt/sources.list.d/speedtest-cli.list
+apt update
 ```
 
-### Step 7: install Speedtest and SysBench
+#### Debian 11 (bullseye)
+
+```shell
+echo -e "deb [signed-by=/usr/share/keyrings/speedtest-cli.gpg] https://packagecloud.io/ookla/speedtest-cli/debian/ bullseye main\ndeb-src [signed-by=/usr/share/keyrings/speedtest-cli.gpg] https://packagecloud.io/ookla/speedtest-cli/debian/ bullseye main" > /etc/apt/sources.list.d/speedtest-cli.list
+apt update
+```
+
+### Step 6: install Speedtest and SysBench
 
 ```shell
 apt install -y speedtest sysbench
