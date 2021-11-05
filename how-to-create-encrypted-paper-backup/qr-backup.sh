@@ -17,15 +17,15 @@ while [ $# -gt 0 ]; do
     "Usage: qr-backup.sh [options]" \
     "" \
     "Options:" \
-    "  --create-bip39-mnemonic      create BIP39 mnemonic" \
-    "  --create-electrum-mnemonic   create Electrum mnemonic" \
-    "  --validate-bip39-mnemonic    validate if secret is valid BIP39 mnemonic" \
-    "  --shamir-secret-sharing      split secret using Shamir Secret Sharing" \
-    "  --number-of-shares           number of shares (defaults to 5)" \
-    "  --share-threshold            shares required to access secret (defaults to 3)" \
-    "  --no-qr                      disable show SHA512 hash as QR code prompt" \
-    "  --label <label>              print label after short hash" \
-    "  -h, --help                   display help for command"
+    "  --create-bip39-mnemonic        create BIP39 mnemonic" \
+    "  --create-electrum-mnemonic     create Electrum mnemonic" \
+    "  --validate-bip39-mnemonic      validate if secret is valid BIP39 mnemonic" \
+    "  --shamir-secret-sharing        split secret using Shamir Secret Sharing" \
+    "  --number-of-shares <shares>    number of shares (defaults to 5)" \
+    "  --share-threshold <threshold>  shares required to access secret (defaults to 3)" \
+    "  --no-qr                        disable show SHA512 hash as QR code prompt" \
+    "  --label <label>                print label after short hash" \
+    "  -h, --help                     display help for command"
     exit 0
     ;;
     --create-bip39-mnemonic)

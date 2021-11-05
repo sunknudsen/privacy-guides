@@ -16,10 +16,10 @@ while [ $# -gt 0 ]; do
     "Usage: qr-restore.sh [options]" \
     "" \
     "Options:" \
-    "  --shamir-secret-sharing    combine secret using Shamir Secret Sharing" \
-    "  --share-threshold          shares required to access secret (defaults to 3)" \
-    "  --word-list                split secret into word list" \
-    "  -h, --help                 display help for command"
+    "  --shamir-secret-sharing        combine secret using Shamir Secret Sharing" \
+    "  --share-threshold <threshold>  shares required to access secret (defaults to 3)" \
+    "  --word-list                    split secret into word list" \
+    "  -h, --help                     display help for command"
     exit 0
     ;;
     --images)
