@@ -25,17 +25,11 @@ Listed: true
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 
-## Signed releases
+## Preconfigured image
 
-Signed releases are available below.
+Preconfigured image is available for [purchase](https://sunknudsen.com/store/products/pi-qr-image).
 
-I’ve invested over one hundred hours into this guide.
-
-Maintaining and hosting them is a labor of love… please consider [supporting](https://sunknudsen.com/donate) the privacy guides. 🙌
-
-[pi-qr-adafruit](https://dl.sunknudsen.com/2021-06-11-pi-qr-adafruit.img.zip) ([PGP signature](https://dl.sunknudsen.com/2021-06-11-pi-qr-adafruit.img.zip.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
-
-[pi-qr](https://dl.sunknudsen.com/2021-06-11-pi-qr.img.zip) ([PGP signature](https://dl.sunknudsen.com/2021-06-11-pi-qr.img.zip.sig), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+Copy image to microSD card and you’re ready to create encrypted paper backups and plan your succession.
 
 Username: `pi` Password: `raspberry`
 
