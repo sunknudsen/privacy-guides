@@ -25,14 +25,6 @@ Listed: true
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 
-## Preconfigured image
-
-Preconfigured image is available for [purchase](https://sunknudsen.com/store/products/pi-qr-image).
-
-Copy image to microSD card and you’re ready to create encrypted paper backups and plan your succession.
-
-Username: `pi` Password: `raspberry`
-
 ## Setup guide
 
 ### Step 1: log in to Raspberry Pi
