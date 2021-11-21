@@ -1184,7 +1184,7 @@ $ ssh-add -L | awk  '{print $1 " " $2 " john@example.net"}' | tee ~/.ssh/johndoe
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ62kuKCXcufbvQeXS8h5D6PW233AMBXHzKpXO0EhmJ6 john@example.net
 ```
 
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ62kuKCXcufbvQeXS8h5D6PW233AMBXHzKpXO0EhmJ6 john@example.net
+ssh-ed25519 AAAAC3Nz… john@example.net
 
 👍
 
