@@ -105,7 +105,7 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 su -
 ```
 
-### Step 4: configure iptables
+### Step 4: configure firewall
 
 > Heads-up: input rules are likely already configured (run `iptables-save` and `ip6tables-save` to check).
 
@@ -125,7 +125,7 @@ ip6tables -A OUTPUT -p udp --dport 500 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -p udp --dport 4500 -m state --state NEW -j ACCEPT
 ```
 
-#### Make iptables rules persistent
+#### make firewall rules persistent
 
 ```shell
 iptables-save > /etc/iptables/rules.v4

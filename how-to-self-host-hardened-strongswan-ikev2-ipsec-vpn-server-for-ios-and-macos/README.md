@@ -249,13 +249,13 @@ $ source ~/.bashrc
 
 ### Step 17: install iptables-persistent
 
-When asked to save current IPv4 or IPv6 rules, answer `Yes`.
+When asked to save current IPv4 or IPv6 rules, answer “Yes”.
 
 ```shell
 apt install -y iptables-persistent
 ```
 
-### Step 18: configure iptables
+### Step 18: configure firewall
 
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
@@ -334,7 +334,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-### Step 19: log out and log in to confirm iptables didn’t block SSH
+### Step 19: log out and log in to confirm firewall didn’t block SSH
 
 #### Log out
 
@@ -361,7 +361,7 @@ When asked, enter root password.
 su -
 ```
 
-### Step 20: make iptables rules persistent
+### Step 20: make firewall rules persistent
 
 ```shell
 iptables-save > /etc/iptables/rules.v4

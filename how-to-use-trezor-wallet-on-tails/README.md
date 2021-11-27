@@ -102,7 +102,7 @@ Setting up trezor-bridge (2.0.30) ...
 Created symlink /etc/systemd/system/multi-user.target.wants/trezord.service → /usr/lib/systemd/system/trezord.service.
 ```
 
-### Step 9: configure iptables
+### Step 9: configure firewall
 
 ```console
 $ sudo iptables -I OUTPUT 3 -o lo -s 127.0.0.1/32 -d 127.0.0.1/32 -p tcp --dport 21325 --syn -m owner --uid-owner amnesia -m conntrack --ctstate NEW -j ACCEPT

@@ -313,7 +313,7 @@ apt update
 
 #### Install `iptables-persistent` and Vim
 
-When asked to save current IPv4 or IPv6 rules, answer `Yes`.
+When asked to save current IPv4 or IPv6 rules, answer “Yes”.
 
 ```shell
 apt install -y iptables-persistent vim
@@ -371,7 +371,7 @@ EOF
 sysctl -p
 ```
 
-### Step 28: configure iptables
+### Step 28: configure firewall
 
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
@@ -434,7 +434,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-### Step 29: log out and log in to confirm iptables didn’t block SSH
+### Step 29: log out and log in to confirm firewall didn’t block SSH
 
 #### Log out
 
@@ -457,7 +457,7 @@ ssh pi@10.0.1.248 -i ~/.ssh/pi
 sudo su -
 ```
 
-### Step 31: make iptables rules persistent
+### Step 31: make firewall rules persistent
 
 ```shell
 iptables-save > /etc/iptables/rules.v4
