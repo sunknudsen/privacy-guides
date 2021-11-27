@@ -26,10 +26,12 @@ Listed: true
 beacon.enabled = false
 dom.battery.enabled = false
 dom.event.clipboardevents.enabled = false
+dom.webaudio.enabled => false
 geo.enabled = false
 media.eme.enabled = false
 media.navigator.enabled = false
 media.peerconnection.enabled = false
+network.captive-portal-service.enabled = false
 network.dns.disablePrefetch = true
 network.http.sendRefererHeader = 0
 network.prefetch-next = false
