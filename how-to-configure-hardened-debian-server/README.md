@@ -239,8 +239,6 @@ apt install -y iptables-persistent
 
 ### Step 17: configure firewall
 
-> Heads-up: if SSH connection is terminated, [log in](#step-8-log-in-as-server-admin) and [switch to root](#step-10-switch-to-root).
-
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
 iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --set
@@ -331,10 +329,9 @@ su -
 
 ### Step 19: make firewall rules persistent
 
-```console
-$ iptables-save > /etc/iptables/rules.v4
-
-$ ip6tables-save > /etc/iptables/rules.v6
+```shell
+iptables-save > /etc/iptables/rules.v4
+ip6tables-save > /etc/iptables/rules.v6
 ```
 
 👍
