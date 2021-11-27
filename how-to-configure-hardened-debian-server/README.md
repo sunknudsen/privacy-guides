@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Virtual private server (VPS) or dedicated server running Debian 10 (buster)
+- Virtual private server (VPS) or dedicated server running Debian 10 (buster) or Debian 11 (bullseye)
 - Linux or macOS computer
 
 ## Caveats
@@ -231,13 +231,15 @@ sysctl -p
 
 ### Step 16: install iptables-persistent
 
-When asked to save current IPv4 or IPv6 rules, answer `Yes`.
+When asked to save current IPv4 or IPv6 rules, answer “Yes”.
 
 ```shell
 apt install -y iptables-persistent
 ```
 
-### Step 17: configure iptables
+### Step 17: configure firewall
+
+> Heads-up: if SSH connection is terminated, [log in](#step-8-log-in-as-server-admin) and [switch to root](#step-10-switch-to-root).
 
 ```shell
 iptables -N SSH_BRUTE_FORCE_MITIGATION
@@ -300,7 +302,7 @@ ip6tables -P INPUT DROP
 ip6tables -P OUTPUT DROP
 ```
 
-### Step 18: log out and log in to confirm iptables didn’t block SSH
+### Step 18: log out and log in to confirm firewall didn’t block SSH
 
 #### Log out
 
@@ -327,11 +329,12 @@ When asked, enter root password.
 su -
 ```
 
-### Step 19: make iptables rules persistent
+### Step 19: make firewall rules persistent
 
-```shell
-iptables-save > /etc/iptables/rules.v4
-ip6tables-save > /etc/iptables/rules.v6
+```console
+$ iptables-save > /etc/iptables/rules.v4
+
+$ ip6tables-save > /etc/iptables/rules.v6
 ```
 
 👍
