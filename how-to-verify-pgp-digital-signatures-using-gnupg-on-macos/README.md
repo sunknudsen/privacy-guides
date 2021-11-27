@@ -50,7 +50,7 @@ brew install gnupg
 
 ### Import signer’s public key using key server…
 
-> Heads-up: replace `0xC1323A377DE14C8B` with signer’s public key ID.
+Replace `0xC1323A377DE14C8B` with signer’s public key ID.
 
 ```console
 $ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0xC1323A377DE14C8B
@@ -65,7 +65,7 @@ imported: 1
 
 ### …or using public key URL
 
-> Heads-up: replace `https://sunknudsen.com/sunknudsen.asc` with signer’s public key URL.
+Replace `https://sunknudsen.com/sunknudsen.asc` with signer’s public key URL.
 
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
@@ -83,7 +83,7 @@ imported: 1
 
 ### Verify signer’s public key using fingerprint
 
-> Heads-up: replace `hello@sunknudsen.com` with signer’s email and use published fingerprints or web of trust to verify signer’s fingerprint (see [example](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint)).
+Replace `hello@sunknudsen.com` with signer’s email and use published fingerprints or web of trust to verify signer’s fingerprint (see [example](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint)).
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com

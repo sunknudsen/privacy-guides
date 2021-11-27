@@ -117,7 +117,7 @@ $ sudo apt install -y autopoint build-essential git libjpeg-dev libmagickwand-de
 
 #### Clone zbar repository
 
-> Heads-up: replace `0.23.90` with [latest release](https://github.com/mchehab/zbar/releases/latest) semver.
+Replace `0.23.90` with [latest release](https://github.com/mchehab/zbar/releases/latest) semver.
 
 ```console
 $ cd ~
@@ -196,7 +196,7 @@ imported: 1
 
 #### Set Electrum release semver environment variable
 
-> Heads-up: replace `4.1.2` with [latest release](https://electrum.org/#download) semver.
+Replace `4.1.2` with [latest release](https://electrum.org/#download) semver.
 
 ```shell
 ELECTRUM_RELEASE_SEMVER=4.1.2

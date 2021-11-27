@@ -71,7 +71,7 @@ Go to https://tails.boum.org/install/download/index.en.html and download latest 
 
 ### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-> Heads-up: replace `4.19` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
+Replace `4.19` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
 
 ```console
 $ gpg --verify ~/Downloads/tails-amd64-4.19.img.sig

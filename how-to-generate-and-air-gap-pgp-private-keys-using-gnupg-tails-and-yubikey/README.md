@@ -201,7 +201,7 @@ uid                              John Doe <john@example.net>
 
 ### Step 9: set master key ID environment variable
 
-> Heads-up: replace `0xC2709D13BAB4763C` with master key ID.
+Replace `0xC2709D13BAB4763C` with master key ID.
 
 ```shell
 KEY_ID=0xC2709D13BAB4763C
@@ -211,7 +211,7 @@ KEY_ID=0xC2709D13BAB4763C
 
 #### Import signing master key (if necessary)
 
-> Heads-up: replace `/path/to/signing/master.asc` with signing master key path.
+Replace `/path/to/signing/master.asc` with signing master key path.
 
 ```console
 $ gpg --import /path/to/signing/master.asc
@@ -225,7 +225,7 @@ gpg:   secret keys imported: 1
 
 #### Sign master key
 
-> Heads-up: replace `0xDFCECB410CE8A745` with signing master key ID.
+Replace `0xDFCECB410CE8A745` with signing master key ID.
 
 ```console
 $ gpg --ask-cert-level --default-key 0xDFCECB410CE8A745 --sign-key $KEY_ID
@@ -529,7 +529,7 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 ### Step 16: rename VeraCrypt encrypted volume
 
-> Heads-up: replace `tcrypt-1793` with directory found using `ls /dev/mapper` and ignore dirty bit is set error.
+Replace `tcrypt-1793` with directory found using `ls /dev/mapper` and ignore dirty bit is set error.
 
 ```console
 $ ls /dev/mapper
@@ -552,7 +552,7 @@ fatlabel: warning - lowercase labels might not work properly with DOS or Windows
 
 ### Step 17: set VeraCrypt encrypted volume name environment variable
 
-> Heads-up: replace `3FDC-B4EB` with directory found using `ls /media/amnesia`.
+Replace `3FDC-B4EB` with directory found using `ls /media/amnesia`.
 
 ```console
 $ ls /media/amnesia
@@ -573,7 +573,7 @@ $ gpg --armor --export $KEY_ID > /media/amnesia/$ENCRYPTED_VOLUME_NAME/pub.asc
 
 ### Step 19: copy public key to backup volume
 
-> Heads-up: replace `johndoe` with name associated to master key.
+Replace `johndoe` with name associated to master key.
 
 ```shell
 cp /media/amnesia/$ENCRYPTED_VOLUME_NAME/pub.asc "/media/amnesia/$VOLUME_NAME/johndoe.asc"
@@ -1001,7 +1001,7 @@ $ gpg --armor --export $KEY_ID > /media/amnesia/Tails/pub.asc
 
 #### Copy public key to backup volume
 
-> Heads-up: replace `Samsung BAR` with backup volume name and `johndoe` with name associated to master key.
+Replace `Samsung BAR` with backup volume name and `johndoe` with name associated to master key.
 
 ```shell
 cp /media/amnesia/Tails/pub.asc "/media/amnesia/Samsung BAR/johndoe.asc"
@@ -1041,7 +1041,7 @@ brew install gnupg pinentry-mac
 
 ### Step 4: import public key
 
-> Heads-up: replace `Samsung BAR` with backup volume name and `johndoe` with name associated to master key.
+Replace `Samsung BAR` with backup volume name and `johndoe` with name associated to master key.
 
 ```console
 $ gpg --keyid-format 0xlong --import "/Volumes/Samsung BAR/johndoe.asc"
@@ -1097,7 +1097,7 @@ ssb>  ed25519/0x1E7B69B238FFA21B  created: 2021-07-21  expires: 2022-07-21
 
 ### Step 6: set master key ID environment variable
 
-> Heads-up: replace `0xC2709D13BAB4763C` with master key ID.
+Replace `0xC2709D13BAB4763C` with master key ID.
 
 ```shell
 KEY_ID=0xC2709D13BAB4763C
@@ -1175,7 +1175,7 @@ source ~/.zshrc
 
 ### Step 9: generate SSH public key
 
-> Heads-up: replace `john@example.net` with email and `johndoe` with name associated to master key.
+Replace `john@example.net` with email and `johndoe` with name associated to master key.
 
 ```console
 $ mkdir -p ~/.ssh

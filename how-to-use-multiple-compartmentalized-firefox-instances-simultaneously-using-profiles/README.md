@@ -22,7 +22,7 @@ Listed: true
 
 ### Step 2: open “Script Editor” and paste following snippet
 
-> Heads-up: replace `work` with profile name from [step 1](#step-1-create-firefox-profile).
+Replace `work` with profile name from [step 1](#step-1-create-firefox-profile).
 
 ```
 do shell script "nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p \"work\" --no-remote > /dev/null 2>&1 &"
@@ -38,7 +38,7 @@ Click “File”, then “Export…”, set “Export As” filename to “Firef
 
 ### Step 4: set Firefox app environment variable
 
-> Heads-up: replace `Firefox work` with filename from [step 3](#step-3-export-script-as-application).
+Replace `Firefox work` with filename from [step 3](#step-3-export-script-as-application).
 
 ```shell
 FIREFOX_APP="Firefox work.app"

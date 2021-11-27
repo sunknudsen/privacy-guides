@@ -36,7 +36,7 @@ Connected to Tor successfully
 
 ### Step 3: set Trezor Bridge release year environment variable
 
-> Heads-up: replace `2020` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) year.
+Replace `2020` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) year.
 
 ```shell
 TREZOR_BRIDGE_RELEASE_YEAR=2020
@@ -62,7 +62,7 @@ imported: 1
 
 ### Step 5: set [Trezor Bridge](https://wiki.trezor.io/Trezor_Bridge) release semver environment variable
 
-> Heads-up: replace `2.0.30` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) semver.
+Replace `2.0.30` with [latest release](https://github.com/trezor/trezord-go/blob/master/CHANGELOG.md) semver.
 
 ```shell
 TREZOR_BRIDGE_RELEASE_SEMVER=2.0.30

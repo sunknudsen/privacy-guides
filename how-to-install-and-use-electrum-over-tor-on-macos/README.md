@@ -67,7 +67,7 @@ Go to https://electrum.org/#download and download latest release and associated 
 
 #### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-> Heads-up: replace `4.1.4` with [latest release](https://electrum.org/#download) semver.
+Replace `4.1.4` with [latest release](https://electrum.org/#download) semver.
 
 ```console
 $ gpg --verify ~/Downloads/electrum-4.1.4.dmg.ThomasV.asc ~/Downloads/electrum-4.1.4.dmg
@@ -110,7 +110,7 @@ Go to https://www.torproject.org/download/ and download latest release and assoc
 
 #### Verify “Tor Browser” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-> Heads-up: replace `10.0.17` with [latest release](https://www.torproject.org/download/) semver.
+Replace `10.0.17` with [latest release](https://www.torproject.org/download/) semver.
 
 ```console
 $ gpg --verify ~/Downloads/TorBrowser-10.0.17-osx64_en-US.dmg.asc
