@@ -61,7 +61,7 @@ apt install -y apt-transport-https curl gnupg2
 ### Step 4: import [Speedtest](https://www.speedtest.net/)’s PGP public key
 
 ```shell
-curl -L https://packagecloud.io/ookla/speedtest-cli/gpgkey | gpg --dearmor > /usr/share/keyrings/speedtest-cli.gpg
+curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | gpg --dearmor > /usr/share/keyrings/speedtest-cli.gpg
 ```
 
 ### Step 5: enable Speedtest’s repository

@@ -59,7 +59,7 @@ apt install -y apt-transport-https curl gnupg lsb-release nginx-full
 ### Step 6: import [Jitsi](https://jitsi.org/)’s PGP public key
 
 ```shell
-curl -L https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /usr/share/keyrings/jitsi.gpg
+curl -fsSL https://download.jitsi.org/jitsi-key.gpg.key | gpg --dearmor > /usr/share/keyrings/jitsi.gpg
 ```
 
 ### Step 7: enable Jitsi’s repository
