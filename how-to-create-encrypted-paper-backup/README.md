@@ -277,12 +277,12 @@ $ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py https://sunk
                                  Dload  Upload   Total   Spent    Left  Speed
 100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
 
-$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.sig
+$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
 
-$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
+$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.asc
 gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
 gpg: Signature made Thu 15 Apr 2021 12:54:22 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -311,12 +311,12 @@ $ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py https://su
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6217  100  6217    0     0   8234      0 --:--:-- --:--:-- --:--:--  8234
 
-$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.sig
+$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6217  100  6217    0     0  10361      0 --:--:-- --:--:-- --:--:-- 10344
 
-$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.sig
+$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.asc
 gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
 gpg: Signature made Thu 15 Apr 2021 12:54:22 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -345,12 +345,12 @@ $ curl --fail --output /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.co
                                  Dload  Upload   Total   Spent    Left  Speed
 100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
 
-$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py.sig
+$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
 
-$ gpg --verify /home/pi/.local/bin/tmux-buttons.py.sig
+$ gpg --verify /home/pi/.local/bin/tmux-buttons.py.asc
 gpg: assuming signed data in '/home/pi/.local/bin/tmux-buttons.py'
 gpg: Signature made Thu Apr 22 09:13:47 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -379,12 +379,12 @@ $ curl --fail --output /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/s
                                  Dload  Upload   Total   Spent    Left  Speed
 100  3956  100  3956    0     0   3971      0 --:--:-- --:--:-- --:--:--  3967
 
-$ curl --fail --output /home/pi/.local/bin/qr-backup.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-backup.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    620      0  0:00:01  0:00:01 --:--:--   620
 
-$ gpg --verify /home/pi/.local/bin/qr-backup.sh.sig
+$ gpg --verify /home/pi/.local/bin/qr-backup.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/qr-backup.sh'
 gpg: Signature made Sun 18 Apr 2021 19:03:07 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -413,12 +413,12 @@ $ curl --fail --output /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1904  100  1904    0     0   1715      0  0:00:01  0:00:01 --:--:--  1715
 
-$ curl --fail --output /home/pi/.local/bin/qr-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-restore.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    908      0 --:--:-- --:--:-- --:--:--   908
 
-$ gpg --verify /home/pi/.local/bin/qr-restore.sh.sig
+$ gpg --verify /home/pi/.local/bin/qr-restore.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/qr-restore.sh'
 gpg: Signature made Sun 18 Apr 2021 18:47:17 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -447,12 +447,12 @@ $ curl --fail --output /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/st
                                  Dload  Upload   Total   Spent    Left  Speed
 100   481  100   481    0     0    440      0  0:00:01  0:00:01 --:--:--   440
 
-$ curl --fail --output /home/pi/.local/bin/qr-clone.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-clone.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    783      0  0:00:01  0:00:01 --:--:--   784
 
-$ gpg --verify /home/pi/.local/bin/qr-clone.sh.sig
+$ gpg --verify /home/pi/.local/bin/qr-clone.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/qr-clone.sh'
 gpg: Signature made Sat 17 Apr 2021 15:37:07 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -481,12 +481,12 @@ $ curl --fail --output /home/pi/.local/bin/secure-erase.sh https://sunknudsen.co
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1350  100  1350    0     0    992      0  0:00:01  0:00:01 --:--:--   992
 
-$ curl --fail --output /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.sig
+$ curl --fail --output /home/pi/.local/bin/secure-erase.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    805      0  0:00:01  0:00:01 --:--:--   805
 
-$ gpg --verify /home/pi/.local/bin/secure-erase.sh.sig
+$ gpg --verify /home/pi/.local/bin/secure-erase.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
 gpg: Signature made Thu 03 Jun 2021 19:34:35 BST
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -515,12 +515,12 @@ $ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh https://su
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
 
-$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.sig
+$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
 
-$ gpg --verify /home/pi/.local/bin/trezor-verify-integrity.sh.sig
+$ gpg --verify /home/pi/.local/bin/trezor-verify-integrity.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/trezor-verify-integrity.sh'
 gpg: Signature made Thu Apr 22 09:13:56 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -549,12 +549,12 @@ $ curl --fail --output /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
 
-$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh.sig
+$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
 
-$ gpg --verify /home/pi/.local/bin/trezor-restore.sh.sig
+$ gpg --verify /home/pi/.local/bin/trezor-restore.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/trezor-restore.sh'
 gpg: Signature made Thu Apr 22 09:14:04 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
@@ -583,12 +583,12 @@ $ curl --fail --output /home/pi/.local/bin/update.sh https://sunknudsen.com/stat
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1494  100  1494    0     0   1498      0 --:--:-- --:--:-- --:--:--  149
 
-$ curl --fail --output /home/pi/.local/bin/update.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh.sig
+$ curl --fail --output /home/pi/.local/bin/update.sh.asc https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    929      0 --:--:-- --:--:-- --:--:--   928
 
-$ gpg --verify /home/pi/.local/bin/update.sh.sig
+$ gpg --verify /home/pi/.local/bin/update.sh.asc
 gpg: assuming signed data in '/home/pi/.local/bin/update.sh'
 gpg: Signature made Sat 05 Jun 2021 16:01:37 BST
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305

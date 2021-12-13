@@ -31,12 +31,12 @@ if [[ ! "$dir_name" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}-pi-qr-update$ ]]; then
   exit 1
 fi
 
-rm "$1/.DS_Store" "$archive" "$archive.sig" || true
+rm "$1/.DS_Store" "$archive" "$archive.asc" || true
 
 cd "$dir_parent"
 
 zip -r "$archive" "$dir_name"
 
-gpg --detach-sig --armor --output "$archive.sig" "$archive"
+gpg --detach-sig --armor --output "$archive.asc" "$archive"
 
 printf "%s\n" "Done"

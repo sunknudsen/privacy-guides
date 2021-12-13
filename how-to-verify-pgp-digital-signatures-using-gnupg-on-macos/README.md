@@ -115,10 +115,10 @@ Good signature
 
 👍
 
-### Verify signed [file](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh) using [detached signature](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh.sig)
+### Verify signed [file](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh) using [detached signature](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh.asc)
 
 ```console
-$ gpg --verify app-cleaner.sh.sig
+$ gpg --verify app-cleaner.sh.asc
 gpg: assuming signed data in 'app-cleaner.sh'
 gpg: Signature made Wed 17 Mar 09:57:42 2021 EDT
 gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305

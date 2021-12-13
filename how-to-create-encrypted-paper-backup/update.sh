@@ -56,7 +56,7 @@ if [ -z "$update" ]; then
   exit 1
 fi
 
-update_sig=$(ls -t $update.sig | head -1 || echo "")
+update_sig=$(ls -t $update.asc | head -1 || echo "")
 
 if [ -z "$update_sig" ]; then
   printf "$bold$red%s$normal\n" "Update signature not found"
