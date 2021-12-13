@@ -68,7 +68,7 @@ imported: 1
 
 👍
 
-### Step 7: set VeraCrypt release semver environment variable
+### Step 7: set [VeraCrypt](https://veracrypt.fr/en/Home.html) release semver environment variable
 
 Replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
 
@@ -76,7 +76,7 @@ Replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloa
 VERACRYPT_RELEASE_SEMVER=1.24-Update7
 ```
 
-### Step 8: download [VeraCrypt](https://veracrypt.fr/en/Home.html) release
+### Step 8: download VeraCrypt release
 
 Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
 
@@ -130,6 +130,6 @@ chmod +x veracrypt.AppImage
 
 ## Usage guide
 
-To use VeraCrypt, double-click `veracrypt.AppImage`.
+Click “Places”, then “Persistent” and double-click “veracrypt.AppImage”.
 
 👍

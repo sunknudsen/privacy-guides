@@ -176,6 +176,6 @@ Download and install [latest](https://github.com/jitsi/jitsi-meet-electron/relea
 
 ### Configure Jitsi Meet Electron to use self-hosted server instead of [meet.jit.si](https://meet.jit.si)
 
-Click cog, expand “Advanced Settings” and set “Server URL” to “https://” followed by hostname from [step 1](#step-1-create-dns-record).
+Click gear icon, expand “Advanced Settings” and set “Server URL” to “https://” followed by hostname from [step 1](#step-1-create-dns-record).
 
 👍
