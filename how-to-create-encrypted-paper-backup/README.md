@@ -207,9 +207,9 @@ ELECTRUM_RELEASE_SEMVER=4.1.2
 ```shell
 $ cd ~
 
-$ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz"
+$ curl --remote-name "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz"
 
-$ curl -O "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
+$ curl --remote-name "https://download.electrum.org/$ELECTRUM_RELEASE_SEMVER/Electrum-$ELECTRUM_RELEASE_SEMVER.tar.gz.asc"
 ```
 
 #### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
@@ -248,13 +248,13 @@ $ sudo apt install -y tmux
 
 $ pip3 install --user attrs trezor
 
-$ sudo curl -o /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
+$ sudo curl --fail --output /etc/udev/rules.d/51-trezor.rules https://data.trezor.io/udev/51-trezor.rules
 ```
 
 ### Step 10: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
-$ curl -o /home/pi/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
+$ curl --fail --output /home/pi/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6896  100  6896    0     0   7569      0 --:--:-- --:--:-- --:--:--  7561
@@ -272,12 +272,12 @@ imported: 1
 ### Step 11: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
-$ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
+$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
 
-$ curl -o /home/pi/.local/bin/create-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.sig
+$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
@@ -306,12 +306,12 @@ Good signature
 ### Step 12: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
-$ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
+$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6217  100  6217    0     0   8234      0 --:--:-- --:--:-- --:--:--  8234
 
-$ curl -o /home/pi/.local/bin/validate-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.sig
+$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6217  100  6217    0     0  10361      0 --:--:-- --:--:-- --:--:-- 10344
@@ -340,12 +340,12 @@ Good signature
 ### Step 13: download and verify [tmux-buttons.py](./tmux-buttons.py)
 
 ```console
-$ curl -o /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py
+$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   149  100   149    0     0    138      0  0:00:01  0:00:01 --:--:--   138
 
-$ curl -o /home/pi/.local/bin/tmux-buttons.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py.sig
+$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/tmux-buttons.py.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    681      0  0:00:01  0:00:01 --:--:--   681
@@ -374,12 +374,12 @@ Good signature
 ### Step 14: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
-$ curl -o /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
+$ curl --fail --output /home/pi/.local/bin/qr-backup.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  3956  100  3956    0     0   3971      0 --:--:-- --:--:-- --:--:--  3967
 
-$ curl -o /home/pi/.local/bin/qr-backup.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-backup.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-backup.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    620      0  0:00:01  0:00:01 --:--:--   620
@@ -408,12 +408,12 @@ Good signature
 ### Step 15: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
-$ curl -o /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
+$ curl --fail --output /home/pi/.local/bin/qr-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1904  100  1904    0     0   1715      0  0:00:01  0:00:01 --:--:--  1715
 
-$ curl -o /home/pi/.local/bin/qr-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-restore.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    908      0 --:--:-- --:--:-- --:--:--   908
@@ -442,12 +442,12 @@ Good signature
 ### Step 16: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
-$ curl -o /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
+$ curl --fail --output /home/pi/.local/bin/qr-clone.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   481  100   481    0     0    440      0  0:00:01  0:00:01 --:--:--   440
 
-$ curl -o /home/pi/.local/bin/qr-clone.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh.sig
+$ curl --fail --output /home/pi/.local/bin/qr-clone.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/qr-clone.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    783      0  0:00:01  0:00:01 --:--:--   784
@@ -476,12 +476,12 @@ Good signature
 ### Step 17: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
-$ curl -o /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
+$ curl --fail --output /home/pi/.local/bin/secure-erase.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1350  100  1350    0     0    992      0  0:00:01  0:00:01 --:--:--   992
 
-$ curl -o /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.sig
+$ curl --fail --output /home/pi/.local/bin/secure-erase.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/secure-erase.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    805      0  0:00:01  0:00:01 --:--:--   805
@@ -510,12 +510,12 @@ Good signature
 ### Step 18: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
 
 ```console
-$ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
+$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
 
-$ curl -o /home/pi/.local/bin/trezor-verify-integrity.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.sig
+$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
@@ -544,12 +544,12 @@ Good signature
 ### Step 19: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
 
 ```console
-$ curl -o /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh
+$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1283  100  1283    0     0   1189      0  0:00:01  0:00:01 --:--:--  1189
 
-$ curl -o /home/pi/.local/bin/trezor-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh.sig
+$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/trezor-restore.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    944      0 --:--:-- --:--:-- --:--:--   944
@@ -578,12 +578,12 @@ Good signature
 ### Step 20: download and verify [update.sh](./update.sh)
 
 ```console
-$ curl -o /home/pi/.local/bin/update.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh
+$ curl --fail --output /home/pi/.local/bin/update.sh https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1494  100  1494    0     0   1498      0 --:--:-- --:--:-- --:--:--  149
 
-$ curl -o /home/pi/.local/bin/update.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh.sig
+$ curl --fail --output /home/pi/.local/bin/update.sh.sig https://sunknudsen.com/static/media/privacy-guides/how-to-create-encrypted-paper-backup/update.sh.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   833  100   833    0     0    929      0 --:--:-- --:--:-- --:--:--   928
