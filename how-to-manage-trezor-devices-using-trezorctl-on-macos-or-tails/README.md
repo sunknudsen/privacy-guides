@@ -14,8 +14,8 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Catalina or Big Sur or [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
-- [Trezor One](https://shop.trezor.io/product/trezor-one-black) or [Trezor Model T](https://shop.trezor.io/product/trezor-model-t)
+- Computer running macOS Big Sur or Monterey or [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
+- [Trezor](https://trezor.io/) device
 
 ## Caveats
 
@@ -45,21 +45,13 @@ brew analytics off
 brew install libusb
 ```
 
-### Step 4 (macOS Mojave-only): install [Python 3](https://www.python.org/)
-
-> Heads-up: Python 3 is pre-installed on macOS Catalina.
-
-```shell
-brew install python3
-```
-
-### Step 5: install [attrs](https://www.attrs.org/en/stable/) and [trezorctl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor)
+### Step 4: install [attrs](https://www.attrs.org/en/stable/) and [trezorctl](https://wiki.trezor.io/Using_trezorctl_commands_with_Trezor)
 
 ```shell
 pip3 install --user attrs trezor
 ```
 
-### Step 6: source Python 3 `bin` directory
+### Step 5: source Python 3 `bin` directory
 
 Replace `3.8` with semver of latest version of Python 3 found using `ls $HOME/Library/Python`.
 
