@@ -29,7 +29,7 @@ Listed: true
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
 ### Step 2: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready
 
@@ -587,11 +587,13 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 > Heads-up: files stored in `tails` include private keys which, if lost, results in loosing one’s cryptographic identity (safeguard backup mindfully).
 
-> Heads-up: never unlock `tails` on macOS (or any other computer that isn’t air-gapped and hardened).
+> Heads-up: one should never unlock `tails` on macOS (or any other computer that isn’t air-gapped and hardened).
 
 ### Step 22: insert and provision YubiKey
 
 > Heads-up: default user PIN is `123456` and default admin PIN is `12345678`.
+
+> Heads-up: one should set different PIN for user vs admin and never use admin PIN on macOS (or any other computer that isn’t air-gapped and hardened).
 
 ```console
 $ gpg --card-edit
@@ -877,17 +879,29 @@ Using a randomly generated lock code: cce9181f4a97bac00459419986510d40
 Lock configuration with this lock code? [y/N]: y
 ```
 
-### Step 27 (optional): extend expiry date of signing, encryption and authentication subkeys (required once a year)
+### Step 27: shutdown computer
 
-#### Mount backup volume (formatted using exFAT)
+👍
+
+---
+
+## Subkeys expiry date extension guide (on Tails)
+
+### Step 1: boot to Tails and set admin password
+
+> Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
+
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+
+### Step 2: mount backup volume (formatted using exFAT)
 
 Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and finally click “Authenticate”.
 
-#### Mount VeraCrypt encrypted volume
+### Step 3: mount VeraCrypt encrypted volume
 
 Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes”, then “Add”, select “tails” file on backup volume, click “Open”, enter password and finally click “Unlock”.
 
-#### Import master key
+### Step 4: import master key
 
 ```console
 $ gpg --import /media/amnesia/Tails/master.asc
@@ -901,13 +915,13 @@ gpg:   secret keys imported: 1
 gpg: no ultimately trusted keys found
 ```
 
-#### Set master key ID environment variable
+### Step 5: set master key ID environment variable
 
 ```shell
 KEY_ID=0xC2709D13BAB4763C
 ```
 
-#### Extend expiry date of signing, encryption and authentication subkeys
+### Step 6: extend expiry date of signing, encryption and authentication subkeys
 
 ```console
 $ gpg --edit-key $KEY_ID
@@ -993,13 +1007,13 @@ ssb* ed25519/0x1E7B69B238FFA21B
 gpg> save
 ```
 
-#### Export public key to VeraCrypt encrypted volume
+### Step 7: export public key to VeraCrypt encrypted volume
 
 ```console
 $ gpg --armor --export $KEY_ID > /media/amnesia/Tails/pub.asc
 ```
 
-#### Copy public key to backup volume
+### Step 8: copy public key to backup volume
 
 Replace `Samsung BAR` with backup volume name and `johndoe` with name associated to master key.
 
@@ -1007,15 +1021,13 @@ Replace `Samsung BAR` with backup volume name and `johndoe` with name associated
 cp /media/amnesia/Tails/pub.asc "/media/amnesia/Samsung BAR/johndoe.asc"
 ```
 
-#### Dismount VeraCrypt encrypted volume
+### Step 9: dismount VeraCrypt encrypted volume
 
 Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and finally click “x”.
 
-### Step 28: shutdown computer
+### Step 10: shutdown computer
 
 👍
-
----
 
 ## Usage guide (on macOS)
 
