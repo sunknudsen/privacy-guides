@@ -94,7 +94,7 @@ Use application-layer firewall such as [Little Snitch](https://www.obdev.at/prod
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under ”Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
 
 ### Step 2: import [Node.js](https://nodejs.org/en/)’s PGP public key
 
