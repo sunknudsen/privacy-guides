@@ -56,7 +56,7 @@ Connected to Tor successfully
 $ torsocks curl https://www.idrix.fr/VeraCrypt/VeraCrypt_PGP_public_key.asc | gpg --import
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  5434  100  5434    0     0   3002      0  0:00:01  0:00:01 --:--:--  3000
+100  5434  100  5434    0     0   4461      0  0:00:01  0:00:01 --:--:--  4461
 gpg: key 0x821ACD02680D16DE: 1 signature not checked due to a missing key
 gpg: key 0x821ACD02680D16DE: public key "VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393) <veracrypt@idrix.fr>" imported
 gpg: Total number processed: 1
@@ -70,10 +70,10 @@ imported: 1
 
 ### Step 7: set [VeraCrypt](https://veracrypt.fr/en/Home.html) release semver environment variable
 
-Replace `1.24-Update7` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
+Replace `1.25.4` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
 
 ```shell
-VERACRYPT_RELEASE_SEMVER=1.24-Update7
+VERACRYPT_RELEASE_SEMVER=1.25.4
 ```
 
 ### Step 8: download VeraCrypt release
@@ -84,8 +84,8 @@ Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr
 
 ```console
 $ gpg --verify ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2.sig
-gpg: assuming signed data in '/home/amnesia/Tor Browser/veracrypt-1.24-Update7-setup.tar.bz2'
-gpg: Signature made Sat 08 Aug 2020 06:22:10 PM UTC
+gpg: assuming signed data in '/home/amnesia/Tor Browser/veracrypt-1.25.4-setup.tar.bz2'
+gpg: Signature made Fri 03 Dec 2021 05:57:28 PM UTC
 gpg:                using RSA key 5069A233D55A0EEB174A5FC3821ACD02680D16DE
 gpg: Good signature from "VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393) <veracrypt@idrix.fr>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
