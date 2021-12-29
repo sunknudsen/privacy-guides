@@ -16,7 +16,7 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Catalina or Big Sur
+- Computer running macOS Big Sur or Monterey
 
 ## Caveats
 
@@ -48,22 +48,26 @@ brew install gnupg
 
 ```console
 $ gpg --full-generate-key
-gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+gpg (GnuPG) 2.3.4; Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 gpg: directory '/Users/sunknudsen/.gnupg' created
 gpg: keybox '/Users/sunknudsen/.gnupg/pubring.kbx' created
 Please select what kind of key you want:
-   (1) RSA and RSA (default)
+   (1) RSA and RSA
    (2) DSA and Elgamal
    (3) DSA (sign only)
    (4) RSA (sign only)
+   (9) ECC (sign and encrypt) *default*
+  (10) ECC (sign only)
   (14) Existing key from card
+Your selection? 9
+Please select which elliptic curve you want:
+   (1) Curve 25519 *default*
+   (4) NIST P-384
+   (6) Brainpool P-256
 Your selection? 1
-RSA keys may be between 1024 and 4096 bits long.
-What keysize do you want? (3072) 4096
-Requested keysize is 4096 bits
 Please specify how long the key should be valid.
          0 = key does not expire
       <n>  = key expires in n days
@@ -92,15 +96,14 @@ some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 gpg: /Users/sunknudsen/.gnupg/trustdb.gpg: trustdb created
-gpg: key DFCECB410CE8A745 marked as ultimately trusted
 gpg: directory '/Users/sunknudsen/.gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/Users/sunknudsen/.gnupg/openpgp-revocs.d/E1B962BF7B5577A7B8021D18DFCECB410CE8A745.rev'
+gpg: revocation certificate stored as '/Users/sunknudsen/.gnupg/openpgp-revocs.d/1ADDDBA409558A8E80A4DF381535F6A0BB6BD636.rev'
 public and secret key created and signed.
 
-pub   rsa4096 2021-03-24 [SC]
-      E1B962BF7B5577A7B8021D18DFCECB410CE8A745
+pub   ed25519 2021-12-29 [SC]
+      1ADDDBA409558A8E80A4DF381535F6A0BB6BD636
 uid                      John Doe <john@example.net>
-sub   rsa4096 2021-03-24 [E]
+sub   cv25519 2021-12-29 [E]
 ```
 
 ### Step 5: back up `~/.gnupg` folder (learn how [here](../how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
@@ -113,17 +116,19 @@ sub   rsa4096 2021-03-24 [E]
 
 ## Usage guide
 
-### Export John’s PGP public key
+### Export PGP public key
+
+> Heads-up: replace `john@example.net` and `johndoe` with email and name from [step 4](#step-4-generate-pgp-key-pair).
 
 ```shell
-gpg --armor --export john@example.net > ~/Desktop/johndoe.asc
+gpg --armor --export john@example.net > ~/johndoe.asc
 ```
 
 ### Import Sun’s public key using key server…
 
 ```console
-$ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0xC1323A377DE14C8B
-gpg: key 0xC1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
+$ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x8C9CA674C47CA060
+gpg: key 8C9CA674C47CA060: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
 ```
@@ -134,48 +139,69 @@ imported: 1
 
 ### …or using public key URL
 
+> Heads-up: verify [web of trust](#verify-suns-pgp-public-key-using-web-of-trust) to list missing keys.
+
 ```console
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  6896  100  6896    0     0  11589      0 --:--:-- --:--:-- --:--:-- 11570
-gpg: key 0xC1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
+100  2070  100  2070    0     0   1881      0  0:00:01  0:00:01 --:--:--  1899
+gpg: key 8C9CA674C47CA060: 1 signature not checked due to a missing key
+gpg: key 8C9CA674C47CA060: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 ```
 
 imported: 1
 
 👍
 
-### Verify Sun’s PGP public key using its fingerprint
+### Verify Sun’s PGP public key using fingerprint
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com
-gpg: checking the trustdb
-gpg: marginals needed: 3  completes needed: 1  trust model: pgp
-gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
-pub   rsa4096 2019-10-17 [C]
-      C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
+pub   ed25519 2021-12-28 [C]
+      E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 uid           [ unknown] Sun Knudsen <hello@sunknudsen.com>
-sub   rsa4096 2019-10-17 [E] [expires: 2021-10-25]
-sub   rsa4096 2019-10-17 [A] [expires: 2021-10-25]
-sub   rsa4096 2019-10-17 [S] [expires: 2021-10-25]
+sub   ed25519 2021-12-28 [S] [expires: 2022-12-28]
+sub   cv25519 2021-12-28 [E] [expires: 2022-12-28]
+sub   ed25519 2021-12-28 [A] [expires: 2022-12-28]
 ```
 
-Open https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and https://www.youtube.com/sunknudsen/about and make sure above fingerprint (`C4FB DDC1 6A26 2672 920D 0A0F C132 3A37 7DE1 4C8B`) matches published fingerprints.
+Open https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and https://www.youtube.com/sunknudsen/about and make sure above fingerprint (“E786 274B C92B 47C2 3C1C &nbsp;F44B 8C9C A674 C47C A060”) matches published fingerprints.
 
 👍
 
-### Paste, encrypt and sign message (enter line break and use command `ctrl+d` to quit edit mode)
+### Verify Sun’s PGP public key using web of trust
+
+> Heads-up: `0xC1323A377DE14C8B` is Sun’s [legacy](https://github.com/sunknudsen/pgp-public-key/tree/master/legacy) public key.
+
+```console
+$ gpg --list-signatures 0x8C9CA674C47CA060
+pub ed25519 2021-12-28 [C]
+E786274BC92B47C23C1CF44B8C9CA674C47CA060
+uid [ unknown] Sun Knudsen <hello@sunknudsen.com>
+sig 3 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+sig 3 C1323A377DE14C8B 2021-12-28 [User ID not found]
+sub ed25519 2021-12-28 [S] [expires: 2022-12-28]
+sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+sub cv25519 2021-12-28 [E] [expires: 2022-12-28]
+sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+sub ed25519 2021-12-28 [A] [expires: 2022-12-28]
+sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+```
+
+### Paste, encrypt and sign message (enter line break and `ctrl+d` to quit edit mode)
 
 ```console
 $ gpg --encrypt --sign --armor --output ~/Desktop/encrypted.asc --recipient john@example.net --recipient hello@sunknudsen.com
-gpg: 5574F4B0B0F67D7F: There is no assurance this key belongs to the named user
+gpg: F56809CDE05DB014: There is no assurance this key belongs to the named user
 
-sub  rsa4096/5574F4B0B0F67D7F 2019-10-17 Sun Knudsen <hello@sunknudsen.com>
- Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
-      Subkey fingerprint: 35A2 7551 E77C 3ED9 8527  032A 5574 F4B0 B0F6 7D7F
+sub  cv25519/F56809CDE05DB014 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+      Subkey fingerprint: F375 2162 E3A4 3F6E 2762  D50B F568 09CD E05D B014
 
 It is NOT certain that the key belongs to the person named
 in the user ID.  If you *really* know what you are doing,
@@ -189,12 +215,12 @@ This is a test!
 
 ```console
 $ gpg --decrypt ~/Desktop/encrypted.asc | perl -MMIME::QuotedPrint -0777 -nle 'print decode_qp($_)'
-gpg: encrypted with 4096-bit RSA key, ID 5574F4B0B0F67D7F, created 2019-10-17
+gpg: encrypted with cv25519 key, ID F56809CDE05DB014, created 2021-12-28
       "Sun Knudsen <hello@sunknudsen.com>"
-gpg: encrypted with 4096-bit RSA key, ID D21EDF2B2BC20129, created 2021-03-24
+gpg: encrypted with cv25519 key, ID F9220AB453F9B6E3, created 2021-12-29
       "John Doe <john@example.net>"
-gpg: Signature made Wed 24 Mar 11:04:49 2021 EDT
-gpg:                using RSA key E1B962BF7B5577A7B8021D18DFCECB410CE8A745
+gpg: Signature made Wed 29 Dec 08:24:05 2021 EST
+gpg:                using EDDSA key 1ADDDBA409558A8E80A4DF381535F6A0BB6BD636
 gpg: Good signature from "John Doe <john@example.net>" [ultimate]
 This is a test!
 ```
@@ -209,4 +235,4 @@ Good signature
 gpg-connect-agent reloadagent /bye
 ```
 
-> Heads-up: when sending [encrypted messages](#paste-encrypt-and-sign-message-enter-line-break-and-use-command-ctrld-to-quit-edit-mode), don’t forget to include your [public key](#export-johns-pgp-public-key).
+> Heads-up: when sending [encrypted messages](#paste-encrypt-and-sign-message-enter-line-break-and-ctrld-to-quit-edit-mode), don’t forget to include your [public key](#export-johns-pgp-public-key).
