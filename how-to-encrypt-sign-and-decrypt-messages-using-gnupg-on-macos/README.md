@@ -124,7 +124,7 @@ sub   cv25519 2021-12-29 [E]
 gpg --armor --export john@example.net > ~/johndoe.asc
 ```
 
-### Import Sun’s public key using key server…
+### Import Sun’s PGP public key using key server…
 
 ```console
 $ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x8C9CA674C47CA060
@@ -137,7 +137,7 @@ imported: 1
 
 👍
 
-### …or using public key URL
+### …or using PGP public key URL
 
 > Heads-up: verify [web of trust](#verify-suns-pgp-public-key-using-web-of-trust) to list missing keys.
 
@@ -179,18 +179,18 @@ Open https://sunknudsen.com/, https://github.com/sunknudsen/pgp-public-key and h
 > Heads-up: `0xC1323A377DE14C8B` is Sun’s [legacy](https://github.com/sunknudsen/pgp-public-key/tree/master/legacy) public key.
 
 ```console
-$ gpg --list-signatures 0x8C9CA674C47CA060
-pub ed25519 2021-12-28 [C]
-E786274BC92B47C23C1CF44B8C9CA674C47CA060
-uid [ unknown] Sun Knudsen <hello@sunknudsen.com>
-sig 3 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
-sig 3 C1323A377DE14C8B 2021-12-28 [User ID not found]
-sub ed25519 2021-12-28 [S] [expires: 2022-12-28]
-sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
-sub cv25519 2021-12-28 [E] [expires: 2022-12-28]
-sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
-sub ed25519 2021-12-28 [A] [expires: 2022-12-28]
-sig 8C9CA674C47CA060 2021-12-28 Sun Knudsen <hello@sunknudsen.com>
+$ gpg --list-signatures hello@sunknudsen.com
+pub   ed25519 2021-12-28 [C]
+      E786274BC92B47C23C1CF44B8C9CA674C47CA060
+uid           [ unknown] Sun Knudsen <hello@sunknudsen.com>
+sig 3        8C9CA674C47CA060 2021-12-28  Sun Knudsen <hello@sunknudsen.com>
+sig 3        C1323A377DE14C8B 2021-12-28  [User ID not found]
+sub   ed25519 2021-12-28 [S] [expires: 2022-12-28]
+sig          8C9CA674C47CA060 2021-12-28  Sun Knudsen <hello@sunknudsen.com>
+sub   cv25519 2021-12-28 [E] [expires: 2022-12-28]
+sig          8C9CA674C47CA060 2021-12-28  Sun Knudsen <hello@sunknudsen.com>
+sub   ed25519 2021-12-28 [A] [expires: 2022-12-28]
+sig          8C9CA674C47CA060 2021-12-28  Sun Knudsen <hello@sunknudsen.com>
 ```
 
 ### Paste, encrypt and sign message (enter line break and `ctrl+d` to quit edit mode)

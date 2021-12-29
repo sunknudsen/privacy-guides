@@ -217,7 +217,7 @@ Replace `/path/to/signing/pub.asc` with signing public key path.
 $ gpg --import '/path/to/signing/pub.asc'
 gpg: key 0xDFCECB410CE8A745: public key "John Doe <john@example.net>" imported
 gpg: Total number processed: 1
-gpg: imported: 1
+gpg:               imported: 1
 ```
 
 #### Import signing private key
@@ -229,9 +229,9 @@ $ gpg --import /path/to/signing/master.asc
 gpg: key 0xDFCECB410CE8A745: "John Doe <john@example.net>" not changed
 gpg: key 0xDFCECB410CE8A745: secret key imported
 gpg: Total number processed: 1
-gpg: unchanged: 1
-gpg: secret keys read: 1
-gpg: secret keys imported: 1
+gpg:              unchanged: 1
+gpg:       secret keys read: 1
+gpg:   secret keys imported: 1
 ```
 
 #### Sign master key
