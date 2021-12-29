@@ -254,7 +254,7 @@ $ sudo curl --fail --output /etc/udev/rules.d/51-trezor.rules https://data.trezo
 ### Step 10: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
-$ curl --fail --output /home/pi/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
+$ curl --fail --output /home/pi/sunknudsen.asc https://raw.githubusercontent.com/sunknudsen/pgp-public-key/master/legacy/sunknudsen-legacy.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6896  100  6896    0     0   7569      0 --:--:-- --:--:-- --:--:--  7561
