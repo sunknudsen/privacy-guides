@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Catalina or Big Sur
+- Computer running macOS Big Sur or Monterey
 
 ## Caveats
 
@@ -48,13 +48,13 @@ brew install gnupg
 
 ## Usage guide
 
-### Import signer’s public key using key server…
+### Import signer’s PGP public key using key server…
 
-Replace `0xC1323A377DE14C8B` with signer’s public key ID.
+Replace `0x8C9CA674C47CA060` with signer’s public key ID.
 
 ```console
-$ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0xC1323A377DE14C8B
-gpg: key 0xC1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
+$ gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x8C9CA674C47CA060
+gpg: key 8C9CA674C47CA060: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
 ```
@@ -63,7 +63,7 @@ imported: 1
 
 👍
 
-### …or using public key URL
+### …or using PGP public key URL
 
 Replace `https://sunknudsen.com/sunknudsen.asc` with signer’s public key URL.
 
@@ -71,19 +71,22 @@ Replace `https://sunknudsen.com/sunknudsen.asc` with signer’s public key URL.
 $ curl https://sunknudsen.com/sunknudsen.asc | gpg --import
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  6896  100  6896    0     0  11589      0 --:--:-- --:--:-- --:--:-- 11570
-gpg: key 0xC1323A377DE14C8B: public key "Sun Knudsen <hello@sunknudsen.com>" imported
+100  2070  100  2070    0     0   1881      0  0:00:01  0:00:01 --:--:--  1899
+gpg: key 8C9CA674C47CA060: 1 signature not checked due to a missing key
+gpg: key 8C9CA674C47CA060: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
 ```
 
 imported: 1
 
 👍
 
-### Verify signer’s public key using fingerprint
+### Verify signer’s PGP public key using fingerprint
 
-Replace `hello@sunknudsen.com` with signer’s email and use published fingerprints or web of trust to verify signer’s fingerprint (see [example](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-its-fingerprint)).
+Replace `hello@sunknudsen.com` with signer’s email and use published fingerprints to verify signer’s cryptographic identity (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint)).
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com
@@ -102,13 +105,13 @@ sub   rsa4096 2019-10-17 [S] [expires: 2021-10-25]
 
 ```console
 $ gpg --verify donate-bitcoin.asc
-gpg: Signature made Sun  7 Mar 14:58:01 2021 EST
-gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Signature made Wed 29 Dec 10:32:32 2021 EST
+gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
-     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+     Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 ```
 
 Good signature
@@ -120,13 +123,13 @@ Good signature
 ```console
 $ gpg --verify app-cleaner.sh.asc
 gpg: assuming signed data in 'app-cleaner.sh'
-gpg: Signature made Wed 17 Mar 09:57:42 2021 EDT
-gpg:                using RSA key A98CCD122243655B26FAFB611FA767862BBD1305
+gpg: Signature made Wed 29 Dec 10:42:13 2021 EST
+gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: C4FB DDC1 6A26 2672 920D  0A0F C132 3A37 7DE1 4C8B
-     Subkey fingerprint: A98C CD12 2243 655B 26FA  FB61 1FA7 6786 2BBD 1305
+Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+     Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 ```
 
 Good signature

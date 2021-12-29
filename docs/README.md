@@ -68,12 +68,12 @@ Go to https://github.com/settings/keys, click “New GPG key”, paste your PGP 
 
 ### Step 2: enable Git [signing](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
 
-Replace `0xC1323A377DE14C8B` with your PGP public key ID.
+Replace `0x8C9CA674C47CA060` with your PGP public key ID.
 
 ```shell
 git config --global commit.gpgsign true
 git config --global gpg.program $(which gpg)
-git config --global user.signingkey 0xC1323A377DE14C8B
+git config --global user.signingkey 0x8C9CA674C47CA060
 ```
 
 ### Step 3: submit pull request
