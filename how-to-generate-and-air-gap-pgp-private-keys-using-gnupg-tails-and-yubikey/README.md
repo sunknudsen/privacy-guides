@@ -71,14 +71,14 @@ imported: 1
 $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage https://developers.yubico.com/yubikey-manager-qt/Releases/yubikey-manager-qt-latest-linux.AppImage
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   281  100   281    0     0    200      0  0:00:01  0:00:01 --:--:--   200
-100 81.9M  100 81.9M    0     0   457k      0  0:03:03  0:03:03 --:--:--  818k
+100   282  100   282    0     0    300      0 --:--:-- --:--:-- --:--:--   299
+100 82.2M  100 82.2M    0     0   953k      0  0:01:28  0:01:28 --:--:--  629k
 
 $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage.sig https://developers.yubico.com/yubikey-manager-qt/Releases/yubikey-manager-qt-latest-linux.AppImage.sig
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   285  100   285    0     0    215      0  0:00:01  0:00:01 --:--:--   215
-100   310  100   310    0     0    184      0  0:00:01  0:00:01 --:--:--     0
+100   286  100   286    0     0    318      0 --:--:-- --:--:-- --:--:--   317
+100   310  100   310    0     0    262      0  0:00:01  0:00:01 --:--:--   262
 ```
 
 ### Step 5: verify “YubiKey Manager” AppImage release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos)) and make AppImage executable
@@ -86,13 +86,13 @@ $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage.sig https://develo
 ```console
 $ gpg --verify ~/Downloads/yubikey-manager-qt.AppImage.sig
 gpg: assuming signed data in '/home/amnesia/Downloads/yubikey-manager-qt.AppImage'
-gpg: Signature made Mon 23 Aug 10:16:06 2021 EDT
-gpg:                using RSA key 159CD7E4AF75DF3C5638BBCDD8588A5844E2A774
-gpg: Good signature from "Emil Lundberg (Software Developer) <emil@yubico.com>" [unknown]
+gpg: Signature made Wed 10 Nov 2021 11:11:13 AM UTC
+gpg:                using RSA key D6919FBF48C484F3CB7B71CD870B88256690D8BC
+gpg: Good signature from "Dennis Fokin <dennis.fokin@yubico.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 57A9 DEED 4C6D 962A 923B  B691 816F 3ED9 9921 835E
-     Subkey fingerprint: 159C D7E4 AF75 DF3C 5638  BBCD D858 8A58 44E2 A774
+Primary key fingerprint: 9E88 5C03 02F9 BB91 6752  9C2D 5CBA 11E6 ADC7 BCD1
+     Subkey fingerprint: D691 9FBF 48C4 84F3 CB7B  71CD 870B 8825 6690 D8BC
 
 $ chmod +x ~/Downloads/yubikey-manager-qt.AppImage
 ```
@@ -209,18 +209,29 @@ KEY_ID=0xC2709D13BAB4763C
 
 ### Step 10 (optional): sign master key using another master key
 
-#### Import signing master key (if necessary)
+#### Import signing public key
+
+Replace `/path/to/signing/pub.asc` with signing public key path.
+
+```console
+$ gpg --import '/path/to/signing/pub.asc'
+gpg: key 0xDFCECB410CE8A745: public key "John Doe <john@example.net>" imported
+gpg: Total number processed: 1
+gpg: imported: 1
+```
+
+#### Import signing private key
 
 Replace `/path/to/signing/master.asc` with signing master key path.
 
 ```console
 $ gpg --import /path/to/signing/master.asc
-gpg: key 0xDFCECB410CE8A745: public key "John Doe <john@example.net>" imported
+gpg: key 0xDFCECB410CE8A745: "John Doe <john@example.net>" not changed
 gpg: key 0xDFCECB410CE8A745: secret key imported
 gpg: Total number processed: 1
-gpg:               imported: 1
-gpg:       secret keys read: 1
-gpg:   secret keys imported: 1
+gpg: unchanged: 1
+gpg: secret keys read: 1
+gpg: secret keys imported: 1
 ```
 
 #### Sign master key
@@ -502,7 +513,7 @@ Filesystem:
  6) NTFS
  7) exFAT
  8) Btrfs
-Select [2]: 2
+Select [2]: 5
 
 Enter password:
 Re-enter password:
@@ -535,33 +546,28 @@ Replace `tcrypt-1793` with directory found using `ls /dev/mapper` and ignore dir
 $ ls /dev/mapper
 control  TailsData_unlocked  tcrypt-1793  tcrypt-1793_1  tcrypt-1793_2
 
-$ sudo fatlabel /dev/mapper/tcrypt-1793 Tails
-
-We trust you have received the usual lecture from the local System
-Administrator. It usually boils down to these three things:
-
-    #1) Respect the privacy of others.
-    #2) Think before you type.
-    #3) With great power comes great responsibility.
-
+$ sudo e2label /dev/mapper/tcrypt-1793 Tails
 [sudo] password for amnesia:
-fatlabel: warning - lowercase labels might not work properly with DOS or Windows
-0x25: Dirty bit is set. Fs was not properly unmounted and some data may be corrupt.
- Automatically removing dirty bit.
 ```
 
 ### Step 17: set VeraCrypt encrypted volume name environment variable
 
-Replace `3FDC-B4EB` with directory found using `ls /media/amnesia`.
+Replace `8ff4dedf-6aa1-4b97-909d-63075b3eb70a` with directory found using `ls /media/amnesia`.
 
 ```console
 $ ls /media/amnesia
-3FDC-B4EB   LaCie  'Samsung BAR'
+8ff4dedf-6aa1-4b97-909d-63075b3eb70a
 
-$ ENCRYPTED_VOLUME_NAME="3FDC-B4EB"
+$ ENCRYPTED_VOLUME_NAME="8ff4dedf-6aa1-4b97-909d-63075b3eb70a"
 ```
 
-### Step 18: export master key, subkeys and public key to VeraCrypt encrypted volume
+### Step 18: change owner of VeraCrypt encrypted volume
+
+```shell
+sudo chown amnesia:amnesia /media/amnesia/$ENCRYPTED_VOLUME_NAME
+```
+
+### Step 19: export master key, subkeys and public key to VeraCrypt encrypted volume
 
 ```console
 $ gpg --armor --export-secret-keys $KEY_ID > /media/amnesia/$ENCRYPTED_VOLUME_NAME/master.asc
@@ -571,7 +577,7 @@ $ gpg --armor --export-secret-subkeys $KEY_ID > /media/amnesia/$ENCRYPTED_VOLUME
 $ gpg --armor --export $KEY_ID > /media/amnesia/$ENCRYPTED_VOLUME_NAME/pub.asc
 ```
 
-### Step 19: copy public key to backup volume
+### Step 20: copy public key to backup volume
 
 Replace `johndoe` with name associated to master key.
 
@@ -579,17 +585,17 @@ Replace `johndoe` with name associated to master key.
 cp /media/amnesia/$ENCRYPTED_VOLUME_NAME/pub.asc "/media/amnesia/$VOLUME_NAME/johndoe.asc"
 ```
 
-### Step 20: dismount VeraCrypt encrypted volume
+### Step 21: dismount VeraCrypt encrypted volume
 
 Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and finally click “x”.
 
-### Step 21: back up `tails` file
+### Step 22: back up `tails` file
 
 > Heads-up: files stored in `tails` include private keys which, if lost, results in loosing one’s cryptographic identity (safeguard backup mindfully).
 
 > Heads-up: one should never unlock `tails` on macOS (or any other computer that isn’t air-gapped and hardened).
 
-### Step 22: insert and provision YubiKey
+### Step 23: insert and provision YubiKey
 
 > Heads-up: default user PIN is `123456` and default admin PIN is `12345678`.
 
@@ -687,7 +693,7 @@ General key info..: [none]
 gpg/card> quit
 ```
 
-### Step 23: move signing, encryption and authentication subkeys to YubiKey
+### Step 24: move signing, encryption and authentication subkeys to YubiKey
 
 ```console
 $ gpg --edit-key $KEY_ID
@@ -825,7 +831,7 @@ ssb* ed25519/0x1E7B69B238FFA21B
 gpg> save
 ```
 
-### Step 24: require YubiKey user interaction for signing, encryption and authentication operations
+### Step 25: require YubiKey user interaction for signing, encryption and authentication operations
 
 ```console
 $ ykman openpgp keys set-touch sig on --force
@@ -859,7 +865,7 @@ On
 
 👍
 
-### Step 25 (optional): disable all YubiKey interfaces except for OpenPGP over USB
+### Step 26 (optional): disable all YubiKey interfaces except for OpenPGP over USB
 
 > Heads-up: increase `sleep` delay if “Error: No YubiKey detected!” error is thrown.
 
@@ -869,7 +875,7 @@ $ ykman config usb --disable FIDO2 --disable HSMAUTH --disable OATH --disable OT
 $ ykman config nfc --disable-all --force
 ```
 
-### Step 26 (optional): enable YubiKey configuration lock
+### Step 27 (optional): enable YubiKey configuration lock
 
 > Heads-up: configuration lock prevents configuring YubiKey without entering lock code (store lock code in air-gapped password manager).
 
@@ -879,7 +885,7 @@ Using a randomly generated lock code: cce9181f4a97bac00459419986510d40
 Lock configuration with this lock code? [y/N]: y
 ```
 
-### Step 27: shutdown computer
+### Step 28: shutdown computer
 
 👍
 
