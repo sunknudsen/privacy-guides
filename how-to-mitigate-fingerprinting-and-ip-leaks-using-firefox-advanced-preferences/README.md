@@ -22,6 +22,8 @@ Listed: true
 
 ### Step 4: open `about:config` and set the following
 
+> Heads-up: if `true` value does not exist, select “Boolean” and click “+”.
+
 ```
 beacon.enabled = false
 dom.battery.enabled = false
