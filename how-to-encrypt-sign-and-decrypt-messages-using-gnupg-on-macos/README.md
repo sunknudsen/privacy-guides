@@ -235,4 +235,4 @@ Good signature
 gpg-connect-agent reloadagent /bye
 ```
 
-> Heads-up: when sending [encrypted messages](#paste-encrypt-and-sign-message-enter-line-break-and-ctrld-to-quit-edit-mode), don’t forget to include your [public key](#export-johns-pgp-public-key).
+> Heads-up: when sending [encrypted messages](#paste-encrypt-and-sign-message-enter-line-break-and-ctrld-to-quit-edit-mode), don’t forget to include your [public key](#export-pgp-public-key).
