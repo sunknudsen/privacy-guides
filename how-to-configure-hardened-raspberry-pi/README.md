@@ -15,7 +15,7 @@ Listed: true
 ## Requirements
 
 - [Raspberry Pi](https://www.raspberrypi.org/)
-- Power adapter, keyboard and HDMI cable (and SD card reader if computer does not have one built-in)
+- HDMI cable, keyboard, microSD card, microSD to SD adapter and power adapter
 - macOS computer
 
 ## Caveats
@@ -74,13 +74,13 @@ EOF
 
 ### Step 3: download latest version of [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
 
-### Step 4: copy “Raspberry Pi OS Lite” to SD card
+### Step 4: copy “Raspberry Pi OS Lite” to microSD card
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
-Run `diskutil list` to find disk ID of SD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
+Run `diskutil list` to find disk ID of microSD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
 
-Replace `diskn` and `rdiskn` with disk ID of SD card (`disk4` and `rdisk4` in the following example) and `2021-10-30-raspios-bullseye-armhf-lite.img` with current image.
+Replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example) and `2021-10-30-raspios-bullseye-armhf-lite.img` with current image.
 
 ```console
 $ diskutil list
