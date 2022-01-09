@@ -12,7 +12,9 @@ Listed: true
 
 [![How to configure self-hosted VPN kill switch using PF firewall on macOS](how-to-configure-self-hosted-vpn-kill-switch-using-pf-firewall-on-macos.png)](https://www.youtube.com/watch?v=wsYYGrEXWnk "How to configure self-hosted VPN kill switch using PF firewall on macOS")
 
-> Heads-up: when following this guide, IKEv2/IPsec VPNs will likely be unresponsive for about 60 seconds at boot and wake. Not sure what causes this issue. Please submit a [PR](https://github.com/sunknudsen/privacy-guides/pulls) if you know how to fix it!
+> **Heads-up: guide is no longer maintained and should be considered obsolete.**
+
+> Heads-up: when following this guide, IKEv2/IPsec VPNs will likely be unresponsive for about 60 seconds at boot and wake.
 
 ## Requirements
 

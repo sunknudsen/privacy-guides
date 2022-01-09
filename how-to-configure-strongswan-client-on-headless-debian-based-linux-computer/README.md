@@ -12,6 +12,8 @@ Listed: true
 
 [![How to configure strongSwan client on headless Debian-based Linux computer](how-to-configure-strongswan-client-on-headless-debian-based-linux-computer.png)](https://www.youtube.com/watch?v=fW1TUByQqk8 "How to configure strongSwan client on headless Debian-based Linux computer")
 
+> **Heads-up: guide is no longer maintained and should be considered obsolete.**
+
 ## Requirements
 
 - [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos)
