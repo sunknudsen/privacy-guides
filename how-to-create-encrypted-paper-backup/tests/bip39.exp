@@ -2,8 +2,8 @@
 
 source ./test.exp
 
-set bip39_mnemonic "online pipe enough dutch decorate want moment scheme rigid enlist blast boat purse sick chalk shop brush all return betray jacket salon abandon retire"
-set electrum_mnemonic "month pet slice know amused leave now vague palm guess cattle element cross truly auto put among craft repeat van sample nephew sad family"
+set valid_bip39_mnemonic "online pipe enough dutch decorate want moment scheme rigid enlist blast boat purse sick chalk shop brush all return betray jacket salon abandon retire"
+set invalid_bip39_mnemonic "online pipe enough dutch decorate want moment scheme rigid enlist blast boat purse sick chalk shop brush all return betray jacket salon abandon check"
 
 test_label "Should format flash drive and create BIP39 mnemonic"
 
@@ -22,7 +22,7 @@ expect {
 }
 
 expect {
-  -re {mkfs\.fat 4\.1 \(2017-01-24\)}
+  -re {mkfs\.fat 4\.2 \(2021-01-31\)}
 }
 
 expect {
@@ -56,14 +56,14 @@ expect {
 
 expect {
   -re {Please type secret and press enter, then ctrl\+d} {
-    test_send "$bip39_mnemonic\r"
+    test_send "$valid_bip39_mnemonic\r"
     test_send "\x04"
   }
 }
 
 expect {
   -re {Please type secret and press enter, then ctrl\+d \(again\)} {
-    test_send "$bip39_mnemonic\r"
+    test_send "$valid_bip39_mnemonic\r"
     test_send "\x04"
   }
 }
@@ -95,14 +95,14 @@ expect {
 
 expect {
   -re {Please type secret and press enter, then ctrl\+d} {
-    test_send "$electrum_mnemonic\r"
+    test_send "$invalid_bip39_mnemonic\r"
     test_send "\x04"
   }
 }
 
 expect {
   -re {Please type secret and press enter, then ctrl\+d \(again\)} {
-    test_send "$electrum_mnemonic\r"
+    test_send "$invalid_bip39_mnemonic\r"
     test_send "\x04"
   }
 }

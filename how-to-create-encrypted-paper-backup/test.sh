@@ -19,7 +19,7 @@ if [ -n "$1" ]; then
 else
   printf "%s\n" "Running unit tests…"
   expect ./tests/bip39.exp
-  expect ./tests/electrum.exp
+  expect ./tests/passphrase.exp
   expect ./tests/default.exp
   expect ./tests/shamir.exp
   expect ./tests/shamir-2-of-3.exp

@@ -30,24 +30,6 @@ sudo rm -fr /var/lib/dhcpcd5/* || true
 sudo rm -fr /var/log/* || true
 sudo rm -fr /var/tmp/* || true
 
-printf "%s\n" "Done"
-
-coutdown() {
-  tput rc
-  tput ed
-  second_s="seconds"
-  if [ "$1" = "1" ]; then
-    second_s="second"
-  fi
-  printf "$bold%s$normal" "Rebooting in $1 $second_s"
-}
-
-tput sc
-
-for ((index=10; index > 0; index--))
-do
-  coutdown $index
-  sleep 1
-done
+sudo passwd pi
 
 sudo systemctl reboot

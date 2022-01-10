@@ -1,0 +1,61 @@
+#!/usr/bin/expect
+
+source ./test.exp
+
+test_label "Should create 7-word passphrase"
+
+spawn qr-backup.sh --create-passphrase
+
+expect {
+  -re {Format USB flash drive \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Creating passphrase…}
+}
+
+expect {
+  -re {([a-z]+ ?){7}} {
+    test_ok true
+  }
+  eof {
+    test_failed
+  }
+}
+
+test_label "Should format flash drive and create 5-word passphrase using short #1 wordlist"
+
+spawn qr-backup.sh --create-passphrase --wordlist short1 --word-count 5
+
+expect {
+  -re {Format USB flash drive \(y or n\)\?} {
+    test_send "n\r"
+  }
+}
+
+expect {
+  -re {\[sudo\] password for pi:} {
+    test_send "$env(password)\r"
+  }
+}
+
+expect {
+  -re {Creating passphrase…}
+}
+
+expect {
+  -re {([a-z]{3,5} ?){5}} {
+    test_ok true
+  }
+  eof {
+    test_failed
+  }
+}

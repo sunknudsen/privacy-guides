@@ -18,8 +18,10 @@ while [ $# -gt 0 ]; do
     "" \
     "Options:" \
     "  --create-bip39-mnemonic        create BIP39 mnemonic" \
-    "  --create-electrum-mnemonic     create Electrum mnemonic" \
     "  --validate-bip39-mnemonic      validate if secret is valid BIP39 mnemonic" \
+    "  --create-passphrase            create passphrase" \
+    "  --wordlist <wordlist>          wordlist (defaults to large)" \
+    "  --word-count <count>           word count (defaults to 7)" \
     "  --shamir-secret-sharing        split secret using Shamir Secret Sharing" \
     "  --number-of-shares <shares>    number of shares (defaults to 5)" \
     "  --share-threshold <threshold>  shares required to access secret (defaults to 3)" \
@@ -32,12 +34,22 @@ while [ $# -gt 0 ]; do
     create_bip39_mnemonic=true
     shift
     ;;
-    --create-electrum-mnemonic)
-    create_electrum_mnemonic=true
-    shift
-    ;;
     --validate-bip39-mnemonic)
     validate_bip39_mnemonic=true
+    shift
+    ;;
+    --create-passphrase)
+    create_passphrase=true
+    shift
+    ;;
+    --wordlist)
+    wordlist=$2
+    shift
+    shift
+    ;;
+    --word-count)
+    word_count=$2
+    shift
     shift
     ;;
     --shamir-secret-sharing)
@@ -117,9 +129,17 @@ if [ -z "$duplicate" ] && [ "$create_bip39_mnemonic" = true ]; then
   sleep 1
 fi
 
-if [ -z "$duplicate" ] && [ "$create_electrum_mnemonic" = true ]; then
-  printf "%s\n" "Creating Electrum mnemonic…"
-  secret=$(electrum make_seed --nbits 264 --offline)
+if [ -z "$duplicate" ] && [ "$create_passphrase" = true ]; then
+  printf "%s\n" "Creating passphrase…"
+  wordlist_arg=""
+  if [ -n "$wordlist" ]; then
+    wordlist_arg=" --$wordlist"
+  fi
+  word_count_arg=""
+  if [ -n "$word_count" ]; then
+    word_count_arg=" $word_count"
+  fi
+  secret=$(passphraseme$wordlist_arg$word_count_arg)
   echo $secret
   sleep 1
 fi
