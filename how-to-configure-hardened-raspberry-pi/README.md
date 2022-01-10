@@ -390,18 +390,12 @@ timedatectl set-timezone America/Montreal
 systemctl disable dphys-swapfile
 ```
 
-### Step 27: update APT index and upgrade system
+### Step 27: update APT index and upgrade packages
 
-#### Update APT index
+```console
+$ apt update
 
-```shell
-apt update
-```
-
-#### Upgrade packages
-
-```shell
-apt upgrade -y
+$ apt upgrade -y
 ```
 
 👍

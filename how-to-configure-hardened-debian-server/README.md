@@ -292,16 +292,10 @@ nft list ruleset >> /etc/nftables.conf
 
 ### Step 16: update APT index and upgrade packages
 
-#### Update APT index
+```console
+$ apt update
 
-```shell
-apt update
-```
-
-#### Upgrade packages
-
-```shell
-apt upgrade -y
+$ apt upgrade -y
 ```
 
 ### Step 17: set timezone (the following is for Montreal time)
