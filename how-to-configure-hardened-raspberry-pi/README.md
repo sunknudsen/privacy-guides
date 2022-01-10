@@ -341,9 +341,10 @@ nft add rule ip6 firewall output ct state related,established accept
 
 #### Log out
 
-```shell
-exit
-exit
+```console
+$ exit
+
+$ exit
 ```
 
 #### Log in

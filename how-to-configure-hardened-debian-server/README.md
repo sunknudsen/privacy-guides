@@ -304,9 +304,10 @@ ip6tables -P OUTPUT DROP
 
 #### Log out
 
-```shell
-exit
-exit
+```console
+$ exit
+
+$ exit
 ```
 
 #### Log in
