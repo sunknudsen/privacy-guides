@@ -37,30 +37,30 @@ $ mkdir ~/.ssh
 
 $ cd ~/.ssh
 
-$ ssh-keygen -t rsa -C "server"
-Generating public/private rsa key pair.
-Enter file in which to save the key (/Users/sunknudsen/.ssh/id_rsa): server
+$ ssh-keygen -t ed25519 -C "server"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/Users/sunknudsen/.ssh/id_ed25519): server
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 Your identification has been saved in server.
 Your public key has been saved in server.pub.
 The key fingerprint is:
-SHA256:De1pasRJ2n0ggfRSWRJqrcensqboAc2i+/+/FxAo3xI server
+SHA256:NSvs5QpA6xisvKdeW9sPOAVoG4ShO2Ij4WBgB6z3sqk server
 The key's randomart image is:
-+---[RSA 3072]----+
-|     ..o=+.      |
-|    . E=o+       |
-|     o+o*.o      |
-| o   .oOoB o     |
-|o o   o.S.B .    |
-|.o     o =..     |
-|. .   . +  .     |
-| . o  .+  .      |
-|.o+.o+o.oo       |
++--[ED25519 256]--+
+|o++o             |
+|+oo .            |
+|=. +..    o      |
+|=+o.o... . o     |
+|==ooo  .S o      |
+|=oo+..o. +       |
+|...=.+... .      |
+|  =.o +...       |
+|E=o. . .o.       |
 +----[SHA256]-----+
 
 $ cat server.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP58i1vuFEe3zoHT+hZRh0YaXQY+ADa8OgBIoTji+AqzZRAa3ve8yDLwtoQKYpAZ2OcHoWDJP2pB/4unLJfKu6ILqKjRLkrnWvMGqcFs2QSVFg4ernmjiSAf3l2qrM+jxwElPEUo0Ht1GByEnWw2yfq0RNg0fukVrczWnUzvJMyhzhG2sjncFHIe2L6SPLlqRW46uHQBhFuHHb2gERV6smH/1ZS8YJtjq1klgVshhZWlBtodbIHo70owAeIpkeped966fSfzcAVksr3lTLR5jQyqgcTlDLj9vJn8nhGX0S/ETUs9dUNAOz0HWDvAaRyw95g/KWrctHvvng4VzjoU4qJlkjnhutoyDhz/medMnm4rkD6g6hOCkNKhMrCKby45TlMWFCZLjDwB70DZwqJChfWXlo0Ov0lah0a+ZgZ7Quz4yvzlrJt7vZkqFfr5LBI8AOB3yfFbeOZR564Q0jaH7C6yeRRvYVZkNCCZAVK9K2v1X7Bl0x42WN/MCzsA6embk= server
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2b7hlrD66EJ+6xxzl9Ae++qmiAz9bBEg7bTwq/9941 server
 ```
 
 ### Step 2: log in to server as root
@@ -77,6 +77,7 @@ ssh root@185.112.147.115 -i ~/.ssh/server
 
 ```shell
 echo "HISTFILESIZE=0" >> ~/.bashrc
+history -c; history -w
 source ~/.bashrc
 ```
 
@@ -147,6 +148,7 @@ ssh server-admin@185.112.147.115 -i ~/.ssh/server
 sed -i -E 's/^HISTSIZE=/#HISTSIZE=/' ~/.bashrc
 sed -i -E 's/^HISTFILESIZE=/#HISTFILESIZE=/' ~/.bashrc
 echo "HISTFILESIZE=0" >> ~/.bashrc
+history -c; history -w
 source ~/.bashrc
 ```
 
@@ -166,56 +168,7 @@ sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ss
 systemctl restart ssh
 ```
 
-### Step 12: update APT index and upgrade packages
-
-#### Update APT index
-
-```shell
-apt update
-```
-
-#### Upgrade packages
-
-```shell
-apt upgrade -y
-```
-
-### Step 13: install and configure Vim
-
-#### Install Vim
-
-```shell
-apt install -y vim
-```
-
-#### Configure Vim
-
-```shell
-cat << "EOF" > ~/.vimrc
-set encoding=UTF-8
-set termencoding=UTF-8
-set nocompatible
-set backspace=indent,eol,start
-set autoindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set smarttab
-set ruler
-set paste
-syntax on
-EOF
-```
-
-### Step 14: set timezone (the following is for Montreal time)
-
-See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-```shell
-timedatectl set-timezone America/Montreal
-```
-
-### Step 15: configure sysctl (if network is IPv4-only)
+### Step 12: configure sysctl (if network is IPv4-only)
 
 > Heads-up: only run the following if network is IPv4-only.
 
@@ -229,78 +182,72 @@ EOF
 sysctl -p
 ```
 
-### Step 16: install iptables-persistent
+### Step 13: enable nftables and configure firewall rules
 
-When asked to save current IPv4 or IPv6 rules, answer “Yes”.
+#### Update APT index and install nftables
 
-```shell
-apt install -y iptables-persistent
+```console
+$ apt update
+
+$ apt install -y nftables
 ```
 
-### Step 17: configure firewall
+#### Enable nftables
 
 ```shell
-iptables -N SSH_BRUTE_FORCE_MITIGATION
-iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --set
-iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -m limit --limit 1/second --limit-burst 100 -j LOG --log-prefix "iptables[ssh-brute-force]: "
-iptables -A SSH_BRUTE_FORCE_MITIGATION -m recent --name SSH --update --seconds 300 --hitcount 10 -j DROP
-iptables -A SSH_BRUTE_FORCE_MITIGATION -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 --syn -m conntrack --ctstate NEW -j SSH_BRUTE_FORCE_MITIGATION
-iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o lo -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
-iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -P FORWARD DROP
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
+systemctl enable nftables
+systemctl start nftables
+```
+
+#### Configure firewall rules
+
+```shell
+nft flush ruleset
+nft add table ip firewall
+nft add chain ip firewall input { type filter hook input priority 0 \; policy drop \; }
+nft add rule ip firewall input iif lo accept
+nft add rule ip firewall input iif != lo ip daddr 127.0.0.0/8 drop
+nft add rule ip firewall input tcp dport ssh accept
+nft add rule ip firewall input ct state established,related accept
+nft add chain ip firewall forward { type filter hook forward priority 0 \; policy drop \; }
+nft add chain ip firewall output { type filter hook output priority 0 \; policy drop \; }
+nft add rule ip firewall output oif lo accept
+nft add rule ip firewall output tcp dport { http, https } accept
+nft add rule ip firewall output udp dport { domain, ntp } accept
+nft add rule ip firewall output ct state established,related accept
 ```
 
 If network is IPv4-only, run:
 
 ```shell
-ip6tables -P FORWARD DROP
-ip6tables -P INPUT DROP
-ip6tables -P OUTPUT DROP
+nft add table ip6 firewall
+nft add chain ip6 firewall input { type filter hook input priority 0 \; policy drop \; }
+nft add chain ip6 firewall forward { type filter hook forward priority 0 \; policy drop \; }
+nft add chain ip6 firewall output { type filter hook output priority 0 \; policy drop \; }
 ```
 
 If network is dual stack (IPv4 + IPv6) run:
 
 ```shell
-ip6tables -A INPUT -i lo -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type destination-unreachable -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type packet-too-big -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type time-exceeded -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type parameter-problem -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type router-advertisement -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type neighbor-solicitation -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type neighbor-advertisement -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A INPUT -p ipv6-icmp --icmpv6-type redirect -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-ip6tables -A OUTPUT -o lo -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type destination-unreachable -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type packet-too-big -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type time-exceeded -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type parameter-problem -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type router-solicitation -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-solicitation -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-advertisement -m hl --hl-eq 255 -j ACCEPT
-ip6tables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
-ip6tables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
-ip6tables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
-ip6tables -A OUTPUT -p udp --dport 123 -m state --state NEW -j ACCEPT
-ip6tables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
-ip6tables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-ip6tables -P FORWARD DROP
-ip6tables -P INPUT DROP
-ip6tables -P OUTPUT DROP
+nft add table ip6 firewall
+nft add chain ip6 firewall input { type filter hook input priority 0\; policy drop\; }
+nft add rule ip6 firewall input iif lo accept
+nft add rule ip6 firewall input iif != lo ip6 daddr ::1 drop
+nft add rule ip6 firewall input meta l4proto ipv6-icmp icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem } accept
+nft add rule ip6 firewall input meta l4proto ipv6-icmp icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } ip6 hoplimit 255 accept
+nft add rule ip6 firewall input tcp dport ssh accept
+nft add rule ip6 firewall input ct state established,related accept
+nft add chain ip6 firewall forward { type filter hook forward priority 0\; policy drop\; }
+nft add chain ip6 firewall output { type filter hook output priority 0\; policy drop\; }
+nft add rule ip6 firewall output oif lo accept
+nft add rule ip6 firewall output meta l4proto ipv6-icmp icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem } accept
+nft add rule ip6 firewall output meta l4proto ipv6-icmp icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } ip6 hoplimit 255 accept
+nft add rule ip6 firewall output tcp dport { http, https } accept
+nft add rule ip6 firewall output udp dport { domain, ntp } accept
+nft add rule ip6 firewall output ct state related,established accept
 ```
 
-### Step 18: log out and log in to confirm firewall didn’t block SSH
+### Step 14: log out and log in to confirm firewall is not blocking SSH
 
 #### Log out
 
@@ -328,11 +275,41 @@ When asked, enter root password.
 su -
 ```
 
-### Step 19: make firewall rules persistent
+### Step 15: make firewall rules persistent
 
 ```shell
-iptables-save > /etc/iptables/rules.v4
-ip6tables-save > /etc/iptables/rules.v6
+cat << "EOF" > /etc/nftables.conf
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+EOF
+```
+
+```shell
+nft list ruleset >> /etc/nftables.conf
+```
+
+### Step 16: update APT index and upgrade packages
+
+#### Update APT index
+
+```shell
+apt update
+```
+
+#### Upgrade packages
+
+```shell
+apt upgrade -y
+```
+
+### Step 17: set timezone (the following is for Montreal time)
+
+See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+```shell
+timedatectl set-timezone America/Montreal
 ```
 
 👍
