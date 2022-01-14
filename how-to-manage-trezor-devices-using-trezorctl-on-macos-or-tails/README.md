@@ -66,6 +66,8 @@ source ~/.zshrc
 
 ## Usage guide
 
+> Heads-up: on Tails, one needs to add `torsocks` before `trezorctl` commands (example: `torsocks trezorctl firmware-update`).
+
 ### Install or update firmware
 
 > Heads-up: connect device in [bootloader mode](https://wiki.trezor.io/User_manual:Updating_the_Trezor_device_firmware__T1) before running command.
