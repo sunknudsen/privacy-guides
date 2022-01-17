@@ -1,64 +1,20 @@
-<!--
-Title: Privacy guides docs
-Description: Learn how to contribute, get help, peer review and sign the reference material.
-Author: Sun Knudsen <https://github.com/sunknudsen>
-Publication date: 1970-01-01T00:00:00.000Z
-Listed: false
--->
-
 # Privacy guides docs
 
 ## How to contribute
 
-First, thanks for contributing. 🙌
+Thanks for contributing. 🙌
 
-**Like the project?** Please star [repo](https://github.com/sunknudsen/privacy-guides).
+**Like project?** Please star [repo](https://github.com/sunknudsen/privacy-guides).
 
-**Have a suggestion or found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues).
+**Found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues) or [signed](#how-to-sign-pull-requests) [pull request](https://github.com/sunknudsen/privacy-guides/pulls).
 
-**Found a security vulnerability?** Please report vulnerability privately using the PGP public key and email found on [sunknudsen.com/contact](https://sunknudsen.com/contact).
+**Found a security vulnerability?** Please disclose vulnerability privately using the PGP public key and email found on [https://sunknudsen.com/contact](https://sunknudsen.com/contact).
 
-**Fellow privacy and security researcher?** Please [peer review and sign guides](#how-to-peer-review-and-sign-guide).
-
-**Wish to support the project?** Please visit [sunknudsen.com/donate](https://sunknudsen.com/donate).
+**Wish to support the project?** Please visit [https://sunknudsen.com/donate](https://sunknudsen.com/donate).
 
 ## How to get help
 
-We have your back, **you are not alone!**
-
-Please search for answers on privacy guides [discussions](https://github.com/sunknudsen/privacy-guides/discussions) and, if you don’t find what you are looking for, please start new discussion.
-
-## How to peer review and sign guide
-
-> Heads-up: in order to establish a web of trust, peer reviewers are expected to have public track records.
-
-### Step 1: clone [repo](https://github.com/sunknudsen/privacy-guides)
-
-### Step 2: checkout [draft](https://github.com/sunknudsen/privacy-guides/tree/draft)
-
-### Step 3: review guide and submit suggestions using [issues](https://github.com/sunknudsen/privacy-guides/issues)
-
-Once consensus has been reached (issues are closed) and updated guide has been published to [draft.sunknudsen.com](https://draft.sunknudsen.com/), time for [step 4](#step-4-append-yourself-to-reviewers-comma-separated).
-
-### Step 4: append yourself to `Reviewers` (comma-separated)
-
-Example:
-
-```markdown
-<!--
-Title: How to append yourself to reviewers
-Description: Learn how to append yourself to reviewers.
-Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
-Reviewers: Alice <https://github.com/alice>, Bob <https://github.com/bob>
-Publication date: 2021-01-24T13:11:17.464Z
-Listed: true
--->
-```
-
-### Step 5: submit [signed](#how-to-sign-pull-requests) pull request
-
-👍
+Check out [discussions](https://github.com/sunknudsen/privacy-guides/discussions).
 
 ## How to sign pull requests
 

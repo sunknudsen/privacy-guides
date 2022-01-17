@@ -243,7 +243,7 @@ Shout out to [Andrew Ho](https://gist.github.com/andrewlkho/31341da4f5953b8d977a
 The following command downloads and runs [ulagen.py](./ulagen.py) ([PGP signature](./ulagen.py.asc), [PGP public key](https://raw.githubusercontent.com/sunknudsen/pgp-public-key/master/legacy/sunknudsen-legacy.asc)).
 
 ```console
-$ curl -s https://sunknudsen.com/static/media/privacy-guides/how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python3 | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
+$ curl -s https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/ulagen.py | python3 | grep "First subnet" | awk '{print "STRONGSWAN_IPV6_ULA="$3}' | tee -a ~/.bashrc
 STRONGSWAN_IPV6_ULA=fdba:8ce0:c301::/64
 
 $ source ~/.bashrc
@@ -951,7 +951,7 @@ Finally, click “File”, then “Save”, and save file as “alice.mobileconf
 
 Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
-In “All Devices”, double-click on iPhone, then “Add”, and finally “Profiles”.
+In “All Devices”, double-click on iPhone, then “Add” and finally “Profiles”.
 
 Select “alice.mobileconfig” and follow instructions.
 

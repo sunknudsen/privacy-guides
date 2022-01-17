@@ -44,7 +44,7 @@ source ~/.zshrc
 This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
 
 ```shell
-curl --fail --output /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
+curl --fail --output /usr/local/sbin/first-names.txt https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
 ```
 
 ### Step 4: download [mac-address-prefixes.txt](./mac-address-prefixes.txt)
@@ -52,7 +52,7 @@ curl --fail --output /usr/local/sbin/first-names.txt https://sunknudsen.com/stat
 This list includes 768 Apple MAC address prefixes.
 
 ```shell
-curl --fail --output /usr/local/sbin/mac-address-prefixes.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/mac-address-prefixes.txt
+curl --fail --output /usr/local/sbin/mac-address-prefixes.txt https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/mac-address-prefixes.txt
 ```
 
 ### Step 5: create `spoof.sh` script

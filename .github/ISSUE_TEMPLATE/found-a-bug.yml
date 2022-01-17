@@ -1,0 +1,24 @@
+name: Found a bug?
+description: Report bug so we can improve
+labels: ["bug"]
+body:
+  - type: markdown
+    value: |
+      ## Hey 👋
+
+      Thanks for reporting bug.
+  - type: input
+    id: guide
+    attributes:
+      label: Guide
+      description: "Which guide(s) is(are) affected by bug (comma separated)?"
+      placeholder: "Example: “How to audit source code of proprietary Electron app”"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What isn’t working?
+    validations:
+      required: true

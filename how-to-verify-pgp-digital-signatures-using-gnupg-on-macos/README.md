@@ -101,11 +101,27 @@ sub   rsa4096 2019-10-17 [A] [expires: 2021-10-25]
 sub   rsa4096 2019-10-17 [S] [expires: 2021-10-25]
 ```
 
-### Verify [signed message](https://sunknudsen.com/static/media/cms/donate/donate-bitcoin.asc)
+### Verify signed message
+
+> Heads-up: run `gpg`, paste message, press <kbd>enter</kbd> and finally press <kbd>ctrl-d</kbd>.
 
 ```console
-$ gpg --verify donate-bitcoin.asc
-gpg: Signature made Wed 29 Dec 10:32:32 2021 EST
+$ gpg
+gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+gpg: Go ahead and type your message ...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+bc1qpy3h47z7pxlpctmfl4e43vu96yutflku2mrsds
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQSceIfhtfy84t/tDhwCxDrQctV3gwUCYeFZGgAKCRACxDrQctV3
+g0m+AP9xoftZV147sWJc7sqpYXpysdW5iiB5NhCaKqGmQ92GpgD/S4AZqzHEUzME
+ifFv0pnoSCEAyxDnEHoUk5SCGCkobAc=
+=uDIU
+-----END PGP SIGNATURE-----
+bc1qpy3h47z7pxlpctmfl4e43vu96yutflku2mrsds
+gpg: Signature made Fri 14 Jan 06:06:02 2022 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -118,7 +134,7 @@ Good signature
 
 👍
 
-### Verify signed [file](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh) using [detached signature](https://sunknudsen.com/static/media/privacy-guides/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh.asc)
+### Verify signed [file](https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh) using [detached signature](https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative/app-cleaner.sh.asc)
 
 ```console
 $ gpg --verify app-cleaner.sh.asc
