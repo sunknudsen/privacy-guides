@@ -1,12 +1,13 @@
 name: Found a bug?
-description: Report bug so we can improve
+description: Please report bug so we can improve
 labels: ["bug"]
 body:
   - type: markdown
-    value: |
-      ## Hey 👋
+    attributes:
+      value: |
+        ## Hey 👋
 
-      Thanks for reporting bug.
+        Thanks for reporting bug.
   - type: input
     id: guide
     attributes:
