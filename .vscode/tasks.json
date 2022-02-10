@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Insert YouTube player",
+      "command": "node ./tasks/insert-youtube-player.js \"${file}\" \"${lineNumber}\" \"${input:youtubeWatchUrl}\"",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Update YouTube players",
+      "command": "node ./tasks/update-youtube-players.js",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Organize steps",
+      "command": "node ./tasks/organize-steps.js \"${file}\"",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "youtubeWatchUrl",
+      "description": "YouTube watch URL",
+      "default": "",
+      "type": "promptString"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "privacy-guides",
+  "description": "Privacy guides tasks",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunknudsen/privacy-guides.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "scripts": {
+    "ncu": "ncu --target minor --upgrade"
+  },
+  "author": "Sun Knudsen <hello@sunknudsen.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunknudsen/privacy-guides/issues"
+  },
+  "homepage": "https://github.com/sunknudsen/privacy-guides#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "fs-extra": "^10.0.0",
+    "npm-check-updates": "^12.3.0",
+    "readdirp": "^3.6.0",
+    "youtube-player-screenshot": "^0.3.0"
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "printWidth": 80,
+    "semi": false,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
+}
