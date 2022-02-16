@@ -28,7 +28,7 @@ Create “A” record (example: meet.sunknudsen.com) that points to IP of server
 
 ### Step 2: log in to server
 
-Replace `~/.ssh/server` with path to private key and `server-admin@185.193.126.203` with server SSH destination.
+> Heads-up: replace `~/.ssh/server` with path to private key and `server-admin@185.193.126.203` with server SSH destination.
 
 ```shell
 ssh -i ~/.ssh/server server-admin@185.193.126.203
@@ -44,7 +44,7 @@ su -
 
 ### Step 4: set hostname environment variable
 
-Replace `meet.sunknudsen.com` with hostname from [step 1](#step-1-create-dns-record).
+> Heads-up: replace `meet.sunknudsen.com` with hostname from [step 1](#step-1-create-dns-record).
 
 ```shell
 JITSI_HOSTNAME=meet.sunknudsen.com
@@ -144,7 +144,7 @@ $ sed -i -E "s/\/\/ anonymousdomain: 'guest.example.com'/anonymousdomain: 'guest
 
 #### Create host credentials
 
-Replace `sun` with desired username.
+> Heads-up: replace `sun` with desired username.
 
 ```shell
 prosodyctl register sun $JITSI_HOSTNAME

@@ -161,9 +161,9 @@ ip a
 
 ### Step 9: log in to Raspberry Pi over SSH
 
-Replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
 
-When asked for passphrase, enter passphrase from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
+> Heads-up: when asked for passphrase, enter passphrase from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
 
 ```shell
 ssh pi@10.0.1.181
@@ -203,9 +203,9 @@ exit
 
 ### Step 13: log in
 
-Replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
 ssh -i ~/.ssh/pi pi@10.0.1.181
@@ -349,7 +349,7 @@ $ exit
 
 #### Log in
 
-Replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
 
 ```shell
 ssh -i ~/.ssh/pi pi@10.0.1.181

@@ -70,7 +70,7 @@ imported: 1
 
 ### Step 7: set [VeraCrypt](https://veracrypt.fr/en/Home.html) release semver environment variable
 
-Replace `1.25.4` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
+> Heads-up: replace `1.25.4` with [latest release](https://www.veracrypt.fr/en/Downloads.html) semver.
 
 ```shell
 VERACRYPT_RELEASE_SEMVER=1.25.4

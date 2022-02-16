@@ -70,7 +70,7 @@ imported: 1
 
 ### Step 7: set [Trezor Suite](https://suite.trezor.io/) release semver environment variable
 
-Replace `21.12.2` with [latest release](https://suite.trezor.io/) semver.
+> Heads-up: replace `21.12.2` with [latest release](https://suite.trezor.io/) semver.
 
 ```shell
 TREZOR_SUITE_RELEASE_SEMVER=21.12.2

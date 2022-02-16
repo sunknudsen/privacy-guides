@@ -70,9 +70,9 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDACoPiTWsEeNyp/aGvCgeAU2qryRDPWr6MniXMLmZC
 
 ### Step 2: log in to server as root
 
-Replace `185.193.126.203` with IP of server.
+> Heads-up: replace `185.193.126.203` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh -i ~/.ssh/vpn-server root@185.193.126.203
@@ -135,9 +135,9 @@ exit
 
 ### Step 8: log in as vpn-server-admin
 
-Replace `185.193.126.203` with IP of server.
+> Heads-up: replace `185.193.126.203` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
@@ -348,9 +348,9 @@ $ exit
 
 #### Log in
 
-Replace `185.193.126.203` with IP of server.
+> Heads-up: replace `185.193.126.203` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
 ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
@@ -468,9 +468,9 @@ $ systemd-resolve --status | grep "DNS Servers" | awk '{print $3}'
 
 #### Set DNS nameservers environment variable
 
-Replace `95.215.19.53` with server DNS nameserver(s).
+> Heads-up: replace `95.215.19.53` with server DNS nameserver(s).
 
-Separate nameservers using commas with no leading spaces (example: `93.95.224.28,93.95.224.29`).
+> Heads-up: separate nameservers using commas with no leading spaces (example: `93.95.224.28,93.95.224.29`).
 
 ```shell
 STRONGSWAN_DNS_NAMESERVERS=95.215.19.53

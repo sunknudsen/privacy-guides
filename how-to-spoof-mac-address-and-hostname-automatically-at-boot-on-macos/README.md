@@ -204,7 +204,7 @@ sudo defaults delete com.apple.loginwindow LogoutHook
 
 ### Step 3: set computer name, local hostname and hostname
 
-Replace `John` with your name.
+> Heads-up: replace `John` with your name.
 
 ```shell
 sudo scutil --set ComputerName "John’s MacBook Pro"

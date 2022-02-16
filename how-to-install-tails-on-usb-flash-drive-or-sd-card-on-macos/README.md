@@ -69,7 +69,7 @@ Go to https://tails.boum.org/install/download/index.en.html and download latest 
 
 ### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-Replace `4.25` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
+> Heads-up: replace `4.25` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
 
 ```console
 $ gpg --verify ~/Downloads/tails-amd64-4.25.img.sig
@@ -92,9 +92,9 @@ Good signature
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
-Run `diskutil list` to find disk ID of USB flash drive or SD card to overwrite with Tails (`disk4` in the following example).
+> Heads-up: run `diskutil list` to find disk ID of USB flash drive or SD card to overwrite with Tails (`disk4` in the following example).
 
-Replace `diskn` and `rdiskn` with disk ID of USB flash drive or SD card (`disk4` and `rdisk4` in the following example) and `tails-amd64-4.25.img` with current image.
+> Heads-up: replace `diskn` and `rdiskn` with disk ID of USB flash drive or SD card (`disk4` and `rdisk4` in the following example) and `tails-amd64-4.25.img` with current image.
 
 ```console
 $ diskutil list

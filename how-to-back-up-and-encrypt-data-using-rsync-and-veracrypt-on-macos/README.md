@@ -64,7 +64,7 @@ Go to https://www.veracrypt.fr/en/Downloads.html and download latest release and
 
 ### Step 6: verify VeraCrypt release signature (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-Replace `VeraCrypt_1.24-Update7` with current release.
+> Heads-up: replace `VeraCrypt_1.24-Update7` with current release.
 
 ```console
 $ gpg --verify ~/Downloads/VeraCrypt_1.24-Update7.dmg.sig

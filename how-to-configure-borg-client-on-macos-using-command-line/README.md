@@ -179,7 +179,7 @@ security add-generic-password -D secret -U -a $USER -s borg-passphrase -w $(open
 
 #### Initialize Borg repo
 
-Replace `borg@185.112.147.115:backup` with self-hosted or cloud-based repo.
+> Heads-up: replace `borg@185.112.147.115:backup` with self-hosted or cloud-based repo.
 
 ```console
 $ export BORG_PASSCOMMAND="security find-generic-password -a $USER -s borg-passphrase -w"
@@ -209,7 +209,7 @@ Write down the passphrase. Store both at safe place(s).
 
 ### Step 9: set environment variables
 
-Replace `borg@185.112.147.115:backup` with self-hosted or cloud-based repo and set backup name.
+> Heads-up: replace `borg@185.112.147.115:backup` with self-hosted or cloud-based repo and set backup name.
 
 ```shell
 BORG_REPO="borg@185.112.147.115:backup"

@@ -65,9 +65,9 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2b7hlrD66EJ+6xxzl9Ae++qmiAz9bBEg7bTwq/9941
 
 ### Step 2: log in to server as root
 
-Replace `185.112.147.115` with IP of server.
+> Heads-up: replace `185.112.147.115` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh -i ~/.ssh/server root@185.112.147.115
@@ -134,9 +134,9 @@ exit
 
 ### Step 8: log in as server-admin
 
-Replace `185.112.147.115` with IP of server.
+> Heads-up: replace `185.112.147.115` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh -i ~/.ssh/server server-admin@185.112.147.115
@@ -259,9 +259,9 @@ $ exit
 
 #### Log in
 
-Replace `185.112.147.115` with IP of server.
+> Heads-up: replace `185.112.147.115` with IP of server.
 
-When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
+> Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-computer).
 
 ```shell
 ssh -i ~/.ssh/server server-admin@185.112.147.115

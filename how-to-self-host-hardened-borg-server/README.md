@@ -115,7 +115,7 @@ EOF
 
 ### Step 4: log in to server or Raspberry Pi
 
-Replace `~/.ssh/server` with path to private key and `server-admin@185.112.147.115` with server or Raspberry Pi SSH destination.
+> Heads-up: replace `~/.ssh/server` with path to private key and `server-admin@185.112.147.115` with server or Raspberry Pi SSH destination.
 
 ```shell
 ssh -i ~/.ssh/server server-admin@185.112.147.115

@@ -29,7 +29,7 @@ Listed: true
 
 ### Step 1: log in to Raspberry Pi
 
-Replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
 
 ```shell
 ssh -i ~/.ssh/pi pi@10.0.1.181
@@ -610,9 +610,9 @@ echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 
 ### Step 29 (optional): compute SHA512 hash of microSD card and store in password manager (on macOS)
 
-Run `diskutil list` to find disk ID of microSD card with “Raspberry Pi OS Lite” installed (`disk4` in the following example).
+> Heads-up: run `diskutil list` to find disk ID of microSD card with “Raspberry Pi OS Lite” installed (`disk4` in the following example).
 
-Replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example).
+> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example).
 
 ```console
 $ diskutil list

@@ -95,7 +95,7 @@ Getting CA Private Key
 
 ### Step 2: log in to client computer
 
-Replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
+> Heads-up: replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
 
 ```shell
 ssh -i ~/.ssh/pi pi@10.0.1.248
@@ -152,7 +152,7 @@ apt install -y strongswan libcharon-extra-plugins
 
 #### Set strongSwan client name and server IP environment variables
 
-Replace `185.193.126.203` with IP of strongSwan server.
+> Heads-up: replace `185.193.126.203` with IP of strongSwan server.
 
 ```shell
 STRONGSWAN_CLIENT_NAME=bob
@@ -404,7 +404,7 @@ curl https://checkip.amazonaws.com
 
 ### Step 12: log in to server
 
-Replace `185.193.126.203` with IP of strongSwan server.
+> Heads-up: replace `185.193.126.203` with IP of strongSwan server.
 
 ```shell
 ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
@@ -418,7 +418,7 @@ su -
 
 ### Step 14: assign static IP to strongSwan client
 
-Replace `10.0.2.171` with IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
+> Heads-up: replace `10.0.2.171` with IP assigned to strongSwan client by strongSwan server (see [step 10](#step-10-confirm-strongswan-client-is-connected)).
 
 ```console
 $ client_ip=10.0.2.171
@@ -446,7 +446,7 @@ systemctl restart dnsmasq
 
 ### Step 16: log in to client computer
 
-Replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
+> Heads-up: replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
 
 ```shell
 ssh -i ~/.ssh/pi pi@10.0.1.248

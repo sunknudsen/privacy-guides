@@ -83,9 +83,9 @@ com.apple.TimeMachine.2021-04-05-162425.local
 
 ### Mount local read-only APFS snapshot
 
-Heads-up: use `umount /tmp/snapshot` to unmount snapshot.
+> Heads-up: use `umount /tmp/snapshot` to unmount snapshot.
 
-Replace `com.apple.TimeMachine.2021-04-05-162416.local` with snapshot from [List local APFS snapshots](#list-local-apfs-snapshots).
+> Heads-up: replace `com.apple.TimeMachine.2021-04-05-162416.local` with snapshot from [List local APFS snapshots](#list-local-apfs-snapshots).
 
 ```shell
 mkdir -p /tmp/snapshot

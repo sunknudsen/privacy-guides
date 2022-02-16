@@ -24,7 +24,7 @@ Go to https://github.com/settings/keys, click “New GPG key”, paste your PGP 
 
 ### Step 2: enable Git [signing](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
 
-Replace `0x8C9CA674C47CA060` with your PGP public key ID.
+> Heads-up: replace `0x8C9CA674C47CA060` with your PGP public key ID.
 
 ```shell
 git config --global commit.gpgsign true

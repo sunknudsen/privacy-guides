@@ -53,7 +53,7 @@ pip3 install --user attrs trezor
 
 ### Step 5: source Python 3 `bin` directory
 
-Replace `3.8` with semver of latest version of Python 3 found using `ls $HOME/Library/Python`.
+> Heads-up: replace `3.8` with semver of latest version of Python 3 found using `ls $HOME/Library/Python`.
 
 ```shell
 echo 'export PATH=$PATH:$HOME/Library/Python/3.8/bin' >> ~/.zshrc
@@ -88,7 +88,7 @@ Extracting embedded firmware image.
 
 ### Setup device
 
-Replace `--strength 256` with `--strength 128` for 12-word mnemonic.
+> Heads-up: replace `--strength 256` with `--strength 128` for 12-word mnemonic.
 
 ```console
 $ trezorctl device setup --strength 256 --passphrase-protection --pin-protection --label "My Trezor One" --backup-type single
