@@ -95,10 +95,10 @@ Getting CA Private Key
 
 ### Step 2: log in to client computer
 
-Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
+Replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
 
 ```shell
-ssh pi@10.0.1.248 -i ~/.ssh/pi
+ssh -i ~/.ssh/pi pi@10.0.1.248
 ```
 
 ### Step 3: switch to root
@@ -407,7 +407,7 @@ curl https://checkip.amazonaws.com
 Replace `185.193.126.203` with IP of strongSwan server.
 
 ```shell
-ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
+ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
 ```
 
 ### Step 13: switch to root
@@ -446,10 +446,10 @@ systemctl restart dnsmasq
 
 ### Step 16: log in to client computer
 
-Replace `pi@10.0.1.248` with SSH destination of client computer and `~/.ssh/pi` with path to associated private key.
+Replace `~/.ssh/pi` with path to private key and `pi@10.0.1.248` with SSH destination of client computer.
 
 ```shell
-ssh pi@10.0.1.248 -i ~/.ssh/pi
+ssh -i ~/.ssh/pi pi@10.0.1.248
 ```
 
 ### Step 17: switch to root

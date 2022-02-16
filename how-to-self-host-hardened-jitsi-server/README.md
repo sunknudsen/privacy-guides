@@ -28,10 +28,10 @@ Create “A” record (example: meet.sunknudsen.com) that points to IP of server
 
 ### Step 2: log in to server
 
-Replace `server-admin@185.193.126.203` with server SSH URL and `~/.ssh/server` with path to associated private key.
+Replace `~/.ssh/server` with path to private key and `server-admin@185.193.126.203` with server SSH destination.
 
 ```shell
-ssh server-admin@185.193.126.203 -i ~/.ssh/server
+ssh -i ~/.ssh/server server-admin@185.193.126.203
 ```
 
 ### Step 3: switch to root

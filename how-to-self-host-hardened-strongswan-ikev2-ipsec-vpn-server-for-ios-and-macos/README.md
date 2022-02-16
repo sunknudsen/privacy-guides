@@ -75,7 +75,7 @@ Replace `185.193.126.203` with IP of server.
 When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
-ssh root@185.193.126.203 -i ~/.ssh/vpn-server
+ssh -i ~/.ssh/vpn-server root@185.193.126.203
 ```
 
 ### Step 3: disable root bash history
@@ -140,7 +140,7 @@ Replace `185.193.126.203` with IP of server.
 When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
-ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
+ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
 ```
 
 ### Step 9: disable vpn-server-admin bash history
@@ -353,7 +353,7 @@ Replace `185.193.126.203` with IP of server.
 When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-mac).
 
 ```shell
-ssh vpn-server-admin@185.193.126.203 -i ~/.ssh/vpn-server
+ssh -i ~/.ssh/vpn-server vpn-server-admin@185.193.126.203
 ```
 
 #### Switch to root

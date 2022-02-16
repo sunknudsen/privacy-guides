@@ -32,7 +32,7 @@ Listed: true
 Replace `10.0.1.181` with IP of Raspberry Pi.
 
 ```shell
-ssh pi@10.0.1.181 -i ~/.ssh/pi
+ssh -i ~/.ssh/pi pi@10.0.1.181
 ```
 
 ### Step 2: configure console font

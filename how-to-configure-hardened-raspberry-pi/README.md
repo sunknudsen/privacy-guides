@@ -208,7 +208,7 @@ Replace `10.0.1.181` with IP of Raspberry Pi.
 When asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
-ssh pi@10.0.1.181 -i ~/.ssh/pi
+ssh -i ~/.ssh/pi pi@10.0.1.181
 ```
 
 ### Step 14: switch to root
@@ -352,7 +352,7 @@ $ exit
 Replace `10.0.1.181` with IP of Raspberry Pi.
 
 ```shell
-ssh pi@10.0.1.181 -i ~/.ssh/pi
+ssh -i ~/.ssh/pi pi@10.0.1.181
 ```
 
 ### Step 23: switch to root
