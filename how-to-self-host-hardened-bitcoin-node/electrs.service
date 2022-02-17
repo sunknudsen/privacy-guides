@@ -1,0 +1,23 @@
+[Unit]
+Description=Electrs daemon
+
+After=bitcoind.service
+
+[Service]
+ExecStart=/usr/bin/electrs --db-dir /var/lib/electrs \
+                           --cookie-file /var/lib/bitcoind/.cookie \
+                           --electrum-rpc-addr="127.0.0.1:50001" \
+                           --log-filters INFO
+
+Type=simple
+Restart=on-failure
+TimeoutSec=60
+
+User=bitcoin
+Group=bitcoin
+
+StateDirectory=electrs
+StateDirectoryMode=0710
+
+[Install]
+WantedBy=multi-user.target
