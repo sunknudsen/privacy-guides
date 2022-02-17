@@ -3,6 +3,15 @@
   "tasks": [
     {
       "type": "shell",
+      "label": "Copy link",
+      "command": "node ./tasks/copy-link.js \"${selectedText}\"",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
       "label": "Insert YouTube player",
       "command": "node ./tasks/insert-youtube-player.js \"${file}\" \"${lineNumber}\" \"${input:youtubeWatchUrl}\"",
       "presentation": {

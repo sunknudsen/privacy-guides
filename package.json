@@ -11,6 +11,7 @@
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
+    "serve": "node index.js",
     "ncu": "ncu --target minor --upgrade"
   },
   "author": "Sun Knudsen <hello@sunknudsen.com>",
@@ -20,7 +21,11 @@
   },
   "homepage": "https://github.com/sunknudsen/privacy-guides#readme",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/fs-extra": "^9.0.13",
+    "clipboardy": "^3.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
     "fs-extra": "^10.0.0",
     "npm-check-updates": "^12.3.0",
     "readdirp": "^3.6.0",
