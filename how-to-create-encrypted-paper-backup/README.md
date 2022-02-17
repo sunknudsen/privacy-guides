@@ -144,7 +144,23 @@ imported: 1
 
 👍
 
-### Step 12: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
+### Step 12: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
+
+```console
+$ gpg --fingerprint hello@sunknudsen.com
+pub   ed25519 2021-12-28 [C]
+      E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+uid           [ unknown] Sun Knudsen <hello@sunknudsen.com>
+sub   ed25519 2021-12-28 [S] [expires: 2022-12-28]
+sub   cv25519 2021-12-28 [E] [expires: 2022-12-28]
+sub   ed25519 2021-12-28 [A] [expires: 2022-12-28]
+```
+
+Fingerprint matches published fingerprints
+
+👍
+
+### Step 13: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
@@ -170,15 +186,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 600 /home/pi/.local/bin/create-bip39-mnemonic.py
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 13: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
+### Step 14: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
@@ -204,15 +216,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 600 /home/pi/.local/bin/validate-bip39-mnemonic.py
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 14: download and verify [tmux-buttons.py](./tmux-buttons.py)
+### Step 15: download and verify [tmux-buttons.py](./tmux-buttons.py)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/tmux-buttons.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/tmux-buttons.py
@@ -238,15 +246,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 600 /home/pi/.local/bin/tmux-buttons.py
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 15: download and verify [qr-backup.sh](./qr-backup.sh)
+### Step 16: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/qr-backup.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-backup.sh
@@ -272,15 +276,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/qr-backup.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 16: download and verify [qr-restore.sh](./qr-restore.sh)
+### Step 17: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/qr-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-restore.sh
@@ -306,15 +306,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/qr-restore.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 17: download and verify [qr-clone.sh](./qr-clone.sh)
+### Step 18: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/qr-clone.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-clone.sh
@@ -340,15 +336,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/qr-clone.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 18: download and verify [secure-erase.sh](./secure-erase.sh)
+### Step 19: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/secure-erase.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/secure-erase.sh
@@ -374,15 +366,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/secure-erase.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 19: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
+### Step 20: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
@@ -408,15 +396,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/trezor-verify-integrity.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 20: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
+### Step 21: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/trezor-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-restore.sh
@@ -442,15 +426,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/trezor-restore.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 21: download and verify [update.sh](./update.sh)
+### Step 22: download and verify [update.sh](./update.sh)
 
 ```console
 $ curl --fail --output /home/pi/.local/bin/update.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/update.sh
@@ -476,15 +456,11 @@ Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
 $ chmod 700 /home/pi/.local/bin/update.sh
 ```
 
-Primary key fingerprint matches [published](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint) fingerprints
-
-👍
-
 Good signature
 
 👍
 
-### Step 22 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
+### Step 23 (optional): install [Adafruit PiTFT monitor](https://www.adafruit.com/product/2423) drivers and disable console auto login
 
 #### Install Adafruit PiTFT monitor drivers
 
@@ -508,7 +484,7 @@ sudo raspi-config
 
 Select “System Options”, then “Boot / Auto Login”, then “Console” and finally “Finish”.
 
-### Step 23: make filesystem read-only
+### Step 24: make filesystem read-only
 
 > Heads-up: shout-out to Nico Kaiser for his amazing [guide](https://gist.github.com/nicokaiser/08aa5b7b3958f171cf61549b70e8a34b) on how to configure a read-only Raspberry Pi.
 
@@ -560,7 +536,7 @@ $ sudo sed -i -e 's/vfat\s*defaults\s/vfat defaults,ro/' /etc/fstab
 $ sudo sed -i -e 's/ext4\s*defaults,noatime\s/ext4 defaults,noatime,ro,noload/' /etc/fstab
 ```
 
-### Step 24: disable networking and “fix” rfkill bug
+### Step 25: disable networking and “fix” rfkill bug
 
 ```console
 $ sudo systemctl disable dhcpcd networking sshd.service wpa_supplicant
@@ -568,7 +544,7 @@ $ sudo systemctl disable dhcpcd networking sshd.service wpa_supplicant
 $ sudo rm /etc/profile.d/wifi-check.sh
 ```
 
-### Step 25: disable Wi-Fi
+### Step 26: disable Wi-Fi
 
 > Heads-up: use `cat /boot/config.txt | grep "dtoverlay=disable-wifi" && echo "Wi-Fi disabled"` to see if Wi-Fi is already disabled.
 
@@ -576,13 +552,13 @@ $ sudo rm /etc/profile.d/wifi-check.sh
 echo "dtoverlay=disable-wifi" | sudo tee -a /boot/config.txt
 ```
 
-### Step 26: delete macOS hidden files (if present)
+### Step 27: delete macOS hidden files (if present)
 
 ```shell
 sudo rm -fr /boot/.fseventsd /boot/.DS_Store /boot/.Spotlight-V100
 ```
 
-### Step 27: unplug network cable (if using ethernet) and reboot
+### Step 28: unplug network cable (if using ethernet) and reboot
 
 ```shell
 sudo systemctl reboot
@@ -590,9 +566,9 @@ sudo systemctl reboot
 
 > WARNING: DO NOT CONNECT RASPBERRY PI TO NETWORK EVER AGAIN WITHOUT REINSTALLING RASPBERRY PI OS FIRST (DEVICE IS NOW “READ-ONLY” AND “COLD”).
 
-### Step 28 (optional): disable auto-mount of `boot` volume (on macOS)
+### Step 29 (optional): disable auto-mount of `boot` volume (on macOS)
 
-> Heads-up: done to prevent macOS from writing [hidden files](#step-24-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of microSD card.
+> Heads-up: done to prevent macOS from writing [hidden files](#step-27-delete-macos-hidden-files-if-present) to `boot` volume which would invalidate stored SHA512 hash of microSD card.
 
 #### Enable read-only mode using switch on microSD to SD adapter
 
@@ -608,7 +584,7 @@ volume_uuid=$(diskutil info "$volume_path" | awk '/Volume UUID:/ { print $3 }')
 echo "UUID=$volume_uuid none msdos ro,noauto" | sudo tee -a /etc/fstab
 ```
 
-### Step 29 (optional): compute SHA512 hash of microSD card and store in password manager (on macOS)
+### Step 30 (optional): compute SHA512 hash of microSD card and store in password manager (on macOS)
 
 > Heads-up: run `diskutil list` to find disk ID of microSD card with “Raspberry Pi OS Lite” installed (`disk4` in the following example).
 
