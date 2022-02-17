@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Raspberry Pi](https://www.raspberrypi.org/)
+- [Raspberry Pi](https://www.raspberrypi.org/) (with [64-bit support](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/))
 - HDMI cable, keyboard, microSD card, microSD to SD adapter and power adapter
 - macOS computer
 
@@ -72,15 +72,15 @@ _EOF
 EOF
 ```
 
-### Step 3: download latest version of [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
+### Step 3: download latest version of 64-bit [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
 
 ### Step 4: copy “Raspberry Pi OS Lite” to microSD card
 
 > WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
 
-Run `diskutil list` to find disk ID of microSD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
+> Heads-up: run `diskutil list` to find disk ID of microSD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
 
-Replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example) and `2021-10-30-raspios-bullseye-armhf-lite.img` with current image.
+> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example) and `2022-01-28-raspios-bullseye-arm64-lite.img` with current image.
 
 ```console
 $ diskutil list
@@ -113,10 +113,10 @@ disk4 was already unmounted or it has a partitioning scheme so use "diskutil unm
 $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk4 was successful
 
-$ sudo dd bs=1m if=$HOME/Downloads/2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/rdiskn
-1864+0 records in
-1864+0 records out
-1954545664 bytes transferred in 37.454965 secs (52183887 bytes/sec)
+$ sudo dd bs=1m if=$HOME/Downloads/2022-01-28-raspios-bullseye-arm64-lite.img of=/dev/rdiskn
+1904+0 records in
+1904+0 records out
+1996488704 bytes transferred in 141.557206 secs (14103759 bytes/sec)
 
 $ sudo diskutil unmountDisk /dev/diskn
 Unmount of all volumes on disk4 was successful
