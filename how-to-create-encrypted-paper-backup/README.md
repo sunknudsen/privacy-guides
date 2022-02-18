@@ -53,7 +53,7 @@ $ sudo sed -i 's/FONTSIZE=""/FONTSIZE="10x20"/' /etc/default/console-setup
 sudo raspi-config
 ```
 
-Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and finally “Finish”.
+Select “Localisation Options”, then “Keyboard”, then “Generic 105-key PC (intl.)”, then “Other”, then “English (US)”, then “English (US)”, then “The default for the keyboard layout”, then “No compose key” and, finally, select “Finish”.
 
 ### Step 4: install dependencies
 
@@ -482,7 +482,7 @@ $ sudo python3 /usr/local/include/Raspberry-Pi-Installer-Scripts/adafruit-pitft.
 sudo raspi-config
 ```
 
-Select “System Options”, then “Boot / Auto Login”, then “Console” and finally “Finish”.
+Select “System Options”, then “Boot / Auto Login”, then “Console” and, finally, select “Finish”.
 
 ### Step 24: make filesystem read-only
 

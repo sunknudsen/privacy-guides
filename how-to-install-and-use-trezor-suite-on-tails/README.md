@@ -24,23 +24,23 @@ Listed: true
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
 
 ### Step 2 (optional): create exFAT partition on Tails USB flash drive or SD card
 
 > Heads-up: partition used to move files between Tails and other operating systems such as macOS.
 
-Click “Applications”, then “Utilities”, then “Disks”, select USB flash drive or SD card, click “Free Space”, then “+”, set “Partition Size”, click “Next”, set “Volume Name”, select “Other”, click “Next”, select “exFAT” and finally click “Create”.
+Click “Applications”, then “Utilities”, then “Disks”, select USB flash drive or SD card, click “Free Space”, then “+”, set “Partition Size”, click “Next”, set “Volume Name”, select “Other”, click “Next”, select “exFAT” and, finally, click “Create”.
 
 ### Step 3: enable persistence
 
-Click “Applications”, then “Favorites”, then “Configure persistent volume”, set passphrase, click “Create”, make sure “Personal Data” is enabled, click “Save” and finally “Restart Now”.
+Click “Applications”, then “Favorites”, then “Configure persistent volume”, set passphrase, click “Create”, make sure “Personal Data” is enabled, click “Save” and, finally, click “Restart Now”.
 
 ### Step 4: boot to Tails, unlock persistent storage and set admin password (required to [configure firewall](#step-1-configure-firewall))
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
 
 ### Step 5: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready
 

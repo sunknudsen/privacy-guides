@@ -103,7 +103,7 @@ sub   rsa4096 2019-10-17 [S] [expires: 2021-10-25]
 
 ### Verify signed message
 
-> Heads-up: run `gpg`, paste message, press <kbd>enter</kbd> and finally press <kbd>ctrl-d</kbd>.
+> Heads-up: run `gpg`, paste message, press <kbd>enter</kbd> and, finally, press <kbd>ctrl-d</kbd>.
 
 ```console
 $ gpg

@@ -149,7 +149,7 @@ Select “System Options”, then “Wireless LAN”, choose country, then selec
 sudo raspi-config
 ```
 
-Select “Interface Options”, then “SSH”, then “Yes”, then “OK” and finally “Finish”.
+Select “Interface Options”, then “SSH”, then “Yes”, then “OK” and, finally, select “Finish”.
 
 When asked if you wish to reboot, select “No”.
 

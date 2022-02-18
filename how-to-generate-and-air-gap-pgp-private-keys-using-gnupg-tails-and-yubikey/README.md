@@ -29,7 +29,7 @@ Listed: true
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
 
 ### Step 2: establish network connection using ethernet cable or Wi-Fi and wait for Tor to be ready
 
@@ -460,7 +460,7 @@ gpg> save
 
 ### Step 12: mount backup volume (formatted using exFAT)
 
-Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and finally click “Authenticate”.
+Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and, finally, click “Authenticate”.
 
 ### Step 13: set backup volume name environment variable
 
@@ -536,7 +536,7 @@ The VeraCrypt volume has been successfully created.
 
 ### Step 15: mount VeraCrypt encrypted volume
 
-Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes”, then “Add”, select “tails” file on backup volume, click “Open”, enter password and finally click “Unlock”.
+Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes”, then “Add”, select “tails” file on backup volume, click “Open”, enter password and, finally, click “Unlock”.
 
 ### Step 16: rename VeraCrypt encrypted volume
 
@@ -587,7 +587,7 @@ cp /media/amnesia/$ENCRYPTED_VOLUME_NAME/pub.asc "/media/amnesia/$VOLUME_NAME/jo
 
 ### Step 21: dismount VeraCrypt encrypted volume
 
-Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and finally click “x”.
+Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and, finally, click “x”.
 
 ### Step 22: back up `tails` file
 
@@ -897,15 +897,15 @@ Lock configuration with this lock code? [y/N]: y
 
 > Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
 
-Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and finally “Start Tails”.
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
 
 ### Step 2: mount backup volume (formatted using exFAT)
 
-Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and finally click “Authenticate”.
+Click “Places”, then “Home”, then backup volume (“Samsung BAR” in example below), enter admin password and, finally, click “Authenticate”.
 
 ### Step 3: mount VeraCrypt encrypted volume
 
-Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes”, then “Add”, select “tails” file on backup volume, click “Open”, enter password and finally click “Unlock”.
+Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes”, then “Add”, select “tails” file on backup volume, click “Open”, enter password and, finally, click “Unlock”.
 
 ### Step 4: import master key
 
@@ -1029,7 +1029,7 @@ cp /media/amnesia/Tails/pub.asc "/media/amnesia/Samsung BAR/johndoe.asc"
 
 ### Step 9: dismount VeraCrypt encrypted volume
 
-Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and finally click “x”.
+Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes” and, finally, click “x”.
 
 ### Step 10: shutdown computer
 

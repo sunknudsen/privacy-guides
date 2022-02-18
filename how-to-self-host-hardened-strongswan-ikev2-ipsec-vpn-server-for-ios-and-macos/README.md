@@ -951,7 +951,7 @@ Finally, click “File”, then “Save”, and save file as “alice.mobileconf
 
 Unlock iPhone, connect it to Mac using USB cable and open Apple Configurator 2.
 
-In “All Devices”, double-click on iPhone, then “Add” and finally “Profiles”.
+In “All Devices”, double-click on iPhone, then click “Add” and, finally, click “Profiles”.
 
 Select “alice.mobileconfig” and follow instructions.
 
@@ -977,7 +977,7 @@ sed -i '' '/<key>DNS<\/key>/,/<\/dict>/d' ~/Desktop/strongswan-certs/alice.mobil
 
 On iPhone, open “Settings”, then enable “VPN”.
 
-On Mac, open “System Preferences”, click “Network”, then “Self-hosted strongSwan VPN” and finally “Connect” and enable “Show VPN status in menu bar”.
+On Mac, open “System Preferences”, click “Network”, then “Self-hosted strongSwan VPN” and, finally, click “Connect” and enable “Show VPN status in menu bar”.
 
 ### Step 37: test for leaks
 
