@@ -94,11 +94,22 @@ apt install -y speedtest sysbench
 
 ### Benchmark network
 
-Depending on iptables configuration, running the following commands may be required.
+> Heads-up: depending on iptables or nftables firewall configuration, running following commands may be required.
+
+#### iptables
 
 ```shell
 iptables -A OUTPUT -p tcp -m tcp --dport 8080 -m state --state NEW -j ACCEPT
 ip6tables -A OUTPUT -p tcp -m tcp --dport 8080 -m state --state NEW -j ACCEPT
+```
+
+#### nftables
+
+> Heads-up: replace `firewall` if needed (see `nft list ruleset`).
+
+```shell
+nft add rule ip firewall output tcp dport http-alt accept
+nft add rule ip6 firewall output tcp dport http-alt accept
 ```
 
 ```console
