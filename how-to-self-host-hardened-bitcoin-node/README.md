@@ -4,7 +4,7 @@ Description: Learn how to self-host hardened Bitcoin node.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
-Publication date: 2022-02-10T22:57:23.600Z
+Publication date: 2022-03-01T17:31:42.392Z
 Listed: true
 -->
 
@@ -12,11 +12,12 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../how-to-configure-hardened-debian-server) or [hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) (with at least 4GB of RAM and IPv6 disabled)
+- [Hardened Debian server](../how-to-configure-hardened-debian-server/README.md) or [hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi/README.md) (with at least 4GB of RAM, 1TB of SSD storage and IPv6 disabled)
 - Linux or macOS computer
 
 ## Caveats
 
+- Steps labelled as “bitcoin-dataset” are only required to bootstrap node using bitcoin-dataset.
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 - When copy/pasting commands that start with `cat << "EOF"`, select all lines at once (from `cat << "EOF"` to `EOF` inclusively) as they are part of the same (single) command
 
@@ -32,6 +33,8 @@ ssh -i ~/.ssh/pi pi@10.0.1.181
 
 ### Step 2: install dependencies
 
+> Heads-up: if `sudo: command not found` is thrown, use `su -` instead.
+
 ```console
 $ sudo su -
 
@@ -40,13 +43,55 @@ $ apt update
 $ apt install -y apt-transport-https build-essential clang cmake curl git gnupg sudo
 ```
 
-### Step 3: add pi user to sudo group
+### Step 3 (bitcoin-dataset): install bitcoin-dataset dependencies
+
+```console
+$ apt install -y lz4 transmission-cli transmission-daemon
+
+$ systemctl disable transmission-daemon
+
+$ systemctl stop transmission-daemon
+```
+
+### Step 4 (bitcoin-dataset): configure transmission-daemon
+
+#### Increase `rmem_max` and `wmem_max`
+
+```console
+$ cat << "EOF" >> /etc/sysctl.conf
+net.core.rmem_max = 4194304
+net.core.wmem_max = 1048576
+EOF
+
+$ sysctl -p
+```
+
+#### Overwrite default settings
+
+```shell
+cat << "EOF" > /etc/transmission-daemon/settings.json
+{
+  "dht-enabled": false,
+  "encryption": 2,
+  "message-level": 1,
+  "pex-enabled": false,
+  "port-forwarding-enabled": true,
+  "rpc-authentication-required": false,
+  "rpc-enabled": true,
+  "utp-enabled": false
+}
+EOF
+```
+
+### Step 5: add user to sudo group
+
+> Heads-up: replace `pi` with user.
 
 ```shell
 usermod -aG sudo pi
 ```
 
-### Step 4: log out and log in to enable sudo privileges
+### Step 6: log out and log in to enable sudo privileges
 
 > Heads-up: replace `~/.ssh/pi` with path to private key and `pi@10.0.1.181` with server or Raspberry Pi SSH destination.
 
@@ -60,7 +105,177 @@ $ ssh -i ~/.ssh/pi pi@10.0.1.181
 $ sudo su -
 ```
 
-### Step 5: import Sun’s PGP public key (used to verify downloads below)
+### Step 7: install and configure [WireGuard](https://www.wireguard.com/)
+
+#### Install WireGuard
+
+```console
+$ apt update
+
+$ apt install -y openresolv wireguard
+```
+
+#### Create and fund [Mullvad](https://mullvad.net/en/) account and [generate](https://mullvad.net/en/account/#/wireguard-config/) WireGuard config
+
+> Heads-up: replace `mullvad-ca10` with Mullvad endpoint, paste Mullvad WireGuard config into `/etc/wireguard/$MULLVAD_ENDPOINT.conf`.
+
+```console
+$ MULLVAD_ENDPOINT=mullvad-ca10
+
+$ nano /etc/wireguard/$MULLVAD_ENDPOINT.conf
+
+$ sed -i -E 's/^(Address.*?),.*/\1/' /etc/wireguard/mullvad-*.conf
+
+$ sed -i -E 's/^(AllowedIPs.*?),.*/\1/' /etc/wireguard/mullvad-*.conf
+```
+
+#### Enable IP forwarding and configure firewall kill switch
+
+> Heads-up: replace `eth0` with network interface (run `ip a` to find interface).
+
+```console
+$ NETWORK_INTERFACE=eth0
+
+$ sed -i -E 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+
+$ sysctl -p
+
+$ cat << EOF > /etc/nftables.conf
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table ip firewall {
+  chain input {
+    type filter hook input priority filter; policy drop;
+    iif "lo" accept
+    iif != "lo" ip daddr 127.0.0.0/8 drop
+    iifname "$NETWORK_INTERFACE" tcp dport 22 accept
+    ct state established,related accept
+  }
+
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+  }
+
+  chain output {
+    type filter hook output priority filter; policy drop;
+    oif "lo" accept
+    oifname "$NETWORK_INTERFACE" udp dport 51820 accept
+    oifname "$MULLVAD_ENDPOINT" tcp dport { 80, 443 } accept
+    oifname "$MULLVAD_ENDPOINT" udp dport { 53, 123 } accept
+    ct state established,related accept
+  }
+}
+table ip6 firewall {
+  chain input {
+    type filter hook input priority filter; policy drop;
+  }
+
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+  }
+
+  chain output {
+    type filter hook output priority filter; policy drop;
+  }
+}
+EOF
+
+$ nft -f /etc/nftables.conf
+```
+
+#### Enable and start WireGuard
+
+```console
+$ systemctl enable wg-quick@$MULLVAD_ENDPOINT
+
+$ systemctl start wg-quick@$MULLVAD_ENDPOINT
+
+$ curl https://am.i.mullvad.net/connected
+You are connected to Mullvad (server ca10-wireguard). Your IP address is 89.36.78.152
+```
+
+You are connected to Mullvad
+
+👍
+
+### Step 8: install [Cargo](https://doc.rust-lang.org/cargo/index.html)
+
+```console
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+info: downloading installer
+
+Welcome to Rust!
+
+This will download and install the official compiler for the Rust
+programming language, and its package manager, Cargo.
+
+Rustup metadata and toolchains will be installed into the Rustup
+home directory, located at:
+
+  /root/.rustup
+
+This can be modified with the RUSTUP_HOME environment variable.
+
+The Cargo home directory located at:
+
+  /root/.cargo
+
+This can be modified with the CARGO_HOME environment variable.
+
+The cargo, rustc, rustup and other commands will be added to
+Cargo's bin directory, located at:
+
+  /root/.cargo/bin
+
+This path will then be added to your PATH environment variable by
+modifying the profile files located at:
+
+  /root/.profile
+  /root/.bashrc
+
+You can uninstall at any time with rustup self uninstall and
+these changes will be reverted.
+
+Current installation options:
+
+
+   default host triple: aarch64-unknown-linux-gnu
+     default toolchain: stable (default)
+               profile: default
+  modify PATH variable: yes
+
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+>1
+…
+Rust is installed now. Great!
+
+To get started you may need to restart your current shell.
+This would reload your PATH environment variable to include
+Cargo's bin directory ($HOME/.cargo/bin).
+
+To configure your current shell, run:
+source $HOME/.cargo/env
+
+$ source $HOME/.cargo/env
+```
+
+### Step 9 (bitcoin-dataset): install [b3sum](https://github.com/BLAKE3-team/BLAKE3)
+
+```console
+$ cargo install b3sum
+    Updating crates.io index
+  Installing b3sum v1.3.1
+             …
+   Installed package `b3sum v1.3.1` (executable `b3sum`)
+
+$ mv /root/.cargo/bin/b3sum /usr/bin/
+```
+
+### Step 10: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
 $ curl --fail https://sunknudsen.com/sunknudsen.asc | gpg --import
@@ -79,7 +294,7 @@ imported: 1
 
 👍
 
-### Step 6: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
+### Step 11: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com
@@ -95,7 +310,7 @@ Fingerprint matches published fingerprints
 
 👍
 
-### Step 7: download and verify [bitcoind.service](./bitcoind.service)
+### Step 12: download and verify [bitcoind.service](./bitcoind.service)
 
 ```console
 $ curl --fail --output /lib/systemd/system/bitcoind.service https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/bitcoind.service
@@ -123,7 +338,7 @@ Good signature
 
 👍
 
-### Step 8: download and verify [electrs.service](./electrs.service)
+### Step 13: download and verify [electrs.service](./electrs.service)
 
 ```console
 $ curl --fail --output /lib/systemd/system/electrs.service https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/electrs.service
@@ -151,7 +366,34 @@ Good signature
 
 👍
 
-### Step 9: download and verify [tor-client-auth.sh](./tor-client-auth.sh)
+### Step 14 (bitcoin-dataset): download and verify [transmission-daemon.service](./transmission-daemon.service)
+
+```console
+$ curl --fail --output /lib/systemd/system/transmission-daemon.service https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/transmission-daemon.service
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1598  100  1598    0     0    568      0  0:00:02  0:00:02 --:--:--   568
+
+$ curl --fail --output /lib/systemd/system/transmission-daemon.service.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/transmission-daemon.service.asc
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+$ gpg --verify /lib/systemd/system/transmission-daemon.service.asc
+gpg: assuming signed data in '/lib/systemd/system/transmission-daemon.service'
+gpg: Signature made Sun 27 Feb 2022 01:47:27 PM EST
+gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+     Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
+```
+
+Good signature
+
+👍
+
+### Step 15: download and verify [tor-client-auth.sh](./tor-client-auth.sh)
 
 ```console
 $ curl --fail --output /usr/bin/tor-client-auth.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/tor-client-auth.sh
@@ -181,112 +423,9 @@ Good signature
 
 👍
 
-### Step 10: install and configure [WireGuard](https://www.wireguard.com/)
+### Step 16: install and configure [Tor](https://www.torproject.org/)
 
-#### Install WireGuard
-
-```console
-$ apt update
-
-$ apt install -y openresolv wireguard
-```
-
-#### Create and fund [Mullvad](https://mullvad.net/en/) account and [generate](https://mullvad.net/en/account/#/wireguard-config/) WireGuard config
-
-> Heads-up: replace `mullvad-ca10` with Mullvad endpoint, paste Mullvad WireGuard config into `/etc/wireguard/$MULLVAD_ENDPOINT.conf` and remove IPv6 addresses.
-
-```console
-$ MULLVAD_ENDPOINT=mullvad-ca10
-
-$ nano /etc/wireguard/$MULLVAD_ENDPOINT.conf
-```
-
-#### Enable IP forwarding and configure firewall as kill switch
-
-> Heads-up: replace `eth0` with network interface
-
-```console
-$ NETWORK_INTERFACE=eth0
-
-$ sed -i -E 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
-
-$ sysctl -p
-
-$ cat << EOF > /etc/nftables.conf
-#!/usr/sbin/nft -f
-
-flush ruleset
-
-table ip firewall {
-	chain input {
-		type filter hook input priority filter; policy drop;
-		iif "lo" accept
-		iif != "lo" ip daddr 127.0.0.0/8 drop
-		iifname $NETWORK_INTERFACE tcp dport 22 accept
-		ct state established,related accept
-	}
-
-	chain forward {
-		type filter hook forward priority filter; policy drop;
-	}
-
-	chain output {
-		type filter hook output priority filter; policy drop;
-		oif "lo" accept
-		oifname $NETWORK_INTERFACE udp dport 51820 accept
-		oifname $MULLVAD_ENDPOINT tcp dport { 80, 443 } accept
-		oifname $MULLVAD_ENDPOINT udp dport { 53, 123 } accept
-		ct state established,related accept
-	}
-}
-table ip6 firewall {
-	chain input {
-		type filter hook input priority filter; policy drop;
-	}
-
-	chain forward {
-		type filter hook forward priority filter; policy drop;
-	}
-
-	chain output {
-		type filter hook output priority filter; policy drop;
-	}
-}
-EOF
-
-$ nft -f /etc/nftables.conf
-```
-
-#### Enable and start WireGuard
-
-```console
-$ systemctl enable wg-quick@$MULLVAD_ENDPOINT
-
-$ systemctl start wg-quick@$MULLVAD_ENDPOINT
-
-$ curl https://am.i.mullvad.net/connected
-You are connected to Mullvad (server ca10-wireguard). Your IP address is 89.36.78.152
-```
-
-You are connected to Mullvad (server ca10-wireguard).
-
-👍
-
-### Step 11: temporarily allow peer-to-peer over Mullvad
-
-> Heads-up: replace `mullvad-ca10` with Mullvad endpoint.
-
-```console
-$ MULLVAD_ENDPOINT=mullvad-ca10
-
-$ nft add rule ip firewall input oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
-
-$ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
-```
-
-### Step 12: install and configure [Tor](https://www.torproject.org/)
-
-> Heads-up: replace `bullseye` with server or Raspberry Pi release codename.
+> Heads-up: replace `bullseye` with Debian version codename (run `cat /etc/os-release` to find Debian version codename).
 
 ```console
 $ DEBIAN_CODENAME=bullseye
@@ -321,7 +460,7 @@ EOF
 $ systemctl restart tor
 ```
 
-### Step 13: configure Tor hidden services client authorization (see [docs](https://community.torproject.org/onion-services/advanced/client-auth/))
+### Step 17: configure Tor hidden services client authorization (see [docs](https://community.torproject.org/onion-services/advanced/client-auth/))
 
 ```console
 $ cd /var/lib/tor/ssh
@@ -335,16 +474,157 @@ $ tor-client-auth.sh
 $ systemctl restart tor
 
 $ cd
-
-$ pwd
-/root
 ```
 
-/root
+### Step 18: create bitcoin user
+
+```console
+$ adduser --group --no-create-home --system bitcoin
+Adding system user `bitcoin' (UID 110) ...
+Adding new group `bitcoin' (GID 115) ...
+Adding new user `bitcoin' (UID 110) with group `bitcoin' ...
+Not creating home directory `/home/bitcoin'.
+
+$ usermod -aG debian-tor bitcoin
+```
+
+### Step 19 (bitcoin-dataset): download and verify bitcoin-dataset torrent
+
+```console
+$ curl --fail --remote-name https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/bitcoin-dataset.torrent
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4271k  100 4271k    0     0  3911k      0  0:00:01  0:00:01 --:--:-- 3911k
+
+$ curl --fail --remote-name https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/bitcoin-dataset.torrent.asc
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   228  100   228    0     0    740      0 --:--:-- --:--:-- --:--:--   740
+
+$ gpg --verify bitcoin-dataset.torrent.asc
+gpg: assuming signed data in 'bitcoin-dataset.torrent'
+gpg: Signature made Tue 01 Mar 2022 10:46:35 AM EST
+gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+     Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
+```
+
+Good signature
 
 👍
 
-### Step 14: install [Bitcoin Core](https://github.com/bitcoin/bitcoin)
+### Step 20 (bitcoin-dataset): temporarily allow BitTorrent peer-to-peer over Mullvad
+
+> Heads-up: replace `mullvad-ca10` with Mullvad endpoint.
+
+```console
+$ MULLVAD_ENDPOINT=mullvad-ca10
+
+$ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp dport { 51413, 57715 } accept
+```
+
+### Step 21 (bitcoin-dataset): download bitcoin-dataset
+
+> Heads-up: downloading bitcoin-dataset will likely take more than 24 hours on Raspberry Pi.
+
+> Heads-up: if download doesn’t start or hangs, try running `systemctl restart transmission-daemon`.
+
+```console
+$ systemctl start transmission-daemon
+
+$ transmission-remote --add bitcoin-dataset.torrent --start
+
+$ watch transmission-remote --list
+Every 2.0s: transmission-remote --list                                           debian: Tue Mar  1 11:56:05 2022
+
+    ID   Done       Have  ETA           Up    Down  Ratio  Status       Name
+     1   100%   458.4 GB  Done         0.0     0.0    0.0  Idle         bitcoin-dataset
+Sum:            458.4 GB               0.0     0.0
+```
+
+100%
+
+👍
+
+### Step 22 (bitcoin-dataset): stop transmission-daemon
+
+```shell
+systemctl stop transmission-daemon
+```
+
+### Step 23 (bitcoin-dataset): verify bitcoin-dataset checksums
+
+```console
+$ cd /var/lib/transmission-daemon/downloads/bitcoin-dataset
+
+$ gpg --verify BLAKE3CHECKSUMS.asc
+```
+
+Good signature
+
+👍
+
+### Step 24 (bitcoin-dataset): check integrity of bitcoin-dataset
+
+> Heads-up: checking integrity of bitcoin-dataset will likely take more than 15 minutes on Raspberry Pi.
+
+```console
+$ b3sum --check BLAKE3CHECKSUMS
+bitcoin.tar.lz4.part00: OK
+…
+electrs.tar.lz4.part03: OK
+```
+
+OK
+
+👍
+
+### Step 25 (bitcoin-dataset): extract bitcoin-dataset
+
+> Heads-up: extracting bitcoin-dataset will likely take more than two hours on Raspberry Pi.
+
+```console
+$ mkdir -m 710 -p /var/lib/bitcoind /var/lib/electrs
+
+$ for part in bitcoind.tar.lz4.part*; do
+  cat < "$part" || break
+  rm -f -- "$part"
+done |
+  tar \
+  --extract \
+  --directory /var/lib/bitcoind \
+  --use-compress-program lz4 \
+  --verbose
+
+$ for part in electrs.tar.lz4.part*; do
+  cat < "$part" || break
+  rm -f -- "$part"
+done |
+  tar \
+  --extract \
+  --directory /var/lib/electrs \
+  --use-compress-program lz4 \
+  --verbose
+
+$ cd
+```
+
+### Step 26: temporarily allow Bitcoin peer-to-peer over Mullvad
+
+> Heads-up: replace `mullvad-ca10` with Mullvad endpoint.
+
+```console
+$ MULLVAD_ENDPOINT=mullvad-ca10
+
+$ nft add rule ip firewall input oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
+
+$ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
+```
+
+### Step 27: install [Bitcoin Core](https://github.com/bitcoin/bitcoin)
 
 > Heads-up: replace `22.0` with [latest release](https://bitcoincore.org/en/releases/) semver.
 
@@ -480,30 +760,81 @@ server=1
 txindex=1
 EOF
 
-$ adduser --group --no-create-home --system bitcoin
-Adding system user `bitcoin' (UID 110) ...
-Adding new group `bitcoin' (GID 115) ...
-Adding new user `bitcoin' (UID 110) with group `bitcoin' ...
-Not creating home directory `/home/bitcoin'.
-
-$ usermod -aG debian-tor bitcoin
-
 $ systemctl enable bitcoind
 
 $ systemctl start bitcoind
 ```
 
-### Step 15: watch initial block download
+### Step 28: watch initial block download
 
-> Heads-up: initial block download will likely take more than a week on Raspberry Pi.
+> Heads-up: initial block download will likely take more than a week on Raspberry Pi unless node was bootstrapped using bitcoin-dataset.
 
 ```console
 $ sudo -u bitcoin watch bitcoin-cli -datadir=/var/lib/bitcoind getblockchaininfo
+Every 2.0s: bitcoin-cli -datadir=/var/lib/bitcoind getblockchaininfo
+
+{
+  "chain": "main",
+  "blocks": 724597,
+  "headers": 724597,
+  "bestblockhash": "00000000000000000006913cd13692e0c63a569a5aa1ef869d019de317cca732",
+  "difficulty": 27967152532434.23,
+  "mediantime": 1645610491,
+  "verificationprogress": 0.9999997584389468,
+  "initialblockdownload": false,
+  "chainwork": "00000000000000000000000000000000000000002934d1f8be10aff1a80e6806",
+  "size_on_disk": 445562831844,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 227931
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 363725
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 388381
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 419328
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 481824
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": 1619222400,
+        "timeout": 1628640000,
+        "since": 709632,
+        "min_activation_height": 709632
+      },
+      "height": 709632,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
 ```
 
-### Step 16: switch to Tor-only (see [docs](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md))
+`"blocks": 724597` = `"headers": 724597` and `"initialblockdownload": false`
 
-> Heads-up: only run following once `"initialblockdownload": false`.
+👍
+
+### Step 29: switch to Tor-only (see [docs](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md))
+
+> Heads-up: only run following once `"blocks": 724597` = `"headers": 724597` and `"initialblockdownload": false`.
 
 ```console
 $ systemctl stop bitcoind
@@ -525,100 +856,31 @@ EOF
 $ systemctl start bitcoind
 ```
 
-### Step 17: install [electrs](https://github.com/romanz/electrs) (see [docs](https://github.com/romanz/electrs/blob/master/doc/install.md))
+### Step 30: install [electrs](https://github.com/romanz/electrs) (see [docs](https://github.com/romanz/electrs/blob/master/doc/install.md))
 
 > Heads-up: build will likely take more than half and hour on Raspberry Pi.
 
 ```console
-$ exit
-
-$ whoami
-pi
-
-$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-info: downloading installer
-
-Welcome to Rust!
-
-This will download and install the official compiler for the Rust
-programming language, and its package manager, Cargo.
-
-Rustup metadata and toolchains will be installed into the Rustup
-home directory, located at:
-
-  /home/pi/.rustup
-
-This can be modified with the RUSTUP_HOME environment variable.
-
-The Cargo home directory located at:
-
-  /home/pi/.cargo
-
-This can be modified with the CARGO_HOME environment variable.
-
-The cargo, rustc, rustup and other commands will be added to
-Cargo's bin directory, located at:
-
-  /home/pi/.cargo/bin
-
-This path will then be added to your PATH environment variable by
-modifying the profile files located at:
-
-  /home/pi/.profile
-  /home/pi/.bashrc
-
-You can uninstall at any time with rustup self uninstall and
-these changes will be reverted.
-
-Current installation options:
-
-
-   default host triple: aarch64-unknown-linux-gnu
-     default toolchain: stable (default)
-               profile: default
-  modify PATH variable: yes
-
-1) Proceed with installation (default)
-2) Customize installation
-3) Cancel installation
->1
-…
-Rust is installed now. Great!
-
-To get started you may need to restart your current shell.
-This would reload your PATH environment variable to include
-Cargo's bin directory ($HOME/.cargo/bin).
-
-To configure your current shell, run:
-source $HOME/.cargo/env
-
-$ source $HOME/.cargo/env
-
 $ git clone https://github.com/romanz/electrs
 
 $ cd electrs
 
 $ cargo build --locked --no-default-features --release
-…
+    …
     Finished release [optimized] target(s) in 24m 18s
 
-$ cd
-
-$ pwd
-/home/pi
-
-$ sudo su -
-
-$ cp /home/pi/electrs/target/release/electrs /usr/bin/
+$ cp /root/electrs/target/release/electrs /usr/bin/
 
 $ systemctl enable electrs
 
 $ systemctl start electrs
+
+$ cd
 ```
 
-### Step 18: watch initial sync
+### Step 31: watch initial sync
 
-> Heads-up: initial sync will likely take more than a day on Raspberry Pi.
+> Heads-up: initial sync will likely take more than a day on Raspberry Pi unless node was bootstrapped using bitcoin-dataset.
 
 > Heads-up: run following commands concurrently.
 
@@ -628,15 +890,15 @@ Every 2.0s: bitcoin-cli -datadir=/var/lib/bitcoind getblockchaininfo
 
 {
   "chain": "main",
-  "blocks": 723754,
-  "headers": 723754,
-  "bestblockhash": "0000000000000000000652fbe7fc08e12a5880bf3fcba4fea3b075fb1e873eae",
+  "blocks": 724597,
+  "headers": 724597,
+  "bestblockhash": "00000000000000000006913cd13692e0c63a569a5aa1ef869d019de317cca732",
   "difficulty": 27967152532434.23,
-  "mediantime": 1645099367,
-  "verificationprogress": 0.9999956296623409,
+  "mediantime": 1645610491,
+  "verificationprogress": 0.9999997584389468,
   "initialblockdownload": false,
-  "chainwork": "000000000000000000000000000000000000000028e10f1da54a49e1bd77f253",
-  "size_on_disk": 444503320738,
+  "chainwork": "00000000000000000000000000000000000000002934d1f8be10aff1a80e6806",
+  "size_on_disk": 445562831844,
   "pruned": false,
   "softforks": {
     "bip34": {
@@ -680,10 +942,18 @@ Every 2.0s: bitcoin-cli -datadir=/var/lib/bitcoind getblockchaininfo
   "warnings": ""
 }
 
-$ sudo journalctl --follow --unit electrs
-Feb 17 07:39:08 raspberrypi electrs[5502]: [2022-02-17T12:39:08.989Z INFO  electrs::chain] chain updated: tip=0000000000000000000652fbe7fc08e12a5880bf3fcba4fea3b075fb1e873eae, height=723754
+$ journalctl --follow --unit electrs
+Feb 23 05:50:49 debian electrs[179948]: [2022-02-23T10:50:49.794Z INFO  electrs::chain] chain updated: tip=00000000000000000006913cd13692e0c63a569a5aa1ef869d019de317cca732, height=724597
 ```
 
-electrs height = bitcoin-cli blocks
+bitcoin-cli `"blocks": 724597` = electrs `height=724597`
+
+👍
+
+### Step 31: reboot
+
+```shell
+systemctl reboot
+```
 
 👍

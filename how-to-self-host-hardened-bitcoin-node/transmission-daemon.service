@@ -1,0 +1,66 @@
+[Unit]
+Description=Transmission daemon
+
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/transmission-daemon \
+  --config-dir /etc/transmission-daemon \
+  --download-dir /var/lib/transmission-daemon/downloads \
+  --encryption-required \
+  --foreground
+ExecStop=/bin/kill -s STOP $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+
+# Make sure the config directory is readable by the service user
+PermissionsStartOnly=true
+ExecStartPre=/bin/chgrp debian-transmission /etc/transmission-daemon
+
+# Process management
+####################
+
+Type=notify
+Restart=on-failure
+TimeoutSec=60
+
+# Directory creation and permissions
+####################################
+
+# Run as debian-transmission:debian-transmission
+User=debian-transmission
+Group=debian-transmission
+
+# /etc/transmission-daemon
+ConfigurationDirectory=transmission-daemon
+ConfigurationDirectoryMode=0710
+
+# /var/lib/transmission-daemon
+StateDirectory=transmission-daemon
+StateDirectoryMode=0710
+
+# Hardening measures
+####################
+
+# Provide a private /tmp and /var/tmp.
+PrivateTmp=true
+
+# Mount /usr, /boot/ and /etc read-only for the process.
+ProtectSystem=full
+
+# Deny access to /home, /root and /run/user
+ProtectHome=true
+
+# Disallow the process and all of its children to gain
+# new privileges through execve().
+NoNewPrivileges=true
+
+# Use a new /dev namespace only populated with API pseudo devices
+# such as /dev/null, /dev/zero and /dev/random.
+PrivateDevices=true
+
+# Deny the creation of writable and executable memory mappings.
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target

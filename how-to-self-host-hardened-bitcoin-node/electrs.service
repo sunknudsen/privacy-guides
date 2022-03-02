@@ -2,6 +2,7 @@
 Description=Electrs daemon
 
 After=bitcoind.service
+Wants=bitcoind.service
 
 [Service]
 ExecStart=/usr/bin/electrs --db-dir /var/lib/electrs \
@@ -9,13 +10,21 @@ ExecStart=/usr/bin/electrs --db-dir /var/lib/electrs \
                            --electrum-rpc-addr="127.0.0.1:50001" \
                            --log-filters INFO
 
+# Process management
+####################
+
 Type=simple
 Restart=on-failure
 TimeoutSec=60
 
+# Directory creation and permissions
+####################################
+
+# Run as bitcoin:bitcoin
 User=bitcoin
 Group=bitcoin
 
+# /var/lib/electrs
 StateDirectory=electrs
 StateDirectoryMode=0710
 
