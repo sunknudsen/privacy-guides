@@ -67,7 +67,7 @@ imported: 1
 
 Go to https://tails.boum.org/install/download/index.en.html and download latest release and associated PGP signature (found under “or download the OpenPGP signature”) to `~/Downloads` folder.
 
-### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
 
 > Heads-up: replace `4.25` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
 

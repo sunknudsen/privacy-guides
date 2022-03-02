@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos)
+- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md)
 
 ## Caveats
 
@@ -94,7 +94,7 @@ $ torsocks curl --fail --output ~/Downloads/trezor-suite.AppImage.asc https://su
 100   833  100   833    0     0    933      0 --:--:-- --:--:-- --:--:--   932
 ```
 
-### Step 10: verify “Trezor Suite” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
+### Step 10: verify “Trezor Suite” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
 
 ```console
 $ gpg --verify ~/Downloads/trezor-suite.AppImage.asc

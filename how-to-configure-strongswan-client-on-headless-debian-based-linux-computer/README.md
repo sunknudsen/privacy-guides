@@ -16,7 +16,7 @@ Listed: true
 
 ## Requirements
 
-- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos)
+- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/README.md)
 - Linux or macOS computer (referred to as “certificate authority computer”)
 - Debian-based Linux computer (referred to as “client computer”)
 
@@ -27,7 +27,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create client key and cert using certificate authority from [How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos) (on certificate authority computer).
+### Step 1: create client key and cert using certificate authority from [How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/README.md) (on certificate authority computer).
 
 #### Navigate to `strongswan-certs` directory
 

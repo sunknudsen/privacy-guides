@@ -294,7 +294,7 @@ imported: 1
 
 👍
 
-### Step 11: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
+### Step 11: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos/README.md#verify-suns-pgp-public-key-using-fingerprint))
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com

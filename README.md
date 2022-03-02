@@ -4,4 +4,4 @@ Most privacy guides episodes published on [YouTube](https://www.youtube.com/sunk
 
 Shout-out to [1984](https://www.1984hosting.com/), [Njalla](https://njal.la/), [rsync.net](https://rsync.net/), [SatoshiLabs](https://satoshilabs.com/) and [Shakepay](https://shakepay.com/) for [supporting](https://sunknudsen.com/donate) the privacy guides. 🙌
 
-Wish to contribute or need help? Read the [docs](./docs).
+Wish to contribute or need help? Read the [docs](./docs/README.md).

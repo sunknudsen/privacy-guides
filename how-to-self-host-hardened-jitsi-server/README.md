@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../how-to-configure-hardened-debian-server)
+- [Hardened Debian server](../how-to-configure-hardened-debian-server/README.md)
 - Linux or macOS computer
 
 ## Caveats

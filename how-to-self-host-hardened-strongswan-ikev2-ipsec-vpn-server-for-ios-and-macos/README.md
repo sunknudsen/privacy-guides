@@ -14,7 +14,7 @@ Listed: true
 
 > **Heads-up: guide is no longer maintained and should be considered obsolete.**
 
-> Heads-up: when following this guide on servers with upstream IPv4-only networks (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) networks. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos).
+> Heads-up: when following this guide on servers with upstream IPv4-only networks (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) networks. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos/README.md).
 
 ## Requirements
 

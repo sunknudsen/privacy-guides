@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos) with VeraCrypt [installed](../how-to-install-and-use-veracrypt-on-tails)
+- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md) with VeraCrypt [installed](../how-to-install-and-use-veracrypt-on-tails/README.md)
 - YubiKey with [OpenPGP](https://www.yubico.com/us/store/compare/) support (firmware version `5.2.3` or higher)
 - Computer running macOS Catalina or Big Sur
 
@@ -81,7 +81,7 @@ $ torsocks curl -L -o ~/Downloads/yubikey-manager-qt.AppImage.sig https://develo
 100   310  100   310    0     0    262      0  0:00:01  0:00:01 --:--:--   262
 ```
 
-### Step 5: verify “YubiKey Manager” AppImage release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos)) and make AppImage executable
+### Step 5: verify “YubiKey Manager” AppImage release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md)) and make AppImage executable
 
 ```console
 $ gpg --verify ~/Downloads/yubikey-manager-qt.AppImage.sig

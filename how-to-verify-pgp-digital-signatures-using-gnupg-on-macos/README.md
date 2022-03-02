@@ -86,7 +86,7 @@ imported: 1
 
 ### Verify signer’s PGP public key using fingerprint
 
-> Heads-up: replace `hello@sunknudsen.com` with signer’s email and use published fingerprints to verify signer’s cryptographic identity (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint)).
+> Heads-up: replace `hello@sunknudsen.com` with signer’s email and use published fingerprints to verify signer’s cryptographic identity (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos/README.md#verify-suns-pgp-public-key-using-fingerprint)).
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com
