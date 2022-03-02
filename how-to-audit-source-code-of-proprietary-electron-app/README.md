@@ -104,7 +104,7 @@ torsocks curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg -
 
 ### Step 3: enable Node.js’s repository
 
-> Heads-up: run `cat /etc/issue` to find Debian version.
+> Heads-up: run `cat /etc/debian_version` to find Debian version.
 
 #### Debian 10 (buster)
 

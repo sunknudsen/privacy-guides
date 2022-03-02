@@ -33,6 +33,8 @@ cat /etc/apt/sources.list | grep "backports"
 
 ### Step 2: enable backports repository (required if previous command returned nothing)
 
+> Heads-up: run `cat /etc/debian_version` to find Debian version.
+
 #### Debian 10 (buster)
 
 ```shell
@@ -65,6 +67,8 @@ curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | gpg --dearmor > 
 ```
 
 ### Step 5: enable Speedtest’s repository
+
+> Heads-up: run `cat /etc/debian_version` to find Debian version.
 
 #### Debian 10 (buster)
 
@@ -117,58 +121,60 @@ $ speedtest
 
    Speedtest by Ookla
 
-     Server: Vodafone - Reykjavík (id = 4141)
+     Server: Siminn - Reykjavik (id = 4818)
         ISP: 1984 ehf
-    Latency:     0.64 ms   (0.06 ms jitter)
-   Download:    95.82 Mbps (data used: 158.0 MB)
-     Upload:    95.63 Mbps (data used: 155.7 MB)
+    Latency:     0.49 ms   (0.05 ms jitter)
+   Download:   955.03 Mbps (data used: 431.6 MB )
+     Upload:   994.20 Mbps (data used: 1.6 GB )
 Packet Loss:     0.0%
- Result URL: https://www.speedtest.net/result/c/19654353-3d2e-4ed3-ac22-824e1376b838
+ Result URL: https://www.speedtest.net/result/c/f2a1be73-563e-450f-a447-0e591c19bff4
 ```
 
-Network download speed: 95.82 Mbps
+Network download speed: 3158.53 Mbps
 
-Network upload speed: 95.63 Mbps
+Network upload speed: 3336.34 Mbps
 
 👍
 
 ### Benchmark CPU
 
+> Heads-up: use `--threads` to use multiple cores concurrently.
+
 ```console
-$ sysbench cpu --cpu-max-prime=20000 run
-sysbench 1.0.18 (using system LuaJIT 2.1.0-beta3)
+$ sysbench cpu run
+sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 Running the test with following options:
 Number of threads: 1
 Initializing random number generator from current time
 
 
-Prime numbers limit: 20000
+Prime numbers limit: 10000
 
 Initializing worker threads...
 
 Threads started!
 
 CPU speed:
-    events per second:   403.87
+    events per second:  4368.44
 
 General statistics:
-    total time:                          10.0012s
-    total number of events:              4040
+    total time:                          10.0001s
+    total number of events:              43687
 
 Latency (ms):
-         min:                                    2.43
-         avg:                                    2.47
-         max:                                    4.60
-         95th percentile:                        2.52
-         sum:                                 9995.53
+         min:                                    0.23
+         avg:                                    0.23
+         max:                                    2.04
+         95th percentile:                        0.23
+         sum:                                 9993.84
 
 Threads fairness:
-    events (avg/stddev):           4040.0000/0.00
-    execution time (avg/stddev):   9.9955/0.00
+    events (avg/stddev):           43687.0000/0.00
+    execution time (avg/stddev):   9.9938/0.00
 ```
 
-CPU events per second: 403.87
+CPU events per second: 4368.44
 
 👍
 
@@ -176,7 +182,7 @@ CPU events per second: 403.87
 
 ```console
 $ sysbench memory run
-sysbench 1.0.18 (using system LuaJIT 2.1.0-beta3)
+sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 Running the test with following options:
 Number of threads: 1
@@ -193,28 +199,28 @@ Initializing worker threads...
 
 Threads started!
 
-Total operations: 40219144 (4020984.62 per second)
+Total operations: 63969454 (6396521.91 per second)
 
-39276.51 MiB transferred (3926.74 MiB/sec)
+62470.17 MiB transferred (6246.60 MiB/sec)
 
 
 General statistics:
-    total time:                          10.0003s
-    total number of events:              40219144
+    total time:                          10.0001s
+    total number of events:              63969454
 
 Latency (ms):
          min:                                    0.00
          avg:                                    0.00
-         max:                                    1.84
+         max:                                    0.63
          95th percentile:                        0.00
-         sum:                                 4358.06
+         sum:                                 4409.21
 
 Threads fairness:
-    events (avg/stddev):           40219144.0000/0.00
-    execution time (avg/stddev):   4.3581/0.00
+    events (avg/stddev):           63969454.0000/0.00
+    execution time (avg/stddev):   4.4092/0.00
 ```
 
-Memory speed: 3926.74 MiB/sec
+Memory speed: 6246.60 MiB/sec
 
 👍
 
@@ -228,17 +234,12 @@ sysbench 1.0.18 (using system LuaJIT 2.1.0-beta3)
 Creating files for the test...
 Extra file open flags: (none)
 Creating file test_file.0
-Creating file test_file.1
-Creating file test_file.2
-Creating file test_file.3
-Creating file test_file.4
-Creating file test_file.5
-...
+…
 Creating file test_file.127
-8589934592 bytes written in 85.92 seconds (95.34 MiB/sec).
+8589934592 bytes written in 81.85 seconds (100.09 MiB/sec).
 
-$ sysbench fileio --file-total-size=8G --file-test-mode=rndrw --max-time=300 --max-requests=0 run
-sysbench 1.0.18 (using system LuaJIT 2.1.0-beta3)
+$ sysbench fileio --file-test-mode=rndrw run
+sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 Running the test with following options:
 Number of threads: 1
@@ -246,8 +247,8 @@ Initializing random number generator from current time
 
 
 Extra file open flags: (none)
-128 files, 64MiB each
-8GiB total file size
+128 files, 16MiB each
+2GiB total file size
 Block size 16KiB
 Number of IO requests: 0
 Read/Write ratio for combined random IO test: 1.50
@@ -261,37 +262,37 @@ Threads started!
 
 
 File operations:
-    reads/s:                      2727.09
-    writes/s:                     1818.06
-    fsyncs/s:                     5818.16
+    reads/s:                      4261.49
+    writes/s:                     2840.93
+    fsyncs/s:                     9091.61
 
 Throughput:
-    read, MiB/s:                  42.61
-    written, MiB/s:               28.41
+    read, MiB/s:                  66.59
+    written, MiB/s:               44.39
 
 General statistics:
-    total time:                          300.0100s
-    total number of events:              3109023
+    total time:                          10.0097s
+    total number of events:              161976
 
 Latency (ms):
          min:                                    0.00
-         avg:                                    0.10
-         max:                                   11.59
-         95th percentile:                        0.23
-         sum:                               298089.49
+         avg:                                    0.06
+         max:                                   10.82
+         95th percentile:                        0.14
+         sum:                                 9969.51
 
 Threads fairness:
-    events (avg/stddev):           3109023.0000/0.00
-    execution time (avg/stddev):   298.0895/0.00
+    events (avg/stddev):           161976.0000/0.00
+    execution time (avg/stddev):   9.9695/0.00
 
-$ sysbench fileio --file-total-size=8G cleanup
-sysbench 1.0.18 (using system LuaJIT 2.1.0-beta3)
+$ sysbench fileio cleanup
+sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
-Removing test files..
+Removing test files...
 ```
 
-Disk read throughput: 42.61 MiB/s
+Disk read throughput: 66.59 MiB/s
 
-Disk write throughput: 28.41 MiB/s
+Disk write throughput: 44.39 MiB/s
 
 👍
