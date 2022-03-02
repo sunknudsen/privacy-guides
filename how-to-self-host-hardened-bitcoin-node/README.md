@@ -950,7 +950,7 @@ bitcoin-cli `"blocks": 724597` = electrs `height=724597`
 
 👍
 
-### Step 31: reboot
+### Step 32: reboot
 
 ```shell
 systemctl reboot
