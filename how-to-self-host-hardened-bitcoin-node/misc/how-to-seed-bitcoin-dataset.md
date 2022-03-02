@@ -65,38 +65,38 @@ $ cat << EOF > /etc/nftables.conf
 flush ruleset
 
 table ip firewall {
-	chain input {
-		type filter hook input priority filter; policy drop;
-		iif "lo" accept
-		iif != "lo" ip daddr 127.0.0.0/8 drop
-		iifname "$NETWORK_INTERFACE" tcp dport { 22, 51413 } accept
-		ct state established,related accept
-	}
+  chain input {
+    type filter hook input priority filter; policy drop;
+    iif "lo" accept
+    iif != "lo" ip daddr 127.0.0.0/8 drop
+    iifname "$NETWORK_INTERFACE" tcp dport { 22, 51413 } accept
+    ct state established,related accept
+  }
 
-	chain forward {
-		type filter hook forward priority filter; policy drop;
-	}
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+  }
 
-	chain output {
-		type filter hook output priority filter; policy drop;
-		oif "lo" accept
-		oifname "$NETWORK_INTERFACE" tcp dport { 80, 443, 51413, 57715 } accept
-		oifname "$NETWORK_INTERFACE" udp dport { 53, 123 } accept
-		ct state established,related accept
-	}
+  chain output {
+    type filter hook output priority filter; policy drop;
+    oif "lo" accept
+    oifname "$NETWORK_INTERFACE" tcp dport { 80, 443, 51413, 57715 } accept
+    oifname "$NETWORK_INTERFACE" udp dport { 53, 123 } accept
+    ct state established,related accept
+  }
 }
 table ip6 firewall {
-	chain input {
-		type filter hook input priority filter; policy drop;
-	}
+  chain input {
+    type filter hook input priority filter; policy drop;
+  }
 
-	chain forward {
-		type filter hook forward priority filter; policy drop;
-	}
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+  }
 
-	chain output {
-		type filter hook output priority filter; policy drop;
-	}
+  chain output {
+    type filter hook output priority filter; policy drop;
+  }
 }
 EOF
 
