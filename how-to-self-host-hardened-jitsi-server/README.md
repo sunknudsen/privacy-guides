@@ -52,8 +52,10 @@ JITSI_HOSTNAME=meet.sunknudsen.com
 
 ### Step 5: install dependencies
 
-```shell
-apt install -y apt-transport-https curl gnupg lsb-release nginx-full
+```console
+$ apt update
+
+$ apt install -y apt-transport-https curl gnupg lsb-release nginx-full
 ```
 
 ### Step 6: import [Jitsi](https://jitsi.org/)’s PGP public key
