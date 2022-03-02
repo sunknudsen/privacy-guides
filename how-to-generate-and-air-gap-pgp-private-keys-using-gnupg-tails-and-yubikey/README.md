@@ -1076,7 +1076,7 @@ gpg: no ultimately trusted keys found
 ### Step 5: insert YubiKey and import private key stubs
 
 ```console
-$ gpg --card-status
+$ gpg --keyid-format 0xlong --card-status
 Reader ...........: Yubico YubiKey CCID
 Application ID ...: D*******************************
 Application type .: OpenPGP
