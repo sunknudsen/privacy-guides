@@ -197,7 +197,7 @@ $ curl --fail --remote-name https://raw.githubusercontent.com/sunknudsen/privacy
 
 $ gpg --verify bitcoin-dataset.torrent.asc
 gpg: assuming signed data in 'bitcoin-dataset.torrent'
-gpg: Signature made Tue 01 Mar 2022 10:46:35 AM EST
+gpg: Signature made Tue 01 Mar 2022 15:18:45 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
