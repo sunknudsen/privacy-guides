@@ -1,6 +1,6 @@
 <!--
-Title: How to seed bitcoin-dataset
-Description: Learn how to seed bitcoin-dataset.
+Title: How to seed bitcoin-dataset on headless server
+Description: Learn how to seed bitcoin-dataset on headless server.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,11 +8,12 @@ Publication date: 2022-03-01T17:31:42.392Z
 Listed: true
 -->
 
-# How to seed bitcoin-dataset
+# How to seed bitcoin-dataset on headless server
 
 ## Requirements
 
-- [Hardened Debian server](../../how-to-configure-hardened-debian-server/README.md) (with at least 1TB of SSD storage and IPv6 disabled)
+- [Hardened Debian server](../../how-to-configure-hardened-debian-server/README.md) (with at least 500GB of available SSD storage and unlimited bandwidth)
+- Transmission app SSD storage, IPv6 disabled and unlimited bandwidth)
 - Linux or macOS computer
 
 ## Caveats
