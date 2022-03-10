@@ -41,21 +41,13 @@ source ~/.zshrc
 
 ### Step 3: download [first-names.txt](./first-names.txt)
 
-This list includes the top 2048 most popular baby names from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html).
+This list includes top 2048 most popular names for people aged 25 from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html) (last [updated](./misc/update-first-names.sh) on March 9th 2022).
 
 ```shell
 curl --fail --output /usr/local/sbin/first-names.txt https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
 ```
 
-### Step 4: download [mac-address-prefixes.txt](./mac-address-prefixes.txt)
-
-This list includes 768 Apple MAC address prefixes.
-
-```shell
-curl --fail --output /usr/local/sbin/mac-address-prefixes.txt https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/mac-address-prefixes.txt
-```
-
-### Step 5: create `spoof.sh` script
+### Step 4: create `spoof.sh` script
 
 ```shell
 cat << "EOF" > /usr/local/sbin/spoof.sh
@@ -79,9 +71,9 @@ sudo scutil --set HostName "$host_name"
 printf "%s\n" "Spoofed hostname to $host_name"
 
 # Spoof MAC address of Wi-Fi interface
-mac_address_prefix=$(sed "$(jot -r 1 1 768)q;d" $basedir/mac-address-prefixes.txt | sed -e 's/[^A-F0-9:]//g')
+mac_address_prefix=$(networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}' | head -c 8)
 mac_address_suffix=$(openssl rand -hex 3 | sed 's/\(..\)/\1:/g; s/.$//')
-mac_address=$(echo "$mac_address_prefix:$mac_address_suffix" | awk '{print toupper($0)}')
+mac_address=$(echo "$mac_address_prefix:$mac_address_suffix" | awk '{print tolower($0)}')
 networksetup -setairportpower en0 on
 sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport --disassociate
 sudo ifconfig en0 ether "$mac_address"
@@ -89,13 +81,13 @@ printf "%s\n" "Spoofed MAC address of en0 interface to $mac_address"
 EOF
 ```
 
-### Step 6: make `spoof.sh` executable
+### Step 5: make `spoof.sh` executable
 
 ```shell
 chmod +x /usr/local/sbin/spoof.sh
 ```
 
-### Step 7: create `local.spoof.plist` launch daemon
+### Step 6: create `local.spoof.plist` launch daemon
 
 ```shell
 cat << "EOF" | sudo tee /Library/LaunchDaemons/local.spoof.plist
@@ -118,7 +110,7 @@ cat << "EOF" | sudo tee /Library/LaunchDaemons/local.spoof.plist
 EOF
 ```
 
-### Step 8: create `spoof-hook.sh` script
+### Step 7: create `spoof-hook.sh` script
 
 ```shell
 cat << "EOF" > /usr/local/sbin/spoof-hook.sh
@@ -129,13 +121,13 @@ networksetup -setairportpower en0 off
 EOF
 ```
 
-### Step 9: make `spoof-hook.sh` executable
+### Step 8: make `spoof-hook.sh` executable
 
 ```shell
 chmod +x /usr/local/sbin/spoof-hook.sh
 ```
 
-### Step 10: make sure `com.apple.loginwindow` does not exist
+### Step 9: make sure `com.apple.loginwindow` does not exist
 
 > Heads-up: if `com.apple.loginwindow` exists, one needs to backup user default carefully and consider using an abstraction that runs both current `LogoutHook` script and `/usr/local/sbin/spoof-hook.sh`.
 
@@ -149,33 +141,33 @@ Domain com.apple.loginwindow does not exist
 
 👍
 
-### Step 11: configure user default (used to disable Wi-Fi interface at logout)
+### Step 10: configure user default (used to disable Wi-Fi interface at logout)
 
 ```shell
 sudo defaults write com.apple.loginwindow LogoutHook "/usr/local/sbin/spoof-hook.sh"
 ```
 
-### Step 12: reboot and confirm hostname and MAC address have been spoofed
+### Step 11: reboot and confirm hostname and MAC address have been spoofed
 
 #### Spoofed hostname
 
 ```console
 $ scutil --get HostName
-Gatlins-MacBook-Pro
+Ottos-MacBook-Pro
 ```
 
 #### Spoofed MAC address
 
 ```console
 $ ifconfig en0 | grep ether | awk '{print $2}'
-20:ee:28:31:03:f6
+98:01:a7:8e:0f:51
 ```
 
 #### Hardware MAC address
 
 ```console
 $ networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}'
-9c:f4:8e:d6:2b:7d
+98:01:a7:5e:d0:c2
 ```
 
 “Spoofed hostname” is random and “Spoofed MAC address” does not match “Hardware MAC address”?
@@ -190,7 +182,6 @@ $ networksetup -listallhardwareports | awk -v RS= '/en0/{print $NF}'
 
 ```shell
 rm /usr/local/sbin/first-names.txt
-rm /usr/local/sbin/mac-address-prefixes.txt
 rm /usr/local/sbin/spoof-hook.sh
 rm /usr/local/sbin/spoof.sh
 sudo rm /Library/LaunchDaemons/local.spoof.plist
