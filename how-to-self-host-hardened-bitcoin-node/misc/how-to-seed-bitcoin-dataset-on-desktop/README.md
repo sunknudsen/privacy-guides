@@ -55,7 +55,7 @@ If [port forwarding](#step-1-configure-port-forwarding) is properly configured, 
 
 ![Network](./transmission-network.png)
 
-### Step 4: download (and optionally verify) bitcoin-dataset [torrent](../bitcoin-dataset.torrent) ([PGP signature](../bitcoin-dataset.torrent.asc), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
+### Step 4: download (and optionally verify) bitcoin-dataset [torrent](../../bitcoin-dataset.torrent) ([PGP signature](../../bitcoin-dataset.torrent.asc), [PGP public key](https://sunknudsen.com/sunknudsen.asc))
 
 ### Step 5: download bitcoin-dataset
 
