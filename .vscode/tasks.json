@@ -3,8 +3,35 @@
   "tasks": [
     {
       "type": "shell",
-      "label": "Copy link",
-      "command": "node ./tasks/copy-link.js \"${selectedText}\"",
+      "label": "Organize steps",
+      "command": "node ./tasks/organize-steps.js \"${file}\"",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Preview markdown",
+      "command": "node ./tasks/preview-markdown.js \"${relativeFile}\"",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Preview markdown (using reverse proxy)",
+      "command": "node ./tasks/preview-markdown.js \"${relativeFile}\" use-proxy",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "Proxify link",
+      "command": "node ./tasks/proxify-link.js \"${selectedText}\"",
       "presentation": {
         "reveal": "silent"
       },
@@ -25,15 +52,6 @@
       "command": "node ./tasks/update-youtube-players.js",
       "presentation": {
         "reveal": "always"
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "Organize steps",
-      "command": "node ./tasks/organize-steps.js \"${file}\"",
-      "presentation": {
-        "reveal": "silent"
       },
       "problemMatcher": []
     }
