@@ -523,7 +523,7 @@ Good signature
 ```console
 $ MULLVAD_ENDPOINT=mullvad-ca10
 
-$ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp dport { 51413, 57715 } accept
+$ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp accept
 ```
 
 ### Step 21 (bitcoin-dataset): download bitcoin-dataset
