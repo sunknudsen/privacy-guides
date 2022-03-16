@@ -121,18 +121,18 @@ $ speedtest
 
    Speedtest by Ookla
 
-     Server: Siminn - Reykjavik (id = 4818)
+     Server: Ljósleiðarinn - Reykjavík (id = 12720)
         ISP: 1984 ehf
-    Latency:     0.49 ms   (0.05 ms jitter)
-   Download:   955.03 Mbps (data used: 431.6 MB )
-     Upload:   994.20 Mbps (data used: 1.6 GB )
+    Latency:     0.48 ms   (0.04 ms jitter)
+   Download:   940.03 Mbps (data used: 494.8 MB )
+     Upload:   941.49 Mbps (data used: 423.8 MB )
 Packet Loss:     0.0%
- Result URL: https://www.speedtest.net/result/c/f2a1be73-563e-450f-a447-0e591c19bff4
+ Result URL: https://www.speedtest.net/result/c/ef84204c-1a99-451a-8782-d9b0753622f7
 ```
 
-Network download speed: 3158.53 Mbps
+Network download speed: 940.03 Mbps
 
-Network upload speed: 3336.34 Mbps
+Network upload speed: 941.49 Mbps
 
 👍
 
@@ -156,25 +156,25 @@ Initializing worker threads...
 Threads started!
 
 CPU speed:
-    events per second:  4368.44
+    events per second:  4322.01
 
 General statistics:
-    total time:                          10.0001s
-    total number of events:              43687
+    total time:                          10.0002s
+    total number of events:              43223
 
 Latency (ms):
          min:                                    0.23
          avg:                                    0.23
-         max:                                    2.04
+         max:                                    3.77
          95th percentile:                        0.23
-         sum:                                 9993.84
+         sum:                                 9993.78
 
 Threads fairness:
-    events (avg/stddev):           43687.0000/0.00
+    events (avg/stddev):           43223.0000/0.00
     execution time (avg/stddev):   9.9938/0.00
 ```
 
-CPU events per second: 4368.44
+CPU events per second: 4322.01
 
 👍
 
@@ -199,28 +199,28 @@ Initializing worker threads...
 
 Threads started!
 
-Total operations: 63969454 (6396521.91 per second)
+Total operations: 62356792 (6235367.55 per second)
 
-62470.17 MiB transferred (6246.60 MiB/sec)
+60895.30 MiB transferred (6089.23 MiB/sec)
 
 
 General statistics:
-    total time:                          10.0001s
-    total number of events:              63969454
+    total time:                          10.0000s
+    total number of events:              62356792
 
 Latency (ms):
          min:                                    0.00
          avg:                                    0.00
-         max:                                    0.63
+         max:                                    0.36
          95th percentile:                        0.00
-         sum:                                 4409.21
+         sum:                                 4421.34
 
 Threads fairness:
-    events (avg/stddev):           63969454.0000/0.00
-    execution time (avg/stddev):   4.4092/0.00
+    events (avg/stddev):           62356792.0000/0.00
+    execution time (avg/stddev):   4.4213/0.00
 ```
 
-Memory speed: 6246.60 MiB/sec
+Memory speed: 6089.23 MiB/sec
 
 👍
 
@@ -236,9 +236,9 @@ Extra file open flags: (none)
 Creating file test_file.0
 …
 Creating file test_file.127
-8589934592 bytes written in 81.85 seconds (100.09 MiB/sec).
+8589934592 bytes written in 82.33 seconds (99.50 MiB/sec).
 
-$ sysbench fileio --file-test-mode=rndrw run
+$ sysbench fileio --file-total-size=8G --file-test-mode=rndrw run
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 
 Running the test with following options:
@@ -247,8 +247,8 @@ Initializing random number generator from current time
 
 
 Extra file open flags: (none)
-128 files, 16MiB each
-2GiB total file size
+128 files, 64MiB each
+8GiB total file size
 Block size 16KiB
 Number of IO requests: 0
 Read/Write ratio for combined random IO test: 1.50
@@ -262,28 +262,28 @@ Threads started!
 
 
 File operations:
-    reads/s:                      4261.49
-    writes/s:                     2840.93
-    fsyncs/s:                     9091.61
+    reads/s:                      4002.99
+    writes/s:                     2668.62
+    fsyncs/s:                     8546.96
 
 Throughput:
-    read, MiB/s:                  66.59
-    written, MiB/s:               44.39
+    read, MiB/s:                  62.55
+    written, MiB/s:               41.70
 
 General statistics:
-    total time:                          10.0097s
-    total number of events:              161976
+    total time:                          10.0036s
+    total number of events:              152119
 
 Latency (ms):
          min:                                    0.00
-         avg:                                    0.06
-         max:                                   10.82
-         95th percentile:                        0.14
-         sum:                                 9969.51
+         avg:                                    0.07
+         max:                                    3.28
+         95th percentile:                        0.16
+         sum:                                 9959.87
 
 Threads fairness:
-    events (avg/stddev):           161976.0000/0.00
-    execution time (avg/stddev):   9.9695/0.00
+    events (avg/stddev):           152119.0000/0.00
+    execution time (avg/stddev):   9.9599/0.00
 
 $ sysbench fileio cleanup
 sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
@@ -291,8 +291,8 @@ sysbench 1.0.20 (using system LuaJIT 2.1.0-beta3)
 Removing test files...
 ```
 
-Disk read throughput: 66.59 MiB/s
+Disk read throughput: 62.55 MiB/s
 
-Disk write throughput: 44.39 MiB/s
+Disk write throughput: 41.70 MiB/s
 
 👍
