@@ -8,7 +8,7 @@ Publication date: 2022-03-17T10:31:44.202Z
 Listed: true
 -->
 
-# How to benchmark computer performance
+# How to benchmark computer for Bitcoin computation
 
 ## Requirements
 
