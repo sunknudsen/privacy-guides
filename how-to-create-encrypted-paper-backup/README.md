@@ -47,7 +47,7 @@ $ sudo sed -i 's/FONTSIZE=""/FONTSIZE="10x20"/' /etc/default/console-setup
 
 > Heads-up: following instructions are for [Raspberry Pi keyboard](https://www.raspberrypi.org/products/raspberry-pi-keyboard-and-hub/) (US model).
 
-> Heads-up: when asked to reboot, select “No” and press enter.
+> Heads-up: when asked to reboot, select “No” and press <kbd>enter</kbd>.
 
 ```shell
 sudo raspi-config
@@ -476,7 +476,7 @@ $ sudo python3 /usr/local/include/Raspberry-Pi-Installer-Scripts/adafruit-pitft.
 
 #### Disable console auto login
 
-> Heads-up: when asked to reboot, select “No” and press enter.
+> Heads-up: when asked to reboot, select “No” and press <kbd>enter</kbd>.
 
 ```shell
 sudo raspi-config
