@@ -741,7 +741,7 @@ gpg:                using RSA key 74E2DEF5D77260B98BC19438099BAD163C70FBFA
 gpg:                issuer "will8clark@gmail.com"
 gpg: Can't check signature: No public key
 
-$ sha256sum --ignore-missing --check SHA256SUMS
+$ sha256sum --check --ignore-missing SHA256SUMS
 bitcoin-22.0-aarch64-linux-gnu.tar.gz: OK
 
 $ tar -vxzf bitcoin-22.0-$SYSTEM_ARCHITECTURE-linux-gnu.tar.gz
