@@ -88,7 +88,7 @@ Use application-layer firewall such as [Little Snitch](https://www.obdev.at/prod
 
 👍
 
-## Linux guide
+## Tails guide
 
 ### Step 1: boot to Tails and set admin password (required to run commands using `sudo`)
 
