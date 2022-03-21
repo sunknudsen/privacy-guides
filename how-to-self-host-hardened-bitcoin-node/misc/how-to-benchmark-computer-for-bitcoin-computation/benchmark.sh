@@ -2,6 +2,8 @@
 
 set -e
 
+export LC_NUMERIC="en_US.UTF-8"
+
 # Raspberry Pi 4 4GB with Samsung T7 Touch SSD 1TB baseline
 pi_openssl=570573.74
 pi_sysbench_cpu=5958.54
