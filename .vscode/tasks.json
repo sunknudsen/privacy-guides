@@ -13,7 +13,7 @@
     {
       "type": "shell",
       "label": "Preview markdown",
-      "command": "node ./tasks/preview-markdown.js '${relativeFile}\"",
+      "command": "node ./tasks/preview-markdown.js '${relativeFile}'",
       "presentation": {
         "reveal": "silent"
       },
