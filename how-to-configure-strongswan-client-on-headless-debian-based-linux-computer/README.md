@@ -8,11 +8,9 @@ Publication date: 2020-12-06T12:41:40.806Z
 Listed: true
 -->
 
-# How to configure strongSwan client on headless Debian-based Linux computer
+# How to configure strongSwan client on headless Debian-based Linux computer (DEPRECATED: guide is no longer maintained)
 
 [![How to configure strongSwan client on headless Debian-based Linux computer](how-to-configure-strongswan-client-on-headless-debian-based-linux-computer.png)](https://www.youtube.com/watch?v=fW1TUByQqk8 "How to configure strongSwan client on headless Debian-based Linux computer")
-
-> **Heads-up: guide is no longer maintained and should be considered obsolete.**
 
 ## Requirements
 
