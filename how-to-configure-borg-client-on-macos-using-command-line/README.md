@@ -388,7 +388,7 @@ cat << "EOF" > ~/Library/LaunchAgents/local.borg-wrapper.plist
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>Borg Wrapper.app</string>
+    <string>local.borg-wrapper</string>
 
     <key>ProgramArguments</key>
     <array>

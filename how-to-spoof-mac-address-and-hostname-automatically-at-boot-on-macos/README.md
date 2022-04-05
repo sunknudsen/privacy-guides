@@ -96,7 +96,7 @@ cat << "EOF" | sudo tee /Library/LaunchDaemons/local.spoof.plist
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>spoof</string>
+    <string>local.spoof</string>
 
     <key>ProgramArguments</key>
     <array>

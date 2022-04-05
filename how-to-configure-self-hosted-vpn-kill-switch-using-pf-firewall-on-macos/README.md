@@ -444,7 +444,7 @@ cat << "EOF" | sudo tee /Library/LaunchDaemons/local.pf.plist
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>pf</string>
+    <string>local.pf</string>
 
     <key>ProgramArguments</key>
     <array>
