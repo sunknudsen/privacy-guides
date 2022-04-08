@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Bitcoin node](../README.md) (with at least 2TB of SSD storage)
+- [Hardened Bitcoin node](../../README.md) (with at least 2TB of SSD storage)
 - Linux or macOS computer
 
 ## Caveats
