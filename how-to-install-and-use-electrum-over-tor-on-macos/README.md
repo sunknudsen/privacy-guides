@@ -14,12 +14,12 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Catalina or Big Sur
+- Computer running macOS Big Sur or Monterey
 
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
-- Press <kbd>ctrl+c</kbd> to stop running command before closing Terminal
+- Press <kbd>ctrl+c</kbd> to stop running command before closing “Terminal” app
 
 ## Setup guide
 
@@ -51,7 +51,7 @@ brew install gnupg
 $ curl https://raw.githubusercontent.com/spesmilo/electrum/master/pubkeys/ThomasV.asc | gpg --import
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  4739  100  4739    0     0   1039      0  0:00:04  0:00:04 --:--:--  1039
+100  4739  100  4739    0     0  29073      0 --:--:-- --:--:-- --:--:-- 29073
 gpg: key 0x2BD5824B7F9470E6: public key "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
@@ -67,11 +67,18 @@ Go to https://electrum.org/#download and download latest release and associated 
 
 #### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
 
-> Heads-up: replace `4.1.4` with [latest release](https://electrum.org/#download) semver.
+> Heads-up: replace `4.2.1` with [latest release](https://electrum.org/#download) semver.
 
 ```console
-$ gpg --verify ~/Downloads/electrum-4.1.4.dmg.ThomasV.asc ~/Downloads/electrum-4.1.4.dmg
-gpg: Signature made Thu 17 Jun 08:57:16 2021 EDT
+$ gpg --verify ~/Downloads/electrum-4.2.1.dmg.asc
+gpg: assuming signed data in '/Users/sunknudsen/Downloads/electrum-4.2.1.dmg'
+gpg: Signature made Sun 27 Mar 12:31:59 2022 EDT
+gpg:                using RSA key 637DB1E23370F84AFF88CCE03152347D07DA627C
+gpg: Can't check signature: No public key
+gpg: Signature made Sun 27 Mar 09:55:54 2022 EDT
+gpg:                using RSA key 0EEDCFD5CAFB459067349B23CA9EEEC43DF911DC
+gpg: Can't check signature: No public key
+gpg: Signature made Sun 27 Mar 01:57:04 2022 EDT
 gpg:                using RSA key 6694D8DE7BE8EE5631BED9502BD5824B7F9470E6
 gpg: Good signature from "Thomas Voegtlin (https://electrum.org) <thomasv@electrum.org>" [unknown]
 gpg:                 aka "ThomasV <thomasv1@gmx.de>" [unknown]
@@ -87,9 +94,11 @@ Good signature
 
 #### Install Electrum
 
-Double-click “electrum-4.1.4.dmg” and drag-and-drop “Electrum” into “Applications” folder.
+Double-click “electrum-4.2.1.dmg” and drag-and-drop “Electrum” into “Applications” folder.
 
 ### Step 5: install [Tor Browser](https://www.torproject.org/) (used to connect to Electrum public servers over Tor)
+
+> Heads-up: using public servers can [compromised privacy of wallet](https://sunknudsen.com/self-hosting-bitcoin-full-node-on-raspberry-pi-updated/) (learn how to self-host Bitcoin node [here](../how-to-self-host-hardened-bitcoin-node/README.md)).
 
 #### Import “Tor Browser Developers (signing key)” PGP public key
 
@@ -110,18 +119,18 @@ Go to https://www.torproject.org/download/ and download latest release and assoc
 
 #### Verify “Tor Browser” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
 
-> Heads-up: replace `10.0.17` with [latest release](https://www.torproject.org/download/) semver.
+> Heads-up: replace `11.0.10` with [latest release](https://www.torproject.org/download/) semver.
 
 ```console
-$ gpg --verify ~/Downloads/TorBrowser-10.0.17-osx64_en-US.dmg.asc
-gpg: assuming signed data in '/Users/sunknudsen/Downloads/TorBrowser-10.0.17-osx64_en-US.dmg'
-gpg: Signature made Tue  1 Jun 18:02:44 2021 EDT
-gpg:                using RSA key 0xEB774491D9FF06E2
+$ gpg --verify ~/Downloads/TorBrowser-11.0.10-osx64_en-US.dmg.asc
+gpg: assuming signed data in '/Users/sunknudsen/Downloads/TorBrowser-11.0.10-osx64_en-US.dmg'
+gpg: Signature made Tue  5 Apr 20:06:23 2022 EDT
+gpg:                using RSA key 0xE53D989A9E2D47BF
 gpg: Good signature from "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
-     Subkey fingerprint: 1107 75B5 D101 FB36 BC6C  911B EB77 4491 D9FF 06E2
+     Subkey fingerprint: 6131 88FC 5BE2 176E 3ED5  4901 E53D 989A 9E2D 47BF
 ```
 
 Good signature
@@ -130,7 +139,7 @@ Good signature
 
 #### Install “Tor Browser”
 
-Double-click “TorBrowser-10.0.17-osx64_en-US.dmg” and drag-and-drop “Tor Browser” into “Applications” folder.
+Double-click “TorBrowser-11.0.10-osx64_en-US.dmg” and drag-and-drop “Tor Browser” into “Applications” folder.
 
 ---
 
