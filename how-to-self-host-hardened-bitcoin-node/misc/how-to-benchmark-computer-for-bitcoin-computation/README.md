@@ -100,3 +100,5 @@ Go to https://github.com/sunknudsen/privacy-guides/discussions/220 and publish J
   "score": "10.05"
 }
 ```
+
+👍
