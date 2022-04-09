@@ -141,6 +141,8 @@ Good signature
 
 Double-click “TorBrowser-11.0.10-osx64_en-US.dmg” and drag-and-drop “Tor Browser” into “Applications” folder.
 
+👍
+
 ---
 
 ## Usage guide

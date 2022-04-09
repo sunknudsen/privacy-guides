@@ -171,6 +171,10 @@ $ source ~/.zshrc
 
 Open “Disk Utility”, select FAT32-formatted USB flash drive, click “Erase”, click “Security Options…”, move slider to first notch (“This option writes a pass of random data…”), click “OK” and, finally, click “Erase”.
 
+👍
+
+---
+
 ## Usage guide
 
 ### Step 1: run tor

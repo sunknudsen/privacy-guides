@@ -155,6 +155,10 @@ $ chmod +x /home/amnesia/Persistent/electrum.sh
 
 Click “Application”, then “Utilities”, then “Disks”, select FAT32-formatted USB flash drive, click “-”, then “Delete”, then “+”, then “Next”, enter “Volume Name”, enable “Erase”, select “For use with all systems and devices (FAT)” and, finally, click “Create”.
 
+👍
+
+---
+
 ## Usage guide (on Tails computer)
 
 ### Step 1: boot to Tails, unlock persistent storage and set admin password (required to run electrum.sh)

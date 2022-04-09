@@ -38,6 +38,8 @@ Encrypted
 
 👍
 
+---
+
 ## Time Machine usage guide
 
 ### Create backup
@@ -58,6 +60,8 @@ Total deleted: 43.5M
 Total deleted: 43.5M
 
 👍
+
+---
 
 ## APFS snapshot usage guide
 

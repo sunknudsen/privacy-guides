@@ -1035,6 +1035,8 @@ Click “Applications”, then “Utilities”, then “Unlock VeraCrypt Volumes
 
 👍
 
+---
+
 ## Usage guide (on macOS)
 
 ### Step 1: install [Homebrew](https://brew.sh/)
