@@ -13,8 +13,8 @@ Listed: true
 ## Requirements
 
 - [Hardened Bitcoin node](../../README.md)
-- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md)
-- Linux or macOS computer (used to connect to node)
+- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md) (used to run [Electrum](https://electrum.org/#home))
+- Linux or macOS computer (used to copy pi-electrs credentials from Bitcoin node to Tails computer)
 - FAT32-formatted USB flash drive
 
 ## Caveats
@@ -22,7 +22,7 @@ Listed: true
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 - When copy/pasting commands that start with `cat << "EOF"`, select all lines at once (from `cat << "EOF"` to `EOF` inclusively) as they are part of the same (single) command
 
-## Guide (on Linux or macOS computer)
+## Setup guide part 1 (on Linux or macOS computer)
 
 ### Step 1: log in to server or Raspberry Pi
 
@@ -36,7 +36,7 @@ ssh -i ~/.ssh/pi pi@10.0.1.181
 
 > Heads-up: on macOS FAT32 is labelled as “MSDOS (FAT)”.
 
-### Step 3: mount USB flash drive, copy hostname and pi-electrs.auth_private over and unmount USB flash drive
+### Step 3: mount FAT32-formatted USB flash drive, copy hostname and pi-electrs.auth_private over and unmount FAT32-formatted USB flash drive
 
 > Heads-up: run `sudo fdisk -l` to find device and replace `sdb1` with device (if needed)
 
@@ -97,9 +97,9 @@ $ sudo cp /var/lib/tor/electrs/{hostname,pi-electrs.auth_private} /tmp/usb
 $ sudo umount /dev/sdb1
 ```
 
-### Step 4: remove USB flash drive from server or Raspberry Pi
+### Step 4: remove FAT32-formatted USB flash drive from server or Raspberry Pi
 
-## Guide (on Tails computer)
+## Setup guide part 2 (on Tails computer)
 
 ### Step 1: boot to Tails
 
@@ -115,7 +115,7 @@ Click “+” under “Additional Settings”, then “Administration Password�
 
 ### Step 4: create electrum.sh script
 
-Insert FAT32-formatted USB flash drive into Tails computer, click “Places”, then “Computer”, then click FAT32-formatted USB flash drive, enter admin password (if required), double-click `hostname` and `pi-electrs.auth_private` and replace `HOSTNAME` and `PI_ELECTRS_AUTH_PRIVATE` with corresponding values.
+Insert FAT32-formatted USB flash drive into Tails computer, click “Places”, then “Computer”, then click FAT32-formatted USB flash drive, enter admin password (if required), double-click “hostname” and “pi-electrs.auth_private” and, finally, replace `HOSTNAME` and `PI_ELECTRS_AUTH_PRIVATE` with corresponding values.
 
 ```console
 $ HOSTNAME=v6tqyvqxt4xsy7qthvld3truapqj3wopx7etayw6gni5odeezwqnouqd.onion
@@ -147,18 +147,28 @@ EOF
 $ chmod +x /home/amnesia/Persistent/electrum.sh
 ```
 
-### Step 5 (optional): secure erase USB flash drive
+### Step 5 (optional): secure erase FAT32-formatted USB flash drive
 
 > Heads-up: data on selected disk will be permanently destroyed… choose disk carefully.
 
-> Heads-up: secure erasing USB flash drive can take a long time (even hours) depending on performance and size of drive.
+> Heads-up: secure erasing FAT32-formatted USB flash drive can take a long time (potentially hours) depending on performance and size of drive.
 
-Click “Application”, then “Utilities”, then “Disks”, select USB flash drive, click “-”, then “Delete”, then “+”, then “Next”, enter “Volume Name”, enable “Erase”, select “For use with all systems and devices (FAT)” and, finally, click “Create”.
+Click “Application”, then “Utilities”, then “Disks”, select FAT32-formatted USB flash drive, click “-”, then “Delete”, then “+”, then “Next”, enter “Volume Name”, enable “Erase”, select “For use with all systems and devices (FAT)” and, finally, click “Create”.
 
-### Step 6: run electrum.sh
+## Usage guide (on Tails computer)
+
+### Step 1: boot to Tails, unlock persistent storage and set admin password (required to run electrum.sh)
+
+> Heads-up: if keyboard layout of computer isn’t “English (US)”, set “Keyboard Layout”.
+
+Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
+
+### Step 2: run electrum.sh
 
 > Heads-up: from now on, this is the only step required to start Electrum and connect to self-hosted node.
 
 ```console
 $ sudo /home/amnesia/Persistent/electrum.sh
 ```
+
+👍
