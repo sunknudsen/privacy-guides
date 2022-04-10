@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md)
+- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md)
 
 ## Caveats
 

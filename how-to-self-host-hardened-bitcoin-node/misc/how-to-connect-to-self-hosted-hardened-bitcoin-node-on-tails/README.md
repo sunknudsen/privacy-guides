@@ -13,7 +13,7 @@ Listed: true
 ## Requirements
 
 - [Hardened Bitcoin node](../../README.md)
-- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md) (used to run [Electrum](https://electrum.org/#home))
+- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md) (used to run [Electrum](https://electrum.org/#home))
 - Linux or macOS computer (used to copy pi-electrs credentials from Bitcoin node to Tails computer)
 - FAT32-formatted USB flash drive
 

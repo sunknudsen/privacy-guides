@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card-on-macos/README.md) with VeraCrypt [installed](../how-to-install-and-use-veracrypt-on-tails/README.md)
+- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md) with VeraCrypt [installed](../how-to-install-and-use-veracrypt-on-tails/README.md)
 - YubiKey with [OpenPGP](https://www.yubico.com/us/store/compare/) support (firmware version `5.2.3` or higher)
 - Computer running macOS Catalina or Big Sur
 
