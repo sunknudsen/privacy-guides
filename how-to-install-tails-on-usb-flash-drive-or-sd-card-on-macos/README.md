@@ -90,7 +90,7 @@ Good signature
 
 ### Step 7: copy Tails to USB flash drive or SD card
 
-> WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
+> **WARNING: BE VERY CAREFUL WHEN RUNNING `DD` AS DATA CAN BE PERMANENTLY DESTROYED (BEGINNERS SHOULD CONSIDER USING [BALENAETCHER](https://www.balena.io/etcher/) INSTEAD).**
 
 > Heads-up: run `diskutil list` to find disk ID of USB flash drive or SD card to overwrite with Tails (`disk4` in the following example).
 

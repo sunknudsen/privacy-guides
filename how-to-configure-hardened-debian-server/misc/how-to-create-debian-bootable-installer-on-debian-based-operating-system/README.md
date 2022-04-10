@@ -96,7 +96,7 @@ OK
 
 ### Step 5: create bootable installer
 
-> WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
+> **WARNING: BE VERY CAREFUL WHEN RUNNING `DD` AS DATA CAN BE PERMANENTLY DESTROYED (BEGINNERS SHOULD CONSIDER USING [BALENAETCHER](https://www.balena.io/etcher/) INSTEAD).**
 
 > Heads-up: run `sudo fdisk --list` to find device name of USB flash drive to overwrite with bootable installer (`sda` in the following example).
 

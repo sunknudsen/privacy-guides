@@ -76,7 +76,7 @@ EOF
 
 ### Step 4: copy “Raspberry Pi OS Lite” to microSD card
 
-> WARNING: DO NOT RUN THE FOLLOWING COMMANDS AS-IS.
+> **WARNING: BE VERY CAREFUL WHEN RUNNING `DD` AS DATA CAN BE PERMANENTLY DESTROYED (BEGINNERS SHOULD CONSIDER USING [BALENAETCHER](https://www.balena.io/etcher/) INSTEAD).**
 
 > Heads-up: run `diskutil list` to find disk ID of microSD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
 
