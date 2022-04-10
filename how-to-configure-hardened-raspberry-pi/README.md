@@ -15,8 +15,8 @@ Listed: true
 ## Requirements
 
 - [Raspberry Pi](https://www.raspberrypi.org/) (with [64-bit support](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/))
-- HDMI cable, keyboard, microSD card, microSD to SD adapter and power adapter
-- macOS computer
+- HDMI cable (Micro HDMI to HDMI if Pi 4), keyboard with USB-A connector, microSD card (or external solid state drive with USB-A connector), microSD to SD adapter (if using microSD card) and power adapter (Micro USB >= 2.1 A if Pi 3 or USB-C >= 3 A if Pi 4)
+- macOS or Linux computer
 
 ## Caveats
 
@@ -72,15 +72,15 @@ _EOF
 EOF
 ```
 
-### Step 3: download latest version of 64-bit [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
+### Step 3: download latest version of 64-bit [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
 
-### Step 4: copy “Raspberry Pi OS Lite” to microSD card
+### Step 4: copy “Raspberry Pi OS Lite” to microSD card or external solid state drive (follow [these](./misc/how-to-copy-raspberry-pi-os-lite-to-microsd-card-or-external-solid-state-drive-on-linux/README.md) steps instead of step 4 if on Linux)
 
 > **WARNING: BE VERY CAREFUL WHEN RUNNING `DD` AS DATA CAN BE PERMANENTLY DESTROYED (BEGINNERS SHOULD CONSIDER USING [BALENAETCHER](https://www.balena.io/etcher/) INSTEAD).**
 
-> Heads-up: run `diskutil list` to find disk ID of microSD card to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
+> Heads-up: run `diskutil list` to find disk ID of microSD card or external solid state drive to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
 
-> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card (`disk4` and `rdisk4` in the following example) and `2022-01-28-raspios-bullseye-arm64-lite.img` with current image.
+> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card or external solid state drive (`disk4` and `rdisk4` in the following example) and `2022-04-04-raspios-bullseye-arm64-lite` with current image.
 
 ```console
 $ diskutil list
@@ -97,15 +97,15 @@ $ diskutil list
                                  Physical Store disk0s2
    1:                APFS Volume Macintosh HD            15.3 GB    disk3s1
    2:              APFS Snapshot com.apple.os.update-... 15.3 GB    disk3s1s1
-   3:                APFS Volume Preboot                 328.4 MB   disk3s2
-   4:                APFS Volume Recovery                815.1 MB   disk3s3
-   5:                APFS Volume Data                    458.6 GB   disk3s5
+   3:                APFS Volume Preboot                 412.4 MB   disk3s2
+   4:                APFS Volume Recovery                807.3 MB   disk3s3
+   5:                APFS Volume Data                    384.5 GB   disk3s5
    6:                APFS Volume VM                      2.1 GB     disk3s6
 
 /dev/disk4 (external, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:     FDisk_partition_scheme                        *15.9 GB    disk4
-   1:               Windows_NTFS Untitled                15.9 GB    disk4s1
+   0:     FDisk_partition_scheme                        *500.1 GB   disk4
+   1:               Windows_NTFS Untitled                500.1 GB   disk4s1
 
 $ sudo diskutil unmount /dev/diskn
 disk4 was already unmounted or it has a partitioning scheme so use "diskutil unmountDisk" instead
@@ -113,10 +113,10 @@ disk4 was already unmounted or it has a partitioning scheme so use "diskutil unm
 $ sudo diskutil unmountDisk /dev/diskn (if previous step fails)
 Unmount of all volumes on disk4 was successful
 
-$ sudo dd bs=1m if=$HOME/Downloads/2022-01-28-raspios-bullseye-arm64-lite.img of=/dev/rdiskn
-1904+0 records in
-1904+0 records out
-1996488704 bytes transferred in 141.557206 secs (14103759 bytes/sec)
+$ sudo dd bs=1m if=$HOME/Downloads/2022-04-04-raspios-bullseye-arm64-lite.img of=/dev/rdiskn
+1908+0 records in
+1908+0 records out
+2000683008 bytes transferred in 6.420741 secs (311596910 bytes/sec)
 
 $ sudo diskutil unmountDisk /dev/diskn
 Unmount of all volumes on disk4 was successful
