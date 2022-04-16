@@ -14,8 +14,12 @@ Listed: true
 
 ## Requirements
 
-- [Raspberry Pi](https://www.raspberrypi.org/) (with [64-bit support](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/))
-- HDMI cable (Micro HDMI to HDMI if Pi 4), keyboard with USB-A connector, microSD card (or external solid state drive with USB-A connector), microSD to SD adapter (if using microSD card) and power adapter (Micro USB >= 2.1 A if Pi 3 or USB-C >= 3 A if Pi 4)
+- [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
+- microSD card or external solid state drive (with USB-A connector)
+- microSD card reader or secure digital (SD) card reader with microSD to SD adapter (if using microSD card)
+- USB-C power adapter (minimum 3A)
+- Keyboard (with USB-A connector)
+- Micro HDMI to HDMI cable
 - macOS or Linux computer
 
 ## Caveats
