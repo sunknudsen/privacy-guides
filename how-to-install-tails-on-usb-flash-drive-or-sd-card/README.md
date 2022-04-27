@@ -68,7 +68,7 @@ imported: 1
 
 Go to https://tails.boum.org/install/download/index.en.html and download latest release and associated PGP signature (found under “or download the OpenPGP signature”) to `~/Downloads` folder.
 
-### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+### Step 6: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 > Heads-up: replace `4.29` with [latest release](https://tails.boum.org/install/download/index.en.html) semver.
 
@@ -183,7 +183,7 @@ $ curl --fail --location --remote-name https://mirrors.edge.kernel.org/tails/sta
 $ curl --fail --location --remote-name https://tails.boum.org/torrents/files/tails-amd64-${TAILS_RELEASE_SEMVER}.img.sig
 ```
 
-### Step 5: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+### Step 5: verify Tails release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
 $ gpg --verify tails-amd64-${TAILS_RELEASE_SEMVER}.img.sig

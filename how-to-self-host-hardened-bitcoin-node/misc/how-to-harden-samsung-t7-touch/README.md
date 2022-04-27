@@ -23,7 +23,7 @@ Listed: true
 
 ### Step 1 (optional): create APFS snapshot
 
-> Heads-up: snapshot can be used to restore filesystem clean-uninstalling Samsung software (see [guide](../../../how-to-use-time-machine-and-apfs-snapshots-on-macos/README.md)).
+> Heads-up: snapshot can be used to restore filesystem clean-uninstalling Samsung software (see [guide](../../../how-to-use-time-machine-and-apfs-snapshots-on-macos)).
 
 ```console
 $ tmutil localsnapshot

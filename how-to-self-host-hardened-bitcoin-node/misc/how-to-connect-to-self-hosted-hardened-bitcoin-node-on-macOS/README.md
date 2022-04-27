@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Bitcoin node](../../README.md)
+- [Hardened Bitcoin node](../..)
 - Computer running macOS Big Sur or Monterey (used to copy pi-electrs credentials from Bitcoin node and run [Electrum](https://electrum.org/#home))
 - FAT32-formatted USB flash drive
 
@@ -97,9 +97,9 @@ $ sudo umount /dev/sdb1
 
 ### Step 4: remove FAT32-formatted USB flash drive from server or Raspberry Pi
 
-### Step 5: download [Tor Browser](https://www.torproject.org/) (and optionally verify PGP signature, learn how [here](../../../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+### Step 5: download [Tor Browser](https://www.torproject.org/) (and optionally verify PGP signature, learn how [here](../../../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
-> Heads-up: check out “How to install and use Electrum over Tor on macOS” [guide](../../../how-to-install-and-use-electrum-over-tor-on-macos/README.md) for hardened Electrum and Tor Browser installation instructions.
+> Heads-up: check out “How to install and use Electrum over Tor on macOS” [guide](../../../how-to-install-and-use-electrum-over-tor-on-macos) for hardened Electrum and Tor Browser installation instructions.
 
 ### Step 6: install Tor Browser
 
@@ -148,13 +148,13 @@ $ umask u=rwx,go=rx
 ### Step 12: create tor alias
 
 ```console
-echo "alias tor=\"/Applications/Tor\ Browser.app/Contents/Resources/TorBrowser/Tor/tor -f $HOME/.local/etc/tor/torrc\"" >> ~/.zshrc
+$ echo "alias tor=\"/Applications/Tor\ Browser.app/Contents/Resources/TorBrowser/Tor/tor -f $HOME/.local/etc/tor/torrc\"" >> ~/.zshrc
 ```
 
 ### Step 13: create electrum alias
 
 ```console
-echo "alias electrum=\"/Applications/Electrum.app/Contents/MacOS/run_electrum --oneserver --server $HOSTNAME:50001:t --proxy socks5:127.0.0.1:9050\"" >> ~/.zshrc
+$ echo "alias electrum=\"/Applications/Electrum.app/Contents/MacOS/run_electrum --oneserver --server $HOSTNAME:50001:t --proxy socks5:127.0.0.1:9050\"" >> ~/.zshrc
 ```
 
 ### Step 14: source ~/.zshrc

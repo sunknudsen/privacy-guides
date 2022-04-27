@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Computer running macOS Big Sur or Monterey or disposable [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md)
+- Computer running macOS Big Sur or Monterey or disposable [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card)
 
 ## Caveats
 

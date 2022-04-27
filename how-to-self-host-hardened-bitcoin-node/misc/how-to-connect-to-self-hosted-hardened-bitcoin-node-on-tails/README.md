@@ -12,8 +12,8 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Bitcoin node](../../README.md)
-- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md) (used to run [Electrum](https://electrum.org/#home))
+- [Hardened Bitcoin node](../..)
+- [Tails USB flash drive or SD card](../../../how-to-install-tails-on-usb-flash-drive-or-sd-card) (used to run [Electrum](https://electrum.org/#home))
 - Linux or macOS computer (used to copy pi-electrs credentials from Bitcoin node to Tails computer)
 - FAT32-formatted USB flash drive
 
@@ -168,8 +168,6 @@ Click “Application”, then “Utilities”, then “Disks”, select FAT32-fo
 Click “+” under “Additional Settings”, then “Administration Password”, set password, click “Add” and, finally, click “Start Tails”.
 
 ### Step 2: run electrum.sh
-
-> Heads-up: from now on, this is the only step required to start Electrum and connect to self-hosted node.
 
 ```console
 $ sudo /home/amnesia/Persistent/electrum.sh

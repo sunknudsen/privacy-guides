@@ -1,7 +1,7 @@
 # Privacy guides reference material
 
-Most privacy guides episodes published on [YouTube](https://www.youtube.com/sunknudsen) don’t need reference material, but when they do, it lands here.
+Most episodes published on [sunknudsen.com](https://sunknudsen.com) and [YouTube](https://www.youtube.com/sunknudsen) don’t need reference material but, when they do, it lands here.
 
 Shout-out to [1984](https://www.1984hosting.com/), [Njalla](https://njal.la/), [rsync.net](https://rsync.net/), [SatoshiLabs](https://satoshilabs.com/) and [Shakepay](https://shakepay.com/) for [supporting](https://sunknudsen.com/donate) the privacy guides. 🙌
 
-Wish to contribute or need help? Read the [docs](./docs/README.md).
+Wish to contribute or need help? Read the [docs](./docs).

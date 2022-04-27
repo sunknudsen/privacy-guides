@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Computer, virtual private server (VPS) or dedicated server running Debian 10 (buster) or Debian 11 (bullseye) (lean how to install Debian [here](./misc/how-to-install-luks-encrypted-debian-operating-system-using-bootable-installer/README.md))
+- Computer, virtual private server (VPS) or dedicated server running Debian 10 (buster) or Debian 11 (bullseye) (lean how to install Debian [here](./misc/how-to-install-luks-encrypted-debian-operating-system-using-bootable-installer))
 - Linux or macOS computer
 
 ## Caveats

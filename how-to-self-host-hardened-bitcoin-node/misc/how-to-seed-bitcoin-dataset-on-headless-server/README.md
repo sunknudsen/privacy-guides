@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../../../how-to-configure-hardened-debian-server/README.md) (with at least 500GB of available SSD storage and unlimited bandwidth)
+- [Hardened Debian server](../../../how-to-configure-hardened-debian-server) (with at least 500GB of available SSD storage and unlimited bandwidth)
 - Transmission app SSD storage, IPv6 disabled and unlimited bandwidth)
 - Linux or macOS computer
 
@@ -140,7 +140,7 @@ imported: 1
 
 👍
 
-### Step 6: verify integrity of Sun’s PGP public key (learn how [here](../../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos/README.md#verify-suns-pgp-public-key-using-fingerprint))
+### Step 6: verify integrity of Sun’s PGP public key (learn how [here](../../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com

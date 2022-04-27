@@ -1,5 +1,5 @@
 <!--
-Title: How to configure strongSwan client on headless Debian-based Linux computer
+Title: How to configure strongSwan client on headless Debian-based Linux computer (DEPRECATED: guide is no longer maintained)
 Description: Learn how to configure strongSwan client on headless Debian-based Linux computer.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/README.md)
+- [Self-hosted hardened strongSwan IKEv2/IPsec VPN server](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos)
 - Linux or macOS computer (referred to as “certificate authority computer”)
 - Debian-based Linux computer (referred to as “client computer”)
 
@@ -25,7 +25,7 @@ Listed: true
 
 ## Guide
 
-### Step 1: create client key and cert using certificate authority from [How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos/README.md) (on certificate authority computer).
+### Step 1: create client key and cert using certificate authority from [How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](../how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos) (on certificate authority computer).
 
 #### Navigate to `strongswan-certs` directory
 

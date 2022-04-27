@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card/README.md)
+- [Tails USB flash drive or SD card](../how-to-install-tails-on-usb-flash-drive-or-sd-card)
 
 ## Caveats
 
@@ -80,7 +80,7 @@ VERACRYPT_RELEASE_SEMVER=1.25.4
 
 Click “Applications”, then “Tor Browser”, go to https://www.veracrypt.fr/en/Downloads.html and download latest release of “Linux Generic Installer” and associated PGP signature.
 
-### Step 9: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+### Step 9: verify VeraCrypt release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 ```console
 $ gpg --verify ~/Tor\ Browser/veracrypt-$VERACRYPT_RELEASE_SEMVER-setup.tar.bz2.sig

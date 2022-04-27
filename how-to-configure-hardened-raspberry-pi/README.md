@@ -78,7 +78,7 @@ EOF
 
 ### Step 3: download latest version of 64-bit [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
 
-### Step 4: copy “Raspberry Pi OS Lite” to microSD card or external solid state drive (follow [these](./misc/how-to-copy-raspberry-pi-os-lite-to-microsd-card-or-external-solid-state-drive-on-linux/README.md) steps instead of step 4 if on Linux)
+### Step 4: copy “Raspberry Pi OS Lite” to microSD card or external solid state drive (follow [these](./misc/how-to-copy-raspberry-pi-os-lite-to-microsd-card-or-external-solid-state-drive-on-linux) steps instead of step 4 if on Linux)
 
 > **WARNING: BE VERY CAREFUL WHEN RUNNING `DD` AS DATA CAN BE PERMANENTLY DESTROYED (BEGINNERS SHOULD CONSIDER USING [BALENAETCHER](https://www.balena.io/etcher/) INSTEAD).**
 

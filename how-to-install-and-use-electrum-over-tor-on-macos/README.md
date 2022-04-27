@@ -65,7 +65,7 @@ imported: 1
 
 Go to https://electrum.org/#download and download latest release and associated PGP signature to `~/Downloads` folder.
 
-#### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+#### Verify Electrum release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 > Heads-up: replace `4.2.1` with [latest release](https://electrum.org/#download) semver.
 
@@ -98,7 +98,7 @@ Double-click “electrum-4.2.1.dmg” and drag-and-drop “Electrum” into “A
 
 ### Step 5: install [Tor Browser](https://www.torproject.org/) (used to connect to Electrum public servers over Tor)
 
-> Heads-up: using public servers can [compromised privacy of wallet](https://sunknudsen.com/self-hosting-bitcoin-full-node-on-raspberry-pi-updated/) (learn how to self-host Bitcoin node [here](../how-to-self-host-hardened-bitcoin-node/README.md)).
+> Heads-up: using public servers can [compromised privacy of wallet](https://sunknudsen.com/self-hosting-bitcoin-full-node-on-raspberry-pi-updated/) (learn how to self-host Bitcoin node [here](../how-to-self-host-hardened-bitcoin-node)).
 
 #### Import “Tor Browser Developers (signing key)” PGP public key
 
@@ -117,7 +117,7 @@ imported: 1
 
 Go to https://www.torproject.org/download/ and download latest release and associated PGP signature to `~/Downloads` folder.
 
-#### Verify “Tor Browser” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos/README.md))
+#### Verify “Tor Browser” release (learn how [here](../how-to-verify-pgp-digital-signatures-using-gnupg-on-macos))
 
 > Heads-up: replace `11.0.10` with [latest release](https://www.torproject.org/download/) semver.
 

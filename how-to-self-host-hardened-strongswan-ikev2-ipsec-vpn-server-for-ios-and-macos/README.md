@@ -1,5 +1,5 @@
 <!--
-Title: How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS
+Title: How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS (DEPRECATED: guide is no longer maintained)
 Description: Learn how to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
@@ -12,7 +12,7 @@ Listed: true
 
 [![How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS](how-to-self-host-hardened-strongswan-ikev2-ipsec-vpn-server-for-ios-and-macos.png)](https://www.youtube.com/watch?v=HY3F_vHuTFQ "How to self-host hardened strongSwan IKEv2/IPsec VPN server for iOS and macOS")
 
-> Heads-up: when following this guide on servers with upstream IPv4-only networks (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) networks. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos/README.md).
+> Heads-up: when following this guide on servers with upstream IPv4-only networks (which is totally fine if one knows what one is doing), it’s likely IPv6 traffic will leak on iOS when clients are connected to carriers or ISPs running dual stack (IPv4 + IPv6) networks. Leaks can be mitigated on iOS (cellular-only) and on macOS by following this [guide](../how-to-disable-ipv6-on-ios-cellular-only-and-macos).
 
 ## Requirements
 

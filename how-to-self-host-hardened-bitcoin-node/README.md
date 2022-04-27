@@ -12,7 +12,7 @@ Listed: true
 
 ## Requirements
 
-- [Hardened Debian server](../how-to-configure-hardened-debian-server/README.md) or [hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi/README.md) (with at least 4GB of RAM, 1TB of SSD storage and IPv6 disabled)
+- [Hardened Debian server](../how-to-configure-hardened-debian-server) or [hardened Raspberry Pi](../how-to-configure-hardened-raspberry-pi) (with at least 4GB of RAM, 1TB of SSD storage and IPv6 disabled)
 - Linux or macOS computer
 
 ## Caveats
@@ -294,7 +294,7 @@ imported: 1
 
 👍
 
-### Step 11: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos/README.md#verify-suns-pgp-public-key-using-fingerprint))
+### Step 11: verify integrity of Sun’s PGP public key (learn how [here](../how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos#verify-suns-pgp-public-key-using-fingerprint))
 
 ```console
 $ gpg --fingerprint hello@sunknudsen.com

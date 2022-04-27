@@ -13,7 +13,7 @@ Listed: true
 ## Requirements
 
 - Debian-compatible computer with [AES instruction set](https://en.wikipedia.org/wiki/AES_instruction_set)
-- Debian bootable installer (learn how to create one on Debian-based operating system [here](../how-to-create-debian-bootable-installer-on-debian-based-operating-system/README.md) or on macOS [there](../how-to-create-debian-bootable-installer-on-macos/README.md))
+- Debian bootable installer (learn how to create one on Debian-based operating system [here](../how-to-create-debian-bootable-installer-on-debian-based-operating-system) or on macOS [there](../how-to-create-debian-bootable-installer-on-macos))
 
 ## Guide
 

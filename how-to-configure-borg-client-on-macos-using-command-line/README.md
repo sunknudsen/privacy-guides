@@ -14,7 +14,7 @@ Listed: true
 
 ## Requirements
 
-- Borg server ([self-hosted](../how-to-self-host-hardened-borg-server/README.md) or cloud-based such as [BorgBase](https://www.borgbase.com/) or [rsync.net](https://rsync.net/products/attic.html))
+- Borg server ([self-hosted](../how-to-self-host-hardened-borg-server) or cloud-based such as [BorgBase](https://www.borgbase.com/) or [rsync.net](https://rsync.net/products/attic.html))
 - Computer running macOS Catalina or Big Sur
 
 ## Caveats
@@ -203,7 +203,7 @@ Write down the passphrase. Store both at safe place(s).
 
 ```
 
-#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](../how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos/README.md))
+#### Back up `~/.config/borg` and `~/Library/Keychains` folders (learn how [here](../how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos))
 
 > Heads-up: both key (stored in `~/.config/borg`) and passphrase (stored in `~/Library/Keychains`) are required to decrypt backup.
 
