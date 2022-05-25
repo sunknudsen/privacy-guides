@@ -2,8 +2,8 @@
 Title: How to configure hardened Debian server
 Description: Learn how to configure hardened Debian server.
 Author: Sun Knudsen <https://github.com/sunknudsen>
-Contributors: Sun Knudsen <https://github.com/sunknudsen>
-Reviewers:
+Contributors: Sun Knudsen <https://github.com/sunknudsen>, Go Compile <https://github.com/go-compile>
+Reviewers: Go Compile <https://github.com/go-compile>
 Publication date: 2020-11-27T10:00:26.806Z
 Listed: true
 -->
@@ -165,6 +165,18 @@ su -
 ```shell
 sed -i -E 's/^(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
 sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+```
+
+#### Limit login attempts and use `Ed25519` host key
+
+```shell
+sed -i -E 's/^(#)?MaxAuthTries 6/MaxAuthTries 2/' /etc/ssh/sshd_config
+sed -i -E 's/^(#)?HostKey \/etc\/ssh\/ssh_host_ed25519_key/HostKey \/etc\/ssh\/ssh_host_ed25519_key/' /etc/ssh/sshd_config
+```
+
+#### Restart SSH daemon 
+
+```shell
 systemctl restart ssh
 ```
 
