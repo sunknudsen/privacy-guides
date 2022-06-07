@@ -25,10 +25,10 @@ Listed: true
 
 ### Step 1: log in to server or Raspberry Pi
 
-> Heads-up: replace `~/.ssh/pi` with path to private key and `pi@10.0.1.181` with server or Raspberry Pi SSH destination.
+> Heads-up: replace `~/.ssh/pi` with path to private key and `pi-admin@10.0.1.94` with server or Raspberry Pi SSH destination.
 
 ```shell
-ssh -i ~/.ssh/pi pi@10.0.1.181
+ssh -i ~/.ssh/pi pi-admin@10.0.1.94
 ```
 
 ### Step 2: install dependencies
@@ -85,22 +85,22 @@ EOF
 
 ### Step 5: add user to sudo group
 
-> Heads-up: replace `pi` with user.
+> Heads-up: replace `pi-admin` with user.
 
 ```shell
-usermod -aG sudo pi
+usermod -aG sudo pi-admin
 ```
 
 ### Step 6: log out and log in to enable sudo privileges
 
-> Heads-up: replace `~/.ssh/pi` with path to private key and `pi@10.0.1.181` with server or Raspberry Pi SSH destination.
+> Heads-up: replace `~/.ssh/pi` with path to private key and `pi-admin@10.0.1.94` with server or Raspberry Pi SSH destination.
 
 ```console
 $ exit
 
 $ exit
 
-$ ssh -i ~/.ssh/pi pi@10.0.1.181
+$ ssh -i ~/.ssh/pi pi-admin@10.0.1.94
 
 $ sudo su -
 ```

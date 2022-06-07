@@ -66,7 +66,7 @@ $ cat pi.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHLwQ2fk5VvoKJ6PNdJfmtum6fTAIn7xG5vbFm0YjEGY pi
 ```
 
-### Step 2: generate heredoc (the output of following command will be used at [step 11](#step-11-configure-pi-ssh-authorized-keys))
+### Step 2: generate heredoc (the output of following command will be used at [step 13](#step-13-configure-pi-ssh-authorized-keys))
 
 ```shell
 cat << EOF
@@ -84,7 +84,7 @@ EOF
 
 > Heads-up: run `diskutil list` to find disk ID of microSD card or external solid state drive to overwrite with “Raspberry Pi OS Lite” (`disk4` in the following example).
 
-> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card or external solid state drive (`disk4` and `rdisk4` in the following example) and `2022-04-04-raspios-bullseye-arm64-lite` with current image.
+> Heads-up: replace `diskn` and `rdiskn` with disk ID of microSD card or external solid state drive (`disk4` and `rdisk4` in the following example) and `2022-04-04-raspios-bullseye-arm64-lite.img` with current image.
 
 ```console
 $ diskutil list
@@ -108,8 +108,8 @@ $ diskutil list
 
 /dev/disk4 (external, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:     FDisk_partition_scheme                        *500.1 GB   disk4
-   1:               Windows_NTFS Untitled                500.1 GB   disk4s1
+   0:     FDisk_partition_scheme                        *15.9 GB    disk4
+   1:               Windows_NTFS Untitled                15.9 GB    disk4s1
 
 $ sudo diskutil unmount /dev/diskn
 disk4 was already unmounted or it has a partitioning scheme so use "diskutil unmountDisk" instead
@@ -120,34 +120,37 @@ Unmount of all volumes on disk4 was successful
 $ sudo dd bs=1m if=$HOME/Downloads/2022-04-04-raspios-bullseye-arm64-lite.img of=/dev/rdiskn
 1908+0 records in
 1908+0 records out
-2000683008 bytes transferred in 6.420741 secs (311596910 bytes/sec)
+2000683008 bytes transferred in 239.955976 secs (8337709 bytes/sec)
 
 $ sudo diskutil unmountDisk /dev/diskn
 Unmount of all volumes on disk4 was successful
 ```
 
-### Step 5: log in as pi (using keyboard) and change password using `passwd`
+### Step 5: configure keyboard
 
-> Heads-up: current password is `raspberry`.
+### Step 6: create user
 
-```console
-$ passwd
-Changing password for pi.
-Current password:
-New password:
-Retype new password:
-passwd: password updated successfully
-```
+When asked for user, use `pi-admin`.
 
-### Step 6: configure Wi-Fi (if not using ethernet)
+When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
+
+### Step 7: configure Wi-Fi (if not using ethernet)
 
 ```shell
 sudo raspi-config
 ```
 
-Select “System Options”, then “Wireless LAN”, choose country, then select “OK”, enter “SSID”, enter passphrase.
+Select “System Options”, then “Wireless LAN”, choose country, then select “OK”, enter “SSID” and, finally, enter passphrase.
 
-### Step 7: enable SSH
+### Step 8: disable auto login
+
+```shell
+sudo raspi-config
+```
+
+Select “System Options”, then “Boot / Auto Login” and, finally, select “Console”.
+
+### Step 9: enable SSH
 
 ```shell
 sudo raspi-config
@@ -157,23 +160,23 @@ Select “Interface Options”, then “SSH”, then “Yes”, then “OK” an
 
 When asked if you wish to reboot, select “No”.
 
-### Step 8: find IP of Raspberry Pi (see `eth0` if using ethernet or `wlan0` if using Wi-Fi)
+### Step 10: find IP of Raspberry Pi (see `eth0` if using ethernet or `wlan0` if using Wi-Fi)
 
 ```shell
 ip a
 ```
 
-### Step 9: log in to Raspberry Pi over SSH
+### Step 11: log in to Raspberry Pi over SSH
 
-> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
-> Heads-up: when asked for passphrase, enter passphrase from [step 5](#step-5-log-in-as-pi-using-keyboard-and-change-password-using-passwd).
+> Heads-up: when asked for passphrase, enter passphrase from [step 5](#step-6-create-user).
 
 ```shell
-ssh pi@10.0.1.181
+ssh pi-admin@10.0.1.94
 ```
 
-### Step 10: disable pi Bash history
+### Step 12: disable pi Bash history
 
 ```shell
 sed -i -E 's/^HISTSIZE=/#HISTSIZE=/' ~/.bashrc
@@ -183,7 +186,7 @@ history -c; history -w
 source ~/.bashrc
 ```
 
-### Step 11: configure pi SSH authorized keys
+### Step 13: configure pi SSH authorized keys
 
 #### Create `.ssh` directory
 
@@ -191,7 +194,7 @@ source ~/.bashrc
 mkdir ~/.ssh
 ```
 
-#### Create `~/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-11)
+#### Create `~/.ssh/authorized_keys` using heredoc generated at [step 2](#step-2-generate-heredoc-the-output-of-following-command-will-be-used-at-step-13)
 
 ```shell
 cat << "_EOF" > ~/.ssh/authorized_keys
@@ -199,29 +202,29 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHLwQ2fk5VvoKJ6PNdJfmtum6fTAIn7xG5vbFm0YjEGY
 _EOF
 ```
 
-### Step 12: log out
+### Step 14: log out
 
 ```shell
 exit
 ```
 
-### Step 13: log in
+### Step 15: log in
 
-> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
 > Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
-ssh -i ~/.ssh/pi pi@10.0.1.181
+ssh -i ~/.ssh/pi pi-admin@10.0.1.94
 ```
 
-### Step 14: switch to root
+### Step 16: switch to root
 
 ```shell
 sudo su -
 ```
 
-### Step 15: disable root Bash history
+### Step 17: disable root Bash history
 
 ```shell
 echo "HISTFILESIZE=0" >> ~/.bashrc
@@ -229,13 +232,13 @@ history -c; history -w
 source ~/.bashrc
 ```
 
-### Step 16: disable pi sudo `nopassword` “feature”
+### Step 18: disable pi sudo `nopassword` “feature”
 
 ```shell
 rm /etc/sudoers.d/010_*
 ```
 
-### Step 17: set root password
+### Step 19: set root password
 
 When asked for password, use output from `openssl rand -base64 24` (and store password in password manager).
 
@@ -246,7 +249,7 @@ Retype new password:
 passwd: password updated successfully
 ```
 
-### Step 18: disable root login and password authentication
+### Step 20: disable root login and password authentication
 
 ```shell
 sed -i -E 's/^(#)?PermitRootLogin (prohibit-password|yes)/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -254,7 +257,7 @@ sed -i -E 's/^(#)?PasswordAuthentication yes/PasswordAuthentication no/' /etc/ss
 systemctl restart ssh
 ```
 
-### Step 19: disable Bluetooth and Wi-Fi
+### Step 21: disable Bluetooth and Wi-Fi
 
 > Heads-up: step will take effect after reboot.
 
@@ -270,7 +273,7 @@ echo "dtoverlay=disable-bt" >> /boot/config.txt
 echo "dtoverlay=disable-wifi" >> /boot/config.txt
 ```
 
-### Step 20: configure sysctl (if network is IPv4-only)
+### Step 22: configure sysctl (if network is IPv4-only)
 
 > Heads-up: only run following if network is IPv4-only.
 
@@ -284,7 +287,7 @@ EOF
 sysctl -p
 ```
 
-### Step 21: enable nftables and configure firewall rules
+### Step 23: enable nftables and configure firewall rules
 
 #### Enable nftables
 
@@ -341,7 +344,7 @@ nft add rule ip6 firewall output udp dport { domain, ntp } accept
 nft add rule ip6 firewall output ct state related,established accept
 ```
 
-### Step 22: log out and log in to confirm firewall is not blocking SSH
+### Step 24: log out and log in to confirm firewall is not blocking SSH
 
 #### Log out
 
@@ -353,19 +356,19 @@ $ exit
 
 #### Log in
 
-> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
 ```shell
-ssh -i ~/.ssh/pi pi@10.0.1.181
+ssh -i ~/.ssh/pi pi-admin@10.0.1.94
 ```
 
-### Step 23: switch to root
+### Step 25: switch to root
 
 ```shell
 sudo su -
 ```
 
-### Step 24: make firewall rules persistent
+### Step 26: make firewall rules persistent
 
 ```shell
 cat << "EOF" > /etc/nftables.conf
@@ -380,7 +383,7 @@ EOF
 nft list ruleset >> /etc/nftables.conf
 ```
 
-### Step 25: set timezone
+### Step 27: set timezone
 
 See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
@@ -388,13 +391,13 @@ See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timedatectl set-timezone America/Montreal
 ```
 
-### Step 26: disable swap
+### Step 28: disable swap
 
 ```shell
 systemctl disable dphys-swapfile
 ```
 
-### Step 27: update APT index and upgrade packages
+### Step 29: update APT index and upgrade packages
 
 ```console
 $ apt update

@@ -29,10 +29,10 @@ Listed: true
 
 ### Step 1: log in to Raspberry Pi
 
-> Heads-up: replace `10.0.1.181` with IP of Raspberry Pi.
+> Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
 ```shell
-ssh -i ~/.ssh/pi pi@10.0.1.181
+ssh -i ~/.ssh/pi pi-admin@10.0.1.94
 ```
 
 ### Step 2: configure console font
