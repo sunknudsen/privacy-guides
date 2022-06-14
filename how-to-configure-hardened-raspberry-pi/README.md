@@ -120,7 +120,7 @@ Unmount of all volumes on disk4 was successful
 $ sudo dd bs=1m if=$HOME/Downloads/2022-04-04-raspios-bullseye-arm64-lite.img of=/dev/rdiskn
 1908+0 records in
 1908+0 records out
-2000683008 bytes transferred in 239.955976 secs (8337709 bytes/sec)
+2000683008 bytes transferred in 38.390485 secs (52114033 bytes/sec)
 
 $ sudo diskutil unmountDisk /dev/diskn
 Unmount of all volumes on disk4 was successful
