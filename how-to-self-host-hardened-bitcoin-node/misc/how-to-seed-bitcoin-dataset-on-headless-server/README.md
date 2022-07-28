@@ -81,7 +81,7 @@ table ip firewall {
   chain output {
     type filter hook output priority filter; policy drop;
     oif "lo" accept
-    oifname "$NETWORK_INTERFACE" tcp dport { 80, 443, 51413, 57715 } accept
+    oifname "$NETWORK_INTERFACE" tcp dport { 80, 443, 51413, 59726 } accept
     oifname "$NETWORK_INTERFACE" udp dport { 53, 123 } accept
     ct state established,related accept
   }
