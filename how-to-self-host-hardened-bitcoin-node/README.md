@@ -257,7 +257,35 @@ Fingerprint matches published fingerprints
 
 👍
 
-### Step 9: download and verify [electrs.service](./electrs.service)
+### Step 9: download and verify [bitcoind.service](./bitcoind.service)
+
+```console
+$ curl --fail --output /lib/systemd/system/bitcoind.service https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/bitcoind.service
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2184  100  2184    0     0   2112      0  0:00:01  0:00:01 --:--:--  2114
+
+$ curl --fail --output /lib/systemd/system/bitcoind.service.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/bitcoind.service.asc
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   228  100   228    0     0    258      0 --:--:-- --:--:-- --:--:--   258
+
+$ gpg --verify /lib/systemd/system/bitcoind.service.asc
+gpg: assuming signed data in 'bitcoind.service'
+gpg: Signature made Wed 16 Feb 2022 14:02:09 EST
+gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
+gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
+     Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
+```
+
+Good signature
+
+👍
+
+### Step 10: download and verify [electrs.service](./electrs.service)
 
 ```console
 $ curl --fail --output /lib/systemd/system/electrs.service https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/electrs.service
@@ -285,7 +313,7 @@ Good signature
 
 👍
 
-### Step 10: download and verify [tor-client-auth.sh](./tor-client-auth.sh)
+### Step 11: download and verify [tor-client-auth.sh](./tor-client-auth.sh)
 
 ```console
 $ curl --fail --output /usr/bin/tor-client-auth.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-self-host-hardened-bitcoin-node/tor-client-auth.sh
@@ -315,7 +343,7 @@ Good signature
 
 👍
 
-### Step 11: install and configure [Tor](https://www.torproject.org/)
+### Step 12: install and configure [Tor](https://www.torproject.org/)
 
 > Heads-up: replace `bullseye` with Debian version codename (run `cat /etc/os-release` to find Debian version codename).
 
@@ -352,7 +380,7 @@ EOF
 $ systemctl restart tor
 ```
 
-### Step 12: configure Tor hidden services client authorization (see [docs](https://community.torproject.org/onion-services/advanced/client-auth/))
+### Step 13: configure Tor hidden services client authorization (see [docs](https://community.torproject.org/onion-services/advanced/client-auth/))
 
 ```console
 $ cd /var/lib/tor/ssh
@@ -368,7 +396,7 @@ $ systemctl restart tor
 $ cd
 ```
 
-### Step 13: create bitcoin user
+### Step 14: create bitcoin user
 
 ```console
 $ adduser --group --no-create-home --system bitcoin
@@ -380,7 +408,7 @@ Not creating home directory `/home/bitcoin'.
 $ usermod -aG debian-tor bitcoin
 ```
 
-### Step 14: temporarily allow Bitcoin peer-to-peer over Mullvad
+### Step 15: temporarily allow Bitcoin peer-to-peer over Mullvad
 
 > Heads-up: replace `mullvad-ca10` with Mullvad endpoint.
 
@@ -392,7 +420,7 @@ $ nft add rule ip firewall input oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
 $ nft add rule ip firewall output oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
 ```
 
-### Step 15: install [Bitcoin Core](https://github.com/bitcoin/bitcoin)
+### Step 16: install [Bitcoin Core](https://github.com/bitcoin/bitcoin)
 
 > Heads-up: replace `22.0` with [latest release](https://bitcoincore.org/en/releases/) semver.
 
@@ -512,9 +540,9 @@ gpg: Can't check signature: No public key
 $ sha256sum --check --ignore-missing SHA256SUMS
 bitcoin-22.0-aarch64-linux-gnu.tar.gz: OK
 
-$ tar -vxzf bitcoin-22.0-$SYSTEM_ARCHITECTURE-linux-gnu.tar.gz
+$ tar -vxzf bitcoin-$BITCOIN_CORE_RELEASE_SEMVER-$SYSTEM_ARCHITECTURE-linux-gnu.tar.gz
 
-$ cp bitcoin-22.0/bin/{bitcoin-cli,bitcoind} /usr/bin/
+$ cp bitcoin-$BITCOIN_CORE_RELEASE_SEMVER/bin/{bitcoin-cli,bitcoind} /usr/bin/
 
 $ mkdir -m 710 -p /etc/bitcoin
 
@@ -533,7 +561,7 @@ $ systemctl enable bitcoind
 $ systemctl start bitcoind
 ```
 
-### Step 16: watch initial block download
+### Step 17: watch initial block download
 
 > Heads-up: initial block download will likely take more than a week on Raspberry Pi.
 
@@ -600,7 +628,7 @@ Every 2.0s: bitcoin-cli -datadir=/var/lib/bitcoind getblockchaininfo
 
 👍
 
-### Step 17: switch to Tor-only (see [docs](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md))
+### Step 18: switch to Tor-only (see [docs](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md))
 
 > Heads-up: only run following once `"blocks": 724597` = `"headers": 724597` and `"initialblockdownload": false`.
 
@@ -624,7 +652,7 @@ EOF
 $ systemctl start bitcoind
 ```
 
-### Step 18: install [electrs](https://github.com/romanz/electrs) (see [docs](https://github.com/romanz/electrs/blob/master/doc/install.md))
+### Step 19: install [electrs](https://github.com/romanz/electrs) (see [docs](https://github.com/romanz/electrs/blob/master/doc/install.md))
 
 > Heads-up: build will likely take more than half and hour on Raspberry Pi.
 
@@ -646,7 +674,7 @@ $ systemctl start electrs
 $ cd
 ```
 
-### Step 19: watch initial sync
+### Step 20: watch initial sync
 
 > Heads-up: initial sync will likely take more than a day on Raspberry Pi.
 
@@ -718,7 +746,7 @@ bitcoin-cli `"blocks": 724597` = electrs `height=724597`
 
 👍
 
-### Step 20: reboot
+### Step 21: reboot
 
 ```shell
 systemctl reboot
