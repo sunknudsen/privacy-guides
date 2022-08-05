@@ -655,7 +655,7 @@ $ systemctl start bitcoind
 
 ### Step 19: install [electrs](https://github.com/romanz/electrs) (see [docs](https://github.com/romanz/electrs/blob/master/doc/install.md))
 
-> Heads-up: build will likely take more than half and hour on Raspberry Pi.
+> Heads-up: build will likely take more than half an hour on Raspberry Pi.
 
 ```console
 $ git clone https://github.com/romanz/electrs
