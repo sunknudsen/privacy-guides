@@ -644,6 +644,7 @@ dns=0
 dnsseed=0
 maxconnections=20
 onlynet=onion
+proxy=127.0.0.1:9050
 prune=0
 server=1
 txindex=1
