@@ -40,7 +40,7 @@ $ mkdir ~/.ssh
 
 $ cd ~/.ssh
 
-$ ssh-keygen -t ed25519 -C "pi"
+$ ssh-keygen -t ed25519 -C "pi-admin"
 Generating public/private ed25519 key pair.
 Enter file in which to save the key (/Users/sunknudsen/.ssh/id_ed25519): pi
 Enter passphrase (empty for no passphrase):
@@ -71,7 +71,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHLwQ2fk5VvoKJ6PNdJfmtum6fTAIn7xG5vbFm0YjEGY
 ```shell
 cat << EOF
 cat << "_EOF" > ~/.ssh/authorized_keys
-$(cat ~/.ssh/pi.pub)
+$(cat ~/.ssh/pi-admin.pub)
 _EOF
 EOF
 ```
@@ -215,7 +215,7 @@ exit
 > Heads-up: when asked for passphrase, enter passphrase from [step 1](#step-1-create-ssh-key-pair-on-macos).
 
 ```shell
-ssh -i ~/.ssh/pi pi-admin@10.0.1.94
+ssh -i ~/.ssh/pi-admin pi-admin@10.0.1.94
 ```
 
 ### Step 16: switch to root
@@ -359,7 +359,7 @@ $ exit
 > Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
 ```shell
-ssh -i ~/.ssh/pi pi-admin@10.0.1.94
+ssh -i ~/.ssh/pi-admin pi-admin@10.0.1.94
 ```
 
 ### Step 25: switch to root

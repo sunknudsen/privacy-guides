@@ -32,7 +32,7 @@ Listed: true
 > Heads-up: replace `10.0.1.94` with IP of Raspberry Pi.
 
 ```shell
-ssh -i ~/.ssh/pi pi-admin@10.0.1.94
+ssh -i ~/.ssh/pi-admin pi-admin@10.0.1.94
 ```
 
 ### Step 2: configure console font
@@ -62,7 +62,7 @@ $ sudo apt update
 
 $ sudo apt install -y bc expect fim git imagemagick python3-pip python3-rpi.gpio tmux zbar-tools
 
-$ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi/.local/bin" >> ~/.bashrc
+$ echo -e "export GPG_TTY=\"\$(tty)\"\nexport PATH=\$PATH:/home/pi-admin/.local/bin" >> ~/.bashrc
 
 $ source ~/.bashrc
 ```
@@ -124,16 +124,16 @@ pip3 install --user pillow qrcode
 ### Step 11: import Sun’s PGP public key (used to verify downloads below)
 
 ```console
-$ curl --fail --output /home/pi/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
+$ curl --fail --output /home/pi-admin/sunknudsen.asc https://sunknudsen.com/sunknudsen.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  2070  100  2070    0     0   1653      0  0:00:01  0:00:01 --:--:--  1653
 
-$ gpg --import /home/pi/sunknudsen.asc
-gpg: directory '/home/pi/.gnupg' created
-gpg: keybox '/home/pi/.gnupg/pubring.kbx' created
+$ gpg --import /home/pi-admin/sunknudsen.asc
+gpg: directory '/home/pi-admin/.gnupg' created
+gpg: keybox '/home/pi-admin/.gnupg/pubring.kbx' created
 gpg: key 8C9CA674C47CA060: 1 signature not checked due to a missing key
-gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
+gpg: /home/pi-admin/.gnupg/trustdb.gpg: trustdb created
 gpg: key 8C9CA674C47CA060: public key "Sun Knudsen <hello@sunknudsen.com>" imported
 gpg: Total number processed: 1
 gpg:               imported: 1
@@ -163,18 +163,18 @@ Fingerprint matches published fingerprints
 ### Step 13: download and verify [create-bip39-mnemonic.py](./create-bip39-mnemonic.py)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
+$ curl --fail --output /home/pi-admin/.local/bin/create-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   149  100   149    0     0    144      0  0:00:01  0:00:01 --:--:--   144
 
-$ curl --fail --output /home/pi/.local/bin/create-bip39-mnemonic.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.asc
+$ curl --fail --output /home/pi-admin/.local/bin/create-bip39-mnemonic.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/create-bip39-mnemonic.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    200      0  0:00:01  0:00:01 --:--:--   200
 
-$ gpg --verify /home/pi/.local/bin/create-bip39-mnemonic.py.asc
-gpg: assuming signed data in '/home/pi/.local/bin/create-bip39-mnemonic.py'
+$ gpg --verify /home/pi-admin/.local/bin/create-bip39-mnemonic.py.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/create-bip39-mnemonic.py'
 gpg: Signature made Sat 08 Jan 2022 14:33:36 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -183,7 +183,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 600 /home/pi/.local/bin/create-bip39-mnemonic.py
+$ chmod 600 /home/pi-admin/.local/bin/create-bip39-mnemonic.py
 ```
 
 Good signature
@@ -193,18 +193,18 @@ Good signature
 ### Step 14: download and verify [validate-bip39-mnemonic.py](./validate-bip39-mnemonic.py)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
+$ curl --fail --output /home/pi-admin/.local/bin/validate-bip39-mnemonic.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   183  100   183    0     0    187      0 --:--:-- --:--:-- --:--:--   187
 
-$ curl --fail --output /home/pi/.local/bin/validate-bip39-mnemonic.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.asc
+$ curl --fail --output /home/pi-admin/.local/bin/validate-bip39-mnemonic.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/validate-bip39-mnemonic.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    113      0  0:00:02  0:00:02 --:--:--   113
 
-$ gpg --verify /home/pi/.local/bin/validate-bip39-mnemonic.py.asc
-gpg: assuming signed data in '/home/pi/.local/bin/validate-bip39-mnemonic.py'
+$ gpg --verify /home/pi-admin/.local/bin/validate-bip39-mnemonic.py.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/validate-bip39-mnemonic.py'
 gpg: Signature made Sat 08 Jan 2022 14:33:41 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -213,7 +213,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 600 /home/pi/.local/bin/validate-bip39-mnemonic.py
+$ chmod 600 /home/pi-admin/.local/bin/validate-bip39-mnemonic.py
 ```
 
 Good signature
@@ -223,18 +223,18 @@ Good signature
 ### Step 15: download and verify [tmux-buttons.py](./tmux-buttons.py)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/tmux-buttons.py
+$ curl --fail --output /home/pi-admin/.local/bin/tmux-buttons.py https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/tmux-buttons.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   918  100   918    0     0    897      0  0:00:01  0:00:01 --:--:--   898
 
-$ curl --fail --output /home/pi/.local/bin/tmux-buttons.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/tmux-buttons.py.asc
+$ curl --fail --output /home/pi-admin/.local/bin/tmux-buttons.py.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/tmux-buttons.py.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    213      0  0:00:01  0:00:01 --:--:--   213
 
-$ gpg --verify /home/pi/.local/bin/tmux-buttons.py.asc
-gpg: assuming signed data in '/home/pi/.local/bin/tmux-buttons.py'
+$ gpg --verify /home/pi-admin/.local/bin/tmux-buttons.py.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/tmux-buttons.py'
 gpg: Signature made Sat 08 Jan 2022 14:33:39 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -243,7 +243,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 600 /home/pi/.local/bin/tmux-buttons.py
+$ chmod 600 /home/pi-admin/.local/bin/tmux-buttons.py
 ```
 
 Good signature
@@ -253,18 +253,18 @@ Good signature
 ### Step 16: download and verify [qr-backup.sh](./qr-backup.sh)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/qr-backup.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-backup.sh
+$ curl --fail --output /home/pi-admin/.local/bin/qr-backup.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-backup.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  8225  100  8225    0     0   7679      0  0:00:01  0:00:01 --:--:--  7686
 
-$ curl --fail --output /home/pi/.local/bin/qr-backup.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-backup.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/qr-backup.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-backup.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    259      0 --:--:-- --:--:-- --:--:--   258
 
-$ gpg --verify /home/pi/.local/bin/qr-backup.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/qr-backup.sh'
+$ gpg --verify /home/pi-admin/.local/bin/qr-backup.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/qr-backup.sh'
 gpg: Signature made Sat 08 Jan 2022 14:33:53 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -273,7 +273,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/qr-backup.sh
+$ chmod 700 /home/pi-admin/.local/bin/qr-backup.sh
 ```
 
 Good signature
@@ -283,18 +283,18 @@ Good signature
 ### Step 17: download and verify [qr-restore.sh](./qr-restore.sh)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/qr-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-restore.sh
+$ curl --fail --output /home/pi-admin/.local/bin/qr-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-restore.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  3754  100  3754    0     0   3511      0  0:00:01  0:00:01 --:--:--  3514
 
-$ curl --fail --output /home/pi/.local/bin/qr-restore.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-restore.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/qr-restore.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-restore.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    236      0 --:--:-- --:--:-- --:--:--   236
 
-$ gpg --verify /home/pi/.local/bin/qr-restore.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/qr-restore.sh'
+$ gpg --verify /home/pi-admin/.local/bin/qr-restore.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/qr-restore.sh'
 gpg: Signature made Sat 08 Jan 2022 14:33:57 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -303,7 +303,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/qr-restore.sh
+$ chmod 700 /home/pi-admin/.local/bin/qr-restore.sh
 ```
 
 Good signature
@@ -313,18 +313,18 @@ Good signature
 ### Step 18: download and verify [qr-clone.sh](./qr-clone.sh)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/qr-clone.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-clone.sh
+$ curl --fail --output /home/pi-admin/.local/bin/qr-clone.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-clone.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1007  100  1007    0     0    930      0  0:00:01  0:00:01 --:--:--   930
 
-$ curl --fail --output /home/pi/.local/bin/qr-clone.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-clone.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/qr-clone.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/qr-clone.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    230      0 --:--:-- --:--:-- --:--:--   229
 
-$ gpg --verify /home/pi/.local/bin/qr-clone.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/qr-clone.sh'
+$ gpg --verify /home/pi-admin/.local/bin/qr-clone.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/qr-clone.sh'
 gpg: Signature made Sat 08 Jan 2022 14:33:55 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -333,7 +333,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/qr-clone.sh
+$ chmod 700 /home/pi-admin/.local/bin/qr-clone.sh
 ```
 
 Good signature
@@ -343,18 +343,18 @@ Good signature
 ### Step 19: download and verify [secure-erase.sh](./secure-erase.sh)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/secure-erase.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/secure-erase.sh
+$ curl --fail --output /home/pi-admin/.local/bin/secure-erase.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/secure-erase.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1352  100  1352    0     0   1390      0 --:--:-- --:--:-- --:--:--  1390
 
-$ curl --fail --output /home/pi/.local/bin/secure-erase.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/secure-erase.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/secure-erase.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/secure-erase.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    257      0 --:--:-- --:--:-- --:--:--   257
 
-$ gpg --verify /home/pi/.local/bin/secure-erase.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/secure-erase.sh'
+$ gpg --verify /home/pi-admin/.local/bin/secure-erase.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/secure-erase.sh'
 gpg: Signature made Sat 08 Jan 2022 14:33:59 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -363,7 +363,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/secure-erase.sh
+$ chmod 700 /home/pi-admin/.local/bin/secure-erase.sh
 ```
 
 Good signature
@@ -373,18 +373,18 @@ Good signature
 ### Step 20: download and verify [trezor-verify-integrity.sh](./trezor-verify-integrity.sh) (used to verify integrity of Trezor devices)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
+$ curl --fail --output /home/pi-admin/.local/bin/trezor-verify-integrity.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1228  100  1228    0     0   1271      0 --:--:-- --:--:-- --:--:--  1269
 
-$ curl --fail --output /home/pi/.local/bin/trezor-verify-integrity.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/trezor-verify-integrity.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-verify-integrity.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    244      0 --:--:-- --:--:-- --:--:--   243
 
-$ gpg --verify /home/pi/.local/bin/trezor-verify-integrity.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/trezor-verify-integrity.sh'
+$ gpg --verify /home/pi-admin/.local/bin/trezor-verify-integrity.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/trezor-verify-integrity.sh'
 gpg: Signature made Sat 08 Jan 2022 14:34:06 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -393,7 +393,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/trezor-verify-integrity.sh
+$ chmod 700 /home/pi-admin/.local/bin/trezor-verify-integrity.sh
 ```
 
 Good signature
@@ -403,18 +403,18 @@ Good signature
 ### Step 21: download and verify [trezor-restore.sh](./trezor-restore.sh) (used to restore Trezor devices)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-restore.sh
+$ curl --fail --output /home/pi-admin/.local/bin/trezor-restore.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-restore.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1818  100  1818    0     0   1744      0  0:00:01  0:00:01 --:--:--  1744
 
-$ curl --fail --output /home/pi/.local/bin/trezor-restore.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-restore.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/trezor-restore.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/trezor-restore.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    257      0 --:--:-- --:--:-- --:--:--   257
 
-$ gpg --verify /home/pi/.local/bin/trezor-restore.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/trezor-restore.sh'
+$ gpg --verify /home/pi-admin/.local/bin/trezor-restore.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/trezor-restore.sh'
 gpg: Signature made Sat 08 Jan 2022 14:34:03 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -423,7 +423,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/trezor-restore.sh
+$ chmod 700 /home/pi-admin/.local/bin/trezor-restore.sh
 ```
 
 Good signature
@@ -433,18 +433,18 @@ Good signature
 ### Step 22: download and verify [update.sh](./update.sh)
 
 ```console
-$ curl --fail --output /home/pi/.local/bin/update.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/update.sh
+$ curl --fail --output /home/pi-admin/.local/bin/update.sh https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/update.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1846  100  1846    0     0   1895      0 --:--:-- --:--:-- --:--:--  1895
 
-$ curl --fail --output /home/pi/.local/bin/update.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/update.sh.asc
+$ curl --fail --output /home/pi-admin/.local/bin/update.sh.asc https://raw.githubusercontent.com/sunknudsen/privacy-guides/master/how-to-create-encrypted-paper-backup/update.sh.asc
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   228  100   228    0     0    225      0  0:00:01  0:00:01 --:--:--   225
 
-$ gpg --verify /home/pi/.local/bin/update.sh.asc
-gpg: assuming signed data in '/home/pi/.local/bin/update.sh'
+$ gpg --verify /home/pi-admin/.local/bin/update.sh.asc
+gpg: assuming signed data in '/home/pi-admin/.local/bin/update.sh'
 gpg: Signature made Sat 08 Jan 2022 14:34:08 EST
 gpg:                using EDDSA key 9C7887E1B5FCBCE2DFED0E1C02C43AD072D57783
 gpg: Good signature from "Sun Knudsen <hello@sunknudsen.com>" [unknown]
@@ -453,7 +453,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: E786 274B C92B 47C2 3C1C  F44B 8C9C A674 C47C A060
      Subkey fingerprint: 9C78 87E1 B5FC BCE2 DFED  0E1C 02C4 3AD0 72D5 7783
 
-$ chmod 700 /home/pi/.local/bin/update.sh
+$ chmod 700 /home/pi-admin/.local/bin/update.sh
 ```
 
 Good signature
@@ -502,12 +502,12 @@ $ sudo rm -fr /etc/console-setup
 $ sudo ln -s /tmp/console-setup /etc/console-setup
 ```
 
-#### Link `/home/pi/.gnupg` to `/tmp/pi/.gnupg`
+#### Link `/home/pi-admin/.gnupg` to `/tmp/pi/.gnupg`
 
 ```console
-$ rm -fr /home/pi/.gnupg
+$ rm -fr /home/pi-admin/.gnupg
 
-$ ln -s /tmp/pi/.gnupg /home/pi/.gnupg
+$ ln -s /tmp/pi/.gnupg /home/pi-admin/.gnupg
 ```
 
 #### Enable tmp.mount
