@@ -502,18 +502,18 @@ $ sudo rm -fr /etc/console-setup
 $ sudo ln -s /tmp/console-setup /etc/console-setup
 ```
 
-#### Link `/home/pi-admin/.gnupg` to `/tmp/pi/.gnupg`
+#### Link `/home/pi-admin/.gnupg` to `/tmp/pi-admin/.gnupg`
 
 ```console
 $ rm -fr /home/pi-admin/.gnupg
 
-$ ln -s /tmp/pi/.gnupg /home/pi-admin/.gnupg
+$ ln -s /tmp/pi-admin/.gnupg /home/pi-admin/.gnupg
 ```
 
 #### Enable tmp.mount
 
 ```console
-$ echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi 1700 pi pi -\nD /tmp/pi/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
+$ echo -e "D /tmp 1777 root root -\nD /tmp/console-setup 1700 root root -\nD /tmp/pi-admin 1700 pi pi -\nD /tmp/pi-admin/.gnupg 1700 pi pi -\nD /var/tmp 1777 root root -" | sudo tee /etc/tmpfiles.d/tmp.conf
 
 $ sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/
 

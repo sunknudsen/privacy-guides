@@ -54,7 +54,7 @@ red=$(tput setaf 1)
 normal=$(tput sgr0)
 
 dev="/dev/sda1"
-tmp="/tmp/pi"
+tmp="/tmp/pi-admin"
 usb="/tmp/usb"
 
 tput reset

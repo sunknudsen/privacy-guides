@@ -15,7 +15,7 @@ normal=$(tput sgr0)
 basedir=$(dirname "$0")
 
 dev="/dev/sda1"
-tmp="/tmp/pi"
+tmp="/tmp/pi-admin"
 usb="/tmp/usb"
 
 tput reset

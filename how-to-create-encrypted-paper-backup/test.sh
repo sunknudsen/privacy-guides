@@ -6,7 +6,7 @@ set -o pipefail
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-mkdir -p /tmp/pi
+mkdir -p /tmp/pi-admin
 
 printf "$bold%s$normal\n" "Please type sudo password and press enter"
 read -rs password
