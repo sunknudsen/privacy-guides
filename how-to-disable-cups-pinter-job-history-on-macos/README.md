@@ -45,9 +45,9 @@ fi
 
 echo "PreserveJobHistory Off" | sudo tee -a /etc/cups/cupsd.conf
 
-launchctl unload /System/Library/LaunchDaemons/org.cups.cupsd.plist
+sudo launchctl unload /System/Library/LaunchDaemons/org.cups.cupsd.plist
 
-launchctl load /System/Library/LaunchDaemons/org.cups.cupsd.plist
+sudo launchctl load /System/Library/LaunchDaemons/org.cups.cupsd.plist
 EOF
 ```
 
