@@ -10,6 +10,8 @@ Listed: true
 
 # How to disable CUPS pinter job history on macOS
 
+[![macOS stores a copy of everything one prints forever](macos-stores-a-copy-of-everything-one-prints-forever.jpeg)](https://www.youtube.com/watch?v=eAgfeVNKdoo "macOS stores a copy of everything one prints forever")
+
 ## Requirements
 
 - Computer running macOS Monterey or Ventura
