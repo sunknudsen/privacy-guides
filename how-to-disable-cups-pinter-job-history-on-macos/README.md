@@ -81,3 +81,39 @@ EOF
 ```
 
 ### Step 6: reboot
+
+👍
+
+---
+
+## Want things back the way they were before following this guide? No problem!
+
+### Step 1: delete `PreserveJobHistory Off` line from `cupsd.conf`
+
+```shell
+sudo sed -i "" "/PreserveJobHistory Off/d" /etc/cups/cupsd.conf
+```
+
+### Step 2: delete `cups.sh` script
+
+```shell
+sudo rm /usr/local/sbin/cups.sh
+```
+
+### Step 3: delete `local.cups.plist` launch daemon
+
+```shell
+sudo rm /Library/LaunchDaemons/local.cups.plist
+```
+
+### Step 4: reload CUPS
+
+```shell
+sudo launchctl unload /System/Library/LaunchDaemons/org.cups.cupsd.plist
+
+sudo launchctl load /System/Library/LaunchDaemons/org.cups.cupsd.plist
+```
+
+### Step 5: reboot
+
+👍
