@@ -10,7 +10,7 @@ Listed: true
 
 # How to audit source code of proprietary Electron app
 
-[![How to audit source code of proprietary Electron app](how-to-audit-source-code-of-proprietary-electron-app.png)](https://www.youtube.com/watch?v=s4S7qgCkVCc "How to audit source code of proprietary Electron app")
+[![How to audit source code of proprietary Electron app](how-to-audit-source-code-of-proprietary-electron-app.jpeg)](https://www.youtube.com/watch?v=s4S7qgCkVCc "How to audit source code of proprietary Electron app")
 
 ## Requirements
 

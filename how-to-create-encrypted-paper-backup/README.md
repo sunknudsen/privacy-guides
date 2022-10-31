@@ -10,7 +10,7 @@ Listed: true
 
 # How to create encrypted paper backup
 
-[![The world’s MOST ADVANCED PAPER BACKUP hardware device is at your finger tips](the-world-s-most-advanced-paper-backup-hardware-device-is-at-your-finger-tips.png)](https://www.youtube.com/watch?v=2Em7jpxRrrk "The world’s MOST ADVANCED PAPER BACKUP hardware device is at your finger tips")
+[![The world’s most advanced paper backup hardware device is at your fingertips](the-world-s-most-advanced-paper-backup-hardware-device-is-at-your-fingertips.jpeg)](https://www.youtube.com/watch?v=2Em7jpxRrrk "The world’s most advanced paper backup hardware device is at your fingertips")
 
 ## Requirements
 

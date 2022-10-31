@@ -10,7 +10,7 @@ Listed: true
 
 # How to configure hardened Raspberry Pi
 
-[![How to configure hardened Raspberry Pi](how-to-configure-hardened-raspberry-pi.png)](https://www.youtube.com/watch?v=6R8uKdstnts "How to configure hardened Raspberry Pi")
+[![How to configure hardened Raspberry Pi](how-to-configure-hardened-raspberry-pi.jpeg)](https://www.youtube.com/watch?v=6R8uKdstnts "How to configure hardened Raspberry Pi")
 
 ## Requirements
 

@@ -10,7 +10,7 @@ Listed: true
 
 # How to create Signal account without using personal phone number
 
-[![How to create Signal account without using personal phone number](how-to-create-signal-account-without-using-personal-phone-number.png)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number")
+[![How to create Signal account without using personal phone number](how-to-create-signal-account-without-using-personal-phone-number.jpeg)](https://www.youtube.com/watch?v=b9aMJZjZ4pw "How to create Signal account without using personal phone number")
 
 ## Guide
 

@@ -10,7 +10,7 @@ Listed: true
 
 # How to self-host hardened Borg server
 
-[![How to self-host hardened Borg server](how-to-self-host-hardened-borg-server.png)](https://www.youtube.com/watch?v=rzEaxL6F2Eg "How to self-host hardened Borg server")
+[![How to self-host hardened Borg server](how-to-self-host-hardened-borg-server.jpeg)](https://www.youtube.com/watch?v=rzEaxL6F2Eg "How to self-host hardened Borg server")
 
 ## Requirements
 

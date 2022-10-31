@@ -10,7 +10,7 @@ Listed: true
 
 # How to spoof MAC address and hostname automatically at boot on macOS
 
-[![How to spoof MAC address and hostname automatically at boot on macOS](how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos.png)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof MAC address and hostname automatically at boot on macOS")
+[![How to spoof MAC address and hostname automatically at boot on macOS](how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos.jpeg)](https://www.youtube.com/watch?v=ASXANpr_zX8 "How to spoof MAC address and hostname automatically at boot on macOS")
 
 > Heads-up: unfortunately, it is not possible to spoof MAC address on some Macs (see [issue](https://github.com/sunknudsen/privacy-guides/issues/15)).
 

@@ -10,7 +10,7 @@ Listed: true
 
 # How to clean uninstall macOS apps using AppCleaner open source alternative
 
-[![How to clean uninstall macOS apps using AppCleaner open source alternative](how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative.png)](https://www.youtube.com/watch?v=0nVOB0EE5ps "How to clean uninstall macOS apps using AppCleaner open source alternative")
+[![How to clean uninstall macOS apps using AppCleaner open source alternative](how-to-clean-uninstall-macos-apps-using-appcleaner-open-source-alternative.jpeg)](https://www.youtube.com/watch?v=0nVOB0EE5ps "How to clean uninstall macOS apps using AppCleaner open source alternative")
 
 ## Setup guide
 
