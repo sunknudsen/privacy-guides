@@ -1,6 +1,6 @@
 <!--
-Title: How to disable CUPS pinter job history on macOS
-Description: Learn how to disable CUPS pinter job history on macOS.
+Title: How to disable CUPS printer job history on macOS
+Description: Learn how to disable CUPS printer job history on macOS.
 Author: Sun Knudsen <https://github.com/sunknudsen>
 Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
@@ -8,7 +8,7 @@ Publication date: 2022-10-29T13:05:18.112Z
 Listed: true
 -->
 
-# How to disable CUPS pinter job history on macOS
+# How to disable CUPS printer job history on macOS
 
 [![macOS stores a copy of everything one prints forever](macos-stores-a-copy-of-everything-one-prints-forever.jpeg)](https://www.youtube.com/watch?v=eAgfeVNKdoo "macOS stores a copy of everything one prints forever")
 
