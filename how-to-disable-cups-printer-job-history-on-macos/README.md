@@ -41,7 +41,7 @@ cat << "EOF" > /usr/local/sbin/cups.sh
 
 set -e
 
-if cupsctl | grep PreserveJobHistory=no > /dev/null 2>&1; then
+if cupsctl | grep --quiet PreserveJobHistory=no; then
   exit 0
 fi
 
