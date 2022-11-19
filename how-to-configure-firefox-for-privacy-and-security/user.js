@@ -82,7 +82,7 @@ user_pref("toolkit.coverage.endpoint.base", "");
 user_pref("toolkit.coverage.opt-out", true);
 user_pref("toolkit.telemetry.coverage.opt-out", true);
 // Firefox fingerprinting hardening using about:config (automated)
-user_pref("privacy.resistFingerprinting", false); // Used to mitigate browser fingerprint but breaks dark mode and screenshots (among other features)… set to `true` for increased privacy
+user_pref("privacy.resistFingerprinting", false); // Used to help resit fingerprint but breaks dark mode and screenshots (among other features)… set to `true` for increased privacy
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
-user_pref("privacy.resistFingerprinting.letterboxing", true);
+user_pref("privacy.resistFingerprinting.letterboxing", true); // Used to help resit fingerprinting… set to `false` to disable letterboxing
 user_pref("webgl.disabled", true);
