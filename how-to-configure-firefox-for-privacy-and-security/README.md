@@ -10,6 +10,8 @@ Listed: true
 
 # How to configure Firefox for privacy and security
 
+[![Firefox privacy and security hardening guide (2022 revised edition)](firefox-privacy-and-security-hardening-guide-2022-revised-edition.jpeg)](https://www.youtube.com/watch?v=s-vwthG28ks "Firefox privacy and security hardening guide (2022 revised edition)")
+
 ## Caveats
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
