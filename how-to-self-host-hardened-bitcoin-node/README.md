@@ -76,16 +76,16 @@ $ apt install -y openresolv wireguard
 
 #### Create and fund [Mullvad](https://mullvad.net/en/) account and [generate](https://mullvad.net/en/account/#/wireguard-config/) WireGuard config
 
-> Heads-up: replace `mullvad-ca10` with Mullvad endpoint, paste Mullvad WireGuard config into `/etc/wireguard/$MULLVAD_ENDPOINT.conf`.
+> Heads-up: replace `ca-mtr-wg-101.conf` with Mullvad endpoint, paste Mullvad WireGuard config into `/etc/wireguard/$MULLVAD_ENDPOINT.conf`.
 
 ```console
-$ MULLVAD_ENDPOINT=mullvad-ca10
+$ MULLVAD_ENDPOINT=ca-mtr-wg-101
 
 $ nano /etc/wireguard/$MULLVAD_ENDPOINT.conf
 
-$ sed -i -E 's/^(Address.*?),.*/\1/' /etc/wireguard/mullvad-*.conf
+$ sed -i -E 's/^(Address.*?),.*/\1/' /etc/wireguard/*.conf
 
-$ sed -i -E 's/^(AllowedIPs.*?),.*/\1/' /etc/wireguard/mullvad-*.conf
+$ sed -i -E 's/^(AllowedIPs.*?),.*/\1/' /etc/wireguard/*.conf
 ```
 
 #### Enable IP forwarding and configure firewall kill switch
@@ -152,7 +152,7 @@ $ systemctl enable wg-quick@$MULLVAD_ENDPOINT
 $ systemctl start wg-quick@$MULLVAD_ENDPOINT
 
 $ curl https://am.i.mullvad.net/connected
-You are connected to Mullvad (server ca10-wireguard). Your IP address is 89.36.78.152
+You are connected to Mullvad (server ca-mtr-wg-101). Your IP address is 89.36.78.153
 ```
 
 You are connected to Mullvad
@@ -410,10 +410,10 @@ $ usermod -aG debian-tor bitcoin
 
 ### Step 15: temporarily allow Bitcoin peer-to-peer over Mullvad
 
-> Heads-up: replace `mullvad-ca10` with Mullvad endpoint.
+> Heads-up: replace `ca-mtr-wg-101.conf` with Mullvad endpoint.
 
 ```console
-$ MULLVAD_ENDPOINT=mullvad-ca10
+$ MULLVAD_ENDPOINT=ca-mtr-wg-101.conf
 
 $ nft add rule ip firewall input oifname $MULLVAD_ENDPOINT tcp dport 8333 accept
 
