@@ -666,7 +666,7 @@ $ cargo build --locked --no-default-features --release
     …
     Finished release [optimized] target(s) in 24m 18s
 
-$ cp /root/electrs/target/release/electrs /usr/bin/
+$ cp target/release/electrs /usr/bin/
 
 $ systemctl enable electrs
 
@@ -748,6 +748,186 @@ bitcoin-cli `"blocks": 724597` = electrs `height=724597`
 👍
 
 ### Step 21: reboot
+
+```shell
+systemctl reboot
+```
+
+👍
+
+## Upgrade guide
+
+### Step 1: log in to server or Raspberry Pi
+
+> Heads-up: replace `~/.ssh/pi` with path to private key and `pi-admin@10.0.1.94` with server or Raspberry Pi SSH destination.
+
+```shell
+ssh -i ~/.ssh/pi pi-admin@10.0.1.94
+```
+
+### Step 2: stop Bitcoin Core and electrs
+
+```console
+$ sudo su -
+
+$ systemctl stop bitcoind
+
+$ systemctl stop electrs
+```
+
+### Step 3: upgrade dependencies
+
+```console
+$ apt update
+
+$ apt upgrade --yes
+```
+
+### Step 4: upgrade Bitcoin Core
+
+> Heads-up: replace `24.0.1` with [latest release](https://bitcoincore.org/en/releases/) semver.
+
+```console
+$ SYSTEM_ARCHITECTURE=$(arch)
+
+$ BITCOIN_CORE_RELEASE_SEMVER=24.0.1
+
+$ curl --fail --remote-name https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/builder-keys/keys.txt
+
+$ while read fingerprint keyholder_name; do gpg --keyserver hkps://keys.openpgp.org:443 --recv-keys ${fingerprint}; done < ./keys.txt
+…
+gpg: key 74810B012346C9A6: "Wladimir J. van der Laan <laanwj@protonmail.com>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+
+$ curl --fail --remote-name https://bitcoincore.org/bin/bitcoin-core-$BITCOIN_CORE_RELEASE_SEMVER/bitcoin-$BITCOIN_CORE_RELEASE_SEMVER-$SYSTEM_ARCHITECTURE-linux-gnu.tar.gz
+
+$ curl --fail --remote-name https://bitcoincore.org/bin/bitcoin-core-$BITCOIN_CORE_RELEASE_SEMVER/SHA256SUMS
+
+$ curl --fail --remote-name https://bitcoincore.org/bin/bitcoin-core-$BITCOIN_CORE_RELEASE_SEMVER/SHA256SUMS.asc
+
+$ gpg --verify SHA256SUMS.asc
+gpg: assuming signed data in 'SHA256SUMS'
+gpg: Signature made Wed 07 Dec 2022 11:30:36 EST
+gpg:                using RSA key 152812300785C96444D3334D17565732E08E5E41
+gpg:                issuer "andrew@achow101.com"
+gpg: Good signature from "Andrew Chow <andrew@achow101.com>" [unknown]
+gpg:                 aka "Andrew Chow (Official New Key) <achow101@gmail.com>" [unknown]
+gpg:                 aka "Andrew Chow <achow101-github@achow101.com>" [unknown]
+gpg:                 aka "Andrew Chow <achow101-lists@achow101.com>" [unknown]
+gpg:                 aka "Andrew Chow <achow101@pm.me>" [unknown]
+gpg:                 aka "Andrew Chow <achow101@protonmail.com>" [unknown]
+gpg:                 aka "Andrew Chow <achow101@yahoo.com>" [unknown]
+gpg:                 aka "Andrew Chow <github@achow101.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 1528 1230 0785 C964 44D3  334D 1756 5732 E08E 5E41
+gpg: Signature made Wed 07 Dec 2022 07:49:36 EST
+gpg:                using RSA key 0AD83877C1F0CD1EE9BD660AD7CC770B81FD22A8
+gpg:                issuer "benthecarman@live.com"
+gpg: Good signature from "Ben Carman <benthecarman@live.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 0AD8 3877 C1F0 CD1E E9BD  660A D7CC 770B 81FD 22A8
+gpg: Signature made Wed 07 Dec 2022 12:10:49 EST
+gpg:                using RSA key 590B7292695AFFA5B672CBB2E13FC145CD3F4304
+gpg:                issuer "darosior@protonmail.com"
+gpg: Good signature from "Antoine Poinsot <darosior@protonmail.com>" [unknown]
+gpg:                 aka "Antoine Poinsot <antoine@revault.dev>" [unknown]
+gpg:                 aka "darosior <darosior@protonmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 590B 7292 695A FFA5 B672  CBB2 E13F C145 CD3F 4304
+gpg: Signature made Wed 07 Dec 2022 04:47:40 EST
+gpg:                using RSA key CFB16E21C950F67FA95E558F2EEB9F5CC09526C1
+gpg:                issuer "fanquake@gmail.com"
+gpg: Good signature from "Michael Ford (bitcoin-otc) <fanquake@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: E777 299F C265 DD04 7930  70EB 944D 35F9 AC3D B76A
+     Subkey fingerprint: CFB1 6E21 C950 F67F A95E  558F 2EEB 9F5C C095 26C1
+gpg: Signature made Wed 07 Dec 2022 04:50:09 EST
+gpg:                using RSA key F4FC70F07310028424EFC20A8E4256593F177720
+gpg:                issuer "gugger@gmail.com"
+gpg: Good signature from "Oliver Gugger <gugger@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: F4FC 70F0 7310 0284 24EF  C20A 8E42 5659 3F17 7720
+gpg: Signature made Wed 07 Dec 2022 14:16:05 EST
+gpg:                using RSA key D1DBF2C4B96F2DEBF4C16654410108112E7EA81F
+gpg:                issuer "hebasto@gmail.com"
+gpg: Good signature from "Hennadii Stepanov (hebasto) <hebasto@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: D1DB F2C4 B96F 2DEB F4C1  6654 4101 0811 2E7E A81F
+gpg: Signature made Wed 07 Dec 2022 09:25:40 EST
+gpg:                using RSA key 287AE4CA1187C68C08B49CB2D11BD4F33F1DB499
+gpg: Can't check signature: No public key
+gpg: Signature made Thu 08 Dec 2022 17:57:29 EST
+gpg:                using RSA key 9DEAE0DC7063249FB05474681E4AED62986CD25D
+gpg: Good signature from "Wladimir J. van der Laan <laanwj@protonmail.com>" [unknown]
+gpg:                 aka "Wladimir J. van der Laan <laanwj@gmail.com>" [unknown]
+gpg:                 aka "Wladimir J. van der Laan <laanwj@visucore.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 71A3 B167 3540 5025 D447  E8F2 7481 0B01 2346 C9A6
+     Subkey fingerprint: 9DEA E0DC 7063 249F B054  7468 1E4A ED62 986C D25D
+gpg: Signature made Wed 07 Dec 2022 11:45:59 EST
+gpg:                using RSA key 3EB0DEE6004A13BE5A0CC758BF2978B068054311
+gpg: Good signature from "Pieter Wuille <pieter@wuille.net>" [unknown]
+gpg:                 aka "Pieter Wuille <pieter.wuille@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 133E AC17 9436 F14A 5CF1  B794 860F EB80 4E66 9320
+     Subkey fingerprint: 3EB0 DEE6 004A 13BE 5A0C  C758 BF29 78B0 6805 4311
+gpg: Signature made Thu 08 Dec 2022 14:12:55 EST
+gpg:                using RSA key ED9BDF7AD6A55E232E84524257FF9BDBCC301009
+gpg: Good signature from "Sjors Provoost <sjors@sprovoost.nl>" [unknown]
+gpg:                 aka "Sjors Provoost <sjors@freedom.nl>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: ED9B DF7A D6A5 5E23 2E84  5242 57FF 9BDB CC30 1009
+gpg: Signature made Wed 07 Dec 2022 13:16:56 EST
+gpg:                using RSA key 28E72909F1717FE9607754F8A7BEB2621678D37D
+gpg:                issuer "vertion@protonmail.com"
+gpg: Can't check signature: No public key
+gpg: Signature made Fri 09 Dec 2022 12:41:10 EST
+gpg:                using RSA key 79D00BAC68B56D422F945A8F8E3A8F3247DBCBBF
+gpg: Can't check signature: No public key
+
+$ sha256sum --check --ignore-missing SHA256SUMS
+bitcoin-24.0.1-aarch64-linux-gnu.tar.gz: OK
+
+$ tar -vxzf bitcoin-$BITCOIN_CORE_RELEASE_SEMVER-$SYSTEM_ARCHITECTURE-linux-gnu.tar.gz
+
+$ cp bitcoin-$BITCOIN_CORE_RELEASE_SEMVER/bin/{bitcoin-cli,bitcoind} /usr/bin/
+```
+
+### Step 5: upgrade electrs
+
+```console
+$ cd electrs
+
+$ git pull
+
+$ cargo build --locked --no-default-features --release
+    …
+    Finished release [optimized] target(s) in 20m 14s
+
+$ cp target/release/electrs /usr/bin/
+```
+
+### Step 6: cleanup
+
+> Heads-up: replace `22.0` with previous release semver.
+
+```console
+$ cd
+
+$ rm -fr bitcoin-22.0*
+```
+
+### Step 7: reboot
 
 ```shell
 systemctl reboot
