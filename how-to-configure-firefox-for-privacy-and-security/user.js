@@ -21,14 +21,17 @@ user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("extensions.pocket.enabled", false);
 user_pref("identity.fxaccounts.enabled", false);
 user_pref("layout.spellcheckDefault", 1); // Used to disable spellchecker… set to `0` for increased privacy
+user_pref("media.peerconnection.enabled", false); // Used to disable WebRTC (mitigating WebRTC leaks)… set to `true` to enable WebRTC
 user_pref("network.cookie.cookieBehavior", 1);
-user_pref("network.cookie.lifetimePolicy", 2);
+user_pref("network.cookie.lifetimePolicy", 2); // Used to delete cookies when Firefox is closed… set to `0` to enable default cookie persistence
 user_pref("network.proxy.socks_remote_dns", true);
-user_pref("network.trr.mode", 5);
+user_pref("network.trr.custom_uri", "https://doh.mullvad.net/dns-query");
+user_pref("network.trr.mode", 3); // Used to enable Mullvad DNS over HTTPS… set to `5` to disable Mullvad DNS over HTTPS
+user_pref("network.trr.uri", "https://doh.mullvad.net/dns-query");
 user_pref("places.history.enabled", false);
 user_pref("privacy.donottrackheader.enabled", true);
 user_pref("privacy.history.custom", true);
-user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+user_pref("privacy.sanitize.sanitizeOnShutdown", true); // Used to delete cookies and site data when Firefox is closed… set to `false` to enable cookie and site data persistence
 user_pref("privacy.trackingprotection.enabled", true);
 user_pref("privacy.trackingprotection.socialtracking.enabled", true);
 user_pref("signon.management.page.breach-alerts.enabled", false);

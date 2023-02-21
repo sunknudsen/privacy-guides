@@ -16,13 +16,15 @@ Listed: true
 
 - When copy/pasting commands that start with `$`, strip out `$` as this character is not part of the command
 
-## Guide
+## Setup guide
 
 ### Step 1: install [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 
 Go to [https://www.mozilla.org/en-US/firefox/new/](https://www.mozilla.org/en-US/firefox/new/), download and install Firefox.
 
 ### Step 2: add [user.js](./user.js) to profile
+
+> Heads-up: enables [Mullvad DNS over HTTPS](https://mullvad.net/en/help/dns-over-https-and-dns-over-tls/).
 
 > Heads-up: see [arkenfox/user.js](https://github.com/arkenfox/user.js/) to explore more settings.
 
@@ -53,5 +55,33 @@ $ curl --fail --remote-name https://sunknudsen.com/static/media/privacy-guides/h
 ### Step 5: set default search engine to DuckDuckGo
 
 ### Step 6: configure containers (see episode)
+
+### Step 7: check for DNS and WebRTC leaks
+
+Go to [https://mullvad.net/en/check](https://mullvad.net/en/check).
+
+![Connection check](connection-check.png)
+
+👍
+
+---
+
+## Usage guide
+
+### Temporarily disable cookie and site data deletion (useful when Firefox is restarted to install update or one wishes to reboot computer while persisting Firefox sessions)
+
+> Heads-up: “Delete cookies and site data when Firefox is closed” will be enabled again next time Firefox starts.
+
+Start Firefox, paste “about:preferences#privacy” in address bar and press enter.
+
+Disable “Delete cookies and site data when Firefox is closed”.
+
+👍
+
+---
+
+## Want things back the way they were before following this guide? No problem!
+
+### Delete `user.js` and set Firefox settings as they were before following guide.
 
 👍
