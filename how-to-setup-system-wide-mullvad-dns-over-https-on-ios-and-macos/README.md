@@ -37,6 +37,8 @@ Go to [https://mullvad.net/en/check](https://mullvad.net/en/check).
 
 ![Connection check](connection-check-ios.png?width=375)
 
+No DNS leaks
+
 👍
 
 ---
@@ -66,6 +68,8 @@ Open “System Settings”, search for “Profiles”, click “Profiles”, cli
 Go to [https://mullvad.net/en/check](https://mullvad.net/en/check).
 
 ![Connection check](connection-check-macos.png)
+
+No DNS leaks
 
 👍
 

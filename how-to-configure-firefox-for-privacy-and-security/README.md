@@ -62,6 +62,10 @@ Go to [https://mullvad.net/en/check](https://mullvad.net/en/check).
 
 ![Connection check](connection-check.png)
 
+No DNS leaks
+
+No WebRTC leaks
+
 👍
 
 ---
