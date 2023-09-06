@@ -45,7 +45,7 @@ source ~/.zshrc
 This list includes top 2048 most popular names for people aged 25 from the [USA Social Security Administration](https://www.ssa.gov/oact/babynames/limits.html) (last [updated](./misc/update-first-names.sh) on March 9th 2022).
 
 ```shell
-curl --fail --output /usr/local/sbin/first-names.txt https://sunknudsen.com/static/media/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
+curl --fail --output /usr/local/sbin/first-names.txt https://sunknudsen.com/privacy-guides/how-to-spoof-mac-address-and-hostname-automatically-at-boot-on-macos/first-names.txt
 ```
 
 ### Step 4: create `spoof.sh` script
