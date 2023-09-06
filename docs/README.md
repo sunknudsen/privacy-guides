@@ -15,7 +15,7 @@ Pinned:
 
 Thanks for contributing. 🙌
 
-**Like project?** Please star [repo](https://github.com/sunknudsen/privacy-guides).
+**Like project?** Please star [repository](https://github.com/sunknudsen/privacy-guides).
 
 **Found a bug?** Please submit [issue](https://github.com/sunknudsen/privacy-guides/issues) or [signed](#how-to-sign-pull-requests) [pull request](https://github.com/sunknudsen/privacy-guides/pulls).
 
