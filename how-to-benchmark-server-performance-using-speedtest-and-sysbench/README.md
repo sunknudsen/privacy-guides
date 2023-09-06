@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-07-31T12:39:56.670Z
 Listed: true
+Pinned:
 -->
 
 # How to benchmark server performance using Speedtest and SysBench

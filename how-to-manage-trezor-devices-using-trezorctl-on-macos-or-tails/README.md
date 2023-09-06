@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-06-26T19:30:49.162Z
 Listed: true
+Pinned:
 -->
 
 # How to manage Trezor devices using trezorctl on macOS or Tails

@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-11-27T12:40:50.540Z
 Listed: true
+Pinned:
 -->
 
 # How to self-host hardened Jitsi server

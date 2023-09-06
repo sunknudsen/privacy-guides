@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>, Albert <https://githu
 Reviewers:
 Publication date: 2020-06-18T00:00:00.000Z
 Listed: true
+Pinned:
 -->
 
 # How to encrypt, sign and decrypt messages using GnuPG on macOS

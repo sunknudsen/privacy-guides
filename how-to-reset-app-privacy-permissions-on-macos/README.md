@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>, 7aqdxe6f <https://git
 Reviewers:
 Publication date: 2020-12-31T14:52:42.907Z
 Listed: true
+Pinned:
 -->
 
 # How to reset app privacy permissions on macOS

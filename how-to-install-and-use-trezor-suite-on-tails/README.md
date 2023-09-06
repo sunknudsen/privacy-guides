@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-12-13T12:49:28.519Z
 Listed: true
+Pinned:
 -->
 
 # How to install and use Trezor Suite on Tails

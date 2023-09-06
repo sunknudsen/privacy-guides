@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-03-01T17:31:42.392Z
 Listed: true
+Pinned:
 -->
 
 # How to self-host hardened Bitcoin node

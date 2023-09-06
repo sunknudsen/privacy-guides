@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-11-27T10:00:26.806Z
 Listed: true
+Pinned:
 -->
 
 # How to configure hardened Debian server

@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-04-10T10:54:33.234Z
 Listed: true
+Pinned:
 -->
 
 # How to copy “Raspberry Pi OS Lite” to microSD card or external solid state drive on Linux

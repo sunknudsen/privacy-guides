@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-06-21T11:03:01.566Z
 Listed: true
+Pinned:
 -->
 
 # How to install and use Electrum over Tor on macOS

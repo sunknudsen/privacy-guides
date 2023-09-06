@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-06-04T00:00:00.000Z
 Listed: true
+Pinned:
 -->
 
 # How to create Signal account without using personal phone number

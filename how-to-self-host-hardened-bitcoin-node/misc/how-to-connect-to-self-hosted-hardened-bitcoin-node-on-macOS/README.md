@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-04-08T12:47:18.266Z
 Listed: true
+Pinned:
 -->
 
 # How to connect to self-hosted hardened Bitcoin node on macOS

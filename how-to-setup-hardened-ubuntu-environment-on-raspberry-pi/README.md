@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2023-02-13T21:05:15.462Z
 Listed: true
+Pinned:
 -->
 
 # How to setup hardened Ubuntu environment on Raspberry Pi

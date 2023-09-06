@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-07-21T15:45:10.940Z
 Listed: true
+Pinned:
 -->
 
 # How to generate and air gap PGP private keys using GnuPG, Tails and YubiKey

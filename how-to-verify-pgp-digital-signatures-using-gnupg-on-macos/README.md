@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-03-24T12:40:31.074Z
 Listed: true
+Pinned:
 -->
 
 # How to verify PGP digital signatures using GnuPG on macOS

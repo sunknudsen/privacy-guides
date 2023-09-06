@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-04-02T17:40:53.608Z
 Listed: true
+Pinned:
 -->
 
 # How to use Time Machine and APFS snapshots on macOS

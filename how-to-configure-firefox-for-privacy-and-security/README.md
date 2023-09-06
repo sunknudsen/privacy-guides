@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-11-04T11:00:13.850Z
 Listed: true
+Pinned: 1
 -->
 
 # How to configure Firefox for privacy and security

@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>, Alex Anderson <https:
 Reviewers:
 Publication date: 2021-04-19T14:05:38.426Z
 Listed: true
+Pinned:
 -->
 
 # How to create encrypted paper backup

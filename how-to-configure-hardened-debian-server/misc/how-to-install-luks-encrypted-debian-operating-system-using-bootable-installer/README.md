@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-03-20T14:16:12.705Z
 Listed: true
+Pinned:
 -->
 
 # How to install LUKS-encrypted Debian operating system using bootable installer

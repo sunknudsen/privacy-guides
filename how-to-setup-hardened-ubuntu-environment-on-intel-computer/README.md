@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2023-02-13T21:06:22.975Z
 Listed: true
+Pinned:
 -->
 
 # How to setup hardened Ubuntu environment on Intel computer

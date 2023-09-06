@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2021-01-04T15:53:29.749Z
 Listed: true
+Pinned:
 -->
 
 # How to make sure app is not running in the background on macOS

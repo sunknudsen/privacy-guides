@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>, 7aqdxe6f <https://git
 Reviewers:
 Publication date: 2021-05-05T14:49:08.692Z
 Listed: true
+Pinned:
 -->
 
 # How to install Tails on USB flash drive or SD card

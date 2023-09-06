@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-04-17T19:08:33.616Z
 Listed: true
+Pinned:
 -->
 
 # How to use COLDCARD devices on Tails

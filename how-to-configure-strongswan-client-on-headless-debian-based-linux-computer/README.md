@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-12-06T12:41:40.806Z
 Listed: true
+Pinned:
 -->
 
 # How to configure strongSwan client on headless Debian-based Linux computer (DEPRECATED: guide is no longer maintained)

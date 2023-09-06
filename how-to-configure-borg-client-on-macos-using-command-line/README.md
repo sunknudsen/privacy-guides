@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-11-27T18:07:56.515Z
 Listed: true
+Pinned:
 -->
 
 # How to configure Borg client on macOS using command-line

@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2020-11-27T17:49:18.440Z
 Listed: true
+Pinned:
 -->
 
 # How to self-host hardened Borg server

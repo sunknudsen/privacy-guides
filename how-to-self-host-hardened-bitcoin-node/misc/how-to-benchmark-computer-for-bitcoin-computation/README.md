@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2022-03-17T10:31:44.202Z
 Listed: true
+Pinned:
 -->
 
 # How to benchmark computer for Bitcoin computation

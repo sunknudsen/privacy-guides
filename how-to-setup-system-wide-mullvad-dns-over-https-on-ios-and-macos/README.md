@@ -6,6 +6,7 @@ Contributors: Sun Knudsen <https://github.com/sunknudsen>
 Reviewers:
 Publication date: 2023-02-22T11:26:55.652Z
 Listed: true
+Pinned:
 -->
 
 # How to setup system-wide [Mullvad DNS over HTTPS](https://mullvad.net/en/help/dns-over-https-and-dns-over-tls/) on iOS and macOS
