@@ -11,7 +11,7 @@ Pinned:
 
 # How to use multiple compartmentalized Firefox instances simultaneously using profiles
 
-[![How to use multiple compartmentalized Firefox instances using profiles](how-to-use-multiple-compartmentalized-firefox-instances-using-profiles.jpeg)](https://www.youtube.com/watch?v=Upib_vq_EB8 "How to use multiple compartmentalized Firefox instances using profiles")
+[![How to use multiple compartmentalized Firefox instances using profiles](how-to-use-multiple-compartmentalized-firefox-instances-using-profiles.jpg)](https://www.youtube.com/watch?v=Upib_vq_EB8 "How to use multiple compartmentalized Firefox instances using profiles")
 
 ## Guide
 

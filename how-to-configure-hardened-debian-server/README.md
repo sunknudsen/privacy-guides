@@ -11,7 +11,7 @@ Pinned:
 
 # How to configure hardened Debian server
 
-[![How to configure hardened Debian server](how-to-configure-hardened-debian-server.jpeg)](https://www.youtube.com/watch?v=z8hizZRX5-4 "How to configure hardened Debian server")
+[![How to configure hardened Debian server](how-to-configure-hardened-debian-server.jpg)](https://www.youtube.com/watch?v=z8hizZRX5-4 "How to configure hardened Debian server")
 
 ## Requirements
 

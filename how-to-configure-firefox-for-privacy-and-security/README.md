@@ -11,7 +11,7 @@ Pinned: 1
 
 # How to configure Firefox for privacy and security
 
-[![Firefox privacy and security hardening guide (2022 revised edition)](firefox-privacy-and-security-hardening-guide-2022-revised-edition.jpeg)](https://www.youtube.com/watch?v=s-vwthG28ks "Firefox privacy and security hardening guide (2022 revised edition)")
+[![Firefox privacy and security hardening guide (2022 revised edition)](firefox-privacy-and-security-hardening-guide-2022-revised-edition.jpg)](https://www.youtube.com/watch?v=s-vwthG28ks "Firefox privacy and security hardening guide (2022 revised edition)")
 
 ## Caveats
 

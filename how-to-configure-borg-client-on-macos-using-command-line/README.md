@@ -11,7 +11,7 @@ Pinned:
 
 # How to configure Borg client on macOS using command-line
 
-[![How to configure Borg client on macOS using command-line](how-to-configure-borg-client-on-macos-using-command-line.jpeg)](https://www.youtube.com/watch?v=g73XmszOwYs "How to configure Borg client on macOS using command-line")
+[![How to configure Borg client on macOS using command-line](how-to-configure-borg-client-on-macos-using-command-line.jpg)](https://www.youtube.com/watch?v=g73XmszOwYs "How to configure Borg client on macOS using command-line")
 
 ## Requirements
 

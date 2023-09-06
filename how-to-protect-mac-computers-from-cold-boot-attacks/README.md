@@ -11,7 +11,7 @@ Pinned:
 
 # How to protect Mac computers from cold boot attacks
 
-[![How to protect Mac computers from cold boot attacks](how-to-protect-mac-computers-from-cold-boot-attacks.jpeg)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks")
+[![How to protect Mac computers from cold boot attacks](how-to-protect-mac-computers-from-cold-boot-attacks.jpg)](https://www.youtube.com/watch?v=d_M18sq0TIQ "How to protect Mac computers from cold boot attacks")
 
 ## Guide
 

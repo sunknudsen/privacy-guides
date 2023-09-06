@@ -11,7 +11,7 @@ Pinned:
 
 # How to encrypt, sign and decrypt messages using GnuPG on macOS
 
-[![How to encrypt, sign and decrypt messages using GnuPG on macOS](how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos.jpeg)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using GnuPG on macOS")
+[![How to encrypt, sign and decrypt messages using GnuPG on macOS](how-to-encrypt-sign-and-decrypt-messages-using-gnupg-on-macos.jpg)](https://www.youtube.com/watch?v=mE8fL5Fu8x8 "How to encrypt, sign and decrypt messages using GnuPG on macOS")
 
 > Heads-up: this is a “getting started” guide. Learn how to harden GnuPG [here](../how-to-generate-and-air-gap-pgp-private-keys-using-gnupg-tails-and-yubikey).
 

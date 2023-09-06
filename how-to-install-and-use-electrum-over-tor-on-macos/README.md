@@ -11,7 +11,7 @@ Pinned:
 
 # How to install and use Electrum over Tor on macOS
 
-[![How to install and use Electrum over Tor on macOS](how-to-install-and-use-electrum-over-tor-on-macos.jpeg)](https://www.youtube.com/watch?v=QQsAu-9brYY "How to install and use Electrum over Tor on macOS")
+[![How to install and use Electrum over Tor on macOS](how-to-install-and-use-electrum-over-tor-on-macos.jpg)](https://www.youtube.com/watch?v=QQsAu-9brYY "How to install and use Electrum over Tor on macOS")
 
 ## Requirements
 

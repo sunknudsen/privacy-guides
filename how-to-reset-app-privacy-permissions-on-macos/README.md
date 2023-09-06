@@ -11,7 +11,7 @@ Pinned:
 
 # How to reset app privacy permissions on macOS
 
-[![How to reset app privacy permissions on macOS](how-to-reset-app-privacy-permissions-on-macos.jpeg)](https://www.youtube.com/watch?v=g_5uk5UkLgw "How to reset app privacy permissions on macOS")
+[![How to reset app privacy permissions on macOS](how-to-reset-app-privacy-permissions-on-macos.jpg)](https://www.youtube.com/watch?v=g_5uk5UkLgw "How to reset app privacy permissions on macOS")
 
 ## Guide
 

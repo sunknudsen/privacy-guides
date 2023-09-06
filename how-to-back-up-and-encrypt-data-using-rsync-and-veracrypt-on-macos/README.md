@@ -11,7 +11,7 @@ Pinned:
 
 # How to back up and encrypt data using rsync and VeraCrypt on macOS
 
-[![How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)](how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos-see-change-log.jpeg)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)")
+[![How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)](how-to-back-up-and-encrypt-data-using-rsync-and-veracrypt-on-macos-see-change-log.jpg)](https://www.youtube.com/watch?v=1cz_ViFB6eE "How to back up and encrypt data using rsync and VeraCrypt on macOS (see change log)")
 
 > Heads-up: when using storage devices with wear-leveling (most flash storage devices), it is not possible to securely change password once it has been set (see [Wear-Leveling](https://www.veracrypt.fr/en/Wear-Leveling.html)).
 

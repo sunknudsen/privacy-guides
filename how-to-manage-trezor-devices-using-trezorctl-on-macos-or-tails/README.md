@@ -11,7 +11,7 @@ Pinned:
 
 # How to manage Trezor devices using trezorctl on macOS or Tails
 
-[![How to manage Trezor devices using trezorctl on macOS or Tails](how-to-manage-trezor-devices-using-trezorctl-on-macos-or-tails.jpeg)](https://www.youtube.com/watch?v=0yWBYL9_uq4 "How to manage Trezor devices using trezorctl on macOS or Tails")
+[![How to manage Trezor devices using trezorctl on macOS or Tails](how-to-manage-trezor-devices-using-trezorctl-on-macos-or-tails.jpg)](https://www.youtube.com/watch?v=0yWBYL9_uq4 "How to manage Trezor devices using trezorctl on macOS or Tails")
 
 ## Requirements
 

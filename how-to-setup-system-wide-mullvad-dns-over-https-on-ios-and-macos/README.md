@@ -11,7 +11,7 @@ Pinned:
 
 # How to setup system-wide [Mullvad DNS over HTTPS](https://mullvad.net/en/help/dns-over-https-and-dns-over-tls/) on iOS and macOS
 
-[![How to setup system-wide Mullvad DNS over HTTPS on iOS and macOS](how-to-setup-system-wide-mullvad-dns-over-https-on-ios-and-macos.jpeg)](https://www.youtube.com/watch?v=DvjxUN5ZYvE "How to setup system-wide Mullvad DNS over HTTPS on iOS and macOS")
+[![How to setup system-wide Mullvad DNS over HTTPS on iOS and macOS](how-to-setup-system-wide-mullvad-dns-over-https-on-ios-and-macos.jpg)](https://www.youtube.com/watch?v=DvjxUN5ZYvE "How to setup system-wide Mullvad DNS over HTTPS on iOS and macOS")
 
 ## Requirements
 

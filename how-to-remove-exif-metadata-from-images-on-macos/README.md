@@ -11,7 +11,7 @@ Pinned:
 
 # How to remove EXIF metadata from images on macOS
 
-[![How to remove EXIF metadata from images on macOS](how-to-remove-exif-metadata-from-images-on-macos.jpeg)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS")
+[![How to remove EXIF metadata from images on macOS](how-to-remove-exif-metadata-from-images-on-macos.jpg)](https://www.youtube.com/watch?v=mVMGiMFGgsU "How to remove EXIF metadata from images on macOS")
 
 ## Requirements
 

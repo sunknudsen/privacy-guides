@@ -11,7 +11,7 @@ Pinned:
 
 # How to install Tails on USB flash drive or SD card
 
-[![Why Tails is not only for hacktivists and whistleblowers and how to get started](why-tails-is-not-only-for-hacktivists-and-whistleblowers-and-how-to-get-started.jpeg)](https://www.youtube.com/watch?v=kZ4NHz-gjLo "Why Tails is not only for hacktivists and whistleblowers and how to get started")
+[![Why Tails is not only for hacktivists and whistleblowers and how to get started](why-tails-is-not-only-for-hacktivists-and-whistleblowers-and-how-to-get-started.jpg)](https://www.youtube.com/watch?v=kZ4NHz-gjLo "Why Tails is not only for hacktivists and whistleblowers and how to get started")
 
 ## Requirements
 

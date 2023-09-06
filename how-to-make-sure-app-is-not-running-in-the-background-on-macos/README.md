@@ -11,7 +11,7 @@ Pinned:
 
 # How to make sure app is not running in the background on macOS
 
-[![How to make sure app is not running in the background on macOS](how-to-make-sure-app-is-not-running-in-the-background-on-macos.jpeg)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS")
+[![How to make sure app is not running in the background on macOS](how-to-make-sure-app-is-not-running-in-the-background-on-macos.jpg)](https://www.youtube.com/watch?v=mSibcNslSK8 "How to make sure app is not running in the background on macOS")
 
 ## Requirements
 

@@ -11,7 +11,7 @@ Pinned:
 
 # How to benchmark server performance using Speedtest and SysBench
 
-[![How to benchmark server performance using Speedtest and SysBench](how-to-benchmark-server-performance-using-speedtest-and-sysbench.jpeg)](https://www.youtube.com/watch?v=zcq2iZUcQQY "How to benchmark server performance using Speedtest and SysBench")
+[![How to benchmark server performance using Speedtest and SysBench](how-to-benchmark-server-performance-using-speedtest-and-sysbench.jpg)](https://www.youtube.com/watch?v=zcq2iZUcQQY "How to benchmark server performance using Speedtest and SysBench")
 
 > Heads-up: Speedtest is known for tracking users therefore it is recommended to run the following benchmark tests on staging servers.
 
