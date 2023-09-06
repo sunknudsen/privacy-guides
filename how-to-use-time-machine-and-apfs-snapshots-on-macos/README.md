@@ -19,21 +19,21 @@ Pinned:
 
 > Heads-up: excluded folders vary depending on use case.
 
-![Format Time Machine drive](./exclude.png?shadow=1)
+![Format Time Machine drive](./exclude.png)
 
 ### Step 2: format Time Machine disk as “Mac OS Extended (Journaled, Encrypted)” using “Disk Utility”
 
 > WARNING: DATA ON TIME MACHINE DISK WILL BE PERMANENTLY DELETED.
 
-![Format Time Machine drive](./format.png?shadow=1)
+![Format Time Machine drive](./format.png)
 
 ### Step 3: enable “Encrypt Backup Disk” and click “Use as Backup Disk”
 
-![Format Time Machine drive](./enable-time-machine.png?shadow=1&width=568)
+![Format Time Machine drive](./enable-time-machine.png)
 
 ### Step 4: confirm encryption is enabled and enable “Show Time Machine in menu bar”
 
-![Format Time Machine drive](./confirm-encryption.png?shadow=1)
+![Format Time Machine drive](./confirm-encryption.png)
 
 Encrypted
 

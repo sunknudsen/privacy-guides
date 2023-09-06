@@ -36,7 +36,7 @@ Open “Settings”, click “Profile Downloaded” and, finally, click “Insta
 
 Go to [https://mullvad.net/en/check](https://mullvad.net/en/check).
 
-![Connection check](connection-check-ios.png?width=375)
+![Connection check](connection-check-ios.png)
 
 No DNS leaks
 

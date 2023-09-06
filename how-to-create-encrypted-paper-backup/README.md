@@ -681,7 +681,7 @@ Done
 
 The following image is now available on USB flash drive.
 
-![0ed162fe](./0ed162fe.jpg?shadow=1)
+![0ed162fe](./0ed162fe.jpg)
 
 ### Restore encrypted paper backup
 
@@ -778,7 +778,7 @@ Done
 
 The following image is now available on USB flash drive.
 
-![305ca16c](./305ca16c.jpg?shadow=1)
+![305ca16c](./305ca16c.jpg)
 
 ### Secure erase flash drive
 

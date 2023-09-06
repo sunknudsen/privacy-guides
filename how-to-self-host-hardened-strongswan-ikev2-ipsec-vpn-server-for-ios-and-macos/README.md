@@ -932,17 +932,17 @@ Open “Apple Configurator 2”, then click “File”, then “New Profile”.
 
 In “General”, enter “Self-hosted strongSwan VPN” in “Name”.
 
-![apple-configurator-general](apple-configurator-general.png?shadow=1)
+![apple-configurator-general](apple-configurator-general.png)
 
 In “Certificates”, click “Configure” and select “ca.crt”. Then click “+” and select “alice.p12”. The password is the one from [step 29](#step-29-generate-client-key-csr-cert-and-pkcs12).
 
-![apple-configurator-certificates](apple-configurator-certificates.png?shadow=1)
+![apple-configurator-certificates](apple-configurator-certificates.png)
 
 In “VPN”, click “Configure” and enter the settings from the following screenshot (replace `185.193.126.203` with IP of server).
 
 The “Child SA Params” are the same as “IKE SA Params”.
 
-![apple-configurator-vpn](apple-configurator-vpn.png?shadow=1)
+![apple-configurator-vpn](apple-configurator-vpn.png)
 
 Finally, click “File”, then “Save”, and save file as “alice.mobileconfig”.
 

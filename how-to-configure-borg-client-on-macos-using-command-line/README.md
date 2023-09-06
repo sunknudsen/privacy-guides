@@ -107,17 +107,17 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2cmGUEKwopEN0vpHl2yNoV/wvm21D1hOP/8V886iC
 
 Go to [SSH Keys](https://www.borgbase.com/account) and add `borg.pub` and `borg-append-only.pub` keys.
 
-![Add SSH key](./borgbase-add-ssh-key.png?shadow=1)
+![Add SSH key](./borgbase-add-ssh-key.png)
 
-![SSH keys](./borgbase-ssh-keys.png?shadow=1)
+![SSH keys](./borgbase-ssh-keys.png)
 
 #### Create repo
 
 Go to [Repositories](https://www.borgbase.com/account) and add repository.
 
-![Add repository](./borgbase-add-repository.png?shadow=1)
+![Add repository](./borgbase-add-repository.png)
 
-![Repositories](./borgbase-repositories.png?shadow=1)
+![Repositories](./borgbase-repositories.png)
 
 ### Step 4: generate and upload `authorized_keys` file (if using rsync.net)
 
@@ -369,11 +369,11 @@ open /Applications/Borg\ Wrapper.app
 
 > Heads-up: given “Borg Wrapper” is developed outside the [Apple Developer Program](https://developer.apple.com/programs/), macOS prevents opening the app without explicit user consent (granted by clicking “Open Anyway” in “System Preferences” / “Privacy & Security”).
 
-![Allow app 1](./allow-app-1.png?shadow=1&width=420)
+![Allow app 1](./allow-app-1.png)
 
-![Allow app 2](./allow-app-2.png?shadow=1&width=668)
+![Allow app 2](./allow-app-2.png)
 
-![Allow app 3](./allow-app-3.png?shadow=1&width=475)
+![Allow app 3](./allow-app-3.png)
 
 Backup completed
 
@@ -482,9 +482,9 @@ umount: /var/folders/dl/mbmsd2m51nb8dvhmtz114j8w0000gn/T/borg: not currently mou
 
 > Heads-up: given “FUSE for macOS” is a third-party extension, macOS prevents using the extension without explicit user consent (granted by clicking “Allow” in “System Preferences” / “Privacy & Security”).
 
-![Allow extension 1](./allow-extension-1.png?shadow=1&width=420)
+![Allow extension 1](./allow-extension-1.png)
 
-![Allow extension 2](./allow-extension-2.png?shadow=1&width=668)
+![Allow extension 2](./allow-extension-2.png)
 
 ```console
 $ borg-restore.sh

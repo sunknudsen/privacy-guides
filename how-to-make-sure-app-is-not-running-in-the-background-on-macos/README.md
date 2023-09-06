@@ -76,7 +76,7 @@ launchctl unload -w {,~}/Library/LaunchAgents/$BUNDLE_IDENTIFIER_PREFIX*.plist
 
 Open “System Preferences”, click “Extensions” and disable app extensions (if any).
 
-![core-sync](./core-sync.png?shadow=1)
+![core-sync](./core-sync.png)
 
 ### Step 4: add `kill-apps` helper to `.zshrc`
 

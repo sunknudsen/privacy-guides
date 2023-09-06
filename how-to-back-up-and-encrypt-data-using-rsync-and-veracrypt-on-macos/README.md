@@ -168,9 +168,9 @@ Error: mount_macfuse: the file system is not available (1)
 
 > Heads-up: given “FUSE for macOS” is a third-party extension, macOS prevents using the extension without explicit user consent (granted by clicking “Allow” in “System Preferences” / “Privacy & Security”).
 
-![Allow extension 1](./allow-extension-1.png?shadow=1&width=420)
+![Allow extension 1](./allow-extension-1.png)
 
-![Allow extension 2](./allow-extension-2.png?shadow=1&width=668)
+![Allow extension 2](./allow-extension-2.png)
 
 ```console
 $ veracrypt --text --create "$BACKUP_VOLUME_PATH"

@@ -31,11 +31,11 @@ Pinned:
 
 Open “System Preferences”, click “Security & Privacy”, then “Firewall” and enable “Turn On Firewall”.
 
-![firewall](firewall.png?shadow=1&width=668)
+![firewall](./firewall.png)
 
 Then, click “Firewall Options…”, disable all options except “Enable stealth mode”.
 
-![firewall-options](firewall-options.png?shadow=1&width=668)
+![firewall-options](./firewall-options.png)
 
 ### Step 2: confirm PF is enabled
 
