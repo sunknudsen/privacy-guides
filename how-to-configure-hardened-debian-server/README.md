@@ -205,17 +205,19 @@ systemctl start nftables
 ```shell
 nft flush ruleset
 nft add table ip firewall
-nft add chain ip firewall input { type filter hook input priority 0 \; policy drop \; }
+nft add chain ip firewall input { type filter hook input priority 0 \; }
 nft add rule ip firewall input iif lo accept
 nft add rule ip firewall input iif != lo ip daddr 127.0.0.0/8 drop
 nft add rule ip firewall input tcp dport ssh accept
 nft add rule ip firewall input ct state established,related accept
+nft add chain ip firewall input { type filter hook input priority 0 \; policy drop \; }
 nft add chain ip firewall forward { type filter hook forward priority 0 \; policy drop \; }
-nft add chain ip firewall output { type filter hook output priority 0 \; policy drop \; }
+nft add chain ip firewall output { type filter hook output priority 0 \; }
 nft add rule ip firewall output oif lo accept
 nft add rule ip firewall output tcp dport { http, https } accept
 nft add rule ip firewall output udp dport { domain, ntp } accept
 nft add rule ip firewall output ct state established,related accept
+nft add chain ip firewall output { type filter hook output priority 0 \; policy drop \; }
 ```
 
 If network is IPv4-only, run:
