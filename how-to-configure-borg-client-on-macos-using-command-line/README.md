@@ -486,6 +486,8 @@ umount: /var/folders/dl/mbmsd2m51nb8dvhmtz114j8w0000gn/T/borg: not currently mou
 
 ![Allow extension 2](./allow-extension-2.png)
 
+> Heads-up: For users with the latest Apple Silicon Macs, you'll need to reboot your computer into Recovery Mode and use the Security Utility to allow kernel extensions. For detailed instructions, please refer to the [Getting Started guide for macFUSE](https://github.com/macfuse/macfuse/wiki/Getting-Started).
+
 ```console
 $ borg-restore.sh
 Restore data and press enter
