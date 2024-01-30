@@ -151,7 +151,7 @@ Double-click “TorBrowser-11.0.10-osx64_en-US.dmg” and drag-and-drop “Tor B
 ### Step 1: start Tor SOCKSv5 proxy
 
 ```console
-$ /Applications/Tor\ Browser.app/Contents/Resources/TorBrowser/Tor/tor
+$ /Applications/Tor Browser.app/Contents/MacOS/Tor/tor
 Jun 21 08:20:47.065 [notice] Tor 0.4.5.8 (git-27e5e33d2ca35de8) running on Darwin with Libevent 2.1.11-stable, OpenSSL 1.1.1k, Zlib 1.2.11, Liblzma N/A, Libzstd N/A and Unknown N/A as libc.
 Jun 21 08:20:47.065 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://www.torproject.org/download/download#warning
 Jun 21 08:20:47.065 [notice] Configuration file "/var/tmp/dist/tor/etc/tor/torrc" not present, using reasonable defaults.
