@@ -172,6 +172,8 @@ Error: mount_macfuse: the file system is not available (1)
 
 ![Allow extension 2](./allow-extension-2.png)
 
+> Heads-up: For users with the latest Apple Silicon Macs, you'll need to reboot your computer into Recovery Mode and use the Security Utility to allow kernel extensions. For detailed instructions, please refer to the [Getting Started guide for macFUSE](https://github.com/macfuse/macfuse/wiki/Getting-Started).
+
 ```console
 $ veracrypt --text --create "$BACKUP_VOLUME_PATH"
 Volume type:
